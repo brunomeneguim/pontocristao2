@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Marcondes
+ * @author Marcondes 1234
  */
 public abstract class Cliente extends ModeloBase{
     private String nome;
@@ -21,4 +21,6 @@ public abstract class Cliente extends ModeloBase{
     private Integer totalLocacoes;
     private Endereco endereco;
     private List<Dependente> dependentes;
+    
+    
 }
