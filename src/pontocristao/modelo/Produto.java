@@ -12,6 +12,7 @@ import java.util.Date;
  * @author marco
  */
 public class Produto extends ModeloBase {
+    private String codigoBarra;
     private String nome;
     private Double valorVenda;
     private Integer quantidade;

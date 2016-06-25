@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author marco
  */
-public class Locacao {
+public class Locacao extends ModeloBase{
     private Date data;
     private List<ItemLocacao> ItensLocacao;
     private Double valorTotal;

@@ -11,9 +11,9 @@ import java.util.Date;
  *
  * @author marco
  */
-public class Pagamento extends ModeloBase{
-    private TipoPagamento tipoPagamento;
-    private Double valor;
+public class ContaPagar extends ModeloBase{
     private Date data;
-    private String descricao;
+    private Date dataVencimento;
+    private Double valor;
+    private TipoContaPagar tipoContaPagar;
 }

@@ -9,7 +9,7 @@ package pontocristao.modelo;
  *
  * @author marco
  */
-public class TabelaPrecoLocacao {
+public class TabelaPrecoLocacao extends ModeloBase{
     private Double valorNormal;
     private Double valorLancamento;
     private Double valorMultaDiaria;

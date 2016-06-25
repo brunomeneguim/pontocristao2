@@ -5,15 +5,10 @@
  */
 package pontocristao.modelo;
 
-import java.util.Date;
-
 /**
  *
  * @author marco
  */
-public class Pagamento extends ModeloBase{
-    private TipoPagamento tipoPagamento;
-    private Double valor;
-    private Date data;
+public class TipoContaPagar extends ModeloBase {
     private String descricao;
 }

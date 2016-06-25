@@ -11,9 +11,8 @@ import java.util.Date;
  *
  * @author marco
  */
-public class Pagamento extends ModeloBase{
-    private TipoPagamento tipoPagamento;
-    private Double valor;
+public abstract class MovimentacaoCaixa extends ModeloBase{
     private Date data;
-    private String descricao;
+    private Double valor;
+    private Funcionario funcionario;
 }
