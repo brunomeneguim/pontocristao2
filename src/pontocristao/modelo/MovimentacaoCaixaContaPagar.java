@@ -11,4 +11,12 @@ package pontocristao.modelo;
  */
 public class MovimentacaoCaixaContaPagar extends MovimentacaoCaixaSaida {
     private ContaPagar contaPagar;
+
+    public ContaPagar getContaPagar() {
+        return contaPagar;
+    }
+
+    public void setContaPagar(ContaPagar contaPagar) {
+        this.contaPagar = contaPagar;
+    }
 }

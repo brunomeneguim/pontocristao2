@@ -13,5 +13,21 @@ import java.util.Date;
  */
 public abstract class MovimentacaoCaixaEntrada extends MovimentacaoCaixa{
     private Date dataFaturar;
+
+    public Date getDataFaturar() {
+        return dataFaturar;
+    }
+
+    public void setDataFaturar(Date dataFaturar) {
+        this.dataFaturar = dataFaturar;
+    }
+
+    public Boolean getFaturado() {
+        return faturado;
+    }
+
+    public void setFaturado(Boolean faturado) {
+        this.faturado = faturado;
+    }
     private Boolean faturado;
 }

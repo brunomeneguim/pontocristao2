@@ -12,6 +12,24 @@ import java.util.List;
  * @author marco
  */
 public class Caixa extends ModeloBase {
+
     private List<MovimentacaoCaixa> movimentacoes;
     private Double saldo;
+
+    public List<MovimentacaoCaixa> getMovimentacoes() {
+        return movimentacoes;
+    }
+
+    public void setMovimentacoes(List<MovimentacaoCaixa> movimentacoes) {
+        this.movimentacoes = movimentacoes;
+    }
+
+    public Double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Double saldo) {
+        this.saldo = saldo;
+    }
+
 }

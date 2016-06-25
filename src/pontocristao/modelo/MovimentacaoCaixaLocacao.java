@@ -9,6 +9,15 @@ package pontocristao.modelo;
  *
  * @author marco
  */
-public class MovimentacaoCaixaLocacao extends MovimentacaoCaixaEntrada{
+public class MovimentacaoCaixaLocacao extends MovimentacaoCaixaEntrada {
+
     private Locacao locacao;
+
+    public Locacao getLocacao() {
+        return locacao;
+    }
+
+    public void setLocacao(Locacao locacao) {
+        this.locacao = locacao;
+    }
 }
