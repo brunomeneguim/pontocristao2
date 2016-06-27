@@ -52,7 +52,6 @@ public class PopularBancoTeste {
     private static void CadastrarCaixa() {
         Caixa caixa = new Caixa();
         caixa.setSaldo(Double.valueOf("22"));
-        //caixa.setMovimentacoes();
     }
 
     private static void CadastrarCliente() {
@@ -65,8 +64,6 @@ public class PopularBancoTeste {
         //cliente.setDataCadastro();
         cliente.setEmail("dsadasdasdsa@dasdas.com");
         cliente.setTotalLocacoes(Integer.parseInt("2"));
-        //cliente.setDependentes(dependentes);
-        //cliente.setEndereco(endereco);
     }
 
     private static void CadastrarClientePessoaFisica() {
@@ -91,7 +88,6 @@ public class PopularBancoTeste {
         //contaPagar.setData(data);
         //contaPagar.setDataVencimento(dataVencimento);
         contaPagar.setValor(Double.valueOf("21312"));
-        //contaPagar.setTipoContaPagar(tipoContaPagar);  
     }
 
     private static void CadastrarDependente() {
@@ -100,7 +96,6 @@ public class PopularBancoTeste {
         dependente.setTelefone("213213");
         dependente.setRg("21312321");
         dependente.setCpf("21321312");
-        //dependente.setCliente(cliente);
     }
 
     private static void CadastrarEndereco() {
@@ -117,7 +112,6 @@ public class PopularBancoTeste {
     private static void CadastrarFilme() {
         Filme filme = new Filme();
         filme.setLancamento(Boolean.TRUE);
-        //filme.setTipoFilme(tipoFilme);
     }
 
     private static void CadastrarFornecedor() {
@@ -129,7 +123,6 @@ public class PopularBancoTeste {
         fornecedor.setCnpj("123");
         fornecedor.setRazaoSocial("teste");
         fornecedor.setInscricaoEstadual("123");
-        //fornecedor.setProdutos(produtos);
     }
 
     private static void CadastrarFuncionario() {
@@ -147,46 +140,36 @@ public class PopularBancoTeste {
         funcionario.setCarteiraTrabalho("123");
         funcionario.setLogin("teste");
         funcionario.setSenha("teste");
-        //funcionario.setEndereco(Endereco);
     }
 
     private static void CadastrarItemLocacao() {
         ItemLocacao itemLocacao = new ItemLocacao();
         //itemLocacao.setDataPrevisaoEntrega(dataPrevisaoEntrega);
-        //itemLocacao.setDataEntrega(dataEntrega);
-        //itemLocacao.setFilme("teste");
-        //itemLocacao.setLocacao(locacao);        
+        //itemLocacao.setDataEntrega(dataEntrega);      
     }
 
     private static void CadastrarItemVenda() {
         ItemVenda itemVenda = new ItemVenda();
-        //itemVenda.setProduto(produto);
-        //itemVenda.setQuantidade(Integer.MIN_VALUE);
+        itemVenda.setQuantidade(Integer.MIN_VALUE);
         itemVenda.setValorUnitario(Double.valueOf("123"));
     }
 
     private static void CadastrarLocacao() {
         Locacao locacao = new Locacao();
         //locacao.setData(data);
-        //locacao.setItensLocacao(ItensLocacao);
         locacao.setValorTotal(Double.valueOf("12321"));
-        //locacao.setFuncionario("");
-        //locacao.setCliente(cliente);
         locacao.setPago(Boolean.TRUE);
-        //locacao.setPagamentos(pagamentos);
     }
 
     private static void CadastrarMovimentacaoCaixa() {
         MovimentacaoCaixa movimentacaoCaixa = new MovimentacaoCaixa() {
         };
         //movimentacaoCaixa.setData(data);
-        //movimentacaoCaixa.setFuncionario(funcionario);
         movimentacaoCaixa.setValor(Double.valueOf("123"));
     }
 
     private static void CadastrarMovimentacaoCaixaContaPagar() {
         MovimentacaoCaixaContaPagar movimentacaoCaixaContaPagar = new MovimentacaoCaixaContaPagar();
-        //movimentacaoCaixaContaPagar.setContaPagar(contaPagar);
     }
 
     private static void CadastrarMovimentacaoCaixaDeposito() {
@@ -203,7 +186,6 @@ public class PopularBancoTeste {
 
     private static void CadastrarMovimentacaoCaixaLocacao() {
         MovimentacaoCaixaLocacao movimentacaoCaixaLocacao = new MovimentacaoCaixaLocacao();
-        //movimentacaoCaixaLocacao.setLocacao(locacao);
     }
 
     private static void CadastrarMovimentacaoCaixaRetirada() {
@@ -219,12 +201,10 @@ public class PopularBancoTeste {
 
     private static void CadastrarMovimentacaoCaixaVenda() {
         MovimentacaoCaixaVenda movimentacaoCaixaVenda = new MovimentacaoCaixaVenda();
-        //movimentacaoCaixaVenda.setVenda(venda);
     }
 
     private static void CadastrarPagamento() {
         Pagamento pagamento = new Pagamento();
-        //pagamento.setTipoPagamento(tipoPagamento);
         pagamento.setValor(Double.valueOf("123"));
         //pagamento.setData(data);
         pagamento.setDescricao("teste");
@@ -237,8 +217,6 @@ public class PopularBancoTeste {
         produto.setValorVenda(Double.valueOf("123"));
         produto.setQuantidade(Integer.MIN_VALUE);
         //produto.setDataCadastro(dataCadastro);
-        //produto.setFornecedor(fornecedor);
-        //produto.setTipoProduto(tipoProduto);
     }
 
     private static void CadastrarTabelaPrecoLocacao() {
@@ -271,12 +249,8 @@ public class PopularBancoTeste {
     private static void CadastrarVenda() {
         Venda venda = new Venda();
         //venda.setData(data);
-        //venda.setItensVenda(ItensVenda);
         venda.setValorTotal(Double.valueOf("123"));
-        //venda.setFuncionario(funcionario);
-        //venda.setCliente(cliente);
         venda.setPago(Boolean.TRUE);
-        //venda.setPagamentos(pagamentos);
     }
 
 }
