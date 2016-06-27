@@ -16,24 +16,36 @@ import pontocristao.modelo.*;
 public class PopularBancoTeste {
 
     public static void Popular() {
-        CadastrarProdutos();
         CadastrarCaixa();
         CadastrarCliente();
         CadastrarClientePessoaFisica();
         CadastrarClientePessoaJuridica();
         CadastrarCodigoBarrasProprio();
-    }
-
-    private static void CadastrarProdutos() {
-        Produto produto = new Produto();
-
-        produto.setCodigoBarra("produto1");
-        produto.setNome("Livro1");
-        produto.setValorVenda(Double.valueOf("22"));
-        produto.setQuantidade(Integer.parseInt("2"));
-        //produto.setDataCadastro();
-        //produto.setfornecedor;
-        //produto.settipoProduto;
+        CadastrarContaPagar();
+        CadastrarDependente();
+        CadastrarEndereco();
+        CadastrarFilme();
+        CadastrarFornecedor();
+        CadastrarFuncionario();
+        CadastrarItemLocacao();
+        CadastrarItemVenda();
+        CadastrarLocacao();
+        CadastrarMovimentacaoCaixa();
+        CadastrarMovimentacaoCaixaContaPagar();
+        CadastrarMovimentacaoCaixaDeposito();
+        CadastrarMovimentacaoCaixaEntrada();
+        CadastrarMovimentacaoCaixaLocacao();
+        CadastrarMovimentacaoCaixaRetirada();
+        CadastrarMovimentacaoCaixaSaida();
+        CadastrarMovimentacaoCaixaVenda();
+        CadastrarPagamento();
+        CadastrarProduto();
+        CadastrarTabelaPrecoLocacao();
+        CadastrarTipoContaPagar();
+        CadastrarTipoFilme();
+        CadastrarTipoPagamento();
+        CadastrarTipoProduto();
+        CadastrarVenda();
 
     }
 
@@ -146,7 +158,7 @@ public class PopularBancoTeste {
         //itemLocacao.setLocacao(locacao);        
     }
 
-    private static void CadastarItemVenda() {
+    private static void CadastrarItemVenda() {
         ItemVenda itemVenda = new ItemVenda();
         //itemVenda.setProduto(produto);
         //itemVenda.setQuantidade(Integer.MIN_VALUE);
@@ -199,13 +211,13 @@ public class PopularBancoTeste {
         movimentacaoCaixaRetirada.setDescricao("teste");
     }
 
-    private static void CadastrarMovimentacacaoCaixaSaida() {
+    private static void CadastrarMovimentacaoCaixaSaida() {
         MovimentacaoCaixaSaida movimentacaoCaixaSaida = new MovimentacaoCaixaSaida() {
         };
 
     }
 
-    private static void CadastrarMovimentacacaoCaixaVenda() {
+    private static void CadastrarMovimentacaoCaixaVenda() {
         MovimentacaoCaixaVenda movimentacaoCaixaVenda = new MovimentacaoCaixaVenda();
         //movimentacaoCaixaVenda.setVenda(venda);
     }
@@ -236,7 +248,7 @@ public class PopularBancoTeste {
         tabelaPrecoLocacao.setValorMultaDiaria(Double.valueOf("123"));
     }
 
-    private static void CadastrarTipocontaPagar() {
+    private static void CadastrarTipoContaPagar() {
         TipoContaPagar tipoContaPagar = new TipoContaPagar();
         tipoContaPagar.setDescricao("teste");
     }
