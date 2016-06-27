@@ -11,9 +11,12 @@ import java.util.Date;
  *
  * @author marco
  */
-public class ItemLocacao extends ModeloBase{
+public class ItemLocacao extends ModeloBase {
+
     private Date dataPrevisaoEntrega;
     private Date dataEntrega;
+    private Filme filme;
+    private Locacao locacao;
 
     public Date getDataPrevisaoEntrega() {
         return dataPrevisaoEntrega;
@@ -46,6 +49,5 @@ public class ItemLocacao extends ModeloBase{
     public void setLocacao(Locacao locacao) {
         this.locacao = locacao;
     }
-    private Filme filme;
-    private Locacao locacao;
+
 }

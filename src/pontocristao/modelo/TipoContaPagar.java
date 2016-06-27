@@ -10,6 +10,7 @@ package pontocristao.modelo;
  * @author marco
  */
 public class TipoContaPagar extends ModeloBase {
+
     private String descricao;
 
     public String getDescricao() {

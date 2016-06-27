@@ -9,10 +9,13 @@ package pontocristao.modelo;
  *
  * @author marco
  */
-public class Dependente extends ModeloBase{
+public class Dependente extends ModeloBase {
+
     private String nome;
     private String telefone;
     private String rg;
+    private String cpf;
+    private Cliente cliente;
 
     public String getNome() {
         return nome;
@@ -53,6 +56,5 @@ public class Dependente extends ModeloBase{
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    private String cpf;
-    private Cliente cliente;
+
 }

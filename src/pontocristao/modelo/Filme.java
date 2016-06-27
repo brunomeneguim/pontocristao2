@@ -9,8 +9,10 @@ package pontocristao.modelo;
  *
  * @author marco
  */
-public class Filme extends Produto{
+public class Filme extends Produto {
+
     private Boolean lancamento;
+    private TipoFilme tipoFilme;
 
     public Boolean getLancamento() {
         return lancamento;
@@ -27,5 +29,5 @@ public class Filme extends Produto{
     public void setTipoFilme(TipoFilme tipoFilme) {
         this.tipoFilme = tipoFilme;
     }
-    private TipoFilme tipoFilme;
+
 }

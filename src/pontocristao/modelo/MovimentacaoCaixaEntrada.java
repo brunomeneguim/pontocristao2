@@ -11,8 +11,10 @@ import java.util.Date;
  *
  * @author marco
  */
-public abstract class MovimentacaoCaixaEntrada extends MovimentacaoCaixa{
+public abstract class MovimentacaoCaixaEntrada extends MovimentacaoCaixa {
+
     private Date dataFaturar;
+    private Boolean faturado;
 
     public Date getDataFaturar() {
         return dataFaturar;
@@ -29,5 +31,5 @@ public abstract class MovimentacaoCaixaEntrada extends MovimentacaoCaixa{
     public void setFaturado(Boolean faturado) {
         this.faturado = faturado;
     }
-    private Boolean faturado;
+
 }

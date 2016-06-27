@@ -10,12 +10,13 @@ package pontocristao.modelo;
  * @author marco
  */
 public class ModeloBase {
+
     private Integer id;
-    
-     public long getId() {
+
+    public long getId() {
         return this.id;
     }
-    
+
     public void setId(Integer id) {
         this.id = id;
     }

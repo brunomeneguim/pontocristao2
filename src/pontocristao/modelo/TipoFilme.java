@@ -9,7 +9,8 @@ package pontocristao.modelo;
  *
  * @author marco
  */
-public class TipoFilme extends ModeloBase{
+public class TipoFilme extends ModeloBase {
+
     private String descricao;
 
     public String getDescricao() {

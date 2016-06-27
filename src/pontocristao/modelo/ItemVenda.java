@@ -9,8 +9,11 @@ package pontocristao.modelo;
  *
  * @author marco
  */
-public class ItemVenda extends ModeloBase{
+public class ItemVenda extends ModeloBase {
+
     private Produto produto;
+    private Integer quantidade;
+    private Double valorUnitario;
 
     public Produto getProduto() {
         return produto;
@@ -35,6 +38,5 @@ public class ItemVenda extends ModeloBase{
     public void setValorUnitario(Double valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
-    private Integer quantidade;
-    private Double valorUnitario;
+
 }

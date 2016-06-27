@@ -9,7 +9,8 @@ package pontocristao.modelo;
  *
  * @author marco
  */
-public class TipoProduto extends ModeloBase{
+public class TipoProduto extends ModeloBase {
+
     private String descricao;
 
     public String getDescricao() {

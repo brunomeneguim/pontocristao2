@@ -9,6 +9,6 @@ package pontocristao.modelo;
  *
  * @author marco
  */
-public abstract class MovimentacaoCaixaSaida extends MovimentacaoCaixa{
-    
+public abstract class MovimentacaoCaixaSaida extends MovimentacaoCaixa {
+
 }

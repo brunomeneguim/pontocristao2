@@ -11,9 +11,12 @@ import java.util.Date;
  *
  * @author marco
  */
-public class Pagamento extends ModeloBase{
+public class Pagamento extends ModeloBase {
+
     private TipoPagamento tipoPagamento;
     private Double valor;
+    private Date data;
+    private String descricao;
 
     public TipoPagamento getTipoPagamento() {
         return tipoPagamento;
@@ -46,6 +49,5 @@ public class Pagamento extends ModeloBase{
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    private Date data;
-    private String descricao;
+
 }

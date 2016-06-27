@@ -11,12 +11,22 @@ import java.util.Date;
  *
  * @author marco
  */
-public class Funcionario extends ModeloBase{
+public class Funcionario extends ModeloBase {
+
     private String nome;
     private String telefoneResidencial;
     private String celular;
     private String rg;
     private String cpf;
+    private Sexo sexo;
+    private Date dataNascimento;
+    private Date dataCadastro;
+    private String email;
+    private Date dataAdmissao;
+    private String carteiraTrabalho;
+    private String login;
+    private String senha;
+    private Endereco endereco;
 
     public String getNome() {
         return nome;
@@ -129,13 +139,5 @@ public class Funcionario extends ModeloBase{
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-    private Sexo sexo;
-    private Date dataNascimento;
-    private Date dataCadastro;
-    private String email;
-    private Date dataAdmissao;
-    private String carteiraTrabalho;
-    private String login;
-    private String senha;
-    private Endereco endereco;
+
 }

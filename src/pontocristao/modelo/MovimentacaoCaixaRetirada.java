@@ -9,7 +9,8 @@ package pontocristao.modelo;
  *
  * @author marco
  */
-public class MovimentacaoCaixaRetirada extends MovimentacaoCaixaSaida{
+public class MovimentacaoCaixaRetirada extends MovimentacaoCaixaSaida {
+
     private String descricao;
 
     public String getDescricao() {

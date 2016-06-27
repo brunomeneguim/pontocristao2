@@ -9,8 +9,11 @@ package pontocristao.modelo;
  *
  * @author marco
  */
-public class TabelaPrecoLocacao extends ModeloBase{
+public class TabelaPrecoLocacao extends ModeloBase {
+
     private Double valorNormal;
+    private Double valorLancamento;
+    private Double valorMultaDiaria;
 
     public Double getValorNormal() {
         return valorNormal;
@@ -35,6 +38,5 @@ public class TabelaPrecoLocacao extends ModeloBase{
     public void setValorMultaDiaria(Double valorMultaDiaria) {
         this.valorMultaDiaria = valorMultaDiaria;
     }
-    private Double valorLancamento;
-    private Double valorMultaDiaria;
+
 }

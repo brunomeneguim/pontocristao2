@@ -9,10 +9,15 @@ package pontocristao.modelo;
  *
  * @author marco
  */
-public class Endereco extends ModeloBase{
+public class Endereco extends ModeloBase {
+
     private String rua;
     private String numero;
     private String complemento;
+    private String cep;
+    private String bairro;
+    private String cidade;
+    private String estado;
 
     public String getRua() {
         return rua;
@@ -69,8 +74,5 @@ public class Endereco extends ModeloBase{
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    private String cep;
-    private String bairro;
-    private String cidade;
-    private String estado;
+
 }

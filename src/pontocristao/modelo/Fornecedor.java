@@ -11,10 +11,16 @@ import java.util.List;
  *
  * @author marco
  */
-public class Fornecedor extends ModeloBase{
+public class Fornecedor extends ModeloBase {
+
     private String nomeFantasia;
     private String telefone;
     private String celular;
+    private String descricao;
+    private String cnpj;
+    private String razaoSocial;
+    private String inscricaoEstadual;
+    private List<Produto> produtos;
 
     public String getNomeFantasia() {
         return nomeFantasia;
@@ -79,9 +85,5 @@ public class Fornecedor extends ModeloBase{
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
-    private String descricao;
-    private String cnpj;
-    private String razaoSocial;
-    private String inscricaoEstadual;
-    private List<Produto> produtos;
+
 }

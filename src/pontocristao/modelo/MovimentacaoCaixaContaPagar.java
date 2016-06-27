@@ -10,6 +10,7 @@ package pontocristao.modelo;
  * @author marco
  */
 public class MovimentacaoCaixaContaPagar extends MovimentacaoCaixaSaida {
+
     private ContaPagar contaPagar;
 
     public ContaPagar getContaPagar() {

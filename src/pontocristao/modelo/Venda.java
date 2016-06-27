@@ -12,10 +12,15 @@ import java.util.List;
  *
  * @author marco
  */
-public class Venda extends ModeloBase{
+public class Venda extends ModeloBase {
+
     private Date data;
     private List<ItemVenda> ItensVenda;
     private Double valorTotal;
+    private Funcionario funcionario;
+    private Cliente cliente;
+    private Boolean pago;
+    private List<Pagamento> pagamentos;
 
     public Date getData() {
         return data;
@@ -72,8 +77,5 @@ public class Venda extends ModeloBase{
     public void setPagamentos(List<Pagamento> pagamentos) {
         this.pagamentos = pagamentos;
     }
-    private Funcionario funcionario;
-    private Cliente cliente;
-    private Boolean pago;
-    private List<Pagamento> pagamentos; 
+
 }

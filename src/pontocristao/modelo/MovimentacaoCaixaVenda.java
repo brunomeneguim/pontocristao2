@@ -10,6 +10,7 @@ package pontocristao.modelo;
  * @author marco
  */
 public class MovimentacaoCaixaVenda extends MovimentacaoCaixaEntrada {
+
     private Venda venda;
 
     public Venda getVenda() {
