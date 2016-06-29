@@ -14,7 +14,7 @@ import pontocristao.modelo.*;
  * @author marco
  */
 public class PopularBancoTeste {
-
+    
     public static void Popular() {
         CadastrarCaixa();
         CadastrarClientePessoaFisica();
@@ -75,7 +75,7 @@ public class PopularBancoTeste {
         clientePessoaJuridica.setEmail("dsadasdasdsa@dasdas.com");
         clientePessoaJuridica.setTotalLocacoes(Integer.parseInt("2"));
         clientePessoaJuridica.setDependentes(new ArrayList<Dependente>(3));
-        clientePessoaJuridica.setEndereco(new Endereco());
+        clientePessoaJuridica.setEndereco(RetornarNovoEndereco());
     }
 
     private static void CadastrarCodigoBarrasProprio() {
@@ -102,6 +102,12 @@ public class PopularBancoTeste {
     }
 
     private static void CadastrarEndereco() {
+        Endereco endereco = RetornarNovoEndereco();
+    
+        //tem que salvar o endereço
+    }
+    
+    private Endereco RetornarNovoEndereco() {
         Endereco endereco = new Endereco();
         endereco.setRua("Rua Teste");
         endereco.setNumero("123");
@@ -110,6 +116,8 @@ public class PopularBancoTeste {
         endereco.setBairro("Teste");
         endereco.setCidade("Teste");
         endereco.setEstado("Teste");
+        
+        return endereco;
     }
 
     private static void CadastrarFilme() {
