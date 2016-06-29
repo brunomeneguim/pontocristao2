@@ -14,7 +14,7 @@ import pontocristao.modelo.*;
  * @author marco
  */
 public class PopularBancoTeste {
-    
+
     public static void Popular() {
         CadastrarCaixa();
         CadastrarClientePessoaFisica();
@@ -51,63 +51,97 @@ public class PopularBancoTeste {
         caixa.setMovimentacoes(new ArrayList<MovimentacaoCaixa>());
     }
 
+    //-----------------------------------CLIENTE PESSOA FISICA-----------------------------------//
     private static void CadastrarClientePessoaFisica() {
+        ClientePessoaFisica clientePessoaFisica = RetornarClientePessoaFisica();
+    }
+
+    private static ClientePessoaFisica RetornarClientePessoaFisica() {
         ClientePessoaFisica clientePessoaFisica = new ClientePessoaFisica();
         clientePessoaFisica.setRg("21312312321");
         clientePessoaFisica.setCpf("21312321321");
         clientePessoaFisica.setNome("teste");
         clientePessoaFisica.setTelefone("123123");
         clientePessoaFisica.setCelular("312321321");
-        clientePessoaFisica.setDataCadastro(new Date(1922, 20, 14));
         clientePessoaFisica.setEmail("dsadasdasdsa@dasdas.com");
+        clientePessoaFisica.setDataCadastro(new Date(1922, 20, 14));
         clientePessoaFisica.setTotalLocacoes(Integer.parseInt("2"));
+
+        clientePessoaFisica.setEndereco(RetornarEndereco());
         clientePessoaFisica.setDependentes(new ArrayList<Dependente>(3));
-        clientePessoaFisica.setEndereco(new Endereco());
+
+        return clientePessoaFisica;
     }
+//-----------------------------------CLIENTE PESSOA JURIDICA-----------------------------------//
 
     private static void CadastrarClientePessoaJuridica() {
+        ClientePessoaJuridica clientePessoaJuridica = RetornarClientePessoaJuridica();
+    }
+
+    private static ClientePessoaJuridica RetornarClientePessoaJuridica() {
         ClientePessoaJuridica clientePessoaJuridica = new ClientePessoaJuridica();
         clientePessoaJuridica.setCnpj("21321321");
         clientePessoaJuridica.setNome("teste");
         clientePessoaJuridica.setTelefone("123123");
         clientePessoaJuridica.setCelular("312321321");
-        clientePessoaJuridica.setDataCadastro(new Date(2016, 6, 27));
         clientePessoaJuridica.setEmail("dsadasdasdsa@dasdas.com");
         clientePessoaJuridica.setTotalLocacoes(Integer.parseInt("2"));
+        clientePessoaJuridica.setDataCadastro(new Date(2016, 6, 27));
+
+        clientePessoaJuridica.setEndereco(RetornarEndereco());
         clientePessoaJuridica.setDependentes(new ArrayList<Dependente>(3));
-        clientePessoaJuridica.setEndereco(RetornarNovoEndereco());
+
+        return clientePessoaJuridica;
     }
 
+    //-----------------------------------------------------------------------------------------//
     private static void CadastrarCodigoBarrasProprio() {
         CodigoBarrasProprio codigoBarrasProprio = new CodigoBarrasProprio();
         codigoBarrasProprio.setPadrao("teste");
         codigoBarrasProprio.setUltimoCodigo(Integer.parseInt("2131"));
     }
 
+    //------------------------------------ CONTA PAGAR ------------------------------------------------//
     private static void CadastrarContaPagar() {
-        ContaPagar contaPagar = new ContaPagar();
-        contaPagar.setData(new Date(2011, 12, 10));
-        contaPagar.setDataVencimento(new Date(2011, 12, 10));
-        contaPagar.setValor(Double.valueOf("21312"));
-        contaPagar.setTipoContaPagar(new TipoContaPagar());
+        ContaPagar contaPagar = RetornarContaPagar();
     }
 
+    private static ContaPagar RetornarContaPagar() {
+        ContaPagar contaPagar = new ContaPagar();
+        contaPagar.setValor(Double.valueOf("21312"));
+        contaPagar.setData(new Date(2011, 12, 10));
+        contaPagar.setDataVencimento(new Date(2011, 12, 10));
+
+        contaPagar.setTipoContaPagar(RetornarTipoContaPagar());
+
+        return contaPagar;
+    }
+//--------------------------------------- DEPENDENTE ---------------------------------------//
+
     private static void CadastrarDependente() {
+        Dependente dependente = RetornarDependente();
+    }
+
+    private static Dependente RetornarDependente() {
         Dependente dependente = new Dependente();
         dependente.setNome("teste");
         dependente.setTelefone("213213");
         dependente.setRg("21312321");
         dependente.setCpf("21321312");
-        dependente.setCliente(new ClientePessoaFisica());
+
+        dependente.setCliente(RetornarClientePessoaFisica());
+
+        return dependente;
     }
+//--------------------------------------- ENDERECO ---------------------------------------//
 
     private static void CadastrarEndereco() {
-        Endereco endereco = RetornarNovoEndereco();
-    
+        Endereco endereco = RetornarEndereco();
+
         //tem que salvar o endereço
     }
-    
-    private Endereco RetornarNovoEndereco() {
+
+    private static Endereco RetornarEndereco() {
         Endereco endereco = new Endereco();
         endereco.setRua("Rua Teste");
         endereco.setNumero("123");
@@ -116,16 +150,28 @@ public class PopularBancoTeste {
         endereco.setBairro("Teste");
         endereco.setCidade("Teste");
         endereco.setEstado("Teste");
-        
+
         return endereco;
     }
+//---------------------------------- FILME -----------------------------------------------------------//
 
     private static void CadastrarFilme() {
-        Filme filme = new Filme();
-        filme.setLancamento(Boolean.TRUE);
+        Filme filme = RetornarFilme();
     }
 
+    private static Filme RetornarFilme() {
+        Filme filme = new Filme();
+        filme.setLancamento(Boolean.TRUE);
+
+        return filme;
+    }
+//---------------------------- FORNECEDOR -------------------------------------------------------------//
+
     private static void CadastrarFornecedor() {
+        Fornecedor fornecedor = RetornarFornecedor();
+    }
+
+    private static Fornecedor RetornarFornecedor() {
         Fornecedor fornecedor = new Fornecedor();
         fornecedor.setNomeFantasia("teste");
         fornecedor.setTelefone("123");
@@ -134,10 +180,18 @@ public class PopularBancoTeste {
         fornecedor.setCnpj("123");
         fornecedor.setRazaoSocial("teste");
         fornecedor.setInscricaoEstadual("123");
+
         fornecedor.setProdutos(new ArrayList<Produto>(3));
+
+        return fornecedor;
     }
+//------------------------------ FUNCIONARIO -----------------------------------------------------------//
 
     private static void CadastrarFuncionario() {
+        Funcionario funcionario = RetornarFuncionario();
+    }
+
+    private static Funcionario RetornarFuncionario() {
         Funcionario funcionario = new Funcionario();
         funcionario.setNome("teste");
         funcionario.setTelefoneResidencial("123");
@@ -152,42 +206,57 @@ public class PopularBancoTeste {
         funcionario.setCarteiraTrabalho("123");
         funcionario.setLogin("teste");
         funcionario.setSenha("teste");
-        funcionario.setEndereco(new Endereco());
+
+        funcionario.setEndereco(RetornarEndereco());
+
+        return funcionario;
     }
+//-----------------------------------------------------------------------------------------//
 
     private static void CadastrarItemLocacao() {
         ItemLocacao itemLocacao = new ItemLocacao();
         itemLocacao.setDataEntrega(new Date(2016, 12, 10));
         itemLocacao.setDataPrevisaoEntrega(new Date(2011, 11, 21));
-        itemLocacao.setLocacao(new Locacao());
-        itemLocacao.setFilme(new Filme());
+
+        itemLocacao.setLocacao(RetornarLocacao());
+        itemLocacao.setFilme(RetornarFilme());
     }
 
     private static void CadastrarItemVenda() {
         ItemVenda itemVenda = new ItemVenda();
-        itemVenda.setQuantidade(Integer.MIN_VALUE);
+        itemVenda.setQuantidade(Integer.SIZE);
         itemVenda.setValorUnitario(Double.valueOf("123"));
-        itemVenda.setProduto(new Produto());
+
+        itemVenda.setProduto(RetornarProduto());
     }
+//-----------------------------------LOCACAO------------------------------------------------------//
 
     private static void CadastrarLocacao() {
+        Locacao locacao = RetornarLocacao();
+    }
+
+    private static Locacao RetornarLocacao() {
         Locacao locacao = new Locacao();
         locacao.setData(new Date(2011, 12, 10));
         locacao.setValorTotal(Double.valueOf("12321"));
         locacao.setPago(Boolean.TRUE);
+
+        locacao.setCliente(RetornarClientePessoaFisica());
+        locacao.setFuncionario(RetornarFuncionario());
         locacao.setItensLocacao(new ArrayList<ItemLocacao>(1));
-        locacao.setCliente(new ClientePessoaFisica());
-        locacao.setFuncionario(new Funcionario());
         locacao.setPagamentos(new ArrayList<Pagamento>(1));
+
+        return locacao;
     }
+//-----------------------------------------------------------------------------------------//
 
     private static void CadastrarMovimentacaoCaixaContaPagar() {
         MovimentacaoCaixaContaPagar movimentacaoCaixaContaPagar = new MovimentacaoCaixaContaPagar();
-        movimentacaoCaixaContaPagar.setContaPagar(new ContaPagar());
         movimentacaoCaixaContaPagar.setData(new Date(2011, 12, 10));
-        movimentacaoCaixaContaPagar.setFuncionario(new Funcionario());
         movimentacaoCaixaContaPagar.setValor(Double.valueOf("123"));
 
+        movimentacaoCaixaContaPagar.setFuncionario(RetornarFuncionario());
+        movimentacaoCaixaContaPagar.setContaPagar(RetornarContaPagar());
     }
 
     private static void CadastrarMovimentacaoCaixaDeposito() {
@@ -196,8 +265,9 @@ public class PopularBancoTeste {
         movimentacaoCaixaDeposito.setData(new Date(2011, 12, 10));
         movimentacaoCaixaDeposito.setDataFaturar(new Date(2011, 12, 10));
         movimentacaoCaixaDeposito.setFaturado(Boolean.TRUE);
-        movimentacaoCaixaDeposito.setFuncionario(new Funcionario());
         movimentacaoCaixaDeposito.setValor(Double.valueOf("123"));
+
+        movimentacaoCaixaDeposito.setFuncionario(RetornarFuncionario());
     }
 
     private static void CadastrarMovimentacaoCaixaLocacao() {
@@ -206,16 +276,18 @@ public class PopularBancoTeste {
         movimentacaoCaixaLocacao.setFaturado(Boolean.TRUE);
         movimentacaoCaixaLocacao.setData(new Date(2011, 12, 10));
         movimentacaoCaixaLocacao.setValor(Double.valueOf("123"));
-        movimentacaoCaixaLocacao.setFuncionario(new Funcionario());
         movimentacaoCaixaLocacao.setData(new Date(2011, 12, 10));
+
+        movimentacaoCaixaLocacao.setFuncionario(RetornarFuncionario());
     }
 
     private static void CadastrarMovimentacaoCaixaRetirada() {
         MovimentacaoCaixaRetirada movimentacaoCaixaRetirada = new MovimentacaoCaixaRetirada();
         movimentacaoCaixaRetirada.setDescricao("teste");
         movimentacaoCaixaRetirada.setData(new Date(2011, 12, 10));
-        movimentacaoCaixaRetirada.setFuncionario(new Funcionario());
         movimentacaoCaixaRetirada.setValor(Double.valueOf("231"));
+
+        movimentacaoCaixaRetirada.setFuncionario(RetornarFuncionario());
     }
 
     private static void CadastrarMovimentacaoCaixaVenda() {
@@ -223,9 +295,10 @@ public class PopularBancoTeste {
         movimentacaoCaixaVenda.setData(new Date(2011, 12, 10));
         movimentacaoCaixaVenda.setDataFaturar(new Date(2011, 12, 10));
         movimentacaoCaixaVenda.setFaturado(Boolean.TRUE);
-        movimentacaoCaixaVenda.setFuncionario(new Funcionario());
         movimentacaoCaixaVenda.setValor(Double.valueOf("123"));
-        movimentacaoCaixaVenda.setVenda(new Venda());
+
+        movimentacaoCaixaVenda.setVenda(RetornarVenda());
+        movimentacaoCaixaVenda.setFuncionario(RetornarFuncionario());
     }
 
     private static void CadastrarPagamento() {
@@ -233,19 +306,30 @@ public class PopularBancoTeste {
         pagamento.setValor(Double.valueOf("123"));
         pagamento.setData(new Date(2011, 12, 10));
         pagamento.setDescricao("teste");
-        pagamento.setTipoPagamento(new TipoPagamento());
+
+        pagamento.setTipoPagamento(RetornarTipoPagamento());
     }
+//------------------------------ PRODUTO -----------------------------------------------------------//
 
     private static void CadastrarProduto() {
+        Produto produto = RetornarProduto();
+    }
+
+    private static Produto RetornarProduto() {
         Produto produto = new Produto();
         produto.setCodigoBarra("teste");
         produto.setNome("teste");
         produto.setValorVenda(Double.valueOf("123"));
         produto.setQuantidade(Integer.MIN_VALUE);
         produto.setDataCadastro(new Date(2011, 12, 10));
-        produto.setFornecedor(new Fornecedor());
-        produto.setTipoProduto(new TipoProduto());
+
+        produto.setFornecedor(RetornarFornecedor());
+        produto.setTipoProduto(RetornarTipoProduto());
+
+        return produto;
+
     }
+//---------------------------------------------------------------------------------------//
 
     private static void CadastrarTabelaPrecoLocacao() {
         TabelaPrecoLocacao tabelaPrecoLocacao = new TabelaPrecoLocacao();
@@ -253,36 +337,71 @@ public class PopularBancoTeste {
         tabelaPrecoLocacao.setValorLancamento(Double.valueOf("123"));
         tabelaPrecoLocacao.setValorMultaDiaria(Double.valueOf("123"));
     }
+//----------------------------- TIPO CONTA PAGAR -------------------------------------------//
 
     private static void CadastrarTipoContaPagar() {
+        TipoContaPagar tipoContaPagar = RetornarTipoContaPagar();
+    }
+
+    private static TipoContaPagar RetornarTipoContaPagar() {
         TipoContaPagar tipoContaPagar = new TipoContaPagar();
         tipoContaPagar.setDescricao("teste");
+
+        return tipoContaPagar;
     }
+//---------------------------------- TIPO FILME--------------------------------------------//
 
     private static void CadastrarTipoFilme() {
+        TipoFilme tipoFilme = RetornarTipoFilme();
+    }
+
+    private static TipoFilme RetornarTipoFilme() {
         TipoFilme tipoFilme = new TipoFilme();
         tipoFilme.setDescricao("teste");
+
+        return tipoFilme;
     }
 
+//------------------------------ TIPO PAGAMENTO -------------------------------------------//
     private static void CadastrarTipoPagamento() {
+        TipoPagamento tipoPagamento = RetornarTipoPagamento();
+    }
+
+    private static TipoPagamento RetornarTipoPagamento() {
         TipoPagamento tipoPagamento = new TipoPagamento();
         tipoPagamento.setDescricao("teste");
+
+        return tipoPagamento;
     }
+//-------------------------------- TIPO PRODUTO ---------------------------------------------------------//
 
     private static void CadastrarTipoProduto() {
-        TipoProduto tipoProduto = new TipoProduto();
-        tipoProduto.setDescricao("teste");
+        TipoProduto tipoProduto = RetornarTipoProduto();
     }
 
+    private static TipoProduto RetornarTipoProduto() {
+        TipoProduto tipoProduto = new TipoProduto();
+        tipoProduto.setDescricao("teste");
+
+        return tipoProduto;
+    }
+//-------------------------- VENDA --------------------------------------------------------------//
+
     private static void CadastrarVenda() {
+        Venda venda = RetornarVenda();
+    }
+
+    private static Venda RetornarVenda() {
         Venda venda = new Venda();
         venda.setData(new Date(2011, 12, 10));
         venda.setValorTotal(Double.valueOf("123"));
         venda.setPago(Boolean.TRUE);
-        venda.setCliente(new ClientePessoaFisica());
-        venda.setFuncionario(new Funcionario());
+
+        venda.setFuncionario(RetornarFuncionario());
+        venda.setCliente(RetornarClientePessoaFisica());
         venda.setItensVenda(new ArrayList<ItemVenda>());
         venda.setPagamentos(new ArrayList<Pagamento>());
-    }
 
+        return venda;
+    }
 }
