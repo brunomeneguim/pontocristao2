@@ -15,7 +15,7 @@ import java.util.List;
 public class Venda extends ModeloBase {
 
     private Date data;
-    private List<ItemVenda> ItensVenda;
+    private List<ItemVenda> ItemVenda;
     private Double valorTotal;
     private Funcionario funcionario;
     private Cliente cliente;
@@ -30,12 +30,12 @@ public class Venda extends ModeloBase {
         this.data = data;
     }
 
-    public List<ItemVenda> getItensVenda() {
-        return ItensVenda;
+    public List<ItemVenda> getItemVenda() {
+        return ItemVenda;
     }
 
-    public void setItensVenda(List<ItemVenda> ItensVenda) {
-        this.ItensVenda = ItensVenda;
+    public void setItemVenda(List<ItemVenda> ItemVenda) {
+        this.ItemVenda = ItemVenda;
     }
 
     public Double getValorTotal() {

@@ -243,7 +243,7 @@ public class PopularBancoTeste {
 
         locacao.setCliente(RetornarClientePessoaFisica());
         locacao.setFuncionario(RetornarFuncionario());
-        locacao.setItensLocacao(new ArrayList<ItemLocacao>(1));
+        locacao.setItemLocacao(new ArrayList<ItemLocacao>(1));
         locacao.setPagamentos(new ArrayList<Pagamento>(1));
 
         return locacao;
@@ -399,7 +399,7 @@ public class PopularBancoTeste {
 
         venda.setFuncionario(RetornarFuncionario());
         venda.setCliente(RetornarClientePessoaFisica());
-        venda.setItensVenda(new ArrayList<ItemVenda>());
+        venda.setItemVenda(new ArrayList<ItemVenda>());
         venda.setPagamentos(new ArrayList<Pagamento>());
 
         return venda;

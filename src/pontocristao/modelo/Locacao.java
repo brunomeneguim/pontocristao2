@@ -15,7 +15,7 @@ import java.util.List;
 public class Locacao extends ModeloBase {
 
     private Date data;
-    private List<ItemLocacao> ItensLocacao;
+    private List<ItemLocacao> ItemLocacao;
     private Double valorTotal;
     private Funcionario funcionario;
     private Cliente cliente;
@@ -30,12 +30,12 @@ public class Locacao extends ModeloBase {
         this.data = data;
     }
 
-    public List<ItemLocacao> getItensLocacao() {
-        return ItensLocacao;
+    public List<ItemLocacao> getItemLocacao() {
+        return ItemLocacao;
     }
 
-    public void setItensLocacao(List<ItemLocacao> ItensLocacao) {
-        this.ItensLocacao = ItensLocacao;
+    public void setItemLocacao(List<ItemLocacao> ItemLocacao) {
+        this.ItemLocacao = ItemLocacao;
     }
 
     public Double getValorTotal() {
