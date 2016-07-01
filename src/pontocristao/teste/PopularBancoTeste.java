@@ -6,7 +6,8 @@
 package pontocristao.teste;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.List;
 import pontocristao.modelo.*;
 
 /**
@@ -14,6 +15,13 @@ import pontocristao.modelo.*;
  * @author marco
  */
 public class PopularBancoTeste {
+
+    List<Funcionario> funcionario = (List<Funcionario>) null;
+
+    public static Calendar Data_Calendar() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar;
+    }
 
     public static void Popular() {
         CadastrarCaixa();
@@ -64,7 +72,8 @@ public class PopularBancoTeste {
         clientePessoaFisica.setTelefone("123123");
         clientePessoaFisica.setCelular("312321321");
         clientePessoaFisica.setEmail("dsadasdasdsa@dasdas.com");
-        clientePessoaFisica.setDataCadastro(new Date(1922, 20, 14));
+        clientePessoaFisica.setDataCadastro(Data_Calendar().getTime());
+        clientePessoaFisica.setDataCadastro(Data_Calendar().getTime());
         clientePessoaFisica.setTotalLocacoes(Integer.parseInt("2"));
 
         clientePessoaFisica.setEndereco(RetornarEndereco());
@@ -86,7 +95,7 @@ public class PopularBancoTeste {
         clientePessoaJuridica.setCelular("312321321");
         clientePessoaJuridica.setEmail("dsadasdasdsa@dasdas.com");
         clientePessoaJuridica.setTotalLocacoes(Integer.parseInt("2"));
-        clientePessoaJuridica.setDataCadastro(new Date(2016, 6, 27));
+        clientePessoaJuridica.setDataCadastro(Data_Calendar().getTime());
 
         clientePessoaJuridica.setEndereco(RetornarEndereco());
         clientePessoaJuridica.setDependentes(new ArrayList<Dependente>(3));
@@ -109,8 +118,8 @@ public class PopularBancoTeste {
     private static ContaPagar RetornarContaPagar() {
         ContaPagar contaPagar = new ContaPagar();
         contaPagar.setValor(Double.valueOf("21312"));
-        contaPagar.setData(new Date(2011, 12, 10));
-        contaPagar.setDataVencimento(new Date(2011, 12, 10));
+        contaPagar.setData(Data_Calendar().getTime());
+        contaPagar.setDataVencimento(Data_Calendar().getTime());
 
         contaPagar.setTipoContaPagar(RetornarTipoContaPagar());
 
@@ -130,7 +139,6 @@ public class PopularBancoTeste {
         dependente.setCpf("21321312");
 
         dependente.setCliente(RetornarClientePessoaFisica());
-
         return dependente;
     }
 //--------------------------------------- ENDERECO ---------------------------------------//
@@ -191,6 +199,10 @@ public class PopularBancoTeste {
         Funcionario funcionario = RetornarFuncionario();
     }
 
+    private static void FuncionarioList(ArrayList Funcionario) {
+        Funcionario funcionario = RetornarFuncionario();
+    }
+
     private static Funcionario RetornarFuncionario() {
         Funcionario funcionario = new Funcionario();
         funcionario.setNome("teste");
@@ -199,10 +211,10 @@ public class PopularBancoTeste {
         funcionario.setRg("123");
         funcionario.setCpf("123");
         funcionario.setSexo(Sexo.FEMININO);
-        funcionario.setDataNascimento(new Date(1992, 12, 10));
-        funcionario.setDataCadastro(new Date(2011, 12, 10));
+        funcionario.setDataNascimento(Data_Calendar().getTime());
+        funcionario.setDataCadastro(Data_Calendar().getTime());
         funcionario.setEmail("teste@teste.com");
-        funcionario.setDataAdmissao(new Date(2011, 12, 10));
+        funcionario.setDataAdmissao(Data_Calendar().getTime());
         funcionario.setCarteiraTrabalho("123");
         funcionario.setLogin("teste");
         funcionario.setSenha("teste");
@@ -215,8 +227,8 @@ public class PopularBancoTeste {
 
     private static void CadastrarItemLocacao() {
         ItemLocacao itemLocacao = new ItemLocacao();
-        itemLocacao.setDataEntrega(new Date(2016, 12, 10));
-        itemLocacao.setDataPrevisaoEntrega(new Date(2011, 11, 21));
+        itemLocacao.setDataEntrega(Data_Calendar().getTime());
+        itemLocacao.setDataPrevisaoEntrega(Data_Calendar().getTime());
 
         itemLocacao.setLocacao(RetornarLocacao());
         itemLocacao.setFilme(RetornarFilme());
@@ -237,7 +249,7 @@ public class PopularBancoTeste {
 
     private static Locacao RetornarLocacao() {
         Locacao locacao = new Locacao();
-        locacao.setData(new Date(2011, 12, 10));
+        locacao.setData(Data_Calendar().getTime());
         locacao.setValorTotal(Double.valueOf("12321"));
         locacao.setPago(Boolean.TRUE);
 
@@ -252,7 +264,7 @@ public class PopularBancoTeste {
 
     private static void CadastrarMovimentacaoCaixaContaPagar() {
         MovimentacaoCaixaContaPagar movimentacaoCaixaContaPagar = new MovimentacaoCaixaContaPagar();
-        movimentacaoCaixaContaPagar.setData(new Date(2011, 12, 10));
+        movimentacaoCaixaContaPagar.setData(Data_Calendar().getTime());
         movimentacaoCaixaContaPagar.setValor(Double.valueOf("123"));
 
         movimentacaoCaixaContaPagar.setFuncionario(RetornarFuncionario());
@@ -262,8 +274,8 @@ public class PopularBancoTeste {
     private static void CadastrarMovimentacaoCaixaDeposito() {
         MovimentacaoCaixaDeposito movimentacaoCaixaDeposito = new MovimentacaoCaixaDeposito();
         movimentacaoCaixaDeposito.setDescricao("teste");
-        movimentacaoCaixaDeposito.setData(new Date(2011, 12, 10));
-        movimentacaoCaixaDeposito.setDataFaturar(new Date(2011, 12, 10));
+        movimentacaoCaixaDeposito.setData(Data_Calendar().getTime());
+        movimentacaoCaixaDeposito.setDataFaturar(Data_Calendar().getTime());
         movimentacaoCaixaDeposito.setFaturado(Boolean.TRUE);
         movimentacaoCaixaDeposito.setValor(Double.valueOf("123"));
 
@@ -272,11 +284,11 @@ public class PopularBancoTeste {
 
     private static void CadastrarMovimentacaoCaixaLocacao() {
         MovimentacaoCaixaLocacao movimentacaoCaixaLocacao = new MovimentacaoCaixaLocacao();
-        movimentacaoCaixaLocacao.setDataFaturar(new Date(2011, 12, 10));
+        movimentacaoCaixaLocacao.setDataFaturar(Data_Calendar().getTime());
         movimentacaoCaixaLocacao.setFaturado(Boolean.TRUE);
-        movimentacaoCaixaLocacao.setData(new Date(2011, 12, 10));
+        movimentacaoCaixaLocacao.setData(Data_Calendar().getTime());
         movimentacaoCaixaLocacao.setValor(Double.valueOf("123"));
-        movimentacaoCaixaLocacao.setData(new Date(2011, 12, 10));
+        movimentacaoCaixaLocacao.setData(Data_Calendar().getTime());
 
         movimentacaoCaixaLocacao.setFuncionario(RetornarFuncionario());
     }
@@ -284,7 +296,7 @@ public class PopularBancoTeste {
     private static void CadastrarMovimentacaoCaixaRetirada() {
         MovimentacaoCaixaRetirada movimentacaoCaixaRetirada = new MovimentacaoCaixaRetirada();
         movimentacaoCaixaRetirada.setDescricao("teste");
-        movimentacaoCaixaRetirada.setData(new Date(2011, 12, 10));
+        movimentacaoCaixaRetirada.setData(Data_Calendar().getTime());
         movimentacaoCaixaRetirada.setValor(Double.valueOf("231"));
 
         movimentacaoCaixaRetirada.setFuncionario(RetornarFuncionario());
@@ -292,8 +304,8 @@ public class PopularBancoTeste {
 
     private static void CadastrarMovimentacaoCaixaVenda() {
         MovimentacaoCaixaVenda movimentacaoCaixaVenda = new MovimentacaoCaixaVenda();
-        movimentacaoCaixaVenda.setData(new Date(2011, 12, 10));
-        movimentacaoCaixaVenda.setDataFaturar(new Date(2011, 12, 10));
+        movimentacaoCaixaVenda.setData(Data_Calendar().getTime());
+        movimentacaoCaixaVenda.setDataFaturar(Data_Calendar().getTime());
         movimentacaoCaixaVenda.setFaturado(Boolean.TRUE);
         movimentacaoCaixaVenda.setValor(Double.valueOf("123"));
 
@@ -304,7 +316,7 @@ public class PopularBancoTeste {
     private static void CadastrarPagamento() {
         Pagamento pagamento = new Pagamento();
         pagamento.setValor(Double.valueOf("123"));
-        pagamento.setData(new Date(2011, 12, 10));
+        pagamento.setData(Data_Calendar().getTime());
         pagamento.setDescricao("teste");
 
         pagamento.setTipoPagamento(RetornarTipoPagamento());
@@ -321,7 +333,7 @@ public class PopularBancoTeste {
         produto.setNome("teste");
         produto.setValorVenda(Double.valueOf("123"));
         produto.setQuantidade(Integer.MIN_VALUE);
-        produto.setDataCadastro(new Date(2011, 12, 10));
+        produto.setDataCadastro(Data_Calendar().getTime());
 
         produto.setFornecedor(RetornarFornecedor());
         produto.setTipoProduto(RetornarTipoProduto());
@@ -393,7 +405,7 @@ public class PopularBancoTeste {
 
     private static Venda RetornarVenda() {
         Venda venda = new Venda();
-        venda.setData(new Date(2011, 12, 10));
+        venda.setData(Data_Calendar().getTime());
         venda.setValorTotal(Double.valueOf("123"));
         venda.setPago(Boolean.TRUE);
 
