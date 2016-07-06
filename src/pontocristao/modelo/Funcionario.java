@@ -6,11 +6,17 @@
 package pontocristao.modelo;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  *
  * @author marco
  */
+
+@Entity
 public class Funcionario extends ModeloBase {
 
     private String nome;
@@ -18,15 +24,15 @@ public class Funcionario extends ModeloBase {
     private String celular;
     private String rg;
     private String cpf;
-    private Sexo sexo;
-    private Date dataNascimento;
-    private Date dataCadastro;
-    private String email;
-    private Date dataAdmissao;
-    private String carteiraTrabalho;
-    private String login;
-    private String senha;
-    private Endereco endereco;
+//    private Sexo sexo;
+//    private Date dataNascimento;
+//    private Date dataCadastro;
+//    private String email;
+//    private Date dataAdmissao;
+//    private String carteiraTrabalho;
+//    private String login;
+//    private String senha;
+    //private Endereco endereco;
 
     public String getNome() {
         return nome;
@@ -68,76 +74,76 @@ public class Funcionario extends ModeloBase {
         this.cpf = cpf;
     }
 
-    public Sexo getSexo() {
-        return sexo;
-    }
+//    public Sexo getSexo() {
+//        return sexo;
+//    }
+//
+//    public void setSexo(Sexo sexo) {
+//        this.sexo = sexo;
+//    }
+//
+//    public Date getDataNascimento() {
+//        return dataNascimento;
+//    }
+//
+//    public void setDataNascimento(Date dataNascimento) {
+//        this.dataNascimento = dataNascimento;
+//    }
+//
+//    public Date getDataCadastro() {
+//        return dataCadastro;
+//    }
+//
+//    public void setDataCadastro(Date dataCadastro) {
+//        this.dataCadastro = dataCadastro;
+//    }
+//
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
+//
+//    public Date getDataAdmissao() {
+//        return dataAdmissao;
+//    }
+//
+//    public void setDataAdmissao(Date dataAdmissao) {
+//        this.dataAdmissao = dataAdmissao;
+//    }
+//
+//    public String getCarteiraTrabalho() {
+//        return carteiraTrabalho;
+//    }
+//
+//    public void setCarteiraTrabalho(String carteiraTrabalho) {
+//        this.carteiraTrabalho = carteiraTrabalho;
+//    }
+//
+//    public String getLogin() {
+//        return login;
+//    }
+//
+//    public void setLogin(String login) {
+//        this.login = login;
+//    }
+//
+//    public String getSenha() {
+//        return senha;
+//    }
+//
+//    public void setSenha(String senha) {
+//        this.senha = senha;
+//    }
 
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
-    }
-
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
-    public Date getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public void setDataCadastro(Date dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getDataAdmissao() {
-        return dataAdmissao;
-    }
-
-    public void setDataAdmissao(Date dataAdmissao) {
-        this.dataAdmissao = dataAdmissao;
-    }
-
-    public String getCarteiraTrabalho() {
-        return carteiraTrabalho;
-    }
-
-    public void setCarteiraTrabalho(String carteiraTrabalho) {
-        this.carteiraTrabalho = carteiraTrabalho;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
+//    public Endereco getEndereco() {
+//        return endereco;
+//    }
+//
+//    public void setEndereco(Endereco endereco) {
+//        this.endereco = endereco;
+//    }
 
 }

@@ -5,13 +5,14 @@
  */
 package pontocristao.modelo;
 
-import java.util.Date;
-import java.util.List;
-
+import java.util.*;
+import javax.persistence.*;
 /**
  *
  * @author Marcondes
  */
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Cliente extends ModeloBase {
 
     private String nome;
@@ -20,8 +21,10 @@ public abstract class Cliente extends ModeloBase {
     private Date dataCadastro;
     private String email;
     private Integer totalLocacoes;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Endereco endereco;
-    private List<Dependente> dependentes;
+    @OneToMany(mappedBy = "cliente")
+    private Set<Dependente> dependentes = new HashSet<Dependente>(0);
 
     public String getNome() {
         return nome;
@@ -79,11 +82,11 @@ public abstract class Cliente extends ModeloBase {
         this.endereco = endereco;
     }
 
-    public List<Dependente> getDependentes() {
+    public Set<Dependente> getDependentes() {
         return dependentes;
     }
 
-    public void setDependentes(List<Dependente> dependentes) {
+    public void setDependentes(Set<Dependente> dependentes) {
         this.dependentes = dependentes;
     }
 

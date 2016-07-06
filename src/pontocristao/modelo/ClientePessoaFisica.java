@@ -5,10 +5,13 @@
  */
 package pontocristao.modelo;
 
+import javax.persistence.*;
+
 /**
  *
  * @author marco
  */
+@Entity
 public class ClientePessoaFisica extends Cliente{
     private String rg;
     private String cpf;

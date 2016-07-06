@@ -5,17 +5,22 @@
  */
 package pontocristao.modelo;
 
-import java.util.Date;
+import java.util.*;
+import javax.persistence.*;
 
 /**
  *
  * @author marco
  */
+@Entity
 public abstract class MovimentacaoCaixa extends ModeloBase {
 
     private Date data;
     private Double valor;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Funcionario funcionario;
+    @ManyToOne(optional = false)
+    private Caixa caixa;
 
     public Date getData() {
         return data;
@@ -39,5 +44,13 @@ public abstract class MovimentacaoCaixa extends ModeloBase {
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
+    }
+
+    public Caixa getCaixa() {
+        return caixa;
+    }
+
+    public void setCaixa(Caixa caixa) {
+        this.caixa = caixa;
     }
 }

@@ -5,22 +5,25 @@
  */
 package pontocristao.modelo;
 
-import java.util.List;
+import java.util.*;
+import javax.persistence.*;
 
 /**
  *
  * @author marco
  */
+@Entity
 public class Caixa extends ModeloBase {
 
-    private List<MovimentacaoCaixa> movimentacoes;
+    @OneToMany(mappedBy = "caixa")
+    private Set<MovimentacaoCaixa> movimentacoes = new HashSet<MovimentacaoCaixa>(0);
     private Double saldo;
 
-    public List<MovimentacaoCaixa> getMovimentacoes() {
+    public Set<MovimentacaoCaixa> getMovimentacoes() {
         return movimentacoes;
     }
 
-    public void setMovimentacoes(List<MovimentacaoCaixa> movimentacoes) {
+    public void setMovimentacoes(Set<MovimentacaoCaixa> movimentacoes) {
         this.movimentacoes = movimentacoes;
     }
 

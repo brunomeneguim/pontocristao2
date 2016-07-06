@@ -5,18 +5,27 @@
  */
 package pontocristao.modelo;
 
+import javax.persistence.*;
+
 /**
  *
  * @author marco
  */
+@Entity
 public class Endereco extends ModeloBase {
 
+    @Column(nullable = false)
     private String rua;
+    @Column(nullable = false)
     private String numero;
     private String complemento;
+    @Column(nullable = false)
     private String cep;
+    @Column(nullable = false)
     private String bairro;
+    @Column(nullable = false)
     private String cidade;
+    @Column(nullable = false)
     private String estado;
 
     public String getRua() {

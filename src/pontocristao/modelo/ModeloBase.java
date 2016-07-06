@@ -5,19 +5,27 @@
  */
 package pontocristao.modelo;
 
+import java.io.Serializable;
+import javax.persistence.*;
+
+
 /**
  *
  * @author marco
  */
-public class ModeloBase {
+@MappedSuperclass()
+public abstract class ModeloBase implements Serializable {
 
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     public long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
+    
 }

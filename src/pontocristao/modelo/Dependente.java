@@ -5,16 +5,20 @@
  */
 package pontocristao.modelo;
 
+import javax.persistence.*;
+
 /**
  *
  * @author marco
  */
+@Entity
 public class Dependente extends ModeloBase {
 
     private String nome;
     private String telefone;
     private String rg;
     private String cpf;
+    @ManyToOne()
     private Cliente cliente;
 
     public String getNome() {
