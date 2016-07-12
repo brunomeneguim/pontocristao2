@@ -13,7 +13,10 @@ import javax.persistence.*;
  */
 @Entity
 public class ClientePessoaFisica extends Cliente{
+    
+    @Column(nullable = false)
     private String rg;
+    @Column(nullable = false)
     private String cpf;
 
     public String getRg() {

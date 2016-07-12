@@ -5,13 +5,19 @@
  */
 package pontocristao.modelo;
 
+import javax.persistence.*;
+
 /**
  *
  * @author marco
  */
+
+@Entity
 public class CodigoBarrasProprio extends ModeloBase {
 
+    @Column(nullable = false)
     private Integer ultimoCodigo;
+    @Column(nullable = false)
     private String padrao;
 
     public Integer getUltimoCodigo() {

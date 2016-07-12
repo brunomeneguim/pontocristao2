@@ -6,11 +6,13 @@
 package pontocristao.modelo;
 
 import java.util.Date;
+import javax.persistence.Entity;
 
 /**
  *
  * @author marco
  */
+@Entity
 public class ItemLocacao extends ModeloBase {
 
     private Date dataPrevisaoEntrega;

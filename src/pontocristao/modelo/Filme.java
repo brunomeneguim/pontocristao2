@@ -5,10 +5,13 @@
  */
 package pontocristao.modelo;
 
+import javax.persistence.*;
+
 /**
  *
  * @author marco
  */
+@Entity
 public class Filme extends Produto {
 
     private Boolean lancamento;

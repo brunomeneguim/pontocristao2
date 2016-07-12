@@ -5,17 +5,23 @@
  */
 package pontocristao.modelo;
 
-import java.util.Date;
+import java.util.*;
+import javax.persistence.*;
 
 /**
  *
  * @author marco
  */
+@Entity
 public class ContaPagar extends ModeloBase {
 
+    @Column(nullable = false)
     private Date data;
+    @Column(nullable = false)
     private Date dataVencimento;
+    @Column(nullable = false)
     private Double valor;
+    @ManyToOne()
     private TipoContaPagar tipoContaPagar;
 
     public Date getData() {

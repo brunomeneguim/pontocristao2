@@ -5,12 +5,14 @@
  */
 package pontocristao.modelo;
 
-import java.util.Date;
+import java.util.*;
+import javax.persistence.*;
 
 /**
  *
  * @author marco
  */
+@Entity
 public class Produto extends ModeloBase {
 
     private String codigoBarra;

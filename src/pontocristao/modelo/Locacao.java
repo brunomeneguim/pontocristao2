@@ -5,22 +5,23 @@
  */
 package pontocristao.modelo;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import javax.persistence.*;
 
 /**
  *
  * @author marco
  */
+@Entity
 public class Locacao extends ModeloBase {
 
     private Date data;
-    private List<ItemLocacao> ItemLocacao;
+    private Set<ItemLocacao> ItensLocacao = new HashSet<ItemLocacao>(0);
     private Double valorTotal;
     private Funcionario funcionario;
     private Cliente cliente;
     private Boolean pago;
-    private List<Pagamento> pagamentos;
+    private Set<Pagamento> pagamentos = new HashSet<Pagamento>(0);
 
     public Date getData() {
         return data;
@@ -30,12 +31,12 @@ public class Locacao extends ModeloBase {
         this.data = data;
     }
 
-    public List<ItemLocacao> getItemLocacao() {
-        return ItemLocacao;
+    public Set<ItemLocacao> getItemLocacao() {
+        return ItensLocacao;
     }
 
-    public void setItemLocacao(List<ItemLocacao> ItemLocacao) {
-        this.ItemLocacao = ItemLocacao;
+    public void setItemLocacao(Set<ItemLocacao> ItensLocacao) {
+        this.ItensLocacao = ItensLocacao;
     }
 
     public Double getValorTotal() {
@@ -70,11 +71,11 @@ public class Locacao extends ModeloBase {
         this.pago = pago;
     }
 
-    public List<Pagamento> getPagamentos() {
+    public Set<Pagamento> getPagamentos() {
         return pagamentos;
     }
 
-    public void setPagamentos(List<Pagamento> pagamentos) {
+    public void setPagamentos(Set<Pagamento> pagamentos) {
         this.pagamentos = pagamentos;
     }
 

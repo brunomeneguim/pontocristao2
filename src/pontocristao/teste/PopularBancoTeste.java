@@ -192,7 +192,7 @@ public class PopularBancoTeste {
         fornecedor.setRazaoSocial("teste");
         fornecedor.setInscricaoEstadual("123");
 
-        fornecedor.setProdutos(new HashSet<Produto>());
+        //fornecedor.setProdutos(new HashSet<Produto>());
 
         return fornecedor;
     }

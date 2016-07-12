@@ -14,9 +14,12 @@ import javax.persistence.*;
 @Entity
 public class Dependente extends ModeloBase {
 
+    @Column(nullable = false)
     private String nome;
     private String telefone;
+    @Column(nullable = false)
     private String rg;
+    @Column(nullable = false)
     private String cpf;
     @ManyToOne()
     private Cliente cliente;

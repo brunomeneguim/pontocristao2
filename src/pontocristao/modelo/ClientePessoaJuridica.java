@@ -13,6 +13,8 @@ import javax.persistence.*;
  */
 @Entity
 public class ClientePessoaJuridica extends Cliente{
+    
+    @Column(nullable = false)
     private String cnpj;
 
     public String getCnpj() {
