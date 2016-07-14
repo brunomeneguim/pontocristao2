@@ -12,12 +12,16 @@ import javax.persistence.*;
  * @author marco
  */
 @Entity
-public class ClientePessoaFisica extends Cliente{
-    
+public class ClientePessoaFisica extends Cliente {
+
     @Column(nullable = false)
     private String rg;
+
     @Column(nullable = false)
     private String cpf;
+
+    @Column(nullable = false)
+    private Sexo sexo;
 
     public String getRg() {
         return rg;
@@ -33,5 +37,13 @@ public class ClientePessoaFisica extends Cliente{
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
     }
 }

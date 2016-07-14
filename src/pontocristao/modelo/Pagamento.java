@@ -6,16 +6,24 @@
 package pontocristao.modelo;
 
 import java.util.Date;
+import javax.persistence.*;
 
 /**
  *
  * @author marco
  */
-public class Pagamento extends ModeloBase {
-
+@Entity
+public abstract class Pagamento extends ModeloBase {
+   
+    @ManyToOne(optional = false)
     private TipoPagamento tipoPagamento;
+    
+    @Column(nullable = false)
     private Double valor;
+    
+    @Column(nullable = false)
     private Date data;
+    
     private String descricao;
 
     public TipoPagamento getTipoPagamento() {

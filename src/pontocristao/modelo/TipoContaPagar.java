@@ -17,7 +17,8 @@ public class TipoContaPagar extends ModeloBase {
 
     @Column(nullable = false)
     private String descricao;
-    @OneToMany(mappedBy = "tipocontapagar")
+    
+    @OneToMany(mappedBy = "tipoContaPagar")
     private Set<ContaPagar> contasPagar = new HashSet<ContaPagar>(0);
 
     public String getDescricao() {

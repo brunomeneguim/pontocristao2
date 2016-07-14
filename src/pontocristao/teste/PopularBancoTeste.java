@@ -19,16 +19,8 @@ public class PopularBancoTeste {
     }
 
     public static void Popular() {
-//        Fornecedor modelo = new Fornecedor();
-//        modelo.setNomeFantasia("Teste");
-//        
-        Session session = HibernateUtil.getSessionFactory().openSession();
-//        
-//        session.beginTransaction();
-//        session.save(modelo);
-//        session.getTransaction().commit();
-//        
-        session.close();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+//        session.close();
 
         CadastrarCaixa();
         CadastrarClientePessoaFisica();
@@ -192,8 +184,6 @@ public class PopularBancoTeste {
         fornecedor.setRazaoSocial("teste");
         fornecedor.setInscricaoEstadual("123");
 
-        //fornecedor.setProdutos(new HashSet<Produto>());
-
         return fornecedor;
     }
 //------------------------------ FUNCIONARIO -----------------------------------------------------------//
@@ -259,7 +249,7 @@ public class PopularBancoTeste {
         locacao.setCliente(RetornarClientePessoaFisica());
         locacao.setFuncionario(RetornarFuncionario());
         locacao.setItemLocacao(new HashSet<ItemLocacao>());
-        locacao.setPagamentos(new HashSet<Pagamento>());
+        //locacao.setPagamentos(new HashSet<Pagamento>());
 
         return locacao;
     }
@@ -317,12 +307,12 @@ public class PopularBancoTeste {
     }
 
     private static void CadastrarPagamento() {
-        Pagamento pagamento = new Pagamento();
-        pagamento.setValor(Double.valueOf("123"));
-        pagamento.setData(Data_Calendar().getTime());
-        pagamento.setDescricao("teste");
-
-        pagamento.setTipoPagamento(RetornarTipoPagamento());
+//        Pagamento pagamento = new Pagamento();
+//        pagamento.setValor(Double.valueOf("123"));
+//        pagamento.setData(Data_Calendar().getTime());
+//        pagamento.setDescricao("teste");
+//
+//        pagamento.setTipoPagamento(RetornarTipoPagamento());
     }
 //------------------------------ PRODUTO -----------------------------------------------------------//
 
@@ -415,7 +405,7 @@ public class PopularBancoTeste {
         venda.setFuncionario(RetornarFuncionario());
         venda.setCliente(RetornarClientePessoaFisica());
         venda.setItemVenda(new HashSet<ItemVenda>());
-        venda.setPagamentos(new HashSet<Pagamento>());
+        //venda.setPagamentos(new HashSet<Pagamento>());
 
         return venda;
     }

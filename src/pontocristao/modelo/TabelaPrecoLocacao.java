@@ -5,14 +5,20 @@
  */
 package pontocristao.modelo;
 
+import javax.persistence.*;
+
 /**
  *
  * @author marco
  */
+@Entity
 public class TabelaPrecoLocacao extends ModeloBase {
 
+    @Column(nullable = false)
     private Double valorNormal;
+    @Column(nullable = false)
     private Double valorLancamento;
+    @Column(nullable = false)
     private Double valorMultaDiaria;
 
     public Double getValorNormal() {

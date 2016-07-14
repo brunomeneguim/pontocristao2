@@ -15,13 +15,26 @@ import javax.persistence.*;
 @Entity
 public class Locacao extends ModeloBase {
 
+    @Column(nullable = false)
     private Date data;
+    
+    @OneToMany(mappedBy = "locacao")
     private Set<ItemLocacao> ItensLocacao = new HashSet<ItemLocacao>(0);
+    
+    @Column(nullable = false)
     private Double valorTotal;
+    
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Funcionario funcionario;
+    
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Cliente cliente;
+    
+    @Column(nullable = false)
     private Boolean pago;
-    private Set<Pagamento> pagamentos = new HashSet<Pagamento>(0);
+    
+    @OneToMany(mappedBy = "locacao")
+    private Set<PagamentoLocacao> pagamentos = new HashSet<PagamentoLocacao>(0);
 
     public Date getData() {
         return data;
@@ -71,11 +84,11 @@ public class Locacao extends ModeloBase {
         this.pago = pago;
     }
 
-    public Set<Pagamento> getPagamentos() {
+    public Set<PagamentoLocacao> getPagamentos() {
         return pagamentos;
     }
 
-    public void setPagamentos(Set<Pagamento> pagamentos) {
+    public void setPagamentos(Set<PagamentoLocacao> pagamentos) {
         this.pagamentos = pagamentos;
     }
 

@@ -6,14 +6,18 @@
 package pontocristao.modelo;
 
 import java.util.Date;
+import javax.persistence.*;
 
 /**
  *
  * @author marco
  */
+@Entity
 public abstract class MovimentacaoCaixaEntrada extends MovimentacaoCaixa {
 
+    @Column(nullable = false)
     private Date dataFaturar;
+    @Column(nullable = false)
     private Boolean faturado;
 
     public Date getDataFaturar() {

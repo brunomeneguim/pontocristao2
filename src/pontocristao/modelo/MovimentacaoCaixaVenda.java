@@ -5,12 +5,16 @@
  */
 package pontocristao.modelo;
 
+import javax.persistence.*;
+
 /**
  *
  * @author marco
  */
+@Entity
 public class MovimentacaoCaixaVenda extends MovimentacaoCaixaEntrada {
 
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Venda venda;
 
     public Venda getVenda() {

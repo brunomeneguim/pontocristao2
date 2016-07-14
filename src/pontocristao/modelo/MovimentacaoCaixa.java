@@ -15,7 +15,9 @@ import javax.persistence.*;
 @Entity
 public abstract class MovimentacaoCaixa extends ModeloBase {
 
+    @Column(nullable = false)
     private Date data;
+    @Column(nullable = false)
     private Double valor;
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Funcionario funcionario;

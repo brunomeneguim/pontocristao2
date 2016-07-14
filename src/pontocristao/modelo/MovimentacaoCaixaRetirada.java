@@ -5,12 +5,16 @@
  */
 package pontocristao.modelo;
 
+import javax.persistence.*;
+
 /**
  *
  * @author marco
  */
+@Entity
 public class MovimentacaoCaixaRetirada extends MovimentacaoCaixaSaida {
 
+    @Column(nullable = false)
     private String descricao;
 
     public String getDescricao() {

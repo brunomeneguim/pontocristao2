@@ -14,7 +14,9 @@ import javax.persistence.*;
 @Entity
 public class Filme extends Produto {
 
+    @Column(nullable = false)
     private Boolean lancamento;
+    @ManyToOne(optional = false)
     private TipoFilme tipoFilme;
 
     public Boolean getLancamento() {

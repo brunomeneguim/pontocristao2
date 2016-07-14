@@ -16,13 +16,26 @@ import javax.persistence.*;
 @Entity
 public class Venda extends ModeloBase {
 
+    @Column(nullable = false)
     private Date data;
+    
+    @OneToMany(mappedBy = "venda")
     private Set<ItemVenda> ItensVenda = new HashSet<ItemVenda>(0);
+    
+    @Column(nullable = false)
     private Double valorTotal;
+    
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Funcionario funcionario;
+    
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Cliente cliente;
+    
+    @Column(nullable = false)
     private Boolean pago;
-    private Set<Pagamento> pagamentos = new HashSet<Pagamento>(0);
+    
+    @OneToMany(mappedBy = "venda")
+    private Set<PagamentoVenda> pagamentos = new HashSet<PagamentoVenda>(0);
 
     public Date getData() {
         return data;
@@ -72,11 +85,11 @@ public class Venda extends ModeloBase {
         this.pago = pago;
     }
 
-    public Set<Pagamento> getPagamentos() {
+    public Set<PagamentoVenda> getPagamentos() {
         return pagamentos;
     }
 
-    public void setPagamentos(Set<Pagamento> pagamentos) {
+    public void setPagamentos(Set<PagamentoVenda> pagamentos) {
         this.pagamentos = pagamentos;
     }
 

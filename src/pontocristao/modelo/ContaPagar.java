@@ -17,10 +17,13 @@ public class ContaPagar extends ModeloBase {
 
     @Column(nullable = false)
     private Date data;
+    
     @Column(nullable = false)
     private Date dataVencimento;
+    
     @Column(nullable = false)
     private Double valor;
+    
     @ManyToOne()
     private TipoContaPagar tipoContaPagar;
 

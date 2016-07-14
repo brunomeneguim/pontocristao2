@@ -16,13 +16,19 @@ import javax.persistence.*;
 @Entity
 public class Fornecedor extends ModeloBase {
     
+    @Column(nullable = false)
     private String nomeFantasia;
+    @Column(nullable = false)
     private String telefone;
     private String celular;
     private String descricao;
+    @Column(nullable = false)
     private String cnpj;
+    @Column(nullable = false)
     private String razaoSocial;
+    @Column(nullable = false)
     private String inscricaoEstadual;
+    @OneToMany(mappedBy = "fornecedor")
     private Set<Produto> produtos = new HashSet<Produto>(0);
 
     public String getNomeFantasia() {

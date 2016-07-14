@@ -12,16 +12,17 @@ import javax.persistence.*;
  * @author marco
  */
 @Entity
-public class MovimentacaoCaixaDeposito extends MovimentacaoCaixaEntrada {
+public class PagamentoVenda extends Pagamento{
+    
+    @ManyToOne(optional = false)
+    private Venda venda;
 
-    @Column(nullable = false)
-    private String descricao;
-
-    public String getDescricao() {
-        return descricao;
+    public Venda getVenda() {
+        return venda;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setVenda(Venda venda) {
+        this.venda = venda;
     }
+    
 }

@@ -5,10 +5,13 @@
  */
 package pontocristao.modelo;
 
+import javax.persistence.Entity;
+
 /**
  *
  * @author marco
  */
+@Entity
 public abstract class MovimentacaoCaixaSaida extends MovimentacaoCaixa {
 
 }

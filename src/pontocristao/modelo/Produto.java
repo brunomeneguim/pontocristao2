@@ -15,12 +15,19 @@ import javax.persistence.*;
 @Entity
 public class Produto extends ModeloBase {
 
+    @Column(nullable = false)
     private String codigoBarra;
+    @Column(nullable = false)
     private String nome;
+    @Column(nullable = false)
     private Double valorVenda;
+    @Column(nullable = false)
     private Integer quantidade;
+    @Column(nullable = false)
     private Date dataCadastro;
+    @ManyToOne()
     private Fornecedor fornecedor;
+    @ManyToOne(optional = false)
     private TipoProduto tipoProduto;
 
     public String getCodigoBarra() {

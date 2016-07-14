@@ -5,8 +5,8 @@
  */
 package pontocristao.modelo;
 
-import java.util.Date;
-import javax.persistence.Entity;
+import java.util.*;
+import javax.persistence.*;
 
 /**
  *
@@ -15,9 +15,12 @@ import javax.persistence.Entity;
 @Entity
 public class ItemLocacao extends ModeloBase {
 
+    @Column(nullable = false)
     private Date dataPrevisaoEntrega;
     private Date dataEntrega;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Filme filme;
+    @ManyToOne(optional = false)
     private Locacao locacao;
 
     public Date getDataPrevisaoEntrega() {

@@ -16,19 +16,31 @@ import javax.persistence.*;
 @Entity
 public class Funcionario extends ModeloBase {
 
+    @Column(nullable = false)
     private String nome;
+    @Column(nullable = false)
     private String telefoneResidencial;
     private String celular;
+    @Column(nullable = false)
     private String rg;
+    @Column(nullable = false)
     private String cpf;
+    @Column(nullable = false)
     private Sexo sexo;
+    @Column(nullable = false)
     private Date dataNascimento;
+    @Column(nullable = false)
     private Date dataCadastro;
     private String email;
+    @Column(nullable = false)
     private Date dataAdmissao;
+    @Column(nullable = false)
     private String carteiraTrabalho;
+    @Column(nullable = false)
     private String login;
+    @Column(nullable = false)
     private String senha;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Endereco endereco;
 
     public String getNome() {

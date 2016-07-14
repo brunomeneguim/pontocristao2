@@ -17,15 +17,22 @@ public abstract class Cliente extends ModeloBase {
 
     @Column(nullable = false)
     private String nome;
+    
     private String telefone;
+    
     private String celular;
+    
     @Column(nullable = false)
     private Date dataCadastro;
+    
     private String email;
+    
     @Column(nullable = false)
     private Integer totalLocacoes;
+    
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Endereco endereco;
+    
     @OneToMany(mappedBy = "cliente")
     private Set<Dependente> dependentes = new HashSet<Dependente>(0);
 
