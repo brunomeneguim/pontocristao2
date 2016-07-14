@@ -19,6 +19,9 @@ public abstract class ModeloBase implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(nullable = false, columnDefinition = "tinyint default false")
+    private Boolean excluido;
 
     public long getId() {
         return this.id;
@@ -28,4 +31,11 @@ public abstract class ModeloBase implements Serializable {
         this.id = id;
     }
     
+        public Boolean getExcluido() {
+        return excluido;
+    }
+
+    public void setExcluido(Boolean excluido) {
+        this.excluido = excluido;
+    }
 }
