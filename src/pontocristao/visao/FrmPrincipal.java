@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pontocristao.visao;
 
 import pontocristao.teste.PopularBancoTeste;
 
 /**
  *
- * @author marco
+ * @author Marcondes
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
@@ -18,7 +13,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     public FrmPrincipal() {
         initComponents();
-        
+
         this.setExtendedState(MAXIMIZED_BOTH);
         //PopularBancoTeste.Popular();
     }
@@ -98,7 +93,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void BtnJanelaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJanelaClientesActionPerformed
         FrmCliente frm = FrmCliente.Mostrar(this);
-        
+
     }//GEN-LAST:event_BtnJanelaClientesActionPerformed
 
     /**

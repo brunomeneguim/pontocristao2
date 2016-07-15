@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pontocristao.modelo;
 
 import java.util.*;
 import javax.persistence.*;
+
 /**
  *
  * @author Marcondes
@@ -17,22 +13,22 @@ public abstract class Cliente extends ModeloBase {
 
     @Column(nullable = false)
     private String nome;
-    
+
     private String telefone;
-    
+
     private String celular;
-    
+
     @Column(nullable = false)
     private Date dataCadastro;
-    
+
     private String email;
-    
+
     @Column(nullable = false)
     private Integer totalLocacoes;
-    
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Endereco endereco;
-    
+
     @OneToMany(mappedBy = "cliente")
     private Set<Dependente> dependentes = new HashSet<Dependente>(0);
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pontocristao.modelo;
 
 import java.util.*;
@@ -10,14 +5,14 @@ import javax.persistence.*;
 
 /**
  *
- * @author marco
+ * @author Marcondes
  */
 @Entity
 public class TipoContaPagar extends ModeloBase {
 
     @Column(nullable = false)
     private String descricao;
-    
+
     @OneToMany(mappedBy = "tipoContaPagar")
     private Set<ContaPagar> contasPagar = new HashSet<ContaPagar>(0);
 
@@ -28,8 +23,8 @@ public class TipoContaPagar extends ModeloBase {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
-        public Set<ContaPagar> getContasPagar() {
+
+    public Set<ContaPagar> getContasPagar() {
         return contasPagar;
     }
 

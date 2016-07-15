@@ -1,23 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pontocristao.modelo;
 
 import javax.persistence.*;
 
 /**
  *
- * @author marco
+ * @author Marcondes
  */
 @Entity
 public class TabelaPrecoLocacao extends ModeloBase {
 
     @Column(nullable = false)
     private Double valorNormal;
+
     @Column(nullable = false)
     private Double valorLancamento;
+
     @Column(nullable = false)
     private Double valorMultaDiaria;
 

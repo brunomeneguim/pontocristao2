@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pontocristao.visao;
 
 import java.awt.*;
 
 /**
  *
- * @author marco
+ * @author Marcondes
  */
 public class FrmCliente extends javax.swing.JDialog {
 
@@ -19,12 +14,12 @@ public class FrmCliente extends javax.swing.JDialog {
     public FrmCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
         this.setBounds(bounds);
 
     }
-    
+
     public static FrmCliente Mostrar(java.awt.Frame parent) {
         FrmCliente frmCliente = new FrmCliente(parent, true);
         frmCliente.setVisible(true);

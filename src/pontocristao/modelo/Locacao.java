@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pontocristao.modelo;
 
 import java.util.*;
@@ -10,29 +5,29 @@ import javax.persistence.*;
 
 /**
  *
- * @author marco
+ * @author Marcondes
  */
 @Entity
 public class Locacao extends ModeloBase {
 
     @Column(nullable = false)
     private Date data;
-    
+
     @OneToMany(mappedBy = "locacao")
     private Set<ItemLocacao> ItensLocacao = new HashSet<ItemLocacao>(0);
-    
+
     @Column(nullable = false)
     private Double valorTotal;
-    
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Funcionario funcionario;
-    
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Cliente cliente;
-    
+
     @Column(nullable = false)
     private Boolean pago;
-    
+
     @OneToMany(mappedBy = "locacao")
     private Set<PagamentoLocacao> pagamentos = new HashSet<PagamentoLocacao>(0);
 

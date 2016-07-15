@@ -1,28 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pontocristao.modelo;
 
 import javax.persistence.*;
 
 /**
  *
- * @author marco
+ * @author Marcondes
  */
 @Entity
 public class ItemVenda extends ModeloBase {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Produto produto;
-    
+
     @Column(nullable = false)
     private Integer quantidade;
-    
+
     @Column(nullable = false)
     private Double valorUnitario;
-    
+
     @ManyToOne(optional = false)
     private Venda venda;
 
@@ -50,7 +45,7 @@ public class ItemVenda extends ModeloBase {
         this.valorUnitario = valorUnitario;
     }
 
-        public Venda getVenda() {
+    public Venda getVenda() {
         return venda;
     }
 
