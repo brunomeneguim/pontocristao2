@@ -5,7 +5,7 @@
  */
 package pontocristao.visao;
 
-import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.*;
 
 /**
  *
@@ -20,10 +20,13 @@ public class FrmCliente extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
+        Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        this.setBounds(bounds);
+
     }
     
     public static FrmCliente Mostrar(java.awt.Frame parent) {
-        FrmCliente frmCliente = new FrmCliente(parent,true);
+        FrmCliente frmCliente = new FrmCliente(parent, true);
         frmCliente.setVisible(true);
         return frmCliente;
     }
@@ -47,6 +50,7 @@ public class FrmCliente extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clientes");
+        setResizable(false);
 
         jButton1.setText("Novo");
 
