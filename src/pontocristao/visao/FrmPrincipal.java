@@ -27,31 +27,57 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BtnJanelaClientes = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        BtnJanelaCliente = new javax.swing.JButton();
+        BtnJanelaFornecedor = new javax.swing.JButton();
+        BtnJanelaFilme = new javax.swing.JButton();
+        BtnJanelaProduto = new javax.swing.JButton();
+        BtnJanelaFuncionario = new javax.swing.JButton();
+        BtnJanelaContaPagar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Principal");
 
-        BtnJanelaClientes.setText("Clientes");
-        BtnJanelaClientes.addActionListener(new java.awt.event.ActionListener() {
+        BtnJanelaCliente.setText("Clientes");
+        BtnJanelaCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnJanelaClientesActionPerformed(evt);
+                BtnJanelaClienteActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Fornecedores");
+        BtnJanelaFornecedor.setText("Fornecedores");
+        BtnJanelaFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnJanelaFornecedorActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Filmes");
+        BtnJanelaFilme.setText("Filmes");
+        BtnJanelaFilme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnJanelaFilmeActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Produtos");
+        BtnJanelaProduto.setText("Produtos");
+        BtnJanelaProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnJanelaProdutoActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Funcionario");
+        BtnJanelaFuncionario.setText("Funcionario");
+        BtnJanelaFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnJanelaFuncionarioActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Contas a pagar");
+        BtnJanelaContaPagar.setText("Contas a pagar");
+        BtnJanelaContaPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnJanelaContaPagarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,41 +86,60 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnJanelaClientes)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(BtnJanelaCliente)
+                    .addComponent(BtnJanelaFornecedor)
+                    .addComponent(BtnJanelaFilme)
+                    .addComponent(BtnJanelaProduto)
+                    .addComponent(BtnJanelaFuncionario)
+                    .addComponent(BtnJanelaContaPagar))
                 .addContainerGap(691, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BtnJanelaClientes)
+                .addComponent(BtnJanelaCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(BtnJanelaFornecedor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(BtnJanelaFilme)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(BtnJanelaProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(BtnJanelaFuncionario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
+                .addComponent(BtnJanelaContaPagar)
                 .addContainerGap(286, Short.MAX_VALUE))
         );
 
-        BtnJanelaClientes.getAccessibleContext().setAccessibleName("BtnJanelaClientes");
+        BtnJanelaCliente.getAccessibleContext().setAccessibleName("BtnJanelaClientes");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnJanelaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJanelaClientesActionPerformed
-        FrmCliente frm = FrmCliente.Mostrar(this);
+    private void BtnJanelaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJanelaClienteActionPerformed
+        FrmCliente frmCliente = FrmCliente.Mostrar(this);
+    }//GEN-LAST:event_BtnJanelaClienteActionPerformed
 
-    }//GEN-LAST:event_BtnJanelaClientesActionPerformed
+    private void BtnJanelaFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJanelaFornecedorActionPerformed
+        FrmFornecedor frmFornecedor = FrmFornecedor.Mostrar(this);
+    }//GEN-LAST:event_BtnJanelaFornecedorActionPerformed
+
+    private void BtnJanelaFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJanelaFilmeActionPerformed
+        FrmFilme frmFilme = FrmFilme.Mostrar(this);
+    }//GEN-LAST:event_BtnJanelaFilmeActionPerformed
+
+    private void BtnJanelaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJanelaProdutoActionPerformed
+        FrmProduto frmProduto = FrmProduto.Mostrar(this);
+    }//GEN-LAST:event_BtnJanelaProdutoActionPerformed
+
+    private void BtnJanelaFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJanelaFuncionarioActionPerformed
+        FrmFuncionario frmFuncionario = FrmFuncionario.Mostrar(this);
+    }//GEN-LAST:event_BtnJanelaFuncionarioActionPerformed
+
+    private void BtnJanelaContaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJanelaContaPagarActionPerformed
+        FrmContaPagar frmContaPagar = FrmContaPagar.Mostrar(this);
+    }//GEN-LAST:event_BtnJanelaContaPagarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,12 +177,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnJanelaClientes;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton BtnJanelaCliente;
+    private javax.swing.JButton BtnJanelaContaPagar;
+    private javax.swing.JButton BtnJanelaFilme;
+    private javax.swing.JButton BtnJanelaFornecedor;
+    private javax.swing.JButton BtnJanelaFuncionario;
+    private javax.swing.JButton BtnJanelaProduto;
     // End of variables declaration//GEN-END:variables
 
 }

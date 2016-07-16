@@ -1,5 +1,6 @@
 package pontocristao.modelo;
 
+import java.util.*;
 import javax.persistence.*;
 
 /**
@@ -17,6 +18,9 @@ public class ClientePessoaFisica extends Cliente {
 
     @Column(nullable = false)
     private Sexo sexo;
+
+    @Column(nullable = false)
+    private Date dataNascimento;
 
     public String getRg() {
         return rg;
@@ -40,5 +44,13 @@ public class ClientePessoaFisica extends Cliente {
 
     public void setSexo(Sexo sexo) {
         this.sexo = sexo;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 }

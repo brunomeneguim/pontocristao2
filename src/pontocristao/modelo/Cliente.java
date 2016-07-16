@@ -14,6 +14,7 @@ public abstract class Cliente extends ModeloBase {
     @Column(nullable = false)
     private String nome;
 
+    @Column(nullable = false)
     private String telefone;
 
     private String celular;

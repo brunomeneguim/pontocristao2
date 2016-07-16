@@ -6,9 +6,9 @@ import java.awt.*;
  *
  * @author Marcondes
  */
-public class FrmCliente extends javax.swing.JDialog {
+public class FrmFornecedor extends javax.swing.JDialog {
 
-    public FrmCliente(java.awt.Frame parent, boolean modal) {
+    public FrmFornecedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -19,11 +19,11 @@ public class FrmCliente extends javax.swing.JDialog {
 
     private static Frame frame;
 
-    public static FrmCliente Mostrar(java.awt.Frame parent) {
+    public static FrmFornecedor Mostrar(java.awt.Frame parent) {
         frame = parent;
-        FrmCliente frmCliente = new FrmCliente(parent, true);
-        frmCliente.setVisible(true);
-        return frmCliente;
+        FrmFornecedor frmFornecedor = new FrmFornecedor(parent, true);
+        frmFornecedor.setVisible(true);
+        return frmFornecedor;
     }
 
     /**
@@ -38,13 +38,13 @@ public class FrmCliente extends javax.swing.JDialog {
         BtnNovo = new javax.swing.JButton();
         BtnEditar = new javax.swing.JButton();
         BtnExcluir = new javax.swing.JButton();
-        txtPesquisar = new javax.swing.JTextField();
+        jPesquisar = new javax.swing.JTextField();
         BtnPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableCliente = new javax.swing.JTable();
+        jTableFornecedor = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Clientes");
+        setTitle("Fornecedor");
         setResizable(false);
 
         BtnNovo.setText("Novo");
@@ -60,7 +60,7 @@ public class FrmCliente extends javax.swing.JDialog {
 
         BtnPesquisar.setText("Pesquisar");
 
-        jTableCliente.setModel(new javax.swing.table.DefaultTableModel(
+        jTableFornecedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -71,7 +71,7 @@ public class FrmCliente extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTableCliente);
+        jScrollPane1.setViewportView(jTableFornecedor);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,7 +88,7 @@ public class FrmCliente extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
-                        .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnPesquisar)))
                 .addContainerGap())
@@ -101,7 +101,7 @@ public class FrmCliente extends javax.swing.JDialog {
                     .addComponent(BtnNovo)
                     .addComponent(BtnEditar)
                     .addComponent(BtnExcluir)
-                    .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnPesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1)
@@ -112,7 +112,7 @@ public class FrmCliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoActionPerformed
-        FrmCadastrarCliente frmCadastrarCliente = FrmCadastrarCliente.Mostrar(frame);
+        FrmCadastrarFornecedor frmCadastrarForncedor = FrmCadastrarFornecedor.Mostrar(frame);
     }//GEN-LAST:event_BtnNovoActionPerformed
 
     /**
@@ -132,20 +132,21 @@ public class FrmCliente extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FrmCliente dialog = new FrmCliente(new javax.swing.JFrame(), true);
+                FrmFornecedor dialog = new FrmFornecedor(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -162,8 +163,8 @@ public class FrmCliente extends javax.swing.JDialog {
     private javax.swing.JButton BtnExcluir;
     private javax.swing.JButton BtnNovo;
     private javax.swing.JButton BtnPesquisar;
+    private javax.swing.JTextField jPesquisar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableCliente;
-    private javax.swing.JTextField txtPesquisar;
+    private javax.swing.JTable jTableFornecedor;
     // End of variables declaration//GEN-END:variables
 }
