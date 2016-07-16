@@ -4,7 +4,7 @@ import java.awt.*;
 
 /**
  *
- * @author Marcondes
+ * @author Marcondess
  */
 public class FrmCadastrarCliente extends javax.swing.JDialog {
 
