@@ -99,7 +99,7 @@
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="txtCodigo" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
                                           <Component id="lCodigo" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -112,26 +112,14 @@
                                           <Component id="lRg" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="lTelefone" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="txtCpf" min="-2" pref="81" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="txtTelefone" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
-                                                  <Component id="lCep" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="lTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtTelefone" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
+                                          <Component id="lCep" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtCpf" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
                                       </Group>
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="txtRg" max="32767" attributes="0"/>
                                           <Component id="txtCelular" alignment="0" max="32767" attributes="0"/>
@@ -151,13 +139,13 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="lCnpj" min="-2" max="-2" attributes="0"/>
                                       <Component id="lDataNascimento" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtCnpj" min="-2" pref="110" max="-2" attributes="0"/>
+                                      <Component id="txtCnpj" pref="110" max="32767" attributes="0"/>
                                       <Component id="lNumero" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtNumero" min="-2" pref="86" max="-2" attributes="0"/>
-                                      <Component id="txtDataNascimento" min="-2" pref="110" max="-2" attributes="0"/>
+                                      <Component id="txtDataNascimento" max="32767" attributes="0"/>
+                                      <Component id="txtNumero" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
