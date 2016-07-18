@@ -16,6 +16,8 @@ public class FrmCliente extends javax.swing.JDialog {
         this.setBounds(bounds);
 
         txtPesquisar.requestFocus();
+        BtnEditar.setEnabled(false);
+        BtnExcluir.setEnabled(false);
 
     }
 
@@ -59,6 +61,11 @@ public class FrmCliente extends javax.swing.JDialog {
 
         BtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnEditar.png"))); // NOI18N
         BtnEditar.setText("Editar");
+        BtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditarActionPerformed(evt);
+            }
+        });
 
         BtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnExcluir.png"))); // NOI18N
         BtnExcluir.setText("Excluir");
@@ -120,6 +127,11 @@ public class FrmCliente extends javax.swing.JDialog {
     private void BtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoActionPerformed
         FrmCadastrarCliente frmCadastrarCliente = FrmCadastrarCliente.Mostrar(frame);
     }//GEN-LAST:event_BtnNovoActionPerformed
+
+    private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
+        FrmCadastrarCliente frmCadastrarCliente = FrmCadastrarCliente.Mostrar(frame);
+
+    }//GEN-LAST:event_BtnEditarActionPerformed
 
     /**
      * @param args the command line arguments

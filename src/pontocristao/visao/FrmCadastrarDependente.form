@@ -24,42 +24,40 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="BtnConfirmar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtNome" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lNome" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lRg" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="105" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="lTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lRg" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="txtTelefone" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtRg" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="BtnCancelar" max="32767" attributes="0"/>
-                          <Component id="lCpf" min="-2" max="-2" attributes="0"/>
-                          <Component id="lCelular" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtCelular" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtCelular" pref="135" max="32767" attributes="0"/>
+                          <Component id="lCelular" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lCpf" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCpf" alignment="0" max="32767" attributes="0"/>
                       </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lNome" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="BtnConfirmar" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="BtnCancelar" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -93,12 +91,12 @@
                   <Component id="txtRg" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="BtnConfirmar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="BtnCancelar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="BtnConfirmar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="BtnCancelar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -117,9 +115,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtTelefone">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTelefoneActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lCelular">
       <Properties>
@@ -127,9 +122,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCelular">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCelularActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lRg">
       <Properties>
@@ -142,14 +134,8 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtRg">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtRgActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCpf">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCpfActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BtnConfirmar">
       <Properties>
@@ -158,6 +144,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Confirmar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnConfirmarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BtnCancelar">
       <Properties>

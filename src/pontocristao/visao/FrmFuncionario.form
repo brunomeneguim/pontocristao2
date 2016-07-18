@@ -35,8 +35,8 @@
                       <Component id="BtnEditar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="BtnExcluir" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="243" max="32767" attributes="0"/>
-                      <Component id="jPesquisar" min="-2" pref="233" max="-2" attributes="0"/>
+                      <EmptySpace pref="96" max="32767" attributes="0"/>
+                      <Component id="txtPesquisar" min="-2" pref="200" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="BtnPesquisar" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -50,11 +50,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="BtnNovo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BtnEditar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BtnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BtnPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnNovo" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="BtnEditar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="BtnExcluir" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="txtPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnPesquisar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" max="32767" attributes="0"/>
@@ -66,6 +66,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="BtnNovo">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/pontocristao/icones/BtnNovo.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Novo"/>
       </Properties>
       <Events>
@@ -74,18 +77,27 @@
     </Component>
     <Component class="javax.swing.JButton" name="BtnEditar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/pontocristao/icones/BtnEditar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Editar"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="BtnExcluir">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/pontocristao/icones/BtnEditar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Excluir"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jPesquisar">
+    <Component class="javax.swing.JTextField" name="txtPesquisar">
     </Component>
     <Component class="javax.swing.JButton" name="BtnPesquisar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/pontocristao/icones/BtnPesquisar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Pesquisar"/>
       </Properties>
     </Component>
