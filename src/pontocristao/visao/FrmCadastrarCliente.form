@@ -175,30 +175,36 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="lTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="txtCpf" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                                  <Component id="lCpf" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="lCpf" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="txtCpf" max="32767" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
-                                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="lCelular" min="-2" max="-2" attributes="0"/>
                                                   <Component id="lRg" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="txtRg" min="-2" pref="150" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="txtCnpj" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                                  <Component id="lCnpj" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="lCnpj" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="txtCnpj" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
@@ -206,9 +212,10 @@
                                                   <Component id="jComboSexo" min="-2" pref="123" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
+                                          <Component id="lEmail" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="lCodigo" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtCodigo" min="-2" pref="81" max="-2" attributes="0"/>
@@ -229,10 +236,19 @@
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="txtTelefone" min="-2" pref="150" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtCelular" min="-2" pref="150" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="txtTelefone" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="186" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="txtRg" min="-2" pref="150" max="-2" attributes="0"/>
+                                          <Component id="txtCelular" min="-2" pref="150" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <Component id="txtEmail" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -268,10 +284,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtRg" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jComboSexo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtRg" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jcDataCadastro" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -279,13 +295,13 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lCelular" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lEmail" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCelular" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -303,8 +319,6 @@
                 <Property name="text" type="java.lang.String" value="Telefone"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtRg">
-            </Component>
             <Component class="javax.swing.JLabel" name="lSexo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sexo"/>
@@ -320,13 +334,7 @@
                 <Property name="text" type="java.lang.String" value="CPF"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtTelefone">
-            </Component>
             <Component class="javax.swing.JTextField" name="txtCodigo">
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtCelular">
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtCpf">
             </Component>
             <Component class="javax.swing.JLabel" name="lNome">
               <Properties>
@@ -363,8 +371,6 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtNome">
             </Component>
-            <Component class="javax.swing.JTextField" name="txtCnpj">
-            </Component>
             <Component class="javax.swing.JTextField" name="txtEmail">
             </Component>
             <Component class="javax.swing.JLabel" name="lCelular">
@@ -380,6 +386,16 @@
             <Component class="com.toedter.calendar.JDateChooser" name="jcDataNascimento">
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="jcDataCadastro">
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtCpf">
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtRg">
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtCnpj">
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtTelefone">
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtCelular">
             </Component>
           </SubComponents>
         </Container>
@@ -400,45 +416,46 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lCep" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="626" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="483" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lNumero" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNumero" min="-2" pref="125" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lEstado" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jComboEstado" max="32767" attributes="0"/>
+                                  <Component id="jComboEstado" pref="142" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtBairro" min="-2" pref="164" max="-2" attributes="0"/>
+                                  <Component id="lBairro" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtCidade" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Component id="lCidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="lComplemento" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="txtComplemento" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lBairro" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
-                                      <Component id="lCidade" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
-                                      <Component id="lComplemento" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtCep" min="-2" pref="80" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                      <Component id="BtnConsultarCep" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lRua" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtRua" min="-2" pref="302" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
+                              <Component id="txtCep" min="-2" pref="80" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="BtnConsultarCep" min="-2" pref="78" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lNumero" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNumero" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
+                                  <Component id="lRua" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtRua" min="-2" pref="302" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="txtBairro" min="-2" pref="164" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtCidade" min="-2" pref="150" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtComplemento" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -457,11 +474,11 @@
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtCep" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtRua" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNumero" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="BtnConsultarCep" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtCep" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -523,8 +540,6 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtComplemento">
             </Component>
-            <Component class="javax.swing.JTextField" name="txtCep">
-            </Component>
             <Component class="javax.swing.JLabel" name="lEstado">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Estado"/>
@@ -573,6 +588,8 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnConsultarCepActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtCep">
             </Component>
           </SubComponents>
         </Container>
