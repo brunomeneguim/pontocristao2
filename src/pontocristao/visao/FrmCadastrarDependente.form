@@ -4,6 +4,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Cadastro de Dependentes"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -27,40 +28,39 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lRg" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="txtTelefone" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtRg" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lTelefone" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTelefone" pref="139" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtCelular" pref="135" max="32767" attributes="0"/>
-                          <Component id="lCelular" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lCpf" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtCpf" alignment="0" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtCelular" min="-2" pref="139" max="-2" attributes="0"/>
+                          <Component id="lCelular" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lNome" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="BtnConfirmar" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="BtnCancelar" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="BtnConfirmar" max="32767" attributes="0"/>
+                                  <Component id="txtRg" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="lCpf" min="-2" max="-2" attributes="0"/>
+                                  <Component id="BtnCancelar" max="32767" attributes="0"/>
+                                  <Component id="txtCpf" alignment="0" pref="139" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
+                          <Component id="lRg" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lNome" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

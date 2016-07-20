@@ -1,7 +1,8 @@
 package pontocristao.visao;
 
 import java.awt.*;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import pontocristao.util.CepWebService;
 
 /**
  *
@@ -12,17 +13,18 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     public FrmCadastrarCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
 
         txtNome.requestFocus();
         txtCodigo.setEnabled(false);
-        txtDataCadastro.setEnabled(false);
+        jcDataCadastro.setEnabled(false);
         BtnEditar.setEnabled(false);
         BtnExcluir.setEnabled(false);
         txtCpf.setEnabled(false);
         txtRg.setEnabled(false);
         txtCnpj.setEnabled(false);
-        lComboSexo.setEnabled(false);
-                
+        jComboSexo.setEnabled(false);
+
     }
 
     private static Frame frame;
@@ -43,13 +45,12 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lButtonGroupTipoCliente = new javax.swing.ButtonGroup();
+        jButtonGroupTipoCliente = new javax.swing.ButtonGroup();
         pCadastroCliente = new javax.swing.JPanel();
         pTipoCliente = new javax.swing.JPanel();
-        lRadioPessoaJuridica = new javax.swing.JRadioButton();
-        lRadioPessoaFisica = new javax.swing.JRadioButton();
+        jRadioPessoaJuridica = new javax.swing.JRadioButton();
+        jRadioPessoaFisica = new javax.swing.JRadioButton();
         pInformacoesPessoais = new javax.swing.JPanel();
-        txtDataNascimento = new javax.swing.JFormattedTextField();
         lDataCadastro = new javax.swing.JLabel();
         lTelefone = new javax.swing.JLabel();
         txtRg = new javax.swing.JTextField();
@@ -62,8 +63,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         txtCpf = new javax.swing.JTextField();
         lNome = new javax.swing.JLabel();
         lEmail = new javax.swing.JLabel();
-        txtDataCadastro = new javax.swing.JFormattedTextField();
-        lComboSexo = new javax.swing.JComboBox<>();
+        jComboSexo = new javax.swing.JComboBox<>();
         lRg = new javax.swing.JLabel();
         lDataNascimento = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
@@ -71,9 +71,11 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         txtEmail = new javax.swing.JTextField();
         lCelular = new javax.swing.JLabel();
         lCnpj = new javax.swing.JLabel();
+        jcDataNascimento = new com.toedter.calendar.JDateChooser();
+        jcDataCadastro = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
         txtNumero = new javax.swing.JTextField();
-        lComboEstado = new javax.swing.JComboBox<>();
+        jComboEstado = new javax.swing.JComboBox<>();
         txtComplemento = new javax.swing.JTextField();
         txtCep = new javax.swing.JTextField();
         lEstado = new javax.swing.JLabel();
@@ -86,6 +88,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         lBairro = new javax.swing.JLabel();
         txtRua = new javax.swing.JTextField();
         lCidade = new javax.swing.JLabel();
+        BtnConsultarCep = new javax.swing.JButton();
         pCadastroDependente = new javax.swing.JPanel();
         BtnNovo = new javax.swing.JButton();
         BtnExcluir = new javax.swing.JButton();
@@ -103,19 +106,19 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
         pTipoCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
 
-        lButtonGroupTipoCliente.add(lRadioPessoaJuridica);
-        lRadioPessoaJuridica.setText("Pessoa Jurídica");
-        lRadioPessoaJuridica.addActionListener(new java.awt.event.ActionListener() {
+        jButtonGroupTipoCliente.add(jRadioPessoaJuridica);
+        jRadioPessoaJuridica.setText("Pessoa Jurídica");
+        jRadioPessoaJuridica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lRadioPessoaJuridicaActionPerformed(evt);
+                jRadioPessoaJuridicaActionPerformed(evt);
             }
         });
 
-        lButtonGroupTipoCliente.add(lRadioPessoaFisica);
-        lRadioPessoaFisica.setText("Pessoa Física");
-        lRadioPessoaFisica.addActionListener(new java.awt.event.ActionListener() {
+        jButtonGroupTipoCliente.add(jRadioPessoaFisica);
+        jRadioPessoaFisica.setText("Pessoa Física");
+        jRadioPessoaFisica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lRadioPessoaFisicaActionPerformed(evt);
+                jRadioPessoaFisicaActionPerformed(evt);
             }
         });
 
@@ -124,10 +127,10 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         pTipoClienteLayout.setHorizontalGroup(
             pTipoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pTipoClienteLayout.createSequentialGroup()
-                .addGap(274, 274, 274)
-                .addComponent(lRadioPessoaFisica)
+                .addGap(309, 309, 309)
+                .addComponent(jRadioPessoaFisica)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lRadioPessoaJuridica)
+                .addComponent(jRadioPessoaJuridica)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pTipoClienteLayout.setVerticalGroup(
@@ -135,8 +138,8 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTipoClienteLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pTipoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lRadioPessoaJuridica)
-                    .addComponent(lRadioPessoaFisica))
+                    .addComponent(jRadioPessoaJuridica)
+                    .addComponent(jRadioPessoaFisica))
                 .addContainerGap())
         );
 
@@ -156,7 +159,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
         lEmail.setText("E-mail");
 
-        lComboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Masculino" }));
+        jComboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Masculino" }));
 
         lRg.setText("RG");
 
@@ -197,7 +200,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
                                         .addGap(18, 18, 18)
                                         .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lSexo)
-                                            .addComponent(lComboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(jComboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pInformacoesPessoaisLayout.createSequentialGroup()
                                 .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lCodigo)
@@ -207,12 +210,11 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
                                     .addComponent(lNome)
                                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
-                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lDataNascimento))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lDataCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lDataNascimento)
+                            .addComponent(jcDataCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                            .addComponent(jcDataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
                         .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -230,10 +232,11 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
                     .addComponent(lCodigo)
                     .addComponent(lDataNascimento))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lCpf)
@@ -242,12 +245,13 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
                     .addComponent(lSexo)
                     .addComponent(lDataCadastro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lComboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lTelefone)
@@ -263,7 +267,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
 
-        lComboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        jComboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
 
         lEstado.setText("Estado");
 
@@ -279,6 +283,13 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
         lCidade.setText("Cidade");
 
+        BtnConsultarCep.setText("Consultar");
+        BtnConsultarCep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnConsultarCepActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -287,38 +298,38 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(lCep)
+                        .addGap(626, 626, 626)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lCidade)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtComplemento))))
+                            .addComponent(lEstado)
+                            .addComponent(jComboEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lBairro)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lBairro)
+                                .addGap(154, 154, 154)
+                                .addComponent(lCidade)
+                                .addGap(135, 135, 135)
+                                .addComponent(lComplemento))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(BtnConsultarCep)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lRua)
-                                    .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lNumero)
                             .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lCep)
-                        .addGap(317, 317, 317)
-                        .addComponent(lComplemento)
-                        .addGap(244, 244, 244)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lEstado)
-                            .addComponent(lComboEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtComplemento)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -335,7 +346,8 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
                     .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lComboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnConsultarCep))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lBairro)
@@ -355,11 +367,9 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
             pCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pCadastroClienteLayout.createSequentialGroup()
                 .addGroup(pCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pCadastroClienteLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(pInformacoesPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pTipoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pTipoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pInformacoesPessoais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pCadastroClienteLayout.setVerticalGroup(
@@ -448,17 +458,16 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnConfirmar)
-                .addGap(18, 18, 18)
-                .addComponent(BtnCancelar)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pCadastroDependente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pCadastroCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BtnConfirmar)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnCancelar))
+                    .addComponent(pCadastroCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pCadastroDependente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -505,22 +514,47 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
-    private void lRadioPessoaFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lRadioPessoaFisicaActionPerformed
+    private void jRadioPessoaFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioPessoaFisicaActionPerformed
         txtCpf.setEnabled(true);
         txtRg.setEnabled(true);
-        lComboSexo.setEnabled(true);
+        jComboSexo.setEnabled(true);
         txtCnpj.setText("");
         txtCnpj.setEnabled(false);
-    }//GEN-LAST:event_lRadioPessoaFisicaActionPerformed
+    }//GEN-LAST:event_jRadioPessoaFisicaActionPerformed
 
-    private void lRadioPessoaJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lRadioPessoaJuridicaActionPerformed
+    private void jRadioPessoaJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioPessoaJuridicaActionPerformed
         txtCnpj.setEnabled(true);
         txtCpf.setText("");
         txtCpf.setEnabled(false);
         txtRg.setText("");
         txtRg.setEnabled(false);
-        lComboSexo.setEnabled(false);
-    }//GEN-LAST:event_lRadioPessoaJuridicaActionPerformed
+        jComboSexo.setEnabled(false);
+        jComboSexo.setSelectedItem("Feminino");
+    }//GEN-LAST:event_jRadioPessoaJuridicaActionPerformed
+
+    private void BtnConsultarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarCepActionPerformed
+        BuscaCep(txtCep.getText().toString());
+        txtNumero.requestFocus();
+    }//GEN-LAST:event_BtnConsultarCepActionPerformed
+
+    public void BuscaCep(String cep) {
+        try {
+
+            CepWebService cepWebService = new CepWebService(cep);
+
+            if (cepWebService.getResultado() == 1) {
+
+                txtRua.setText(cepWebService.getLogradouro());
+                txtBairro.setText(cepWebService.getBairro());
+                txtCidade.setText(cepWebService.getCidade());
+                jComboEstado.setSelectedItem(cepWebService.getEstado());
+            } else {
+                JOptionPane.showMessageDialog(null, "Não foi possivel encontrar o endereço", "Procura do endereço", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Não foi possivel encontrar o endereço", "Procura do endereço", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -568,21 +602,26 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton BtnConfirmar;
+    private javax.swing.JButton BtnConsultarCep;
     private javax.swing.JButton BtnEditar;
     private javax.swing.JButton BtnExcluir;
     private javax.swing.JButton BtnNovo;
+    private javax.swing.ButtonGroup jButtonGroupTipoCliente;
+    private javax.swing.JComboBox<String> jComboEstado;
+    private javax.swing.JComboBox<String> jComboSexo;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioPessoaFisica;
+    private javax.swing.JRadioButton jRadioPessoaJuridica;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableDependente;
+    private com.toedter.calendar.JDateChooser jcDataCadastro;
+    private com.toedter.calendar.JDateChooser jcDataNascimento;
     private javax.swing.JLabel lBairro;
-    private javax.swing.ButtonGroup lButtonGroupTipoCliente;
     private javax.swing.JLabel lCelular;
     private javax.swing.JLabel lCep;
     private javax.swing.JLabel lCidade;
     private javax.swing.JLabel lCnpj;
     private javax.swing.JLabel lCodigo;
-    private javax.swing.JComboBox<String> lComboEstado;
-    private javax.swing.JComboBox<String> lComboSexo;
     private javax.swing.JLabel lComplemento;
     private javax.swing.JLabel lCpf;
     private javax.swing.JLabel lDataCadastro;
@@ -591,8 +630,6 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     private javax.swing.JLabel lEstado;
     private javax.swing.JLabel lNome;
     private javax.swing.JLabel lNumero;
-    private javax.swing.JRadioButton lRadioPessoaFisica;
-    private javax.swing.JRadioButton lRadioPessoaJuridica;
     private javax.swing.JLabel lRg;
     private javax.swing.JLabel lRua;
     private javax.swing.JLabel lSexo;
@@ -609,8 +646,6 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtComplemento;
     private javax.swing.JTextField txtCpf;
-    private javax.swing.JFormattedTextField txtDataCadastro;
-    private javax.swing.JFormattedTextField txtDataNascimento;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;

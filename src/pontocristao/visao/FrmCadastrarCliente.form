@@ -2,7 +2,7 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="lButtonGroupTipoCliente">
+    <Component class="javax.swing.ButtonGroup" name="jButtonGroupTipoCliente">
     </Component>
   </NonVisualComponents>
   <Properties>
@@ -29,20 +29,19 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="BtnConfirmar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="BtnCancelar" min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="pCadastroDependente" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="BtnConfirmar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="BtnCancelar" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Component id="pCadastroCliente" max="32767" attributes="0"/>
+                  <Component id="pCadastroDependente" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -78,12 +77,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="pInformacoesPessoais" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
                       <Component id="pTipoCliente" max="32767" attributes="0"/>
+                      <Component id="pInformacoesPessoais" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -117,10 +113,10 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="274" max="-2" attributes="0"/>
-                      <Component id="lRadioPessoaFisica" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="309" max="-2" attributes="0"/>
+                      <Component id="jRadioPessoaFisica" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="lRadioPessoaJuridica" min="-2" max="-2" attributes="0"/>
+                      <Component id="jRadioPessoaJuridica" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -130,8 +126,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lRadioPessoaJuridica" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lRadioPessoaFisica" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioPessoaJuridica" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioPessoaFisica" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -139,26 +135,26 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JRadioButton" name="lRadioPessoaJuridica">
+            <Component class="javax.swing.JRadioButton" name="jRadioPessoaJuridica">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="lButtonGroupTipoCliente"/>
+                  <ComponentRef name="jButtonGroupTipoCliente"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pessoa Jur&#xed;dica"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lRadioPessoaJuridicaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioPessoaJuridicaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="lRadioPessoaFisica">
+            <Component class="javax.swing.JRadioButton" name="jRadioPessoaFisica">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="lButtonGroupTipoCliente"/>
+                  <ComponentRef name="jButtonGroupTipoCliente"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pessoa F&#xed;sica"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lRadioPessoaFisicaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioPessoaFisicaActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -207,7 +203,7 @@
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="lSexo" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lComboSexo" min="-2" pref="123" max="-2" attributes="0"/>
+                                                  <Component id="jComboSexo" min="-2" pref="123" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -225,13 +221,12 @@
                                   </Group>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lDataCadastro" min="-2" pref="105" max="-2" attributes="0"/>
-                                  <Component id="txtDataCadastro" min="-2" pref="105" max="-2" attributes="0"/>
-                                  <Component id="txtDataNascimento" min="-2" pref="105" max="-2" attributes="0"/>
-                                  <Component id="lDataNascimento" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="lDataCadastro" max="32767" attributes="0"/>
+                                  <Component id="lDataNascimento" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jcDataCadastro" pref="142" max="32767" attributes="0"/>
+                                  <Component id="jcDataNascimento" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="txtTelefone" min="-2" pref="150" max="-2" attributes="0"/>
@@ -255,10 +250,12 @@
                           <Component id="lDataNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtDataNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jcDataNascimento" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -269,12 +266,14 @@
                           <Component id="lDataCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtRg" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lComboSexo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtDataCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtRg" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jComboSexo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jcDataCadastro" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -294,8 +293,6 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JFormattedTextField" name="txtDataNascimento">
-            </Component>
             <Component class="javax.swing.JLabel" name="lDataCadastro">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Data do Cadastro"/>
@@ -341,9 +338,7 @@
                 <Property name="text" type="java.lang.String" value="E-mail"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtDataCadastro">
-            </Component>
-            <Component class="javax.swing.JComboBox" name="lComboSexo">
+            <Component class="javax.swing.JComboBox" name="jComboSexo">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">
@@ -382,6 +377,10 @@
                 <Property name="text" type="java.lang.String" value="CNPJ"/>
               </Properties>
             </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="jcDataNascimento">
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="jcDataCadastro">
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel1">
@@ -400,29 +399,30 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="txtBairro" min="-2" pref="150" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lCep" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="626" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lCidade" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtCidade" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="txtComplemento" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="lEstado" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jComboEstado" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lBairro" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtCep" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Component id="lBairro" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
+                                      <Component id="lCidade" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
+                                      <Component id="lComplemento" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="txtCep" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                      <Component id="BtnConsultarCep" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="lRua" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtRua" min="-2" pref="318" max="-2" attributes="0"/>
+                                          <Component id="txtRua" min="-2" pref="302" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -434,14 +434,11 @@
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lCep" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="317" max="-2" attributes="0"/>
-                              <Component id="lComplemento" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lEstado" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lComboEstado" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="txtBairro" min="-2" pref="164" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="txtCidade" min="-2" pref="150" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="txtComplemento" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -463,7 +460,8 @@
                           <Component id="txtCep" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtRua" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNumero" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lComboEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BtnConsultarCep" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -485,7 +483,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextField" name="txtNumero">
             </Component>
-            <Component class="javax.swing.JComboBox" name="lComboEstado">
+            <Component class="javax.swing.JComboBox" name="jComboEstado">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="27">
@@ -567,6 +565,14 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cidade"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="BtnConsultarCep">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Consultar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnConsultarCepActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
