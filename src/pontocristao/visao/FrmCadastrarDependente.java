@@ -2,6 +2,8 @@ package pontocristao.visao;
 
 import java.awt.*;
 import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
+import pontocristao.util.Utilidades;
 
 /**
  *
@@ -13,6 +15,8 @@ public class FrmCadastrarDependente extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        Mascara();
     }
 
     private static Frame frame;
@@ -22,6 +26,21 @@ public class FrmCadastrarDependente extends javax.swing.JDialog {
         FrmCadastrarDependente frmCadastrarDependente = new FrmCadastrarDependente(parent, true);
         frmCadastrarDependente.setVisible(true);
         return frmCadastrarDependente;
+    }
+
+    public void Mascara() {
+        //Setando mascáras para campos 
+        MaskFormatter mascara = new Utilidades().setMascara("(##)####-####");
+        mascara.install(txtTelefone);
+
+        mascara = new Utilidades().setMascara("(##)####-####");
+        mascara.install(txtCelular);
+
+        mascara = new Utilidades().setMascara("###.###.###-##");
+        mascara.install(txtCpf);
+
+        mascara = new Utilidades().setMascara("#########");
+        mascara.install(txtRg);
     }
 
     /**
@@ -36,15 +55,15 @@ public class FrmCadastrarDependente extends javax.swing.JDialog {
         lNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lTelefone = new javax.swing.JLabel();
-        txtTelefone = new javax.swing.JTextField();
         lCelular = new javax.swing.JLabel();
-        txtCelular = new javax.swing.JTextField();
         lRg = new javax.swing.JLabel();
         lCpf = new javax.swing.JLabel();
-        txtRg = new javax.swing.JTextField();
-        txtCpf = new javax.swing.JTextField();
         BtnConfirmar = new javax.swing.JButton();
         BtnCancelar = new javax.swing.JButton();
+        txtTelefone = new javax.swing.JFormattedTextField();
+        txtCelular = new javax.swing.JFormattedTextField();
+        txtRg = new javax.swing.JFormattedTextField();
+        txtCpf = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Dependentes");
@@ -85,28 +104,36 @@ public class FrmCadastrarDependente extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lTelefone)
-                            .addComponent(txtTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lCelular)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(BtnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtRg))
+                                    .addComponent(lCpf))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lCpf)
-                                    .addComponent(BtnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)))
-                            .addComponent(lRg)
-                            .addComponent(lNome))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtNome))
-                .addGap(9, 9, 9))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lRg)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lNome)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lTelefone)
+                                        .addGap(18, 18, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtTelefone)
+                                        .addGap(17, 17, 17)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lCelular)
+                                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(1, 1, 1))
+                            .addComponent(txtNome))
+                        .addGap(9, 9, 9))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,10 +242,10 @@ public class FrmCadastrarDependente extends javax.swing.JDialog {
     private javax.swing.JLabel lNome;
     private javax.swing.JLabel lRg;
     private javax.swing.JLabel lTelefone;
-    private javax.swing.JTextField txtCelular;
-    private javax.swing.JTextField txtCpf;
+    private javax.swing.JFormattedTextField txtCelular;
+    private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtRg;
-    private javax.swing.JTextField txtTelefone;
+    private javax.swing.JFormattedTextField txtRg;
+    private javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }
