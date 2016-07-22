@@ -8,7 +8,7 @@ import pontocristao.util.Utilidades;
 
 /**
  *
- * @author Marcondes
+ * @author Marcondess
  */
 public class FrmCadastrarFuncionario extends javax.swing.JDialog {
 
