@@ -1,6 +1,10 @@
 package pontocristao.visao;
 
 import java.awt.*;
+import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
+import pontocristao.util.CepWebService;
+import pontocristao.util.Utilidades;
 
 /**
  *
@@ -11,6 +15,20 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
     public FrmCadastrarFuncionario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        //Abrir centralizado
+        this.setLocationRelativeTo(null);
+
+        //Dinâmica dos Botões e campos
+        txtLogin.requestFocus();
+        txtCodigo.setEnabled(false);
+        jcDataCadastro.setEnabled(false);
+        txtCpf.setEnabled(false);
+        txtRg.setEnabled(false);
+        jComboSexo.setEnabled(false);
+
+        Utilidades utilidades = new Utilidades();
+        Mascara();
     }
 
     private static Frame frame;
@@ -22,6 +40,27 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
         return frmCadastrarFuncionario;
     }
 
+    public void Mascara() {
+        //Setando mascáras para campos 
+        MaskFormatter mascara = new Utilidades().setMascara("#####-###");
+        mascara.install(txtCep);
+
+        mascara = new Utilidades().setMascara("#############");
+        mascara.install(txtCarteiraTrabalho);
+
+        mascara = new Utilidades().setMascara("(##)####-####");
+        mascara.install(txtTelefone);
+
+        mascara = new Utilidades().setMascara("(##)####-####");
+        mascara.install(txtCelular);
+
+        mascara = new Utilidades().setMascara("###.###.###-##");
+        mascara.install(txtCpf);
+
+        mascara = new Utilidades().setMascara("#########");
+        mascara.install(txtRg);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,22 +70,389 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pInformacoesSistema = new javax.swing.JPanel();
+        lLogin = new javax.swing.JLabel();
+        txtLogin = new javax.swing.JTextField();
+        lSenha = new javax.swing.JLabel();
+        txtSenha = new javax.swing.JPasswordField();
+        lConfirmacaoSenha = new javax.swing.JLabel();
+        txtConfirmacaoSenha = new javax.swing.JPasswordField();
+        lDataAdmissao = new javax.swing.JLabel();
+        jcDataAdmissao = new com.toedter.calendar.JDateChooser();
+        pInformacoesPessoais = new javax.swing.JPanel();
+        lDataCadastro = new javax.swing.JLabel();
+        lTelefone = new javax.swing.JLabel();
+        lSexo = new javax.swing.JLabel();
+        lCodigo = new javax.swing.JLabel();
+        lCpf = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JTextField();
+        lNome = new javax.swing.JLabel();
+        lEmail = new javax.swing.JLabel();
+        jComboSexo = new javax.swing.JComboBox<>();
+        lRg = new javax.swing.JLabel();
+        lDataNascimento = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        lCelular = new javax.swing.JLabel();
+        jcDataNascimento = new com.toedter.calendar.JDateChooser();
+        jcDataCadastro = new com.toedter.calendar.JDateChooser();
+        txtCpf = new javax.swing.JFormattedTextField();
+        txtRg = new javax.swing.JFormattedTextField();
+        txtTelefone = new javax.swing.JFormattedTextField();
+        txtCelular = new javax.swing.JFormattedTextField();
+        lCarteiraTrabalho = new javax.swing.JLabel();
+        txtCarteiraTrabalho = new javax.swing.JFormattedTextField();
+        pEndereco = new javax.swing.JPanel();
+        txtNumero = new javax.swing.JTextField();
+        jComboEstado = new javax.swing.JComboBox<>();
+        txtComplemento = new javax.swing.JTextField();
+        lEstado = new javax.swing.JLabel();
+        lNumero = new javax.swing.JLabel();
+        lRua = new javax.swing.JLabel();
+        txtBairro = new javax.swing.JTextField();
+        lComplemento = new javax.swing.JLabel();
+        lCep = new javax.swing.JLabel();
+        txtCidade = new javax.swing.JTextField();
+        lBairro = new javax.swing.JLabel();
+        txtRua = new javax.swing.JTextField();
+        lCidade = new javax.swing.JLabel();
+        BtnConsultarCep = new javax.swing.JButton();
+        txtCep = new javax.swing.JFormattedTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Funcionários");
+
+        pInformacoesSistema.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações do Sistema"));
+
+        lLogin.setText("Login");
+
+        lSenha.setText("Senha");
+
+        lConfirmacaoSenha.setText("Confirmação de Senha");
+
+        lDataAdmissao.setText("Data de Admissão");
+
+        javax.swing.GroupLayout pInformacoesSistemaLayout = new javax.swing.GroupLayout(pInformacoesSistema);
+        pInformacoesSistema.setLayout(pInformacoesSistemaLayout);
+        pInformacoesSistemaLayout.setHorizontalGroup(
+            pInformacoesSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pInformacoesSistemaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pInformacoesSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(pInformacoesSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(lSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(pInformacoesSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lConfirmacaoSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(txtConfirmacaoSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pInformacoesSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pInformacoesSistemaLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jcDataAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lDataAdmissao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pInformacoesSistemaLayout.setVerticalGroup(
+            pInformacoesSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pInformacoesSistemaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pInformacoesSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lLogin)
+                    .addComponent(lSenha)
+                    .addComponent(lConfirmacaoSenha)
+                    .addComponent(lDataAdmissao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pInformacoesSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pInformacoesSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtConfirmacaoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcDataAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        pInformacoesPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações Pessoais"));
+
+        lDataCadastro.setText("Data do Cadastro");
+
+        lTelefone.setText("Telefone");
+
+        lSexo.setText("Sexo");
+
+        lCodigo.setText("Código");
+
+        lCpf.setText("CPF");
+
+        lNome.setText("Nome");
+
+        lEmail.setText("E-mail");
+
+        jComboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Masculino" }));
+
+        lRg.setText("RG");
+
+        lDataNascimento.setText("Data de Nascimento");
+
+        lCelular.setText("Celular");
+
+        lCarteiraTrabalho.setText("Carteira de Trabalho");
+
+        javax.swing.GroupLayout pInformacoesPessoaisLayout = new javax.swing.GroupLayout(pInformacoesPessoais);
+        pInformacoesPessoais.setLayout(pInformacoesPessoaisLayout);
+        pInformacoesPessoaisLayout.setHorizontalGroup(
+            pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pInformacoesPessoaisLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                                .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCarteiraTrabalho, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(301, 301, 301))
+                            .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtEmail)
+                                    .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lCarteiraTrabalho)
+                                            .addComponent(lEmail))
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
+                    .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                                        .addComponent(lCodigo)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lNome)
+                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pInformacoesPessoaisLayout.createSequentialGroup()
+                                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lCpf)
+                                            .addComponent(lTelefone))
+                                        .addGap(126, 126, 126)
+                                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lCelular)
+                                            .addComponent(lRg)))
+                                    .addComponent(txtCpf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lSexo))))
+                        .addGap(18, 18, 18)
+                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lDataCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lDataNascimento)
+                            .addComponent(jcDataCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                            .addComponent(jcDataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pInformacoesPessoaisLayout.setVerticalGroup(
+            pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lNome)
+                        .addComponent(lDataNascimento))
+                    .addComponent(lCodigo, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lCpf)
+                    .addComponent(lRg)
+                    .addComponent(lDataCadastro)
+                    .addComponent(lSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lCarteiraTrabalho))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCarteiraTrabalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lTelefone)
+                    .addComponent(lCelular)
+                    .addComponent(lEmail))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtEmail)
+                    .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        pEndereco.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
+
+        jComboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+
+        lEstado.setText("Estado");
+
+        lNumero.setText("Número");
+
+        lRua.setText("Rua");
+
+        lComplemento.setText("Complemento");
+
+        lCep.setText("CEP");
+
+        lBairro.setText("Bairro");
+
+        lCidade.setText("Cidade");
+
+        BtnConsultarCep.setText("Consultar");
+        BtnConsultarCep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnConsultarCepActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pEnderecoLayout = new javax.swing.GroupLayout(pEndereco);
+        pEndereco.setLayout(pEnderecoLayout);
+        pEnderecoLayout.setHorizontalGroup(
+            pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pEnderecoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pEnderecoLayout.createSequentialGroup()
+                        .addComponent(lCep)
+                        .addGap(483, 483, 483)
+                        .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lNumero)
+                            .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lEstado)
+                            .addComponent(jComboEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(pEnderecoLayout.createSequentialGroup()
+                        .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lBairro)
+                            .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lCidade)
+                            .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtComplemento)
+                            .addGroup(pEnderecoLayout.createSequentialGroup()
+                                .addComponent(lComplemento)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(pEnderecoLayout.createSequentialGroup()
+                        .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnConsultarCep, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lRua)
+                            .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        pEnderecoLayout.setVerticalGroup(
+            pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pEnderecoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lCep)
+                    .addComponent(lRua)
+                    .addComponent(lNumero)
+                    .addComponent(lEstado))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnConsultarCep)
+                    .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lBairro)
+                    .addComponent(lCidade)
+                    .addComponent(lComplemento))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(pInformacoesSistema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pInformacoesPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pInformacoesSistema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pInformacoesPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnConsultarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarCepActionPerformed
+        BuscaCep(txtCep.getText().toString());
+        txtNumero.requestFocus();
+    }//GEN-LAST:event_BtnConsultarCepActionPerformed
+
+    public void BuscaCep(String cep) {
+        try {
+
+            CepWebService cepWebService = new CepWebService(cep);
+
+            if (cepWebService.getResultado() == 1) {
+
+                txtRua.setText(cepWebService.getLogradouro());
+                txtBairro.setText(cepWebService.getBairro());
+                txtCidade.setText(cepWebService.getCidade());
+                jComboEstado.setSelectedItem(cepWebService.getEstado());
+            } else {
+                JOptionPane.showMessageDialog(null, "Não foi possivel encontrar o endereço", "Procura do endereço", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Não foi possivel encontrar o endereço", "Procura do endereço", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -91,5 +497,53 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnConsultarCep;
+    private javax.swing.JComboBox<String> jComboEstado;
+    private javax.swing.JComboBox<String> jComboSexo;
+    private com.toedter.calendar.JDateChooser jcDataAdmissao;
+    private com.toedter.calendar.JDateChooser jcDataCadastro;
+    private com.toedter.calendar.JDateChooser jcDataNascimento;
+    private javax.swing.JLabel lBairro;
+    private javax.swing.JLabel lCarteiraTrabalho;
+    private javax.swing.JLabel lCelular;
+    private javax.swing.JLabel lCep;
+    private javax.swing.JLabel lCidade;
+    private javax.swing.JLabel lCodigo;
+    private javax.swing.JLabel lComplemento;
+    private javax.swing.JLabel lConfirmacaoSenha;
+    private javax.swing.JLabel lCpf;
+    private javax.swing.JLabel lDataAdmissao;
+    private javax.swing.JLabel lDataCadastro;
+    private javax.swing.JLabel lDataNascimento;
+    private javax.swing.JLabel lEmail;
+    private javax.swing.JLabel lEstado;
+    private javax.swing.JLabel lLogin;
+    private javax.swing.JLabel lNome;
+    private javax.swing.JLabel lNumero;
+    private javax.swing.JLabel lRg;
+    private javax.swing.JLabel lRua;
+    private javax.swing.JLabel lSenha;
+    private javax.swing.JLabel lSexo;
+    private javax.swing.JLabel lTelefone;
+    private javax.swing.JPanel pEndereco;
+    private javax.swing.JPanel pInformacoesPessoais;
+    private javax.swing.JPanel pInformacoesSistema;
+    private javax.swing.JTextField txtBairro;
+    private javax.swing.JFormattedTextField txtCarteiraTrabalho;
+    private javax.swing.JFormattedTextField txtCelular;
+    private javax.swing.JFormattedTextField txtCep;
+    private javax.swing.JTextField txtCidade;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextField txtComplemento;
+    private javax.swing.JPasswordField txtConfirmacaoSenha;
+    private javax.swing.JFormattedTextField txtCpf;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtLogin;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtNumero;
+    private javax.swing.JFormattedTextField txtRg;
+    private javax.swing.JTextField txtRua;
+    private javax.swing.JPasswordField txtSenha;
+    private javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }

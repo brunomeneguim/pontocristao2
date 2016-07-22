@@ -77,7 +77,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+                      <Component id="pEndereco" alignment="1" max="32767" attributes="0"/>
                       <Component id="pTipoCliente" max="32767" attributes="0"/>
                       <Component id="pInformacoesPessoais" alignment="1" max="32767" attributes="0"/>
                   </Group>
@@ -93,7 +93,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="pInformacoesPessoais" max="32767" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jPanel1" max="32767" attributes="0"/>
+                  <Component id="pEndereco" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -273,12 +273,14 @@
                           <Component id="jcDataNascimento" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lCpf" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lRg" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lDataCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lSexo" alignment="0" min="-2" pref="14" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lRg" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lDataCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -403,7 +405,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Container class="javax.swing.JPanel" name="pEndereco">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
