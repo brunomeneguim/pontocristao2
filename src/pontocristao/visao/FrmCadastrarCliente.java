@@ -536,7 +536,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
         Object[] botoes = {"Sim", "Não"};
         int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja finalizar o Cadastro do Cliente? ",
+                "Deseja Cancelar o Cadastro do Cliente? ",
                 "Confirmação",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                 botoes, botoes[0]);
@@ -548,7 +548,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
         Object[] botoes = {"Sim", "Não"};
         int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja finalizar o Cadastro do Cliente? ",
+                "Deseja Finalizar o Cadastro do Cliente? ",
                 "Confirmação",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                 botoes, botoes[0]);

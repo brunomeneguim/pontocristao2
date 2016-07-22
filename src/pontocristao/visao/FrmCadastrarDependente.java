@@ -171,7 +171,7 @@ public class FrmCadastrarDependente extends javax.swing.JDialog {
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
         Object[] botoes = {"Sim", "Não"};
         int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja finalizar o Cadastro do Dependente? ",
+                "Deseja Cancelar o Cadastro do Dependente? ",
                 "Confirmação",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                 botoes, botoes[0]);
@@ -183,7 +183,7 @@ public class FrmCadastrarDependente extends javax.swing.JDialog {
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
         Object[] botoes = {"Sim", "Não"};
         int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja finalizar o Cadastro do Dependente? ",
+                "Deseja Finalizar o Cadastro do Dependente? ",
                 "Confirmação",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                 botoes, botoes[0]);

@@ -25,8 +25,14 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="pInformacoesSistema" alignment="0" max="32767" attributes="0"/>
-          <Component id="pEndereco" alignment="0" max="32767" attributes="0"/>
           <Component id="pInformacoesPessoais" alignment="0" max="32767" attributes="0"/>
+          <Component id="pEndereco" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="BtnConfirmar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="BtnCancelar" min="-2" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -34,10 +40,15 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="pInformacoesSistema" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pInformacoesPessoais" max="32767" attributes="0"/>
+              <Component id="pInformacoesPessoais" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pEndereco" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+              <Component id="pEndereco" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="BtnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -58,28 +69,38 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lLogin" alignment="0" pref="198" max="32767" attributes="0"/>
-                      <Component id="txtLogin" alignment="0" pref="198" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="txtLogin" pref="201" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="lLogin" pref="170" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtSenha" alignment="0" pref="198" max="32767" attributes="0"/>
-                      <Component id="lSenha" alignment="0" pref="198" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lConfirmacaoSenha" pref="198" max="32767" attributes="0"/>
-                      <Component id="txtConfirmacaoSenha" pref="198" max="32767" attributes="0"/>
+                      <Component id="lSenha" max="32767" attributes="0"/>
+                      <Component id="txtSenha" min="-2" pref="193" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="txtConfirmacaoSenha" pref="198" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
+                          <Component id="lConfirmacaoSenha" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jcDataAdmissao" min="-2" pref="145" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="lDataAdmissao" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="lDataAdmissao" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jcDataAdmissao" min="-2" pref="142" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -157,7 +178,7 @@
                           <Component id="txtTelefone" min="-2" pref="150" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="18" max="32767" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Component id="txtRg" min="-2" pref="150" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="txtCarteiraTrabalho" min="-2" pref="150" max="-2" attributes="0"/>
@@ -168,7 +189,6 @@
                                   <Component id="txtCelular" min="-2" pref="150" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="lCarteiraTrabalho" min="-2" max="-2" attributes="0"/>
@@ -176,6 +196,7 @@
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
+                                      <Component id="txtEmail" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -222,15 +243,13 @@
                               </Group>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lDataCadastro" alignment="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lDataNascimento" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jcDataCadastro" alignment="0" pref="142" max="32767" attributes="0"/>
-                              <Component id="jcDataNascimento" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jcDataNascimento" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="11" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -257,19 +276,15 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lCpf" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lRg" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lDataCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lSexo" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                       <Component id="lCarteiraTrabalho" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="jComboSexo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtRg" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtCarteiraTrabalho" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="jcDataCadastro" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jComboSexo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtRg" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCarteiraTrabalho" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -279,7 +294,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtEmail" alignment="0" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txtCelular" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -294,11 +309,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lDataCadastro">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Data do Cadastro"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="lTelefone">
           <Properties>
             <Property name="text" type="java.lang.String" value="Telefone"/>
@@ -364,8 +374,6 @@
           </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jcDataNascimento">
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jcDataCadastro">
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtCpf">
         </Component>
@@ -578,5 +586,27 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="BtnCancelar">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/pontocristao/icones/BtnCancelar.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Cancelar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCancelarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BtnConfirmar">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/pontocristao/icones/BtnConfirmar.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Confirmar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnConfirmarActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

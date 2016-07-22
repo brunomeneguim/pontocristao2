@@ -27,65 +27,59 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtDescricao" max="32767" attributes="0"/>
+                          <Component id="lNomeFantasia" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lCnpj" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="txtNomeFantasia" min="-2" pref="132" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtTelefone" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <Component id="txtTelefone" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                                   <Component id="lTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtCelular" min="-2" pref="132" max="-2" attributes="0"/>
                                   <Component id="lCelular" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCelular" min="-2" pref="150" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="lNomeFantasia" min="-2" max="-2" attributes="0"/>
-                          <Component id="ldescricao" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lProduto" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtNomeFantasia" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jComboProduto" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtDescricao" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="txtCnpj" min="-2" pref="132" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txtCnpj" min="-2" pref="150" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lRazaoSocial" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtRazaoSocial" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Component id="lRazaoSocial" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lInscricaoEstadual" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtInscricaoEstadual" min="-2" pref="150" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="ldescricao" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtRazaoSocial" min="-2" pref="132" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtInscricaoSocial" min="-2" pref="132" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="273" max="-2" attributes="0"/>
+                                      <Component id="BtnConfirmar" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="BtnCancelar" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lCnpj" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="lInscricaoEstadual" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                  </Group>
               </Group>
-          </Group>
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
-                      <Component id="BtnConfirmar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="BtnCancelar" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lProduto" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jComboProduto" min="-2" pref="132" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -93,22 +87,24 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="lNomeFantasia" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="txtNomeFantasia" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lNomeFantasia" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lCelular" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtNomeFantasia" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtCelular" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCelular" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Component id="ldescricao" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="ldescricao" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="txtDescricao" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lRazaoSocial" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -118,17 +114,18 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtRazaoSocial" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtInscricaoSocial" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtInscricaoEstadual" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="lProduto" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jComboProduto" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="42" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="BtnConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BtnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -171,27 +168,29 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtNomeFantasia">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtCelular">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtTelefone">
-    </Component>
     <Component class="javax.swing.JTextField" name="txtDescricao">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtCnpj">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtRazaoSocial">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtInscricaoSocial">
     </Component>
     <Component class="javax.swing.JButton" name="BtnConfirmar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/pontocristao/icones/BtnConfirmar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Confirmar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnConfirmarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BtnCancelar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/pontocristao/icones/BtnCancelar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCancelarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lProduto">
       <Properties>
@@ -212,6 +211,16 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtTelefone">
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtCelular">
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtCnpj">
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtRazaoSocial">
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtInscricaoEstadual">
     </Component>
   </SubComponents>
 </Form>

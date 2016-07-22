@@ -1,6 +1,9 @@
 package pontocristao.visao;
 
 import java.awt.*;
+import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
+import pontocristao.util.Utilidades;
 
 /**
  *
@@ -11,6 +14,12 @@ public class FrmCadastrarFornecedor extends javax.swing.JDialog {
     public FrmCadastrarFornecedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        //Abrir centralizado
+        this.setLocationRelativeTo(null);
+
+        Utilidades utilidades = new Utilidades();
+        Mascara();
     }
 
     private static Frame frame;
@@ -20,6 +29,24 @@ public class FrmCadastrarFornecedor extends javax.swing.JDialog {
         FrmCadastrarFornecedor frmCadastrarFornecedor = new FrmCadastrarFornecedor(parent, true);
         frmCadastrarFornecedor.setVisible(true);
         return frmCadastrarFornecedor;
+    }
+
+    public void Mascara() {
+        //Setando mascáras para campos 
+        MaskFormatter mascara = new Utilidades().setMascara("#####-###");
+        mascara.install(txtRazaoSocial);
+        
+        mascara = new Utilidades().setMascara("##.###.###/####-##");
+        mascara.install(txtInscricaoEstadual);
+
+        mascara = new Utilidades().setMascara("##.###.###/####-##");
+        mascara.install(txtCnpj);
+
+        mascara = new Utilidades().setMascara("(##)####-####");
+        mascara.install(txtTelefone);
+
+        mascara = new Utilidades().setMascara("(##)####-####");
+        mascara.install(txtCelular);
     }
 
     /**
@@ -39,16 +66,16 @@ public class FrmCadastrarFornecedor extends javax.swing.JDialog {
         lRazaoSocial = new javax.swing.JLabel();
         lInscricaoEstadual = new javax.swing.JLabel();
         txtNomeFantasia = new javax.swing.JTextField();
-        txtCelular = new javax.swing.JTextField();
-        txtTelefone = new javax.swing.JTextField();
         txtDescricao = new javax.swing.JTextField();
-        txtCnpj = new javax.swing.JTextField();
-        txtRazaoSocial = new javax.swing.JTextField();
-        txtInscricaoSocial = new javax.swing.JTextField();
         BtnConfirmar = new javax.swing.JButton();
         BtnCancelar = new javax.swing.JButton();
         lProduto = new javax.swing.JLabel();
         jComboProduto = new javax.swing.JComboBox<>();
+        txtTelefone = new javax.swing.JFormattedTextField();
+        txtCelular = new javax.swing.JFormattedTextField();
+        txtCnpj = new javax.swing.JFormattedTextField();
+        txtRazaoSocial = new javax.swing.JFormattedTextField();
+        txtInscricaoEstadual = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Fornecedores");
@@ -67,9 +94,21 @@ public class FrmCadastrarFornecedor extends javax.swing.JDialog {
 
         lInscricaoEstadual.setText("Inscrição Estadual");
 
+        BtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnConfirmar.png"))); // NOI18N
         BtnConfirmar.setText("Confirmar");
+        BtnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnConfirmarActionPerformed(evt);
+            }
+        });
 
+        BtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnCancelar.png"))); // NOI18N
         BtnCancelar.setText("Cancelar");
+        BtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCancelarActionPerformed(evt);
+            }
+        });
 
         lProduto.setText("Produtos");
 
@@ -84,67 +123,64 @@ public class FrmCadastrarFornecedor extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDescricao)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lTelefone))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lCelular)))
                             .addComponent(lNomeFantasia)
-                            .addComponent(ldescricao)
+                            .addComponent(lCnpj)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lRazaoSocial)
+                                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lTelefone))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lCelular)
+                                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lProduto))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNomeFantasia)
+                            .addComponent(jComboProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtDescricao, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lRazaoSocial))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lInscricaoEstadual)
+                                    .addComponent(txtInscricaoEstadual, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ldescricao)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtInscricaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lCnpj)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lInscricaoEstadual)
-                        .addGap(54, 54, 54))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(BtnConfirmar)
-                        .addGap(35, 35, 35)
-                        .addComponent(BtnCancelar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lProduto))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jComboProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGap(273, 273, 273)
+                                        .addComponent(BtnConfirmar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(BtnCancelar)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(lNomeFantasia)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lNomeFantasia)
                     .addComponent(lTelefone)
                     .addComponent(lCelular))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(ldescricao)
+                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ldescricao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lCnpj)
                     .addComponent(lRazaoSocial)
@@ -153,19 +189,44 @@ public class FrmCadastrarFornecedor extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtInscricaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtInscricaoEstadual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnConfirmar)
-                    .addComponent(BtnCancelar)))
+                    .addComponent(BtnCancelar)
+                    .addComponent(BtnConfirmar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
+        Object[] botoes = {"Sim", "Não"};
+        int resposta = JOptionPane.showOptionDialog(null,
+                "Deseja Finalizar o Cadastro do Fornecedor? ",
+                "Confirmação",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                botoes, botoes[0]);
+        if (resposta == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_BtnConfirmarActionPerformed
+
+    private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
+        Object[] botoes = {"Sim", "Não"};
+        int resposta = JOptionPane.showOptionDialog(null,
+                "Deseja Cancelar o Cadastro do Forncedor? ",
+                "Confirmação",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                botoes, botoes[0]);
+        if (resposta == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_BtnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,12 +282,12 @@ public class FrmCadastrarFornecedor extends javax.swing.JDialog {
     private javax.swing.JLabel lRazaoSocial;
     private javax.swing.JLabel lTelefone;
     private javax.swing.JLabel ldescricao;
-    private javax.swing.JTextField txtCelular;
-    private javax.swing.JTextField txtCnpj;
+    private javax.swing.JFormattedTextField txtCelular;
+    private javax.swing.JFormattedTextField txtCnpj;
     private javax.swing.JTextField txtDescricao;
-    private javax.swing.JTextField txtInscricaoSocial;
+    private javax.swing.JFormattedTextField txtInscricaoEstadual;
     private javax.swing.JTextField txtNomeFantasia;
-    private javax.swing.JTextField txtRazaoSocial;
-    private javax.swing.JTextField txtTelefone;
+    private javax.swing.JFormattedTextField txtRazaoSocial;
+    private javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }
