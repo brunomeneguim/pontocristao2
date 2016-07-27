@@ -7,7 +7,7 @@ import pontocristao.util.HibernateUtil;
 
 /**
  *
- * @author Marcondes
+ * @author Marcondess
  */
 public class PopularBancoTeste {
 
