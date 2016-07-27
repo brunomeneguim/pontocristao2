@@ -15,7 +15,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         initComponents();
 
         this.setExtendedState(MAXIMIZED_BOTH);
-        //PopularBancoTeste.Popular();
+        PopularBancoTeste.Popular();
     }
 
     /**
