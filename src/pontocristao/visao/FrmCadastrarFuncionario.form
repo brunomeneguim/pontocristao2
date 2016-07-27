@@ -48,7 +48,7 @@
                   <Component id="BtnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BtnConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="35" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -272,7 +272,7 @@
                       </Group>
                       <Component id="jcDataNascimento" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lCpf" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lRg" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -286,7 +286,7 @@
                       <Component id="txtRg" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtCarteiraTrabalho" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lCelular" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -295,15 +295,10 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="txtEmail" alignment="0" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtCelular" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="txtCelular" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -473,7 +468,7 @@
                       <Component id="BtnConsultarCep" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtCep" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lBairro" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lCidade" alignment="3" min="-2" max="-2" attributes="0"/>
