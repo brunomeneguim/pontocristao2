@@ -19,146 +19,150 @@ public class PopularBancoTeste {
     }
 
     public static void Popular() {
-        Session sessao = HibernateUtil.getSessionFactory().openSession();
-        Transaction transacao = sessao.getTransaction();
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            Transaction transacao = sessao.getTransaction();
 
-        transacao.begin();
+            transacao.begin();
 
-        CodigoBarrasProprio codigoBarras = RetornarNovoCodigoBarrasProprio();
+            CodigoBarrasProprio codigoBarras = RetornarNovoCodigoBarrasProprio();
 
-        //Salva um novo código de barras próprio
-        sessao.save(codigoBarras);
+            //Salva um novo código de barras próprio
+            sessao.save(codigoBarras);
 
-        Caixa caixa = RetornarNovoCaixa();
+            Caixa caixa = RetornarNovoCaixa();
 
-        //Salva um novo caixa
-        sessao.save(caixa);
+            //Salva um novo caixa
+            sessao.save(caixa);
 
-        TipoContaPagar tipoContaPagar = RetornarNovoTipoContaPagar();
+            TipoContaPagar tipoContaPagar = RetornarNovoTipoContaPagar();
 
-        //Salva um novo tipo de conta a pagar
-        sessao.save(tipoContaPagar);
+            //Salva um novo tipo de conta a pagar
+            sessao.save(tipoContaPagar);
 
-        ContaPagar contaPagar = RetornarNovaContaPagar();
-        contaPagar.setTipoContaPagar(tipoContaPagar);
+            ContaPagar contaPagar = RetornarNovaContaPagar();
+            contaPagar.setTipoContaPagar(tipoContaPagar);
 
-        //Salva uma nova conta a pagar
-        sessao.save(contaPagar);
+            //Salva uma nova conta a pagar
+            sessao.save(contaPagar);
 
-        Fornecedor fornecedor = RetornarNovoFornecedor();
+            Fornecedor fornecedor = RetornarNovoFornecedor();
 
-        //Salva um novo fornecedor
-        sessao.save(fornecedor);
+            //Salva um novo fornecedor
+            sessao.save(fornecedor);
 
-        TipoProduto tipoProduto = RetornarNovoTipoProduto();
+            TipoProduto tipoProduto = RetornarNovoTipoProduto();
 
-        //Salva um novo tipo de produto
-        sessao.save(tipoProduto);
+            //Salva um novo tipo de produto
+            sessao.save(tipoProduto);
 
-        Produto produto = RetornarNovoProduto();
-        produto.setFornecedor(fornecedor);
-        produto.setTipoProduto(tipoProduto);
+            Produto produto = RetornarNovoProduto();
+            produto.setFornecedor(fornecedor);
+            produto.setTipoProduto(tipoProduto);
 
-        //Salva um novo produto
-        sessao.save(produto);
+            //Salva um novo produto
+            sessao.save(produto);
 
-        TipoFilme tipoFilme = RetornarTipoFilme();
+            TipoFilme tipoFilme = RetornarTipoFilme();
 
-        //Salva um novo tipo de filme
-        sessao.save(tipoFilme);
+            //Salva um novo tipo de filme
+            sessao.save(tipoFilme);
 
-        Filme filme = RetornarNovoFilme();
-        filme.setTipoFilme(tipoFilme);
-        filme.setTipoProduto(tipoProduto);
+            Filme filme = RetornarNovoFilme();
+            filme.setTipoFilme(tipoFilme);
+            filme.setTipoProduto(tipoProduto);
 
-        //Salva um novo filme
-        sessao.save(filme);
+            //Salva um novo filme
+            sessao.save(filme);
 
-        TabelaPrecoLocacao tabelaPrecoLocacao = RetornarNovaTabelaPrecoLocacao();
+            TabelaPrecoLocacao tabelaPrecoLocacao = RetornarNovaTabelaPrecoLocacao();
 
-        //Salva uma nova tabela de preço de locação
-        sessao.save(tabelaPrecoLocacao);
+            //Salva uma nova tabela de preço de locação
+            sessao.save(tabelaPrecoLocacao);
 
-        Endereco enderecoFuncionario = RetornarNovoEndereco();
+            Endereco enderecoFuncionario = RetornarNovoEndereco();
 
-        //Salva um novo endereço para o funcionário
-        sessao.save(enderecoFuncionario);
+            //Salva um novo endereço para o funcionário
+            sessao.save(enderecoFuncionario);
 
-        Funcionario funcionario = RetornarNovoFuncionario();
-        funcionario.setEndereco(enderecoFuncionario);
+            Funcionario funcionario = RetornarNovoFuncionario();
+            funcionario.setEndereco(enderecoFuncionario);
 
-        //Salva um novo funcionário
-        sessao.save(funcionario);
+            //Salva um novo funcionário
+            sessao.save(funcionario);
 
-        Endereco enderecoClientePessoaFisica = RetornarNovoEndereco();
+            Endereco enderecoClientePessoaFisica = RetornarNovoEndereco();
 
-        //Salva um novo endereço para o cliente pessoa física
-        sessao.save(enderecoClientePessoaFisica);
+            //Salva um novo endereço para o cliente pessoa física
+            sessao.save(enderecoClientePessoaFisica);
 
-        ClientePessoaFisica clientePessoaFisica = RetornarNovoClientePessoaFisica();
-        clientePessoaFisica.setEndereco(enderecoClientePessoaFisica);
+            ClientePessoaFisica clientePessoaFisica = RetornarNovoClientePessoaFisica();
+            clientePessoaFisica.setEndereco(enderecoClientePessoaFisica);
 
-        //Salva um novo cliente pessoa física
-        sessao.save(clientePessoaFisica);
+            //Salva um novo cliente pessoa física
+            sessao.save(clientePessoaFisica);
 
-        Dependente dependenteClientePessoaFisica = RetornarNovoDependente();
-        dependenteClientePessoaFisica.setCliente(clientePessoaFisica);
+            Dependente dependenteClientePessoaFisica = RetornarNovoDependente();
+            dependenteClientePessoaFisica.setCliente(clientePessoaFisica);
 
-        //Salvar um novo dependente para o cliente pessoa física
-        sessao.save(dependenteClientePessoaFisica);
+            //Salvar um novo dependente para o cliente pessoa física
+            sessao.save(dependenteClientePessoaFisica);
 
-        Endereco enderecoClientePessoaJuridica = RetornarNovoEndereco();
+            Endereco enderecoClientePessoaJuridica = RetornarNovoEndereco();
 
-        //Salva um novo endereço para o cliente pessoa jurídica
-        sessao.save(enderecoClientePessoaJuridica);
+            //Salva um novo endereço para o cliente pessoa jurídica
+            sessao.save(enderecoClientePessoaJuridica);
 
-        ClientePessoaJuridica clientePessoaJuridica = RetornarNovoClientePessoaJuridica();
-        clientePessoaFisica.setEndereco(enderecoClientePessoaJuridica);
+            ClientePessoaJuridica clientePessoaJuridica = RetornarNovoClientePessoaJuridica();
+            clientePessoaFisica.setEndereco(enderecoClientePessoaJuridica);
 
-        //Salva um novo cliente pessoa jurídica
-        sessao.save(clientePessoaJuridica);
+            //Salva um novo cliente pessoa jurídica
+            sessao.save(clientePessoaJuridica);
 
-        Dependente dependenteClientePessoaJuridica = RetornarNovoDependente();
-        dependenteClientePessoaFisica.setCliente(clientePessoaJuridica);
+            Dependente dependenteClientePessoaJuridica = RetornarNovoDependente();
+            dependenteClientePessoaFisica.setCliente(clientePessoaJuridica);
 
-        //Salvar um novo dependente para o cliente pessoa física
-        sessao.save(dependenteClientePessoaJuridica);
+            //Salvar um novo dependente para o cliente pessoa física
+            sessao.save(dependenteClientePessoaJuridica);
 
-        Locacao locacao = RetornarNovaLocacao();
-        locacao.setCliente(clientePessoaFisica);
-        locacao.setFuncionario(funcionario);
+            Locacao locacao = RetornarNovaLocacao();
+            locacao.setCliente(clientePessoaFisica);
+            locacao.setFuncionario(funcionario);
 
-        //Salva uma nova locação
-        sessao.save(locacao);
+            //Salva uma nova locação
+            sessao.save(locacao);
 
-        ItemLocacao itemLocacao = RetornarNovoItemLocacao();
-        itemLocacao.setFilme(filme);
-        itemLocacao.setLocacao(locacao);
+            ItemLocacao itemLocacao = RetornarNovoItemLocacao();
+            itemLocacao.setFilme(filme);
+            itemLocacao.setLocacao(locacao);
 
-        //Salva um novo item de locação
-        sessao.save(itemLocacao);
+            //Salva um novo item de locação
+            sessao.save(itemLocacao);
 
-        TipoPagamento tipoPagamento = RetornarNovoTipoPagamento();
+            TipoPagamento tipoPagamento = RetornarNovoTipoPagamento();
 
-        //Salva um novo tipo de pagamento
-        sessao.save(tipoPagamento);
+            //Salva um novo tipo de pagamento
+            sessao.save(tipoPagamento);
 
-        PagamentoLocacao pagamentoLocacao = RetornarNovoPagamentoLocacao();
-        pagamentoLocacao.setLocacao(locacao);
+            PagamentoLocacao pagamentoLocacao = RetornarNovoPagamentoLocacao();
+            pagamentoLocacao.setLocacao(locacao);
 
-        //Salva um novo pagamento de locacao
-        sessao.save(pagamentoLocacao);
+            //Salva um novo pagamento de locacao
+            sessao.save(pagamentoLocacao);
 
-        MovimentacaoCaixaLocacao movimentacaoCaixaLocacao = RetornarNovaMovimentacaoCaixaLocacao();
-        movimentacaoCaixaLocacao.setCaixa(caixa);
-        movimentacaoCaixaLocacao.setFuncionario(funcionario);
-        movimentacaoCaixaLocacao.setLocacao(locacao);
+            MovimentacaoCaixaLocacao movimentacaoCaixaLocacao = RetornarNovaMovimentacaoCaixaLocacao();
+            movimentacaoCaixaLocacao.setCaixa(caixa);
+            movimentacaoCaixaLocacao.setFuncionario(funcionario);
+            movimentacaoCaixaLocacao.setLocacao(locacao);
 
-        //Salva uma nova movimentação de caixa de locação
-        sessao.save(movimentacaoCaixaLocacao);
+            //Salva uma nova movimentação de caixa de locação
+            sessao.save(movimentacaoCaixaLocacao);
 
-        transacao.commit();
-        sessao.close();
+            transacao.commit();
+            sessao.close();
+        } catch (Exception e) {
+            Exception erro = e;
+        }
 
     }
 
