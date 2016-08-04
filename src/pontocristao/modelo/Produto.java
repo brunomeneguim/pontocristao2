@@ -8,6 +8,7 @@ import javax.persistence.*;
  * @author Marcondes
  */
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Produto extends ModeloBase {
 
     @Column(nullable = false)

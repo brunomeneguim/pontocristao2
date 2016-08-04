@@ -11,13 +11,6 @@ import pontocristao.util.HibernateUtil;
  */
 public class PopularBancoTeste {
 
-    List<Funcionario> funcionario = (List<Funcionario>) null;
-
-    public static Calendar Data_Calendar() {
-        Calendar calendar = Calendar.getInstance();
-        return calendar;
-    }
-
     public static void Popular() {
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
@@ -114,7 +107,7 @@ public class PopularBancoTeste {
             sessao.save(enderecoClientePessoaJuridica);
 
             ClientePessoaJuridica clientePessoaJuridica = RetornarNovoClientePessoaJuridica();
-            clientePessoaFisica.setEndereco(enderecoClientePessoaJuridica);
+            clientePessoaJuridica.setEndereco(enderecoClientePessoaJuridica);
 
             //Salva um novo cliente pessoa jurídica
             sessao.save(clientePessoaJuridica);
