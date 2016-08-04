@@ -2,6 +2,8 @@ package pontocristao.visao;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
+import pontocristao.util.Utilidades;
 
 /**
  *
@@ -18,6 +20,12 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
 
         //Abrir centralizado
         this.setLocationRelativeTo(null);
+
+        Utilidades utilidades = new Utilidades();
+        Mascara();
+        
+        txtNomeProduto.requestFocus();
+        txtCodigoProduto.setEnabled(false);
     }
 
     private static Frame frame;
@@ -27,6 +35,12 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
         FrmCadastrarProduto frmCadastrarProduto = new FrmCadastrarProduto(parent, true);
         frmCadastrarProduto.setVisible(true);
         return frmCadastrarProduto;
+    }
+    
+    public void Mascara() {
+        //Setando mascáras para campos 
+        MaskFormatter mascara = new Utilidades().setMascara("R$ #.###,##");
+        mascara.install(txtValorVenda);
     }
 
     /**
@@ -44,8 +58,8 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
         txtCodigoBarra = new javax.swing.JFormattedTextField();
         lDataCadastro = new javax.swing.JLabel();
         jcDataCadastro = new com.toedter.calendar.JDateChooser();
-        lNome = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
+        lNomeProduto = new javax.swing.JLabel();
+        txtNomeProduto = new javax.swing.JTextField();
         lValorVenda = new javax.swing.JLabel();
         txtValorVenda = new javax.swing.JFormattedTextField();
         txtQuantidade = new javax.swing.JTextField();
@@ -62,13 +76,15 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
 
         lCodigoProduto.setText("Código do Produto");
 
+        txtCodigoProduto.setEditable(false);
+        txtCodigoProduto.setBackground(new java.awt.Color(255, 255, 255));
         txtCodigoProduto.setEnabled(false);
 
         lCodigoBarra.setText("Código de Barras");
 
         lDataCadastro.setText("Data de Cadastro");
 
-        lNome.setText("Nome do Produto");
+        lNomeProduto.setText("Nome do Produto");
 
         lValorVenda.setText("Valor de Venda");
 
@@ -119,8 +135,8 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lDataCadastro)
                                         .addComponent(jcDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(lNome)
-                                .addComponent(txtNome))
+                                .addComponent(lNomeProduto)
+                                .addComponent(txtNomeProduto))
                             .addComponent(lFornecedor)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,11 +172,11 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
                         .addComponent(txtCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtCodigoBarra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jcDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(lNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(lNomeProduto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lValorVenda)
                     .addComponent(lQuantidade)
@@ -170,7 +186,7 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
                     .addComponent(txtValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lFornecedor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -187,10 +203,10 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
         Object[] botoes = {"Sim", "Não"};
         int resposta = JOptionPane.showOptionDialog(null,
-            "Deseja Finalizar o Cadastro do Fornecedor? ",
-            "Confirmação",
-            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-            botoes, botoes[0]);
+                "Deseja Finalizar o Cadastro do Fornecedor? ",
+                "Confirmação",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                botoes, botoes[0]);
         if (resposta == 0) {
             this.dispose();
         }
@@ -199,10 +215,10 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
         Object[] botoes = {"Sim", "Não"};
         int resposta = JOptionPane.showOptionDialog(null,
-            "Deseja Cancelar o Cadastro do Forncedor? ",
-            "Confirmação",
-            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-            botoes, botoes[0]);
+                "Deseja Cancelar o Cadastro do Forncedor? ",
+                "Confirmação",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                botoes, botoes[0]);
         if (resposta == 0) {
             this.dispose();
         }
@@ -259,14 +275,14 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
     private javax.swing.JLabel lCodigoProduto;
     private javax.swing.JLabel lDataCadastro;
     private javax.swing.JLabel lFornecedor;
-    private javax.swing.JLabel lNome;
+    private javax.swing.JLabel lNomeProduto;
     private javax.swing.JLabel lQuantidade;
     private javax.swing.JLabel lTipoProduto;
     private javax.swing.JLabel lValorVenda;
     private javax.swing.JFormattedTextField txtCodigoBarra;
     private javax.swing.JTextField txtCodigoProduto;
     private javax.swing.JTextField txtFornecedor;
-    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtNomeProduto;
     private javax.swing.JTextField txtQuantidade;
     private javax.swing.JFormattedTextField txtValorVenda;
     // End of variables declaration//GEN-END:variables

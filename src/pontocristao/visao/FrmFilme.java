@@ -1,6 +1,7 @@
 package pontocristao.visao;
 
 import java.awt.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +17,8 @@ public class FrmFilme extends javax.swing.JDialog {
         this.setBounds(bounds);
 
         txtPesquisar.requestFocus();
+        BtnEditar.setEnabled(false);
+        BtnExcluir.setEnabled(false);
 
     }
 
@@ -44,6 +47,7 @@ public class FrmFilme extends javax.swing.JDialog {
         BtnPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableFilme = new javax.swing.JTable();
+        BtnSair1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Filme");
@@ -79,6 +83,15 @@ public class FrmFilme extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTableFilme);
 
+        BtnSair1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnSair.png"))); // NOI18N
+        BtnSair1.setText("Sair");
+        BtnSair1.setPreferredSize(new java.awt.Dimension(139, 65));
+        BtnSair1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSair1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,7 +109,10 @@ public class FrmFilme extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                         .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnPesquisar)))
+                        .addComponent(BtnPesquisar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BtnSair1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -110,7 +126,9 @@ public class FrmFilme extends javax.swing.JDialog {
                     .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnSair1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -120,6 +138,18 @@ public class FrmFilme extends javax.swing.JDialog {
     private void BtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoActionPerformed
         FrmCadastrarFilme frmCadastrarFilme = FrmCadastrarFilme.Mostrar(frame);
     }//GEN-LAST:event_BtnNovoActionPerformed
+
+    private void BtnSair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSair1ActionPerformed
+        Object[] botoes = {"Sim", "Não"};
+        int resposta = JOptionPane.showOptionDialog(null,
+                "Deseja sair da lista de Clientes? ",
+                "Confirmação",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                botoes, botoes[0]);
+        if (resposta == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_BtnSair1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,6 +201,7 @@ public class FrmFilme extends javax.swing.JDialog {
     private javax.swing.JButton BtnExcluir;
     private javax.swing.JButton BtnNovo;
     private javax.swing.JButton BtnPesquisar;
+    private javax.swing.JButton BtnSair1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableFilme;
     private javax.swing.JTextField txtPesquisar;

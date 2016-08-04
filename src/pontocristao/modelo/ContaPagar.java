@@ -19,6 +19,9 @@ public class ContaPagar extends ModeloBase {
     @Column(nullable = false)
     private Double valor;
 
+    @Column(nullable = false)
+    private String descricao;
+
     @ManyToOne()
     private TipoContaPagar tipoContaPagar;
 
@@ -52,6 +55,14 @@ public class ContaPagar extends ModeloBase {
 
     public void setTipoContaPagar(TipoContaPagar tipoContaPagar) {
         this.tipoContaPagar = tipoContaPagar;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
 }

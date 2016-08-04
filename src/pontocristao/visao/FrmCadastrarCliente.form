@@ -272,7 +272,7 @@
                           </Group>
                           <Component id="jcDataNascimento" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lSexo" alignment="0" min="-2" pref="14" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -292,7 +292,7 @@
                           </Group>
                           <Component id="jcDataCadastro" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lCelular" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -486,7 +486,7 @@
                           <Component id="BtnConsultarCep" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCep" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lBairro" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lCidade" alignment="3" min="-2" max="-2" attributes="0"/>

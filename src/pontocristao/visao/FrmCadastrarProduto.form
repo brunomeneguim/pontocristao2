@@ -47,8 +47,8 @@
                                       <Component id="jcDataCadastro" min="-2" pref="150" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="lNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lNomeProduto" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNomeProduto" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="lFornecedor" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
@@ -98,11 +98,11 @@
                   </Group>
                   <Component id="jcDataCadastro" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="lNome" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtNome" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lNomeProduto" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="txtNomeProduto" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lValorVenda" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -114,7 +114,7 @@
                   <Component id="txtQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jComboTipoProduto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="lFornecedor" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="txtFornecedor" min="-2" max="-2" attributes="0"/>
@@ -136,6 +136,10 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtCodigoProduto">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
@@ -153,12 +157,12 @@
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jcDataCadastro">
     </Component>
-    <Component class="javax.swing.JLabel" name="lNome">
+    <Component class="javax.swing.JLabel" name="lNomeProduto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nome do Produto"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNome">
+    <Component class="javax.swing.JTextField" name="txtNomeProduto">
     </Component>
     <Component class="javax.swing.JLabel" name="lValorVenda">
       <Properties>
