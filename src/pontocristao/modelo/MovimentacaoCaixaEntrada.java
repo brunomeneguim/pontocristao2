@@ -8,6 +8,7 @@ import javax.persistence.*;
  * @author Marcondes
  */
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class MovimentacaoCaixaEntrada extends MovimentacaoCaixa {
 
     @Column(nullable = false)

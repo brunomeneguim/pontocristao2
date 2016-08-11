@@ -139,6 +139,7 @@ public class PopularBancoTeste {
 
             PagamentoLocacao pagamentoLocacao = RetornarNovoPagamentoLocacao();
             pagamentoLocacao.setLocacao(locacao);
+            pagamentoLocacao.setTipoPagamento(tipoPagamento);
 
             //Salva um novo pagamento de locacao
             sessao.save(pagamentoLocacao);
@@ -150,7 +151,31 @@ public class PopularBancoTeste {
 
             //Salva uma nova movimentação de caixa de locação
             sessao.save(movimentacaoCaixaLocacao);
-
+            
+            Venda venda = RetornarNovaVenda();
+            venda.setCliente(clientePessoaFisica);
+            venda.setFuncionario(funcionario);
+            
+            ItemVenda itemVenda = RetornarNovoItemVenda();
+            itemVenda.setProduto(produto);
+            
+            itemVenda.setVenda(venda);
+            
+            //Salva uma nova venda
+            sessao.save(venda);
+            
+            //Salva um novo item de venda            
+            sessao.save(itemVenda);
+            
+            
+            
+            PagamentoVenda pagamentoVenda = RetornarNovoPagamentoVenda();
+            pagamentoVenda.setTipoPagamento(tipoPagamento);
+            pagamentoVenda.setVenda(venda);
+            
+            //Salva um novo pagamento de venda
+            sessao.save(pagamentoVenda);
+            
             transacao.commit();
             sessao.close();
         } catch (Exception e) {
@@ -238,6 +263,7 @@ public class PopularBancoTeste {
 
         conta.setData(new Date());
         conta.setDataVencimento(calendario.getTime());
+        conta.setDescricao("Conta a pagar de teste");
         conta.setValor(102.15);
 
         return conta;
@@ -385,7 +411,7 @@ public class PopularBancoTeste {
         MovimentacaoCaixaLocacao movimentacao = new MovimentacaoCaixaLocacao();
 
         movimentacao.setData(new Date());
-        movimentacao.setData(new Date());
+        movimentacao.setDataFaturar(new Date());
         movimentacao.setFaturado(true);
         movimentacao.setValor(6.9);
 
@@ -395,43 +421,70 @@ public class PopularBancoTeste {
     private static Venda RetornarNovaVenda() {
         Venda venda = new Venda();
 
+        venda.setData(new Date());
+        venda.setPago(false);
+        venda.setValorTotal(45.56);
+        
         return venda;
     }
 
     private static ItemVenda RetornarNovoItemVenda() {
         ItemVenda item = new ItemVenda();
 
+        item.setQuantidade(1);
+        item.setValorUnitario(45.56);
+        
         return item;
     }
 
     private static PagamentoVenda RetornarNovoPagamentoVenda() {
         PagamentoVenda pagamento = new PagamentoVenda();
 
+        pagamento.setData(new Date());
+        pagamento.setDescricao("Venda de teste");
+        pagamento.setValor(45.56);
+        
         return pagamento;
     }
 
     private static MovimentacaoCaixaVenda RetornarNovaMovimentacaoCaixaVenda() {
-        MovimentacaoCaixaVenda movimentcao = new MovimentacaoCaixaVenda();
+        MovimentacaoCaixaVenda movimentacao = new MovimentacaoCaixaVenda();
 
-        return movimentcao;
+        movimentacao.setData(new Date());
+        movimentacao.setDataFaturar(new Date());
+        movimentacao.setFaturado(true);
+        movimentacao.setValor(45.56);
+        
+        return movimentacao;
     }
 
     private static MovimentacaoCaixaContaPagar RetornarNovaMivimentacaoCaixaContaPagar() {
-        MovimentacaoCaixaContaPagar movimentcao = new MovimentacaoCaixaContaPagar();
+        MovimentacaoCaixaContaPagar movimentacao = new MovimentacaoCaixaContaPagar();
 
-        return movimentcao;
+        movimentacao.setData(new Date());
+        movimentacao.setValor(102.15);
+        
+        return movimentacao;
     }
 
     private static MovimentacaoCaixaDeposito RetornarNovaMivimentacaoCaixaDeposito() {
-        MovimentacaoCaixaDeposito movimentcao = new MovimentacaoCaixaDeposito();
+        MovimentacaoCaixaDeposito movimentacao = new MovimentacaoCaixaDeposito();
 
-        return movimentcao;
+        movimentacao.setData(new Date());
+        movimentacao.setValor(102.15);
+        movimentacao.setDescricao("Movimentação de teste");
+        
+        return movimentacao;
     }
 
     private static MovimentacaoCaixaRetirada RetornarNovaMivimentacaoCaixaRetirada() {
-        MovimentacaoCaixaRetirada movimentcao = new MovimentacaoCaixaRetirada();
+        MovimentacaoCaixaRetirada movimentacao = new MovimentacaoCaixaRetirada();
 
-        return movimentcao;
+        movimentacao.setData(new Date());
+        movimentacao.setValor(102.15);
+        movimentacao.setDescricao("Movimentação de teste");
+        
+        return movimentacao;
     }
 
 }

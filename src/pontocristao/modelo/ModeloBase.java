@@ -15,7 +15,7 @@ public abstract class ModeloBase implements Serializable {
     private Long id;
 
     @Column(nullable = false, columnDefinition = "tinyint default false")
-    private Boolean excluido;
+    private Boolean excluido = false;
 
     public long getId() {
         return this.id;
