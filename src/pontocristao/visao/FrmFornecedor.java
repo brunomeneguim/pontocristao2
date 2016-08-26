@@ -67,7 +67,7 @@ public class FrmFornecedor extends javax.swing.JDialog {
         BtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnExcluir.png"))); // NOI18N
         BtnExcluir.setText("Excluir");
 
-        BtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnEditar.png"))); // NOI18N
+        BtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnPesquisar.png"))); // NOI18N
         BtnPesquisar.setText("Pesquisar");
 
         jTableFornecedor.setModel(new javax.swing.table.DefaultTableModel(
@@ -200,7 +200,6 @@ public class FrmFornecedor extends javax.swing.JDialog {
     private javax.swing.JButton BtnNovo;
     private javax.swing.JButton BtnPesquisar;
     private javax.swing.JButton BtnSair;
-    private javax.swing.JButton BtnSair1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableFornecedor;
     private javax.swing.JTextField txtPesquisar;
