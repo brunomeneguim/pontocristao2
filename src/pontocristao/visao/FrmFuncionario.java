@@ -2,6 +2,10 @@ package pontocristao.visao;
 
 import java.awt.*;
 import javax.swing.JOptionPane;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import pontocristao.modelo.Funcionario;
+import pontocristao.util.HibernateUtil;
 
 /**
  *
@@ -20,6 +24,7 @@ public class FrmFuncionario extends javax.swing.JDialog {
         BtnEditar.setEnabled(false);
         BtnExcluir.setEnabled(false);
 
+        Atualizar(0);
     }
 
     private static Frame frame;
@@ -29,6 +34,29 @@ public class FrmFuncionario extends javax.swing.JDialog {
         FrmFuncionario frmFuncionario = new FrmFuncionario(parent, true);
         frmFuncionario.setVisible(true);
         return frmFuncionario;
+    }
+    
+     
+    private void Atualizar(long id) {
+        Session sessao = HibernateUtil.getSessionFactory().openSession();
+        
+        if (id > 0) {
+            
+            String sql = "SELECT * FROM Funcionario WHERE id = " + id;
+            Query q = sessao.createSQLQuery(sql).addEntity(Funcionario.class);
+            java.util.List resultados = q.list();
+            
+            //atualizar na lista somente o funcionario com esse id
+            
+            
+        } else {
+            String sql = "SELECT * FROM Funcionario";
+            Query q = sessao.createSQLQuery(sql).addEntity(Funcionario.class);
+            java.util.List resultados = q.list();
+            
+            int zzz = 0;
+            //Adicionar a lista na tela
+        }
     }
 
     /**
@@ -136,7 +164,7 @@ public class FrmFuncionario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoActionPerformed
-        FrmCadastrarFuncionario frmCadastrarFuncionario = FrmCadastrarFuncionario.Mostrar(frame);
+        FrmCadastrarFuncionario frmCadastrarFuncionario = FrmCadastrarFuncionario.Mostrar(frame, 0);
     }//GEN-LAST:event_BtnNovoActionPerformed
 
     private void BtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSairActionPerformed

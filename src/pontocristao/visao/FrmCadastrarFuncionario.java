@@ -3,6 +3,7 @@ package pontocristao.visao;
 import java.awt.*;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
+import pontocristao.controle.ControleFuncionario;
 import pontocristao.util.CepWebService;
 import pontocristao.util.Utilidades;
 
@@ -12,7 +13,7 @@ import pontocristao.util.Utilidades;
  */
 public class FrmCadastrarFuncionario extends javax.swing.JDialog {
 
-    public FrmCadastrarFuncionario(java.awt.Frame parent, boolean modal) {
+    public FrmCadastrarFuncionario(java.awt.Frame parent, boolean modal, long id) {
         super(parent, modal);
         initComponents();
 
@@ -23,17 +24,18 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
         txtLogin.requestFocus();
         txtCodigo.setEnabled(false);
         jcDataAdmissao.setEnabled(false);
-        
 
         Utilidades utilidades = new Utilidades();
         Mascara();
+        InicializarControle(id);
     }
 
     private static Frame frame;
-
-    public static FrmCadastrarFuncionario Mostrar(java.awt.Frame parent) {
+    private ControleFuncionario controle;
+    
+    public static FrmCadastrarFuncionario Mostrar(java.awt.Frame parent, long id) {
         frame = parent;
-        FrmCadastrarFuncionario frmCadastrarFuncionario = new FrmCadastrarFuncionario(parent, true);
+        FrmCadastrarFuncionario frmCadastrarFuncionario = new FrmCadastrarFuncionario(parent, true, id);
         frmCadastrarFuncionario.setVisible(true);
         return frmCadastrarFuncionario;
     }
@@ -57,6 +59,31 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
 
         mascara = new Utilidades().setMascara("#########");
         mascara.install(txtRg);
+    }
+    
+    private void InicializarControle(long id) {
+        this.controle = new ControleFuncionario();
+        
+        if (id > 0) {
+            Exception erro = this.controle.RecuperarFuncionario(id);
+            
+            if (erro != null) {
+                Utilidades.MostrarMensagemErro(erro);
+                //fechar a janela com um resultado falso
+            } else {
+                AtualizarCampos();
+            }
+        }
+    }
+    
+    private void AtualizarCampos() {
+        txtBairro.setText(controle.getFuncionario().getEndereco().getBairro());
+        jComboEstado.setSelectedItem(controle.getFuncionario().getEndereco().getEstado());
+        jcDataNascimento.setDate(controle.getFuncionario().getDataNascimento());
+    }
+    
+    private void AtualizarModelo() {
+        controle.getFuncionario().getEndereco().setBairro(txtBairro.getText());
     }
 
     /**
@@ -137,9 +164,7 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
             .addGroup(pInformacoesSistemaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pInformacoesSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pInformacoesSistemaLayout.createSequentialGroup()
-                        .addComponent(lLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtLogin))
                 .addGap(18, 18, 18)
                 .addGroup(pInformacoesSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,11 +252,9 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
                             .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
                                 .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
                                         .addComponent(lCodigo)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addGap(0, 236, Short.MAX_VALUE))
+                                    .addComponent(txtCodigo))
                                 .addGap(18, 18, 18)
                                 .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
@@ -256,8 +279,7 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lDataNascimento)
-                            .addComponent(jcDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jcDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         pInformacoesPessoaisLayout.setVerticalGroup(
@@ -468,7 +490,16 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
             JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
             botoes, botoes[0]);
         if (resposta == 0) {
-            this.dispose();
+            AtualizarModelo();
+            
+            Exception erro = controle.Salvar();
+            
+            if (erro != null) {
+                Utilidades.MostrarMensagemErro(erro);
+            } else {
+                this.dispose();
+                
+            }
         }
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
@@ -489,6 +520,15 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Não foi possivel encontrar o endereço", "Procura do endereço", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+    
+    @Override
+    public void dispose() {
+        if (controle != null) {
+            controle.Dispose();
+        }
+        
+        super.dispose();
     }
 
     /**
@@ -521,7 +561,7 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FrmCadastrarFuncionario dialog = new FrmCadastrarFuncionario(new javax.swing.JFrame(), true);
+                FrmCadastrarFuncionario dialog = new FrmCadastrarFuncionario(new javax.swing.JFrame(), true, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

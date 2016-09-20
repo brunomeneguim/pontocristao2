@@ -1,5 +1,6 @@
 package pontocristao.util;
 
+import javax.swing.JOptionPane;
 import javax.swing.text.*;
 
 /**
@@ -17,4 +18,7 @@ public class Utilidades {
         return mask;
     }
 
+    public static void MostrarMensagemErro(Exception erro) {
+        JOptionPane.showMessageDialog(null, "Erro", erro.getMessage(), 0);
+    }
 }

@@ -1,6 +1,8 @@
 package pontocristao.controle;
 
+import org.hibernate.*;
 import pontocristao.modelo.*;
+import pontocristao.util.HibernateUtil;
 
 /**
  *
@@ -8,13 +10,50 @@ import pontocristao.modelo.*;
  */
 public abstract class ControleBase {
 
-    public Exception Salvar(ModeloBase modelo) {
-        Boolean salvou = true;
+    private Session sessao;
 
-        if (salvou) {
-            return null;
-        } else {
-            return new Exception("Não foi possível salvar");
+    public Session getSessao() {
+        return sessao;
+    }
+    private ModeloBase modelo;
+
+    public ModeloBase getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(ModeloBase modelo) {
+        this.modelo = modelo;
+    }
+    
+    public ControleBase()
+    {
+        sessao = HibernateUtil.getSessionFactory().openSession();
+    }
+    
+    public Exception Salvar(ModeloBase modelo) {
+        Exception erro = null;
+        
+        try {
+            
+            Transaction transacao = sessao.getTransaction();
+            transacao.begin();
+            
+            sessao.saveOrUpdate(modelo);
+            
+            transacao.commit();
+            
+        } catch (Exception e) {
+            erro = e;
+        } finally {
+            return erro;
+        }
+    }
+    
+    public void Dispose() {
+        if (sessao != null) {
+            if (sessao.isOpen()) {
+                sessao.close();
+            }
         }
     }
 
