@@ -54,7 +54,6 @@ public class FrmFuncionario extends javax.swing.JDialog {
             Query q = sessao.createSQLQuery(sql).addEntity(Funcionario.class);
             java.util.List resultados = q.list();
             
-            int zzz = 0;
             //Adicionar a lista na tela
         }
     }
