@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 public class Funcionario extends ModeloBase {
 
-    @Column(nullable = false)
+    @Column(nullable = false)    
     private String nome;
 
     @Column(nullable = false)
@@ -30,7 +30,6 @@ public class Funcionario extends ModeloBase {
     @Column(nullable = false)
     private Date dataNascimento;
 
-    @Column(nullable = false)
     private Date dataCadastro;
 
     private String email;

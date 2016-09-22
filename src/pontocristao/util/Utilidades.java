@@ -19,6 +19,6 @@ public class Utilidades {
     }
 
     public static void MostrarMensagemErro(Exception erro) {
-        JOptionPane.showMessageDialog(null, "Erro", erro.getMessage(), 0);
+        JOptionPane.showMessageDialog(null, "Não foi possível realizar a ação!", erro.getMessage(), 0);
     }
 }

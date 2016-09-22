@@ -12,7 +12,7 @@ public abstract class ModeloBase implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id = 0L;
 
     @Column(nullable = false, columnDefinition = "tinyint default false")
     private Boolean excluido = false;

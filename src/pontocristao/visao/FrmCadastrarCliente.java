@@ -28,6 +28,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         txtRg.setEnabled(false);
         txtCnpj.setEnabled(false);
         jComboSexo.setEnabled(false);
+        
 
         Utilidades utilidades = new Utilidades();
         Mascara();
@@ -75,9 +76,6 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
         jButtonGroupTipoCliente = new javax.swing.ButtonGroup();
         pCadastroCliente = new javax.swing.JPanel();
-        pTipoCliente = new javax.swing.JPanel();
-        jRadioPessoaJuridica = new javax.swing.JRadioButton();
-        jRadioPessoaFisica = new javax.swing.JRadioButton();
         pInformacoesPessoais = new javax.swing.JPanel();
         lDataCadastro = new javax.swing.JLabel();
         lTelefone = new javax.swing.JLabel();
@@ -101,6 +99,8 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         txtCnpj = new javax.swing.JFormattedTextField();
         txtTelefone = new javax.swing.JFormattedTextField();
         txtCelular = new javax.swing.JFormattedTextField();
+        jRadioPessoaJuridica = new javax.swing.JRadioButton();
+        jRadioPessoaFisica = new javax.swing.JRadioButton();
         pEndereco = new javax.swing.JPanel();
         txtNumero = new javax.swing.JTextField();
         jComboEstado = new javax.swing.JComboBox<>();
@@ -132,45 +132,6 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
         pCadastroCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        pTipoCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
-
-        jButtonGroupTipoCliente.add(jRadioPessoaJuridica);
-        jRadioPessoaJuridica.setText("Pessoa Jurídica");
-        jRadioPessoaJuridica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioPessoaJuridicaActionPerformed(evt);
-            }
-        });
-
-        jButtonGroupTipoCliente.add(jRadioPessoaFisica);
-        jRadioPessoaFisica.setText("Pessoa Física");
-        jRadioPessoaFisica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioPessoaFisicaActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pTipoClienteLayout = new javax.swing.GroupLayout(pTipoCliente);
-        pTipoCliente.setLayout(pTipoClienteLayout);
-        pTipoClienteLayout.setHorizontalGroup(
-            pTipoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pTipoClienteLayout.createSequentialGroup()
-                .addGap(309, 309, 309)
-                .addComponent(jRadioPessoaFisica)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioPessoaJuridica)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pTipoClienteLayout.setVerticalGroup(
-            pTipoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTipoClienteLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pTipoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioPessoaJuridica)
-                    .addComponent(jRadioPessoaFisica))
-                .addContainerGap())
-        );
-
         pInformacoesPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações Pessoais"));
 
         lDataCadastro.setText("Data do Cadastro");
@@ -197,74 +158,102 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
         lCnpj.setText("CNPJ");
 
+        jButtonGroupTipoCliente.add(jRadioPessoaJuridica);
+        jRadioPessoaJuridica.setText("Pessoa Jurídica");
+        jRadioPessoaJuridica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioPessoaJuridicaActionPerformed(evt);
+            }
+        });
+
+        jButtonGroupTipoCliente.add(jRadioPessoaFisica);
+        jRadioPessoaFisica.setSelected(true);
+        jRadioPessoaFisica.setText("Pessoa Física");
+        jRadioPessoaFisica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioPessoaFisicaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pInformacoesPessoaisLayout = new javax.swing.GroupLayout(pInformacoesPessoais);
         pInformacoesPessoais.setLayout(pInformacoesPessoaisLayout);
         pInformacoesPessoaisLayout.setHorizontalGroup(
             pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
-                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pInformacoesPessoaisLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                                .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lCnpj))
-                                .addGap(22, 22, 22)
-                                .addComponent(lSexo)
-                                .addGap(259, 259, 259))
+                        .addContainerGap()
+                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pInformacoesPessoaisLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                                        .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lCnpj))
+                                        .addGap(22, 22, 22)
+                                        .addComponent(lSexo)
+                                        .addGap(259, 259, 259))
                                     .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
-                                        .addComponent(lEmail)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                                                .addComponent(lEmail)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(txtEmail)))))
+                            .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lCpf)
+                                            .addComponent(lTelefone))
+                                        .addGap(126, 126, 126)
+                                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lCelular)
+                                            .addComponent(lRg))
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(txtEmail)))))
-                    .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
-                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
-                                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lCpf)
-                                    .addComponent(lTelefone))
-                                .addGap(126, 126, 126)
-                                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lCelular)
-                                    .addComponent(lRg))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
-                                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                                                .addComponent(lCodigo)
+                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lNome)
+                                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
-                                        .addComponent(lCodigo)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jComboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
-                                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lNome)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
-                                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lDataCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lDataNascimento)
-                            .addComponent(jcDataCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                            .addComponent(jcDataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lDataCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lDataNascimento)
+                                    .addComponent(jcDataCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                                    .addComponent(jcDataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
+                        .addGap(304, 304, 304)
+                        .addComponent(jRadioPessoaFisica)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioPessoaJuridica)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pInformacoesPessoaisLayout.setVerticalGroup(
             pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioPessoaJuridica)
+                    .addComponent(jRadioPessoaFisica))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lNome)
@@ -410,19 +399,15 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
             pCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pCadastroClienteLayout.createSequentialGroup()
                 .addGroup(pCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pEndereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pTipoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pInformacoesPessoais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pInformacoesPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pEndereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pCadastroClienteLayout.setVerticalGroup(
             pCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pCadastroClienteLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pTipoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pInformacoesPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -503,13 +488,13 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addComponent(pCadastroCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pCadastroDependente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(BtnConfirmar)
                         .addGap(18, 18, 18)
-                        .addComponent(BtnCancelar))
-                    .addComponent(pCadastroCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pCadastroDependente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(BtnCancelar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -519,7 +504,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
                 .addComponent(pCadastroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pCadastroDependente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -563,6 +548,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         jComboSexo.setEnabled(true);
         txtCnpj.setText("");
         txtCnpj.setEnabled(false);
+        jcDataNascimento.setEnabled(true);
     }//GEN-LAST:event_jRadioPessoaFisicaActionPerformed
 
     private void jRadioPessoaJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioPessoaJuridicaActionPerformed
@@ -573,6 +559,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         txtRg.setEnabled(false);
         jComboSexo.setEnabled(false);
         jComboSexo.setSelectedItem("Feminino");
+        jcDataNascimento.setEnabled(false);
     }//GEN-LAST:event_jRadioPessoaJuridicaActionPerformed
 
     private void BtnConsultarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarCepActionPerformed
@@ -680,7 +667,6 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     private javax.swing.JPanel pCadastroDependente;
     private javax.swing.JPanel pEndereco;
     private javax.swing.JPanel pInformacoesPessoais;
-    private javax.swing.JPanel pTipoCliente;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCelular;
     private javax.swing.JFormattedTextField txtCep;

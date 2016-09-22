@@ -1,9 +1,12 @@
 package pontocristao.visao;
 
 import java.awt.*;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import pontocristao.controle.ControleFuncionario;
 import pontocristao.modelo.Funcionario;
 import pontocristao.util.HibernateUtil;
 
@@ -13,18 +16,52 @@ import pontocristao.util.HibernateUtil;
  */
 public class FrmFuncionario extends javax.swing.JDialog {
 
+    java.util.List<Funcionario> funcionario = (java.util.List<Funcionario>) null;
+
+    String[] colunas = new String[]{"Código", "Nome", "Telefone", "Celular", "CPF", "RG"};
+    DefaultTableModel modeloTabela = new DefaultTableModel(null, colunas) {
+        @Override
+        public boolean isCellEditable(int row, int col) {
+            return false;
+        }
+    };
+
     public FrmFuncionario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
+        ControleFuncionario controleFuncionario = new ControleFuncionario();
+
         Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
         this.setBounds(bounds);
-
         txtPesquisar.requestFocus();
         BtnEditar.setEnabled(false);
         BtnExcluir.setEnabled(false);
 
+        jTabelaFuncionario.setModel(modeloTabela);
+        // Mudar tamanho de cada coluna da tabela
+        jTabelaFuncionario.getColumnModel().getColumn(0).setPreferredWidth(2);
+        jTabelaFuncionario.getColumnModel().getColumn(1).setPreferredWidth(150);
+        jTabelaFuncionario.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTabelaFuncionario.getColumnModel().getColumn(3).setPreferredWidth(100);
+        jTabelaFuncionario.getColumnModel().getColumn(4).setPreferredWidth(100);
+        jTabelaFuncionario.getColumnModel().getColumn(5).setPreferredWidth(100);
+        
+        ListarTabela(controleFuncionario);
+        
         Atualizar(0);
+        
+        
+    }
+
+    public void ListarTabela(ControleFuncionario funcionario) {
+        ControleFuncionario controleFuncionario = new ControleFuncionario();
+
+        try {
+            java.util.List<Funcionario> Funcionarios = controleFuncionario.RetornarFuncionarios();
+        } catch (Exception e) {
+        }
+
     }
 
     private static Frame frame;
@@ -35,25 +72,22 @@ public class FrmFuncionario extends javax.swing.JDialog {
         frmFuncionario.setVisible(true);
         return frmFuncionario;
     }
-    
-     
+
     private void Atualizar(long id) {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
-        
+
         if (id > 0) {
-            
+
             String sql = "SELECT * FROM Funcionario WHERE id = " + id;
             Query q = sessao.createSQLQuery(sql).addEntity(Funcionario.class);
             java.util.List resultados = q.list();
-            
+
             //atualizar na lista somente o funcionario com esse id
-            
-            
         } else {
             String sql = "SELECT * FROM Funcionario";
             Query q = sessao.createSQLQuery(sql).addEntity(Funcionario.class);
             java.util.List resultados = q.list();
-            
+
             //Adicionar a lista na tela
         }
     }
@@ -73,7 +107,7 @@ public class FrmFuncionario extends javax.swing.JDialog {
         txtPesquisar = new javax.swing.JTextField();
         BtnPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableFuncionario = new javax.swing.JTable();
+        jTabelaFuncionario = new javax.swing.JTable();
         BtnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -97,7 +131,7 @@ public class FrmFuncionario extends javax.swing.JDialog {
         BtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnPesquisar.png"))); // NOI18N
         BtnPesquisar.setText("Pesquisar");
 
-        jTableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
+        jTabelaFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -108,7 +142,7 @@ public class FrmFuncionario extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTableFuncionario);
+        jScrollPane1.setViewportView(jTabelaFuncionario);
 
         BtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnSair.png"))); // NOI18N
         BtnSair.setText("Sair");
@@ -228,7 +262,7 @@ public class FrmFuncionario extends javax.swing.JDialog {
     private javax.swing.JButton BtnPesquisar;
     private javax.swing.JButton BtnSair;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableFuncionario;
+    private javax.swing.JTable jTabelaFuncionario;
     private javax.swing.JTextField txtPesquisar;
     // End of variables declaration//GEN-END:variables
 }

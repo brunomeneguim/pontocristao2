@@ -203,7 +203,7 @@ public class PopularBancoTeste {
         cliente.setEmail("clientepessoafisica@teste.com.br");
         cliente.setNome("Cliente Pessoa Fisica");
         cliente.setRg("12345678");
-        cliente.setSexo(Sexo.MASCULINO);
+        cliente.setSexo(Sexo.Masculino);
         cliente.setTelefone("4230350011");
         cliente.setTotalLocacoes(1);
 
@@ -351,7 +351,7 @@ public class PopularBancoTeste {
         funcionario.setNome("Funcionário Teste");
         funcionario.setRg("32132196");
         funcionario.setSenha("1234");
-        funcionario.setSexo(Sexo.MASCULINO);
+        funcionario.setSexo(Sexo.Masculino);
         funcionario.setTelefoneResidencial("4230304561");
 
         return funcionario;
