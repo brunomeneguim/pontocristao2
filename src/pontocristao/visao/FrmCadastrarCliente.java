@@ -1,8 +1,11 @@
 package pontocristao.visao;
 
 import java.awt.*;
+import java.util.Date;
 import javax.swing.*;
 import javax.swing.text.*;
+import pontocristao.controle.ControleCliente;
+import pontocristao.modelo.Sexo;
 import pontocristao.util.*;
 
 /**
@@ -11,7 +14,7 @@ import pontocristao.util.*;
  */
 public class FrmCadastrarCliente extends javax.swing.JDialog {
 
-    public FrmCadastrarCliente(java.awt.Frame parent, boolean modal) {
+    public FrmCadastrarCliente(java.awt.Frame parent, boolean modal, long id) {
         super(parent, modal);
         initComponents();
 
@@ -28,20 +31,39 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         txtRg.setEnabled(false);
         txtCnpj.setEnabled(false);
         jComboSexo.setEnabled(false);
-        
 
         Utilidades utilidades = new Utilidades();
         Mascara();
+        InicializarControle(id);
+        teste();
 
     }
-
     private static Frame frame;
+    private ControleCliente controle;
 
-    public static FrmCadastrarCliente Mostrar(java.awt.Frame parent) {
+    public static FrmCadastrarCliente Mostrar(java.awt.Frame parent, long id) {
         frame = parent;
-        FrmCadastrarCliente frmCadastrarCliente = new FrmCadastrarCliente(parent, true);
+        FrmCadastrarCliente frmCadastrarCliente = new FrmCadastrarCliente(parent, true, id);
         frmCadastrarCliente.setVisible(true);
         return frmCadastrarCliente;
+    }
+
+    public void teste() {
+        jcDataNascimento.setDate(new Date());
+        jcDataCadastro.setDate(new Date());
+        txtNome.setText("Bruno");
+        txtCpf.setText("07735781962");
+        txtRg.setText("124292352");
+        txtCnpj.setText("123125481232");
+        txtTelefone.setText("4236265335");
+        txtCelular.setText("4299227422");
+        txtEmail.setText("brunomeneguim@hotmail.com");
+        txtCep.setText("85010300");
+        txtRua.setText("Quintino Bocaiuva");
+        txtNumero.setText("947");
+        txtBairro.setText("Centro");
+        txtCidade.setText("Guarapuava");
+        txtComplemento.setText("Blah");
     }
 
     public void Mascara() {
@@ -63,6 +85,58 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
         mascara = new Utilidades().setMascara("#########");
         mascara.install(txtRg);
+    }
+
+    private void InicializarControle(long id) {
+        this.controle = new ControleCliente();
+
+        if (id > 0) {
+            Exception erro = this.controle.RecuperarCliente(id);
+
+            if (erro != null) {
+                Utilidades.MostrarMensagemErro(erro);
+                //fechar a janela com um resultado falso
+            } else {
+                AtualizarCampos();
+            }
+        }
+    }
+
+    private void AtualizarCampos() {
+        txtNome.setText(controle.getCliente().getNome());
+        txtCpf.setText(controle.getCliente().getCpf());
+        txtRg.setText(controle.getCliente().getRg());
+        txtCnpj.setText(controle.getCliente().getCnpj());
+        jComboSexo.setSelectedItem(controle.getCliente().getSexo());
+        jcDataNascimento.setDate(controle.getCliente().getDataNascimento());
+        txtTelefone.setText(controle.getCliente().getTelefoneResidencial());
+        txtCelular.setText(controle.getCliente().getCelular());
+        txtEmail.setText(controle.getCliente().getEmail());
+        txtCep.setText(controle.getCliente().getEndereco().getCep());
+        txtRua.setText(controle.getCliente().getEndereco().getRua());
+        txtNumero.setText(controle.getCliente().getEndereco().getNumero());
+        jComboEstado.setSelectedItem(controle.getCliente().getEndereco().getEstado());
+        txtBairro.setText(controle.getCliente().getEndereco().getBairro());
+        txtCidade.setText(controle.getCliente().getEndereco().getCidade());
+        txtComplemento.setText(controle.getCliente().getEndereco().getComplemento());
+    }
+
+    private void AtualizarModelo() {
+        controle.getCliente().setNome(txtNome.getText());
+        controle.getCliente().setCpf(txtCpf.getText());
+        controle.getCliente().setRg(txtRg.getText());
+        controle.getCliente().setSexo(Sexo.valueOf(jComboSexo.getSelectedItem().toString()));
+        controle.getCliente().setDataNascimento(jcDataNascimento.getDate());
+        controle.getCliente().setTelefoneResidencial(txtTelefone.getText());
+        controle.getCliente().setCelular(txtCelular.getText());
+        controle.getCliente().setEmail(txtEmail.getText());
+        controle.getCliente().getEndereco().setCep(txtCep.getText());
+        controle.getCliente().getEndereco().setRua(txtRua.getText());
+        controle.getCliente().getEndereco().setNumero(txtNumero.getText());
+        controle.getCliente().getEndereco().setEstado(jComboEstado.getSelectedItem().toString());
+        controle.getCliente().getEndereco().setBairro(txtBairro.getText());
+        controle.getCliente().getEndereco().setCidade(txtCidade.getText());
+        controle.getCliente().getEndereco().setComplemento(txtComplemento.getText());
     }
 
     /**
@@ -617,7 +691,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FrmCadastrarCliente dialog = new FrmCadastrarCliente(new javax.swing.JFrame(), true);
+                FrmCadastrarCliente dialog = new FrmCadastrarCliente(new javax.swing.JFrame(), true, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

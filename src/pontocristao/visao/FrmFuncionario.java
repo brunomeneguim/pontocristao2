@@ -1,7 +1,6 @@
 package pontocristao.visao;
 
 import java.awt.*;
-import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
