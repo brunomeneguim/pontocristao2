@@ -21,7 +21,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         //Abrir centralizado
         this.setLocationRelativeTo(null);
 
-        //Dinâmica dos Botões e campos
+        //Dinâmica dos botões e campos
         txtNome.requestFocus();
         txtCodigo.setEnabled(false);
         jcDataCadastro.setEnabled(false);
