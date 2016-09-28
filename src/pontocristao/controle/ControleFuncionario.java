@@ -30,6 +30,24 @@ public class ControleFuncionario extends ControleBase {
         return (List<Funcionario>) q.list();
     }
 
+    public List<Funcionario> RetornarFuncionarios(String sqlWhere) {
+        String sql = "SELECT * FROM Funcionario " + sqlWhere;
+        Query q = this.getSessao().createSQLQuery(sql).addEntity(Funcionario.class);
+        return (List<Funcionario>) q.list();
+
+        //testar =>
+//        select *
+//      ,case when nome like '%test%' then 1
+//            when telefoneResidencial like '%test%' then 2
+//            when DataNascimento like '%test%' then 3
+//       end as priority
+//  from pontocristao.funcionario
+// where nome like '%test%'
+//    or telefoneResidencial like '%test%'
+//    or DataNascimento like '%test%'
+// order by priority
+    }
+
     public Exception RecuperarFuncionario(long id) {
         String sql = "SELECT * FROM Funcionario WHERE id = " + id;
         Exception erro = null;

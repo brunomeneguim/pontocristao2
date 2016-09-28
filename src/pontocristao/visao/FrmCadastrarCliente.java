@@ -104,12 +104,12 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
     private void AtualizarCampos() {
         txtNome.setText(controle.getCliente().getNome());
-        txtCpf.setText(controle.getCliente().getCpf());
-        txtRg.setText(controle.getCliente().getRg());
-        txtCnpj.setText(controle.getCliente().getCnpj());
-        jComboSexo.setSelectedItem(controle.getCliente().getSexo());
-        jcDataNascimento.setDate(controle.getCliente().getDataNascimento());
-        txtTelefone.setText(controle.getCliente().getTelefoneResidencial());
+//        txtCpf.setText(controle.getCliente().getCpf());
+//        txtRg.setText(controle.getCliente().getRg());
+//        txtCnpj.setText(controle.getCliente().getCnpj());
+//        jComboSexo.setSelectedItem(controle.getCliente().getSexo());
+//        jcDataNascimento.setDate(controle.getCliente().getDataNascimento());
+//        txtTelefone.setText(controle.getCliente().getTelefoneResidencial());
         txtCelular.setText(controle.getCliente().getCelular());
         txtEmail.setText(controle.getCliente().getEmail());
         txtCep.setText(controle.getCliente().getEndereco().getCep());
@@ -123,11 +123,11 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
     private void AtualizarModelo() {
         controle.getCliente().setNome(txtNome.getText());
-        controle.getCliente().setCpf(txtCpf.getText());
-        controle.getCliente().setRg(txtRg.getText());
-        controle.getCliente().setSexo(Sexo.valueOf(jComboSexo.getSelectedItem().toString()));
-        controle.getCliente().setDataNascimento(jcDataNascimento.getDate());
-        controle.getCliente().setTelefoneResidencial(txtTelefone.getText());
+//        controle.getCliente().setCpf(txtCpf.getText());
+//        controle.getCliente().setRg(txtRg.getText());
+//        controle.getCliente().setSexo(Sexo.valueOf(jComboSexo.getSelectedItem().toString()));
+//        controle.getCliente().setDataNascimento(jcDataNascimento.getDate());
+//        controle.getCliente().setTelefoneResidencial(txtTelefone.getText());
         controle.getCliente().setCelular(txtCelular.getText());
         controle.getCliente().setEmail(txtEmail.getText());
         controle.getCliente().getEndereco().setCep(txtCep.getText());

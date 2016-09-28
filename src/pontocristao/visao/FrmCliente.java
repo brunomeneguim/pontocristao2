@@ -141,11 +141,11 @@ public class FrmCliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoActionPerformed
-        FrmCadastrarCliente frmCadastrarCliente = FrmCadastrarCliente.Mostrar(frame);
+        //FrmCadastrarCliente frmCadastrarCliente = FrmCadastrarCliente.Mostrar(frame);
     }//GEN-LAST:event_BtnNovoActionPerformed
 
     private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
-        FrmCadastrarCliente frmCadastrarCliente = FrmCadastrarCliente.Mostrar(frame);
+        //FrmCadastrarCliente frmCadastrarCliente = FrmCadastrarCliente.Mostrar(frame);
 
     }//GEN-LAST:event_BtnEditarActionPerformed
 

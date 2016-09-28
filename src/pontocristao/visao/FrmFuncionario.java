@@ -3,11 +3,9 @@ package pontocristao.visao;
 import java.awt.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.hibernate.Query;
-import org.hibernate.Session;
 import pontocristao.controle.ControleFuncionario;
 import pontocristao.modelo.Funcionario;
-import pontocristao.util.HibernateUtil;
+import pontocristao.util.Utilidades;
 
 /**
  *
@@ -15,54 +13,8 @@ import pontocristao.util.HibernateUtil;
  */
 public class FrmFuncionario extends javax.swing.JDialog {
 
-    java.util.List<Funcionario> funcionario = (java.util.List<Funcionario>) null;
-
-    String[] colunas = new String[]{"Código", "Nome", "Telefone", "Celular", "CPF", "RG"};
-    DefaultTableModel modeloTabela = new DefaultTableModel(null, colunas) {
-        @Override
-        public boolean isCellEditable(int row, int col) {
-            return false;
-        }
-    };
-
-    public FrmFuncionario(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-
-        ControleFuncionario controleFuncionario = new ControleFuncionario();
-
-        Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-        this.setBounds(bounds);
-        txtPesquisar.requestFocus();
-        BtnEditar.setEnabled(false);
-        BtnExcluir.setEnabled(false);
-
-        jTabelaFuncionario.setModel(modeloTabela);
-        // Mudar tamanho de cada coluna da tabela
-        jTabelaFuncionario.getColumnModel().getColumn(0).setPreferredWidth(2);
-        jTabelaFuncionario.getColumnModel().getColumn(1).setPreferredWidth(150);
-        jTabelaFuncionario.getColumnModel().getColumn(2).setPreferredWidth(100);
-        jTabelaFuncionario.getColumnModel().getColumn(3).setPreferredWidth(100);
-        jTabelaFuncionario.getColumnModel().getColumn(4).setPreferredWidth(100);
-        jTabelaFuncionario.getColumnModel().getColumn(5).setPreferredWidth(100);
-        
-        ListarTabela(controleFuncionario);
-        
-        Atualizar(0);
-        
-        
-    }
-
-    public void ListarTabela(ControleFuncionario funcionario) {
-        ControleFuncionario controleFuncionario = new ControleFuncionario();
-
-        try {
-            java.util.List<Funcionario> Funcionarios = controleFuncionario.RetornarFuncionarios();
-        } catch (Exception e) {
-        }
-
-    }
-
+    private DefaultTableModel modeloTabela;
+    private final ControleFuncionario controleFuncionario = new ControleFuncionario();
     private static Frame frame;
 
     public static FrmFuncionario Mostrar(java.awt.Frame parent) {
@@ -72,25 +24,93 @@ public class FrmFuncionario extends javax.swing.JDialog {
         return frmFuncionario;
     }
 
-    private void Atualizar(long id) {
-        Session sessao = HibernateUtil.getSessionFactory().openSession();
+    public FrmFuncionario(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        AjustarTabela();
 
-        if (id > 0) {
+        Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        this.setBounds(bounds);
 
-            String sql = "SELECT * FROM Funcionario WHERE id = " + id;
-            Query q = sessao.createSQLQuery(sql).addEntity(Funcionario.class);
-            java.util.List resultados = q.list();
+        txtPesquisar.requestFocus();
 
-            //atualizar na lista somente o funcionario com esse id
-        } else {
-            String sql = "SELECT * FROM Funcionario";
-            Query q = sessao.createSQLQuery(sql).addEntity(Funcionario.class);
-            java.util.List resultados = q.list();
+        BtnEditar.setEnabled(false);
+        BtnExcluir.setEnabled(false);
 
-            //Adicionar a lista na tela
+        ListarFuncionarios();
+    }
+
+    private void AjustarTabela() {
+        String[] colunas = new String[]{"Nome", "Telefone", "Celular", "E-mail", "Data de Nascimento"};
+        modeloTabela = new DefaultTableModel(null, colunas) {
+            @Override
+            public boolean isCellEditable(int row, int col) {
+                return false;
+            }
+        };
+
+        jTabelaFuncionario.setModel(modeloTabela);
+    }
+
+    public void AtualizarTabela(java.util.List<Funcionario> funcionarios) {
+        while (modeloTabela.getRowCount() > 0) {
+            modeloTabela.removeRow(0);
+        }
+
+        for (Funcionario funcionario : funcionarios) {
+            modeloTabela.addRow(new Object[]{
+                funcionario.getNome(),
+                funcionario.getTelefoneResidencial(),
+                funcionario.getCelular(),
+                funcionario.getEmail(),
+                funcionario.getDataNascimento()
+            });
         }
     }
 
+    public void ListarFuncionarios() {
+        try {
+            AtualizarTabela(controleFuncionario.RetornarFuncionarios());
+        } catch (Exception e) {
+            Utilidades.MostrarMensagemErro(e);
+        }
+    }
+
+    public void ListarFuncionarios(String pesquisa) {
+        if (pesquisa != null && pesquisa.length() > 0) {
+            String texto = txtPesquisar.getText();
+            String sqlWhere = "WHERE "
+                    + "nome like '%" + texto + "%' OR "
+                    + "telefoneResidencial like '%" + texto + "%' OR "
+                    + "celular like '%" + texto + "%' OR "
+                    + "email like '%" + texto + "%' OR "
+                    + "dataNascimento like '%" + texto + "%'";
+
+            AtualizarTabela(controleFuncionario.RetornarFuncionarios(sqlWhere));
+
+        } else {
+            ListarFuncionarios();
+        }
+    }
+
+//    private void Atualizar(long id) {
+//        Session sessao = HibernateUtil.getSessionFactory().openSession();
+//
+//        if (id > 0) {
+//
+//            String sql = "SELECT * FROM Funcionario WHERE id = " + id;
+//            Query q = sessao.createSQLQuery(sql).addEntity(Funcionario.class);
+//            java.util.List resultados = q.list();
+//
+//            //atualizar na lista somente o funcionario com esse id
+//        } else {
+//            String sql = "SELECT * FROM Funcionario";
+//            Query q = sessao.createSQLQuery(sql).addEntity(Funcionario.class);
+//            java.util.List resultados = q.list();
+//
+//            //Adicionar a lista na tela
+//        }
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,7 +127,6 @@ public class FrmFuncionario extends javax.swing.JDialog {
         BtnPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabelaFuncionario = new javax.swing.JTable();
-        BtnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Funcionario");
@@ -129,6 +148,11 @@ public class FrmFuncionario extends javax.swing.JDialog {
 
         BtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnPesquisar.png"))); // NOI18N
         BtnPesquisar.setText("Pesquisar");
+        BtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPesquisarActionPerformed(evt);
+            }
+        });
 
         jTabelaFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,15 +166,6 @@ public class FrmFuncionario extends javax.swing.JDialog {
             }
         ));
         jScrollPane1.setViewportView(jTabelaFuncionario);
-
-        BtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnSair.png"))); // NOI18N
-        BtnSair.setText("Sair");
-        BtnSair.setPreferredSize(new java.awt.Dimension(139, 65));
-        BtnSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnSairActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,10 +184,7 @@ public class FrmFuncionario extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                         .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnPesquisar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(BtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(BtnPesquisar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -186,9 +198,7 @@ public class FrmFuncionario extends javax.swing.JDialog {
                     .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
 
@@ -199,17 +209,9 @@ public class FrmFuncionario extends javax.swing.JDialog {
         FrmCadastrarFuncionario frmCadastrarFuncionario = FrmCadastrarFuncionario.Mostrar(frame, 0);
     }//GEN-LAST:event_BtnNovoActionPerformed
 
-    private void BtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSairActionPerformed
-        Object[] botoes = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja sair da lista de Clientes? ",
-                "Confirmação",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                botoes, botoes[0]);
-        if (resposta == 0) {
-            this.dispose();
-        }
-    }//GEN-LAST:event_BtnSairActionPerformed
+    private void BtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPesquisarActionPerformed
+        ListarFuncionarios(txtPesquisar.getText());
+    }//GEN-LAST:event_BtnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,7 +261,6 @@ public class FrmFuncionario extends javax.swing.JDialog {
     private javax.swing.JButton BtnExcluir;
     private javax.swing.JButton BtnNovo;
     private javax.swing.JButton BtnPesquisar;
-    private javax.swing.JButton BtnSair;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTabelaFuncionario;
     private javax.swing.JTextField txtPesquisar;
