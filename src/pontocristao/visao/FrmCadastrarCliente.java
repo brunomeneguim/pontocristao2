@@ -68,23 +68,12 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
     public void Mascara() {
         //Setando mascáras para campos 
-        MaskFormatter mascara = new Utilidades().setMascara("#####-###");
-        mascara.install(txtCep);
-
-        mascara = new Utilidades().setMascara("##.###.###/####-##");
-        mascara.install(txtCnpj);
-
-        mascara = new Utilidades().setMascara("(##)####-####");
-        mascara.install(txtTelefone);
-
-        mascara = new Utilidades().setMascara("(##)####-####");
-        mascara.install(txtCelular);
-
-        mascara = new Utilidades().setMascara("###.###.###-##");
-        mascara.install(txtCpf);
-
-        mascara = new Utilidades().setMascara("#########");
-        mascara.install(txtRg);
+        Utilidades.setMascara("#####-###", txtCep);
+        Utilidades.setMascara("##.###.###/####-##", txtCnpj);
+        Utilidades.setMascara("(##)####-####", txtTelefone);
+        Utilidades.setMascara("(##)####-####", txtCelular);
+        Utilidades.setMascara("###.###.###-##", txtCpf);
+        Utilidades.setMascara("#########", txtRg);
     }
 
     private void InicializarControle(long id) {

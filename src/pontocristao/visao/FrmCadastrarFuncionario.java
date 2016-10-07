@@ -1,11 +1,14 @@
 package pontocristao.visao;
 
 import java.awt.*;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.text.MaskFormatter;
 import pontocristao.controle.ControleFuncionario;
+import pontocristao.modelo.Funcionario;
 import pontocristao.modelo.Sexo;
 import pontocristao.util.CepWebService;
 import pontocristao.util.Utilidades;
@@ -16,76 +19,43 @@ import pontocristao.util.Utilidades;
  */
 public class FrmCadastrarFuncionario extends javax.swing.JDialog {
 
+    private static Frame frame;
+    private ControleFuncionario controle;
+    private Boolean modeloAtualizado = false;
+
+    public Boolean getModeloAtualizado() {
+        return modeloAtualizado;
+    }
+
+    public Funcionario getFuncionario() {
+        return controle.getFuncionario();
+    }
+
     public FrmCadastrarFuncionario(java.awt.Frame parent, boolean modal, long id) {
         super(parent, modal);
         initComponents();
 
-        //Abrir centralizado
         this.setLocationRelativeTo(null);
 
-        //Dinâmica dos Botões e campos
         txtLogin.requestFocus();
         txtCodigo.setEnabled(false);
         jcDataCadastro.setEnabled(false);
 
-        Utilidades utilidades = new Utilidades();
-        Mascara();
+        Utilidades.setMascara("#####-###", txtCep);
+        Utilidades.setMascara("###.#####.##-#", txtCarteiraTrabalho);
+        Utilidades.setMascara("(##)####-####", txtTelefone);
+        Utilidades.setMascara("(##)####-####", txtCelular);
+        Utilidades.setMascara("###.###.###-##", txtCpf);
+        Utilidades.setMascara("#########", txtRg);
+
         InicializarControle(id);
-        teste();
-
     }
-
-    private static Frame frame;
-    private ControleFuncionario controle;
 
     public static FrmCadastrarFuncionario Mostrar(java.awt.Frame parent, long id) {
         frame = parent;
         FrmCadastrarFuncionario frmCadastrarFuncionario = new FrmCadastrarFuncionario(parent, true, id);
         frmCadastrarFuncionario.setVisible(true);
         return frmCadastrarFuncionario;
-    }
-
-    public void teste() {
-        txtLogin.setText("Bruno");
-        txtSenha.setText("123");
-        txtConfirmacaoSenha.setText("123");
-        jcDataAdmissao.setDate(new Date());
-        jcDataNascimento.setDate(new Date());
-        jcDataCadastro.setDate(new Date());
-        txtNome.setText("Bruno");
-        txtCpf.setText("07735781962");
-        txtRg.setText("124292352");
-        txtCarteiraTrabalho.setText("12312345122");
-        txtTelefone.setText("4236265335");
-        txtCelular.setText("4299227422");
-        txtEmail.setText("brunomeneguim@hotmail.com");
-        txtCep.setText("85010300");
-        txtRua.setText("Quintino Bocaiuva");
-        txtNumero.setText("947");
-        txtBairro.setText("Centro");
-        txtCidade.setText("Guarapuava");
-        txtComplemento.setText("Blah");
-    }
-
-    public void Mascara() {
-        //Setando mascáras para campos 
-        MaskFormatter mascara = new Utilidades().setMascara("#####-###");
-        mascara.install(txtCep);
-
-        mascara = new Utilidades().setMascara("###.#####.##-#");
-        mascara.install(txtCarteiraTrabalho);
-
-        mascara = new Utilidades().setMascara("(##)####-####");
-        mascara.install(txtTelefone);
-
-        mascara = new Utilidades().setMascara("(##)####-####");
-        mascara.install(txtCelular);
-
-        mascara = new Utilidades().setMascara("###.###.###-##");
-        mascara.install(txtCpf);
-
-        mascara = new Utilidades().setMascara("#########");
-        mascara.install(txtRg);
     }
 
     private void InicializarControle(long id) {
@@ -96,7 +66,6 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
 
             if (erro != null) {
                 Utilidades.MostrarMensagemErro(erro);
-                //fechar a janela com um resultado falso
             } else {
                 AtualizarCampos();
             }
@@ -105,8 +74,9 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
 
     private void AtualizarCampos() {
         txtLogin.setText(controle.getFuncionario().getLogin());
-        txtSenha.setText(controle.getFuncionario().getSenha());
         jcDataAdmissao.setDate(controle.getFuncionario().getDataAdmissao());
+        jcDataCadastro.setDate(controle.getFuncionario().getDataCadastro());
+        txtCodigo.setText(String.valueOf(controle.getFuncionario().getId()));
         txtNome.setText(controle.getFuncionario().getNome());
         txtCpf.setText(controle.getFuncionario().getCpf());
         txtRg.setText(controle.getFuncionario().getRg());
@@ -127,7 +97,6 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
 
     private void AtualizarModelo() {
         controle.getFuncionario().setLogin(txtLogin.getText());
-        controle.getFuncionario().setSenha(txtSenha.getPassword().toString());
         controle.getFuncionario().setDataAdmissao(jcDataAdmissao.getDate());
         controle.getFuncionario().setNome(txtNome.getText());
         controle.getFuncionario().setCpf(txtCpf.getText());
@@ -145,6 +114,10 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
         controle.getFuncionario().getEndereco().setBairro(txtBairro.getText());
         controle.getFuncionario().getEndereco().setCidade(txtCidade.getText());
         controle.getFuncionario().getEndereco().setComplemento(txtComplemento.getText());
+
+        if (txtSenha.getPassword().length > 0) {
+            controle.getFuncionario().setSenha(txtSenha.getPassword().toString());
+        }
     }
 
     /**
@@ -557,52 +530,33 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnConsultarCepActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
-        Object[] botoes = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja Cancelar o Cadastro do Funcionário? ",
-                "Confirmação",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                botoes, botoes[0]);
-        if (resposta == 0) {
-            this.dispose();
-        }
+        this.dispose();
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
-        Object[] botoes = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja Finalizar o Cadastro do Funcionário? ",
-                "Confirmação",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                botoes, botoes[0]);
-        if (resposta == 0) {
-            if (ValidaCampos()) {
-                if (ValidaSenha()) {
+        if (ValidaCampos()) {
+            if (ValidaSenha()) {
 
-                    AtualizarModelo();
+                AtualizarModelo();
 
-                    Exception erro = controle.Salvar();
+                Exception erro = controle.Salvar();
 
-                    if (erro != null) {
-                        Utilidades.MostrarMensagemErro(erro);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Cadastro de Funcionário efetuado com sucesso! ");
-                        this.dispose();
-                    }
+                if (erro != null) {
+                    Utilidades.MostrarMensagemErro(erro);
+                } else {
+                    modeloAtualizado = true;
+                    this.dispose();
                 }
             }
         }
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
     public Boolean ValidaSenha() {
-//        String senha = txtSenha.getText();
-//        String confirmacaoSenha = txtConfirmacaoSenha.getText();
         Boolean retorno = false;
         if (Arrays.equals(txtSenha.getPassword(), txtConfirmacaoSenha.getPassword())) {
             retorno = true;
         } else {
             JOptionPane.showMessageDialog(null, "As senhas digitadas devem ser iguais.");
-
         }
         return retorno;
     }
@@ -610,9 +564,8 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
     public Boolean ValidaCampos() {
         //Campos Obrigatórios
         Boolean retorno = true;
+
         if (txtLogin.getText().equals("")
-                || txtSenha.getText().equals("")
-                || txtConfirmacaoSenha.getText().equals("")
                 || jcDataAdmissao.getDate().equals("")
                 || txtNome.getText().equals("")
                 || txtCpf.getText().equals("")
@@ -628,7 +581,11 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
                 || txtBairro.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos.");
             retorno = false;
+        } else if (controle.getFuncionario().getId() == 0 && txtSenha.getPassword().toString().equals("")) {
+            JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos.");
+            retorno = false;
         }
+
         return retorno;
     }
 

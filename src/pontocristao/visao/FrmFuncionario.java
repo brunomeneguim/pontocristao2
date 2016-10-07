@@ -2,6 +2,9 @@ package pontocristao.visao;
 
 import java.awt.*;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.*;
 import javax.swing.table.DefaultTableModel;
 import pontocristao.controle.ControleFuncionario;
 import pontocristao.modelo.Funcionario;
@@ -14,8 +17,9 @@ import pontocristao.util.Utilidades;
 public class FrmFuncionario extends javax.swing.JDialog {
 
     private DefaultTableModel modeloTabela;
-    private final ControleFuncionario controleFuncionario = new ControleFuncionario();
+    private ControleFuncionario controleFuncionario = new ControleFuncionario();
     private static Frame frame;
+    private java.util.List<Funcionario> listaFuncionarios;
 
     public static FrmFuncionario Mostrar(java.awt.Frame parent) {
         frame = parent;
@@ -50,22 +54,47 @@ public class FrmFuncionario extends javax.swing.JDialog {
         };
 
         jTabelaFuncionario.setModel(modeloTabela);
+        jTabelaFuncionario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        jTabelaFuncionario.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent lse) {
+                if (!lse.getValueIsAdjusting()) {
+                    if (jTabelaFuncionario.getSelectedRow() >= 0) {
+                        BtnEditar.setEnabled(true);
+                        BtnExcluir.setEnabled(true);
+                    } else {
+                        BtnEditar.setEnabled(false);
+                        BtnExcluir.setEnabled(false);
+                    }
+                }
+            }
+        });
     }
 
-    public void AtualizarTabela(java.util.List<Funcionario> funcionarios) {
+    private void AtualizarTabela(java.util.List<Funcionario> funcionarios) {
         while (modeloTabela.getRowCount() > 0) {
             modeloTabela.removeRow(0);
         }
 
+        listaFuncionarios = funcionarios;
+
         for (Funcionario funcionario : funcionarios) {
-            modeloTabela.addRow(new Object[]{
-                funcionario.getNome(),
-                funcionario.getTelefoneResidencial(),
-                funcionario.getCelular(),
-                funcionario.getEmail(),
-                funcionario.getDataNascimento()
-            });
+            AdicionarLinha(funcionario);
         }
+    }
+
+    private void AdicionarLinha(Funcionario funcionario) {
+        modeloTabela.addRow(RetornarNovaLinha(funcionario));
+    }
+
+    private Object[] RetornarNovaLinha(Funcionario funcionario) {
+        return new Object[]{
+            funcionario.getNome(),
+            funcionario.getTelefoneResidencial(),
+            funcionario.getCelular(),
+            funcionario.getEmail(),
+            funcionario.getDataNascimento()
+        };
     }
 
     public void ListarFuncionarios() {
@@ -78,39 +107,13 @@ public class FrmFuncionario extends javax.swing.JDialog {
 
     public void ListarFuncionarios(String pesquisa) {
         if (pesquisa != null && pesquisa.length() > 0) {
-            String texto = txtPesquisar.getText();
-            String sqlWhere = "WHERE "
-                    + "nome like '%" + texto + "%' OR "
-                    + "telefoneResidencial like '%" + texto + "%' OR "
-                    + "celular like '%" + texto + "%' OR "
-                    + "email like '%" + texto + "%' OR "
-                    + "dataNascimento like '%" + texto + "%'";
-
-            AtualizarTabela(controleFuncionario.RetornarFuncionarios(sqlWhere));
-
+            String[] camposPesquisa = new String[]{"nome", "telefoneResidencial", "celular", "email", "dataNascimento"};
+            AtualizarTabela(controleFuncionario.RetornarFuncionarios(camposPesquisa, pesquisa));
         } else {
             ListarFuncionarios();
         }
     }
 
-//    private void Atualizar(long id) {
-//        Session sessao = HibernateUtil.getSessionFactory().openSession();
-//
-//        if (id > 0) {
-//
-//            String sql = "SELECT * FROM Funcionario WHERE id = " + id;
-//            Query q = sessao.createSQLQuery(sql).addEntity(Funcionario.class);
-//            java.util.List resultados = q.list();
-//
-//            //atualizar na lista somente o funcionario com esse id
-//        } else {
-//            String sql = "SELECT * FROM Funcionario";
-//            Query q = sessao.createSQLQuery(sql).addEntity(Funcionario.class);
-//            java.util.List resultados = q.list();
-//
-//            //Adicionar a lista na tela
-//        }
-//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -142,9 +145,19 @@ public class FrmFuncionario extends javax.swing.JDialog {
 
         BtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnEditar.png"))); // NOI18N
         BtnEditar.setText("Editar");
+        BtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditarActionPerformed(evt);
+            }
+        });
 
         BtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnExcluir.png"))); // NOI18N
         BtnExcluir.setText("Excluir");
+        BtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnExcluirActionPerformed(evt);
+            }
+        });
 
         BtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnPesquisar.png"))); // NOI18N
         BtnPesquisar.setText("Pesquisar");
@@ -207,11 +220,58 @@ public class FrmFuncionario extends javax.swing.JDialog {
 
     private void BtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoActionPerformed
         FrmCadastrarFuncionario frmCadastrarFuncionario = FrmCadastrarFuncionario.Mostrar(frame, 0);
+
+        if (frmCadastrarFuncionario.getModeloAtualizado()) {
+            Funcionario funcionario = frmCadastrarFuncionario.getFuncionario();
+            AdicionarLinha(funcionario);
+            listaFuncionarios.add(funcionario);
+        }
+        
+        controleFuncionario = new ControleFuncionario();
     }//GEN-LAST:event_BtnNovoActionPerformed
 
     private void BtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPesquisarActionPerformed
         ListarFuncionarios(txtPesquisar.getText());
     }//GEN-LAST:event_BtnPesquisarActionPerformed
+
+    private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
+        if (listaFuncionarios != null) {
+
+            Boolean podeExcluir = Utilidades.MostrarMensagemPergunta("Confirmação", "Tem certeza que deseja excluir o funcionário?", false);
+
+            if (podeExcluir) {
+                int linhaSelecionada = jTabelaFuncionario.getSelectedRow();
+                Funcionario funcionario = listaFuncionarios.get(linhaSelecionada);
+                
+                try {
+                    controleFuncionario.Excluir(funcionario.getId());
+                    modeloTabela.removeRow(linhaSelecionada);
+                    listaFuncionarios.remove(funcionario);
+                    
+                    controleFuncionario = new ControleFuncionario();
+                } catch (Exception e) {
+                    Utilidades.MostrarMensagemErro(e);
+                }
+            }
+        }
+    }//GEN-LAST:event_BtnExcluirActionPerformed
+
+    private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
+        if (listaFuncionarios != null) {
+            int linhaSelecionada = jTabelaFuncionario.getSelectedRow();
+            Funcionario funcionario = listaFuncionarios.get(linhaSelecionada);
+            FrmCadastrarFuncionario frmCadastrarFuncionario = FrmCadastrarFuncionario.Mostrar(frame, funcionario.getId());
+
+            funcionario = frmCadastrarFuncionario.getFuncionario();
+            
+            if (frmCadastrarFuncionario.getModeloAtualizado()) {
+                modeloTabela.removeRow(linhaSelecionada);
+                modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(funcionario));
+                
+                controleFuncionario = new ControleFuncionario();
+            }
+        }
+    }//GEN-LAST:event_BtnEditarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -31,17 +31,10 @@ public class FrmCadastrarDependente extends javax.swing.JDialog {
 
     public void Mascara() {
         //Setando mascáras para campos 
-        MaskFormatter mascara = new Utilidades().setMascara("(##)####-####");
-        mascara.install(txtTelefone);
-
-        mascara = new Utilidades().setMascara("(##)####-####");
-        mascara.install(txtCelular);
-
-        mascara = new Utilidades().setMascara("###.###.###-##");
-        mascara.install(txtCpf);
-
-        mascara = new Utilidades().setMascara("#########");
-        mascara.install(txtRg);
+        Utilidades.setMascara("(##)####-####", txtTelefone);
+        Utilidades.setMascara("(##)####-####", txtCelular);
+        Utilidades.setMascara("###.###.###-##", txtCpf);
+        Utilidades.setMascara("#########", txtRg);
     }
 
     /**

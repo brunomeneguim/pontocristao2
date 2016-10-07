@@ -25,27 +25,31 @@ public class ControleFuncionario extends ControleBase {
     }
 
     public List<Funcionario> RetornarFuncionarios() {
-        String sql = "SELECT * FROM Funcionario";
+        String sql = "SELECT * FROM Funcionario WHERE excluido = false";
         Query q = this.getSessao().createSQLQuery(sql).addEntity(Funcionario.class);
         return (List<Funcionario>) q.list();
     }
 
-    public List<Funcionario> RetornarFuncionarios(String sqlWhere) {
-        String sql = "SELECT * FROM Funcionario " + sqlWhere;
+    public List<Funcionario> RetornarFuncionarios(String[] camposPesquisa, String textoPesquisa) {
+        String sql = "SELECT * FROM Funcionario";
+
+        if (camposPesquisa != null && textoPesquisa != null && camposPesquisa.length > 0 && textoPesquisa.length() > 0) {
+            sql += " WHERE (";
+
+            for (int i = 0; i < camposPesquisa.length; i++) {
+                sql += camposPesquisa[i] + " LIKE '%" + textoPesquisa + "%'";
+                if (i + 1 < camposPesquisa.length) {
+                    sql += " OR ";
+                } else {
+                    sql += ") AND excluido = false";
+                }
+            }
+        } else {
+            sql += " WHERE excluido = false";
+        }
+
         Query q = this.getSessao().createSQLQuery(sql).addEntity(Funcionario.class);
         return (List<Funcionario>) q.list();
-
-        //testar =>
-//        select *
-//      ,case when nome like '%test%' then 1
-//            when telefoneResidencial like '%test%' then 2
-//            when DataNascimento like '%test%' then 3
-//       end as priority
-//  from pontocristao.funcionario
-// where nome like '%test%'
-//    or telefoneResidencial like '%test%'
-//    or DataNascimento like '%test%'
-// order by priority
     }
 
     public Exception RecuperarFuncionario(long id) {
@@ -58,6 +62,35 @@ public class ControleFuncionario extends ControleBase {
 
             if (resultados.size() == 1) {
                 this.setFuncionario((Funcionario) resultados.get(0));
+            } else {
+                throw new Exception("Não foi possível encontrar o funcionário com o id " + id);
+            }
+        } catch (Exception e) {
+            erro = e;
+        } finally {
+            return erro;
+        }
+    }
+
+    public Exception Excluir(long id) {
+        String sql = "SELECT * FROM Funcionario WHERE id = " + id;
+        Exception erro = null;
+
+        try {
+            Session s = getSessao();
+            Query q = s.createSQLQuery(sql).addEntity(Funcionario.class);
+            List resultados = q.list();
+
+            if (resultados.size() == 1) {
+                Funcionario funcionario = (Funcionario) resultados.get(0);
+                funcionario.setExcluido(true);
+                
+                Transaction transacao = s.getTransaction();
+
+                transacao.begin();
+                s.save(funcionario);
+                transacao.commit();
+                
             } else {
                 throw new Exception("Não foi possível encontrar o funcionário com o id " + id);
             }

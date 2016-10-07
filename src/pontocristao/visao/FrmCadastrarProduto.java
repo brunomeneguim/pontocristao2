@@ -39,8 +39,7 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
     
     public void Mascara() {
         //Setando mascáras para campos 
-        MaskFormatter mascara = new Utilidades().setMascara("R$ #.###,##");
-        mascara.install(txtValorVenda);
+        Utilidades.setMascara("R$ #.###,##", txtValorVenda);
     }
 
     /**
