@@ -2,6 +2,13 @@ package pontocristao.visao;
 
 import java.awt.*;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.*;
+import javax.swing.table.DefaultTableModel;
+import pontocristao.controle.*;
+import pontocristao.modelo.*;
+import pontocristao.util.Utilidades;
 
 /**
  *
@@ -9,26 +16,102 @@ import javax.swing.JOptionPane;
  */
 public class FrmCliente extends javax.swing.JDialog {
 
-    public FrmCliente(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-
-        Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-        this.setBounds(bounds);
-
-        txtPesquisar.requestFocus();
-        BtnEditar.setEnabled(false);
-        BtnExcluir.setEnabled(false);
-
-    }
-
+    private DefaultTableModel modeloTabela;
+    private ControleCliente controleCliente = new ControleCliente(true);
     private static Frame frame;
-
+    private java.util.List<Cliente> listaClientes;
+    
     public static FrmCliente Mostrar(java.awt.Frame parent) {
         frame = parent;
         FrmCliente frmCliente = new FrmCliente(parent, true);
         frmCliente.setVisible(true);
         return frmCliente;
+    }
+        
+    public FrmCliente(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        AjustarTabela();
+
+        Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        this.setBounds(bounds);
+
+        txtPesquisar.requestFocus();
+
+        BtnEditar.setEnabled(false);
+        BtnExcluir.setEnabled(false);
+
+        ListarClientes();
+    }
+    
+    private void AjustarTabela() {
+        String[] colunas = new String[]{"Nome", "Telefone", "Celular", "E-mail", "Total de locações"};
+        modeloTabela = new DefaultTableModel(null, colunas) {
+            @Override
+            public boolean isCellEditable(int row, int col) {
+                return false;
+            }
+        };
+
+        jTableCliente.setModel(modeloTabela);
+        jTableCliente.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        jTableCliente.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent lse) {
+                if (!lse.getValueIsAdjusting()) {
+                    if (jTableCliente.getSelectedRow() >= 0) {
+                        BtnEditar.setEnabled(true);
+                        BtnExcluir.setEnabled(true);
+                    } else {
+                        BtnEditar.setEnabled(false);
+                        BtnExcluir.setEnabled(false);
+                    }
+                }
+            }
+        });
+    }
+    
+    private void AtualizarTabela(java.util.List<Cliente> clientes) {
+        while (modeloTabela.getRowCount() > 0) {
+            modeloTabela.removeRow(0);
+        }
+
+        listaClientes = clientes;
+
+        for (Cliente cliente : clientes) {
+            AdicionarLinha(cliente);
+        }
+    }
+
+    private void AdicionarLinha(Cliente cliente) {
+        modeloTabela.addRow(RetornarNovaLinha(cliente));
+    }
+
+    private Object[] RetornarNovaLinha(Cliente cliente) {
+        return new Object[]{
+            cliente.getNome(),
+            cliente.getTelefone(),
+            cliente.getCelular(),
+            cliente.getEmail(),
+            cliente.getTotalLocacoes()
+        };
+    }
+
+    public void ListarClientes() {
+        try {
+            AtualizarTabela(controleCliente.RetornarClientes());
+        } catch (Exception e) {
+            Utilidades.MostrarMensagemErro(e);
+        }
+    }
+
+    public void ListarFuncionarios(String pesquisa) {
+        if (pesquisa != null && pesquisa.length() > 0) {
+            String[] camposPesquisa = new String[]{"nome", "telefone", "celular", "email"};
+            AtualizarTabela(controleCliente.RetornarClientes(camposPesquisa, pesquisa));
+        } else {
+            ListarClientes();
+        }
     }
 
     /**
@@ -47,7 +130,6 @@ public class FrmCliente extends javax.swing.JDialog {
         BtnPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCliente = new javax.swing.JTable();
-        BtnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clientes");
@@ -88,15 +170,6 @@ public class FrmCliente extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTableCliente);
 
-        BtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnSair.png"))); // NOI18N
-        BtnSair.setText("Sair");
-        BtnSair.setPreferredSize(new java.awt.Dimension(139, 65));
-        BtnSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnSairActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,10 +187,7 @@ public class FrmCliente extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnPesquisar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(BtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(BtnPesquisar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -131,9 +201,7 @@ public class FrmCliente extends javax.swing.JDialog {
                     .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -148,18 +216,6 @@ public class FrmCliente extends javax.swing.JDialog {
         //FrmCadastrarCliente frmCadastrarCliente = FrmCadastrarCliente.Mostrar(frame);
 
     }//GEN-LAST:event_BtnEditarActionPerformed
-
-    private void BtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSairActionPerformed
-        Object[] botoes = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja sair da lista de Clientes? ",
-                "Confirmação",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                botoes, botoes[0]);
-        if (resposta == 0) {
-            this.dispose();
-        }
-    }//GEN-LAST:event_BtnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,7 +264,6 @@ public class FrmCliente extends javax.swing.JDialog {
     private javax.swing.JButton BtnExcluir;
     private javax.swing.JButton BtnNovo;
     private javax.swing.JButton BtnPesquisar;
-    private javax.swing.JButton BtnSair;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableCliente;
     private javax.swing.JTextField txtPesquisar;

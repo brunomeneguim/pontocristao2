@@ -77,7 +77,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     }
 
     private void InicializarControle(long id) {
-        this.controle = new ControleCliente();
+        this.controle = new ControleCliente(true);
 
         if (id > 0) {
             Exception erro = this.controle.RecuperarCliente(id);

@@ -30,7 +30,7 @@ public abstract class Cliente extends ModeloBase {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
     private Set<Dependente> dependentes = new HashSet<Dependente>(0);
 
     public String getNome() {

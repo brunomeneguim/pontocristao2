@@ -6,8 +6,8 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.*;
 import javax.swing.table.DefaultTableModel;
-import pontocristao.controle.ControleFuncionario;
-import pontocristao.modelo.Funcionario;
+import pontocristao.controle.*;
+import pontocristao.modelo.*;
 import pontocristao.util.Utilidades;
 
 /**
