@@ -105,7 +105,7 @@ public class FrmCliente extends javax.swing.JDialog {
         }
     }
 
-    public void ListarFuncionarios(String pesquisa) {
+    public void ListarClientes(String pesquisa) {
         if (pesquisa != null && pesquisa.length() > 0) {
             String[] camposPesquisa = new String[]{"nome", "telefone", "celular", "email"};
             AtualizarTabela(controleCliente.RetornarClientes(camposPesquisa, pesquisa));
@@ -153,9 +153,19 @@ public class FrmCliente extends javax.swing.JDialog {
 
         BtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnExcluir.png"))); // NOI18N
         BtnExcluir.setText("Excluir");
+        BtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnExcluirActionPerformed(evt);
+            }
+        });
 
         BtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnPesquisar.png"))); // NOI18N
         BtnPesquisar.setText("Pesquisar");
+        BtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPesquisarActionPerformed(evt);
+            }
+        });
 
         jTableCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -209,13 +219,60 @@ public class FrmCliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoActionPerformed
-        //FrmCadastrarCliente frmCadastrarCliente = FrmCadastrarCliente.Mostrar(frame);
+        FrmCadastrarCliente frmCadastrarCliente = FrmCadastrarCliente.Mostrar(frame, 0);
+
+        if (frmCadastrarCliente.getModeloAtualizado()) {
+            Cliente cliente = frmCadastrarCliente.getCliente();
+            AdicionarLinha(cliente);
+            listaClientes.add(cliente);
+        }
+        
+        controleCliente = new ControleCliente(true);
     }//GEN-LAST:event_BtnNovoActionPerformed
 
     private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
-        //FrmCadastrarCliente frmCadastrarCliente = FrmCadastrarCliente.Mostrar(frame);
+        if (listaClientes != null) {
+            int linhaSelecionada = jTableCliente.getSelectedRow();
+            Cliente cliente = listaClientes.get(linhaSelecionada);
+            FrmCadastrarCliente frmCadastrarCliente = FrmCadastrarCliente.Mostrar(frame, cliente.getId());
+
+            cliente = frmCadastrarCliente.getCliente();
+            
+            if (frmCadastrarCliente.getModeloAtualizado()) {
+                modeloTabela.removeRow(linhaSelecionada);
+                modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(cliente));
+                
+                controleCliente = new ControleCliente(true);
+            }
+        }
 
     }//GEN-LAST:event_BtnEditarActionPerformed
+
+    private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
+        if (listaClientes != null) {
+
+            Boolean podeExcluir = Utilidades.MostrarMensagemPergunta("Confirmação", "Tem certeza que deseja excluir o cliente?", false);
+
+            if (podeExcluir) {
+                int linhaSelecionada = jTableCliente.getSelectedRow();
+                Cliente cliente = listaClientes.get(linhaSelecionada);
+                
+                try {
+                    controleCliente.Excluir(cliente.getId());
+                    modeloTabela.removeRow(linhaSelecionada);
+                    listaClientes.remove(cliente);
+                    
+                    controleCliente = new ControleCliente(true);
+                } catch (Exception e) {
+                    Utilidades.MostrarMensagemErro(e);
+                }
+            }
+        }
+    }//GEN-LAST:event_BtnExcluirActionPerformed
+
+    private void BtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPesquisarActionPerformed
+        ListarClientes(txtPesquisar.getText());
+    }//GEN-LAST:event_BtnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -35,64 +35,31 @@ public class ControleCliente extends ControleBase {
         String sqlPessoaFisica = "SELECT * FROM ClientePessoaFisica JOIN Cliente ON ClientePessoaFisica.id = Cliente.id WHERE Cliente.excluido = false";
         String sqlPessoaJuridica = "SELECT * FROM ClientePessoaJuridica JOIN Cliente ON ClientePessoaJuridica.id = Cliente.id WHERE Cliente.excluido = false";
 
-        Query qPessoaFisica = this.getSessao().createSQLQuery(sqlPessoaFisica).addEntity(ClientePessoaFisica.class);
-        Query qPessoaJuridica = this.getSessao().createSQLQuery(sqlPessoaJuridica).addEntity(ClientePessoaJuridica.class);
-
-        List<ClientePessoaFisica> clientesPessoaFisica = qPessoaFisica.list();
-        List<ClientePessoaJuridica> clientesPessoaJuridica = qPessoaJuridica.list();
-
-        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-
-        clientes.addAll(clientesPessoaFisica);
-        clientes.addAll(clientesPessoaJuridica);
-
-        Collections.sort(clientes, new Comparator<Cliente>() {
-            @Override
-            public int compare(Cliente c2, Cliente c1) {
-                if (c2.getId() > c1.getId()) {
-                    return 1;
-                } else {
-                    return -1;
-                }
-
-            }
-        });
+        List<Cliente> clientes = this.RetornarClientes(sqlPessoaFisica, sqlPessoaJuridica, this.getSessao());
 
         return clientes;
     }
 
     public List<Cliente> RetornarClientes(String[] camposPesquisa, String textoPesquisa) {
-        String sql = "SELECT * FROM Cliente";
+        String sqlPessoaFisica = "SELECT * FROM ClientePessoaFisica JOIN Cliente ON ClientePessoaFisica.id = Cliente.id";
+        String sqlPessoaJuridica = "SELECT * FROM ClientePessoaJuridica JOIN Cliente ON ClientePessoaJuridica.id = Cliente.id";
 
-        if (camposPesquisa != null && textoPesquisa != null && camposPesquisa.length > 0 && textoPesquisa.length() > 0) {
-            sql += " WHERE (";
+        sqlPessoaFisica += this.RetornarClausulaWhere(camposPesquisa, textoPesquisa, "Cliente");
+        sqlPessoaJuridica += this.RetornarClausulaWhere(camposPesquisa, textoPesquisa, "Cliente");
 
-            for (int i = 0; i < camposPesquisa.length; i++) {
-                sql += camposPesquisa[i] + " LIKE '%" + textoPesquisa + "%'";
-                if (i + 1 < camposPesquisa.length) {
-                    sql += " OR ";
-                } else {
-                    sql += ") AND excluido = false";
-                }
-            }
-        } else {
-            sql += " WHERE excluido = false";
-        }
+        List<Cliente> clientes = this.RetornarClientes(sqlPessoaFisica, sqlPessoaJuridica, this.getSessao());
 
-        Query q = this.getSessao().createSQLQuery(sql).addEntity(Cliente.class);
-        return (List<Cliente>) q.list();
+        return clientes;
     }
 
     public Exception RecuperarCliente(long id) {
-        String sql = "SELECT * FROM Cliente WHERE id = " + id;
         Exception erro = null;
 
         try {
-            Query q = this.getSessao().createSQLQuery(sql).addEntity(Cliente.class);
-            List resultados = q.list();
+            Cliente cliente = this.RetornarCliente(id, this.getSessao());
 
-            if (resultados.size() == 1) {
-                this.setCliente((Cliente) resultados.get(0));
+            if (cliente != null) {
+                this.setCliente(cliente);
             } else {
                 throw new Exception("Não foi possível encontrar o cliente com o id " + id);
             }
@@ -104,16 +71,13 @@ public class ControleCliente extends ControleBase {
     }
 
     public Exception Excluir(long id) {
-        String sql = "SELECT * FROM Cliente WHERE id = " + id;
         Exception erro = null;
 
         try {
             Session s = getSessao();
-            Query q = s.createSQLQuery(sql).addEntity(Cliente.class);
-            List resultados = q.list();
-
-            if (resultados.size() == 1) {
-                Cliente cliente = (Cliente) resultados.get(0);
+            Cliente cliente = this.RetornarCliente(id, s);
+            
+            if (cliente != null) {
                 cliente.setExcluido(true);
 
                 Transaction transacao = s.getTransaction();
@@ -159,5 +123,67 @@ public class ControleCliente extends ControleBase {
             }
         }
 
+    }
+
+    public Cliente RetornarCliente(long id, Session s) {
+        String sqlPessoaFisica = "SELECT * FROM ClientePessoaFisica JOIN Cliente ON ClientePessoaFisica.id = Cliente.id WHERE ClientePessoaFisica.id = " + id;
+        String sqlPessoaJuridica = "SELECT * FROM ClientePessoaJuridica JOIN Cliente ON ClientePessoaJuridica.id = Cliente.id WHERE ClientePessoaJuridica.id = " + id;
+
+        List<Cliente> clientes = this.RetornarClientes(sqlPessoaFisica, sqlPessoaJuridica, s);
+
+        if (clientes.size() == 1) {
+            return clientes.get(0);
+        } else {
+            return null;
+        }
+
+    }
+
+    private List<Cliente> RetornarClientes(String sqlPessoaFisica, String sqlPessoaJuridica, Session s) {
+        Query qPessoaFisica = s.createSQLQuery(sqlPessoaFisica).addEntity(ClientePessoaFisica.class);
+        Query qPessoaJuridica = s.createSQLQuery(sqlPessoaJuridica).addEntity(ClientePessoaJuridica.class);
+
+        List<ClientePessoaFisica> clientesPessoaFisica = qPessoaFisica.list();
+        List<ClientePessoaJuridica> clientesPessoaJuridica = qPessoaJuridica.list();
+
+        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+
+        clientes.addAll(clientesPessoaFisica);
+        clientes.addAll(clientesPessoaJuridica);
+
+        Collections.sort(clientes, new Comparator<Cliente>() {
+            @Override
+            public int compare(Cliente c2, Cliente c1) {
+                if (c2.getId() > c1.getId()) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+
+            }
+        });
+
+        return clientes;
+    }
+
+    private String RetornarClausulaWhere(String[] camposPesquisa, String textoPesquisa, String nomeTabela) {
+        String sql = "";
+
+        if (camposPesquisa != null && textoPesquisa != null && camposPesquisa.length > 0 && textoPesquisa.length() > 0) {
+            sql += " WHERE (";
+
+            for (int i = 0; i < camposPesquisa.length; i++) {
+                sql += nomeTabela + "." + camposPesquisa[i] + " LIKE '%" + textoPesquisa + "%'";
+                if (i + 1 < camposPesquisa.length) {
+                    sql += " OR ";
+                } else {
+                    sql += ") AND Cliente.excluido = false";
+                }
+            }
+        } else {
+            sql += " WHERE Cliente.excluido = false";
+        }
+
+        return sql;
     }
 }
