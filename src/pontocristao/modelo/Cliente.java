@@ -25,7 +25,7 @@ public abstract class Cliente extends ModeloBase {
     private String email;
 
     @Column(nullable = false)
-    private Integer totalLocacoes;
+    private Integer totalLocacoes = 0;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Endereco endereco;

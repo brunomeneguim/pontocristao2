@@ -8,5 +8,6 @@ import javax.persistence.*;
  */
 @Entity
 public enum Sexo {
-    Masculino, Feminino
+    Feminino,
+    Masculino
 }

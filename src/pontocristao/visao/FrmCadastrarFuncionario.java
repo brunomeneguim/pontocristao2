@@ -81,7 +81,7 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
         txtCpf.setText(controle.getFuncionario().getCpf());
         txtRg.setText(controle.getFuncionario().getRg());
         txtCarteiraTrabalho.setText(controle.getFuncionario().getCarteiraTrabalho());
-        jComboSexo.setSelectedItem(controle.getFuncionario().getSexo());
+        jComboSexo.setSelectedIndex(controle.getFuncionario().getSexo().ordinal());
         jcDataNascimento.setDate(controle.getFuncionario().getDataNascimento());
         txtTelefone.setText(controle.getFuncionario().getTelefoneResidencial());
         txtCelular.setText(controle.getFuncionario().getCelular());
@@ -566,19 +566,21 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
         Boolean retorno = true;
 
         if (txtLogin.getText().equals("")
-                || jcDataAdmissao.getDate().equals("")
+                || jcDataAdmissao.getDate() == null
                 || txtNome.getText().equals("")
                 || txtCpf.getText().equals("")
                 || txtRg.getText().equals("")
                 || txtCarteiraTrabalho.getText().equals("")
-                || jcDataNascimento.getDate().equals("")
+                || jcDataNascimento.getDate() == null
                 || txtTelefone.getText().equals("")
                 || txtCelular.getText().equals("")
                 || txtCep.getText().equals("")
                 || txtRua.getText().equals("")
                 || txtNumero.getText().equals("")
                 || txtCidade.getText().equals("")
-                || txtBairro.getText().equals("")) {
+                || txtBairro.getText().equals("")
+                || jComboSexo.getSelectedItem().equals("")
+                || jComboEstado.getSelectedItem().equals("")) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos.");
             retorno = false;
         } else if (controle.getFuncionario().getId() == 0 && txtSenha.getPassword().toString().equals("")) {

@@ -3,10 +3,16 @@ package pontocristao.visao;
 import java.awt.*;
 import java.util.Date;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.*;
 import pontocristao.controle.ControleCliente;
 import pontocristao.modelo.Sexo;
 import pontocristao.modelo.Cliente;
+import pontocristao.modelo.ClientePessoaFisica;
+import pontocristao.modelo.ClientePessoaJuridica;
+import pontocristao.modelo.Dependente;
 import pontocristao.util.*;
 
 /**
@@ -15,6 +21,7 @@ import pontocristao.util.*;
  */
 public class FrmCadastrarCliente extends javax.swing.JDialog {
 
+    private DefaultTableModel modeloTabela;
     private static Frame frame;
     private ControleCliente controle;
     private Boolean modeloAtualizado = false;
@@ -30,18 +37,16 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     public FrmCadastrarCliente(java.awt.Frame parent, boolean modal, long id) {
         super(parent, modal);
         initComponents();
+        AjustarTabela();
 
-        this.setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
 
         txtNome.requestFocus();
         txtCodigo.setEnabled(false);
         jcDataCadastro.setEnabled(false);
         BtnEditar.setEnabled(false);
         BtnExcluir.setEnabled(false);
-        txtCpf.setEnabled(false);
-        txtRg.setEnabled(false);
         txtCnpj.setEnabled(false);
-        jComboSexo.setEnabled(false);
 
         Utilidades.setMascara("#####-###", txtCep);
         Utilidades.setMascara("##.###.###/####-##", txtCnpj);
@@ -61,14 +66,23 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     }
 
     private void InicializarControle(long id) {
-        this.controle = new ControleCliente(true);
+        controle = new ControleCliente(true);
 
         if (id > 0) {
-            Exception erro = this.controle.RecuperarCliente(id);
+            Exception erro = controle.RecuperarCliente(id);
 
             if (erro != null) {
                 Utilidades.MostrarMensagemErro(erro);
             } else {
+
+                if (controle.getCliente().getClass() == ClientePessoaFisica.class) {
+                    jRadioPessoaFisica.setSelected(true);
+                } else {
+                    jRadioPessoaJuridica.setSelected(true);
+                }
+                jRadioPessoaFisica.setEnabled(false);
+                jRadioPessoaJuridica.setEnabled(false);
+
                 AtualizarCampos();
             }
         }
@@ -76,13 +90,8 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
     private void AtualizarCampos() {
         txtNome.setText(controle.getCliente().getNome());
-//        txtCpf.setText(controle.getCliente().getCpf());
-//        txtRg.setText(controle.getCliente().getRg());
-//        txtCnpj.setText(controle.getCliente().getCnpj());
-//        jComboSexo.setSelectedItem(controle.getCliente().getSexo());
-//        jcDataNascimento.setDate(controle.getCliente().getDataNascimento());
-//        txtTelefone.setText(controle.getCliente().getTelefoneResidencial());
         txtCelular.setText(controle.getCliente().getCelular());
+        txtTelefone.setText(controle.getCliente().getTelefone());
         txtEmail.setText(controle.getCliente().getEmail());
         txtCep.setText(controle.getCliente().getEndereco().getCep());
         txtRua.setText(controle.getCliente().getEndereco().getRua());
@@ -91,16 +100,27 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         txtBairro.setText(controle.getCliente().getEndereco().getBairro());
         txtCidade.setText(controle.getCliente().getEndereco().getCidade());
         txtComplemento.setText(controle.getCliente().getEndereco().getComplemento());
+
+        ListarDependentes();
+
+        if (controle.getCliente().getClass() == ClientePessoaFisica.class) {
+            ClientePessoaFisica cliente = (ClientePessoaFisica) controle.getCliente();
+
+            txtCpf.setText(cliente.getCpf());
+            txtRg.setText(cliente.getRg());
+            jComboSexo.setSelectedIndex(cliente.getSexo().ordinal());
+            jcDataNascimento.setDate(cliente.getDataNascimento());
+        } else {
+            ClientePessoaJuridica cliente = (ClientePessoaJuridica) controle.getCliente();
+
+            txtCnpj.setText(cliente.getCnpj());
+        }
     }
 
     private void AtualizarModelo() {
         controle.getCliente().setNome(txtNome.getText());
-//        controle.getCliente().setCpf(txtCpf.getText());
-//        controle.getCliente().setRg(txtRg.getText());
-//        controle.getCliente().setSexo(Sexo.valueOf(jComboSexo.getSelectedItem().toString()));
-//        controle.getCliente().setDataNascimento(jcDataNascimento.getDate());
-//        controle.getCliente().setTelefoneResidencial(txtTelefone.getText());
         controle.getCliente().setCelular(txtCelular.getText());
+        controle.getCliente().setTelefone(txtTelefone.getText());
         controle.getCliente().setEmail(txtEmail.getText());
         controle.getCliente().getEndereco().setCep(txtCep.getText());
         controle.getCliente().getEndereco().setRua(txtRua.getText());
@@ -109,6 +129,117 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         controle.getCliente().getEndereco().setBairro(txtBairro.getText());
         controle.getCliente().getEndereco().setCidade(txtCidade.getText());
         controle.getCliente().getEndereco().setComplemento(txtComplemento.getText());
+
+        if (controle.getCliente().getClass() == ClientePessoaFisica.class) {
+            ClientePessoaFisica cliente = (ClientePessoaFisica) controle.getCliente();
+
+            cliente.setCpf(txtCpf.getText());
+            cliente.setRg(txtRg.getText());
+            cliente.setSexo(Sexo.valueOf(jComboSexo.getSelectedItem().toString()));
+            cliente.setDataNascimento(jcDataNascimento.getDate());
+            
+        } else {
+            ClientePessoaJuridica cliente = (ClientePessoaJuridica) controle.getCliente();
+
+            cliente.setCnpj(txtCnpj.getText());
+        }
+
+    }
+
+    public Boolean ValidaCampos() {
+        //Campos Obrigatórios
+        Boolean retorno = true;
+        
+        if (txtNome.getText().equals("")
+                || txtCelular.getText().equals("")
+                || txtTelefone.getText().equals("")
+                || txtCep.getText().equals("")
+                || txtRua.getText().equals("")
+                || txtNumero.getText().equals("")
+                || jComboEstado.getSelectedItem().equals("")
+                || txtBairro.getText().equals("")
+                || txtCidade.getText().equals("")) {
+            
+            retorno = false;
+        }
+        
+        if (controle.getCliente().getClass() == ClientePessoaFisica.class) {
+            if (txtCpf.getText().equals("")
+                    || txtRg.getText().equals("")
+                    || jComboSexo.getSelectedItem().equals("")
+                    || jcDataNascimento.getDate() == null) {
+                retorno = false;
+            }
+            
+        } else {
+            if (txtCnpj.getText().equals("")) {
+                retorno = false;
+            }
+        }
+        
+        if (!retorno) {
+            JOptionPane.showMessageDialog(null, "Todos os campos com o título em negrito, devem estar preenchidos.");
+        }
+
+        return retorno;
+    }
+
+    private void AjustarTabela() {
+        String[] colunas = new String[]{"Nome", "Telefone", "RG", "CPF"};
+        modeloTabela = new DefaultTableModel(null, colunas) {
+            @Override
+            public boolean isCellEditable(int row, int col) {
+                return false;
+            }
+        };
+
+        jTableDependente.setModel(modeloTabela);
+        jTableDependente.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        jTableDependente.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent lse) {
+                if (!lse.getValueIsAdjusting()) {
+                    if (jTableDependente.getSelectedRow() >= 0) {
+                        BtnEditar.setEnabled(true);
+                        BtnExcluir.setEnabled(true);
+                    } else {
+                        BtnEditar.setEnabled(false);
+                        BtnExcluir.setEnabled(false);
+                    }
+                }
+            }
+        });
+    }
+
+    private void AtualizarTabela() {
+        while (modeloTabela.getRowCount() > 0) {
+            modeloTabela.removeRow(0);
+        }
+
+        for (Dependente dependente : controle.getCliente().getDependentes()) {
+            AdicionarLinha(dependente);
+        }
+    }
+
+    private void AdicionarLinha(Dependente dependente) {
+        modeloTabela.addRow(RetornarNovaLinha(dependente));
+    }
+
+    private Object[] RetornarNovaLinha(Dependente dependente) {
+        return new Object[]{
+            dependente.getNome(),
+            dependente.getTelefone(),
+            dependente.getRg(),
+            dependente.getCpf()
+        };
+    }
+
+    public void ListarDependentes() {
+        try {
+            AtualizarTabela();
+        } catch (Exception e) {
+            Utilidades.MostrarMensagemErro(e);
+        }
     }
 
     /**
@@ -182,26 +313,35 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
         lDataCadastro.setText("Data do Cadastro");
 
+        lTelefone.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lTelefone.setText("Telefone");
 
+        lSexo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lSexo.setText("Sexo");
 
         lCodigo.setText("Código");
 
+        lCpf.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lCpf.setText("CPF");
 
+        lNome.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lNome.setText("Nome");
 
         lEmail.setText("E-mail");
 
         jComboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Masculino" }));
+        jComboSexo.setSelectedIndex(-1);
 
+        lRg.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lRg.setText("RG");
 
+        lDataNascimento.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lDataNascimento.setText("Data de Nascimento");
 
+        lCelular.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lCelular.setText("Celular");
 
+        lCnpj.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lCnpj.setText("CNPJ");
 
         jButtonGroupTipoCliente.add(jRadioPessoaJuridica);
@@ -346,19 +486,26 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         pEndereco.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
 
         jComboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        jComboEstado.setSelectedIndex(-1);
 
+        lEstado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lEstado.setText("Estado");
 
+        lNumero.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lNumero.setText("Número");
 
+        lRua.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lRua.setText("Rua");
 
         lComplemento.setText("Complemento");
 
+        lCep.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lCep.setText("CEP");
 
+        lBairro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lBairro.setText("Bairro");
 
+        lCidade.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lCidade.setText("Cidade");
 
         BtnConsultarCep.setText("Consultar");
@@ -384,7 +531,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lEstado)
-                            .addComponent(jComboEstado, 0, 142, Short.MAX_VALUE)))
+                            .addComponent(jComboEstado, 0, 145, Short.MAX_VALUE)))
                     .addGroup(pEnderecoLayout.createSequentialGroup()
                         .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lBairro)
@@ -565,26 +712,21 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnNovoActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
-        Object[] botoes = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja Cancelar o Cadastro do Cliente? ",
-                "Confirmação",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                botoes, botoes[0]);
-        if (resposta == 0) {
-            this.dispose();
-        }
+        this.dispose();
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
-        Object[] botoes = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja Finalizar o Cadastro do Cliente? ",
-                "Confirmação",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                botoes, botoes[0]);
-        if (resposta == 0) {
-            this.dispose();
+        if (ValidaCampos()) {
+            AtualizarModelo();
+
+            Exception erro = controle.Salvar();
+
+            if (erro != null) {
+                Utilidades.MostrarMensagemErro(erro);
+            } else {
+                modeloAtualizado = true;
+                this.dispose();
+            }
         }
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
@@ -592,20 +734,29 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         txtCpf.setEnabled(true);
         txtRg.setEnabled(true);
         jComboSexo.setEnabled(true);
-        txtCnpj.setText("");
-        txtCnpj.setEnabled(false);
         jcDataNascimento.setEnabled(true);
+
+        txtCnpj.setEnabled(false);
+
+        txtCnpj.setText("");
+
+        controle.setCliente(new ClientePessoaFisica());
     }//GEN-LAST:event_jRadioPessoaFisicaActionPerformed
 
     private void jRadioPessoaJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioPessoaJuridicaActionPerformed
         txtCnpj.setEnabled(true);
-        txtCpf.setText("");
+
         txtCpf.setEnabled(false);
-        txtRg.setText("");
         txtRg.setEnabled(false);
         jComboSexo.setEnabled(false);
-        jComboSexo.setSelectedItem("Feminino");
         jcDataNascimento.setEnabled(false);
+
+        txtRg.setText("");
+        txtCpf.setText("");
+        jComboSexo.setSelectedIndex(-1);
+        jcDataNascimento.setDate(null);
+
+        controle.setCliente(new ClientePessoaJuridica());
     }//GEN-LAST:event_jRadioPessoaJuridicaActionPerformed
 
     private void BtnConsultarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarCepActionPerformed
