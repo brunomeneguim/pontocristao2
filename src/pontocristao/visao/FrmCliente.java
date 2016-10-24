@@ -124,6 +124,7 @@ public class FrmCliente extends javax.swing.JDialog {
     private void initComponents() {
 
         BtnNovo = new javax.swing.JButton();
+        BtnSair = new javax.swing.JButton();
         BtnEditar = new javax.swing.JButton();
         BtnExcluir = new javax.swing.JButton();
         txtPesquisar = new javax.swing.JTextField();
@@ -133,6 +134,7 @@ public class FrmCliente extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clientes");
+        setPreferredSize(new java.awt.Dimension(834, 505));
         setResizable(false);
 
         BtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnNovo.png"))); // NOI18N
@@ -140,6 +142,15 @@ public class FrmCliente extends javax.swing.JDialog {
         BtnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnNovoActionPerformed(evt);
+            }
+        });
+
+        BtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnSair.png"))); // NOI18N
+        BtnSair.setText("Sair");
+        BtnSair.setPreferredSize(new java.awt.Dimension(139, 65));
+        BtnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSairActionPerformed(evt);
             }
         });
 
@@ -157,6 +168,7 @@ public class FrmCliente extends javax.swing.JDialog {
         BtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnPesquisar.png"))); // NOI18N
         BtnPesquisar.setText("Pesquisar");
 
+        jTableCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("")));
         jTableCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -184,10 +196,13 @@ public class FrmCliente extends javax.swing.JDialog {
                         .addComponent(BtnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnExcluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                         .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnPesquisar)))
+                        .addComponent(BtnPesquisar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -201,7 +216,9 @@ public class FrmCliente extends javax.swing.JDialog {
                     .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -216,6 +233,18 @@ public class FrmCliente extends javax.swing.JDialog {
         //FrmCadastrarCliente frmCadastrarCliente = FrmCadastrarCliente.Mostrar(frame);
 
     }//GEN-LAST:event_BtnEditarActionPerformed
+
+    private void BtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSairActionPerformed
+        Object[] botoes = {"Sim", "Não"};
+        int resposta = JOptionPane.showOptionDialog(null,
+            "Deseja sair da lista de Clientes? ",
+            "Confirmação",
+            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+            botoes, botoes[0]);
+        if (resposta == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_BtnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,6 +293,7 @@ public class FrmCliente extends javax.swing.JDialog {
     private javax.swing.JButton BtnExcluir;
     private javax.swing.JButton BtnNovo;
     private javax.swing.JButton BtnPesquisar;
+    private javax.swing.JButton BtnSair;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableCliente;
     private javax.swing.JTextField txtPesquisar;
