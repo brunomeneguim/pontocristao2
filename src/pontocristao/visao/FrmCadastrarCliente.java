@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.text.*;
 import pontocristao.controle.ControleCliente;
 import pontocristao.modelo.Sexo;
+import pontocristao.modelo.Cliente;
 import pontocristao.util.*;
 
 /**
@@ -14,14 +15,24 @@ import pontocristao.util.*;
  */
 public class FrmCadastrarCliente extends javax.swing.JDialog {
 
+    private static Frame frame;
+    private ControleCliente controle;
+    private Boolean modeloAtualizado = false;
+
+    public Boolean getModeloAtualizado() {
+        return modeloAtualizado;
+    }
+
+    public Cliente getCliente() {
+        return controle.getCliente();
+    }
+
     public FrmCadastrarCliente(java.awt.Frame parent, boolean modal, long id) {
         super(parent, modal);
         initComponents();
 
-        //Abrir centralizado
         this.setLocationRelativeTo(null);
 
-        //Dinâmica dos botões e campos
         txtNome.requestFocus();
         txtCodigo.setEnabled(false);
         jcDataCadastro.setEnabled(false);
@@ -32,48 +43,21 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         txtCnpj.setEnabled(false);
         jComboSexo.setEnabled(false);
 
-        Utilidades utilidades = new Utilidades();
-        Mascara();
-        InicializarControle(id);
-        teste();
-
-    }
-    private static Frame frame;
-    private ControleCliente controle;
-
-    public static FrmCadastrarCliente Mostrar(java.awt.Frame parent, long id) {
-        frame = parent;
-        FrmCadastrarCliente frmCadastrarCliente = new FrmCadastrarCliente(parent, true, id);
-        frmCadastrarCliente.setVisible(true);
-        return frmCadastrarCliente;
-    }
-
-    public void teste() {
-        jcDataNascimento.setDate(new Date());
-        jcDataCadastro.setDate(new Date());
-        txtNome.setText("Bruno");
-        txtCpf.setText("07735781962");
-        txtRg.setText("124292352");
-        txtCnpj.setText("123125481232");
-        txtTelefone.setText("4236265335");
-        txtCelular.setText("4299227422");
-        txtEmail.setText("brunomeneguim@hotmail.com");
-        txtCep.setText("85010300");
-        txtRua.setText("Quintino Bocaiuva");
-        txtNumero.setText("947");
-        txtBairro.setText("Centro");
-        txtCidade.setText("Guarapuava");
-        txtComplemento.setText("Blah");
-    }
-
-    public void Mascara() {
-        //Setando mascáras para campos 
         Utilidades.setMascara("#####-###", txtCep);
         Utilidades.setMascara("##.###.###/####-##", txtCnpj);
         Utilidades.setMascara("(##)####-####", txtTelefone);
         Utilidades.setMascara("(##)####-####", txtCelular);
         Utilidades.setMascara("###.###.###-##", txtCpf);
         Utilidades.setMascara("#########", txtRg);
+
+        InicializarControle(id);
+    }
+
+    public static FrmCadastrarCliente Mostrar(java.awt.Frame parent, long id) {
+        frame = parent;
+        FrmCadastrarCliente frmCadastrarCliente = new FrmCadastrarCliente(parent, true, id);
+        frmCadastrarCliente.setVisible(true);
+        return frmCadastrarCliente;
     }
 
     private void InicializarControle(long id) {
@@ -84,7 +68,6 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
             if (erro != null) {
                 Utilidades.MostrarMensagemErro(erro);
-                //fechar a janela com um resultado falso
             } else {
                 AtualizarCampos();
             }
