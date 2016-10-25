@@ -76,7 +76,7 @@ public class ControleCliente extends ControleBase {
         try {
             Session s = getSessao();
             Cliente cliente = this.RetornarCliente(id, s);
-            
+
             if (cliente != null) {
                 cliente.setExcluido(true);
 
@@ -97,32 +97,34 @@ public class ControleCliente extends ControleBase {
     }
 
     public Exception Salvar() {
-        if (getCliente().getId() > 0) {
-            return Salvar(getModelo());
-        } else {
 
+        if (getCliente().getId() == 0) {
             getCliente().setDataCadastro(new Date());
-
-            Exception erro = null;
-            Session s = getSessao();
-            Transaction transacao = s.getTransaction();
-
-            transacao.begin();
-
-            try {
-                s.save(getCliente().getEndereco());
-                s.save(getCliente());
-
-                transacao.commit();
-
-            } catch (Exception e) {
-                transacao.rollback();
-                erro = e;
-            } finally {
-                return erro;
-            }
         }
 
+        Exception erro = null;
+        Session s = getSessao();
+        Transaction transacao = s.getTransaction();
+
+        transacao.begin();
+
+        try {
+
+            s.saveOrUpdate(getCliente().getEndereco());
+            s.saveOrUpdate(getCliente());
+
+            for (Dependente dependente : getCliente().getDependentes()) {
+                s.saveOrUpdate(dependente);
+            }
+            
+            transacao.commit();
+
+        } catch (Exception e) {
+            transacao.rollback();
+            erro = e;
+        } finally {
+            return erro;
+        }
     }
 
     public Cliente RetornarCliente(long id, Session s) {

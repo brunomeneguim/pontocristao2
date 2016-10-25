@@ -2,7 +2,7 @@ package pontocristao.visao;
 
 import java.awt.*;
 import javax.swing.JOptionPane;
-import javax.swing.text.MaskFormatter;
+import pontocristao.modelo.Dependente;
 import pontocristao.util.Utilidades;
 
 /**
@@ -11,30 +11,68 @@ import pontocristao.util.Utilidades;
  */
 public class FrmCadastrarDependente extends javax.swing.JDialog {
 
+    private Dependente dependente;
+    private static Frame frame;
+    private Boolean modeloAtualizado = false;
+
+    public Boolean getModeloAtualizado() {
+        return modeloAtualizado;
+    }
+
+    public Dependente getDependente() {
+        return dependente;
+    }
+
+    public void setDependente(Dependente dependente) {
+        this.dependente = dependente;
+    }
+
     public FrmCadastrarDependente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        this.setLocationRelativeTo(null);
-        
-        Mascara();
+
+        setLocationRelativeTo(null);
+
+        Utilidades.setMascara("(##)####-####", txtTelefone);
+        Utilidades.setMascara("###.###.###-##", txtCpf);
+        Utilidades.setMascara("#########", txtRg);
     }
 
-    private static Frame frame;
-
-    public static FrmCadastrarDependente Mostrar(java.awt.Frame parent) {
+    public static FrmCadastrarDependente Mostrar(java.awt.Frame parent, Dependente dependente) {
         frame = parent;
         FrmCadastrarDependente frmCadastrarDependente = new FrmCadastrarDependente(parent, true);
+        frmCadastrarDependente.setDependente(dependente);
+        frmCadastrarDependente.AtualizarCampos();
         frmCadastrarDependente.setVisible(true);
         return frmCadastrarDependente;
     }
 
-    public void Mascara() {
-        //Setando mascáras para campos 
-        Utilidades.setMascara("(##)####-####", txtTelefone);
-        Utilidades.setMascara("(##)####-####", txtCelular);
-        Utilidades.setMascara("###.###.###-##", txtCpf);
-        Utilidades.setMascara("#########", txtRg);
+    private void AtualizarCampos() {
+        txtNome.setText(getDependente().getNome());
+        txtTelefone.setText(getDependente().getTelefone());
+        txtRg.setText(getDependente().getRg());
+        txtCpf.setText(getDependente().getCpf());
+    }
+
+    private void AtualizarModelo() {
+        getDependente().setNome(txtNome.getText());
+        getDependente().setCpf(txtCpf.getText());
+        getDependente().setRg(txtRg.getText());
+        getDependente().setTelefone(txtTelefone.getText());
+    }
+
+    private Boolean ValidarCampos() {
+        Boolean retorno = true;
+
+        if (txtNome.getText().equals("")
+                || Utilidades.getValorSemMascara(txtRg) == null
+                || Utilidades.getValorSemMascara(txtCpf) == null) {
+            
+            retorno = false;
+            JOptionPane.showMessageDialog(null, "Todos os campos com o título em negrito, devem estar preenchidos.");
+        }
+        
+        return retorno;
     }
 
     /**
@@ -49,13 +87,11 @@ public class FrmCadastrarDependente extends javax.swing.JDialog {
         lNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lTelefone = new javax.swing.JLabel();
-        lCelular = new javax.swing.JLabel();
         lRg = new javax.swing.JLabel();
         lCpf = new javax.swing.JLabel();
         BtnConfirmar = new javax.swing.JButton();
         BtnCancelar = new javax.swing.JButton();
         txtTelefone = new javax.swing.JFormattedTextField();
-        txtCelular = new javax.swing.JFormattedTextField();
         txtRg = new javax.swing.JFormattedTextField();
         txtCpf = new javax.swing.JFormattedTextField();
 
@@ -63,14 +99,15 @@ public class FrmCadastrarDependente extends javax.swing.JDialog {
         setTitle("Cadastro de Dependentes");
         setResizable(false);
 
+        lNome.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lNome.setText("Nome");
 
         lTelefone.setText("Telefone");
 
-        lCelular.setText("Celular");
-
+        lRg.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lRg.setText("RG");
 
+        lCpf.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lCpf.setText("CPF");
 
         BtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnConfirmar.png"))); // NOI18N
@@ -110,17 +147,11 @@ public class FrmCadastrarDependente extends javax.swing.JDialog {
                                 .addComponent(lNome)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lTelefone)
-                                        .addGap(18, 18, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtTelefone)
-                                        .addGap(17, 17, 17)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lCelular)
-                                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(1, 1, 1))
+                                .addComponent(lTelefone)
+                                .addGap(18, 18, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtTelefone)
+                                .addGap(157, 157, 157))
                             .addComponent(txtNome))
                         .addGap(9, 9, 9))
                     .addGroup(layout.createSequentialGroup()
@@ -137,13 +168,9 @@ public class FrmCadastrarDependente extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lTelefone)
-                    .addComponent(lCelular))
+                .addComponent(lTelefone)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lRg)
@@ -163,26 +190,14 @@ public class FrmCadastrarDependente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
-        Object[] botoes = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja Cancelar o Cadastro do Dependente? ",
-                "Confirmação",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                botoes, botoes[0]);
-        if (resposta == 0) {
-            this.dispose();
-        }
+        dispose();
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
-        Object[] botoes = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja Finalizar o Cadastro do Dependente? ",
-                "Confirmação",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                botoes, botoes[0]);
-        if (resposta == 0) {
-            this.dispose();
+        if (ValidarCampos()) {
+            AtualizarModelo();
+            modeloAtualizado = true;
+            dispose();
         }
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
@@ -231,12 +246,10 @@ public class FrmCadastrarDependente extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton BtnConfirmar;
-    private javax.swing.JLabel lCelular;
     private javax.swing.JLabel lCpf;
     private javax.swing.JLabel lNome;
     private javax.swing.JLabel lRg;
     private javax.swing.JLabel lTelefone;
-    private javax.swing.JFormattedTextField txtCelular;
     private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtNome;
     private javax.swing.JFormattedTextField txtRg;

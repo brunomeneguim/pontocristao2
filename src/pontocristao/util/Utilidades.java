@@ -19,6 +19,19 @@ public class Utilidades {
         }
     }
     
+    public static String getValorSemMascara(JFormattedTextField campo) {
+        String valor = campo.getText();
+        String valorSemMascara = valor
+                .replace(".", "")
+                .replace("-", "")
+                .replace(" ", "")
+                .replace("(", "")
+                .replace(")", "")
+                .replace("/", "")
+                .replace("R$", "");
+        return valorSemMascara;
+    }
+    
     public static Boolean MostrarMensagemPergunta(String titulo, String texto, Boolean padraoSim) {
         Object[] botoes = {"Sim", "Não"};
         int indicePadrao = 0;

@@ -1,12 +1,11 @@
 package pontocristao.visao;
 
 import java.awt.*;
-import java.util.Date;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.*;
 import pontocristao.controle.ControleCliente;
 import pontocristao.modelo.Sexo;
 import pontocristao.modelo.Cliente;
@@ -25,6 +24,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     private static Frame frame;
     private ControleCliente controle;
     private Boolean modeloAtualizado = false;
+    private java.util.List<Dependente> listaDependentes;
 
     public Boolean getModeloAtualizado() {
         return modeloAtualizado;
@@ -89,6 +89,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     }
 
     private void AtualizarCampos() {
+        txtCodigo.setText(String.valueOf(controle.getCliente().getId()));
         txtNome.setText(controle.getCliente().getNome());
         txtCelular.setText(controle.getCliente().getCelular());
         txtTelefone.setText(controle.getCliente().getTelefone());
@@ -137,7 +138,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
             cliente.setRg(txtRg.getText());
             cliente.setSexo(Sexo.valueOf(jComboSexo.getSelectedItem().toString()));
             cliente.setDataNascimento(jcDataNascimento.getDate());
-            
+
         } else {
             ClientePessoaJuridica cliente = (ClientePessoaJuridica) controle.getCliente();
 
@@ -146,37 +147,34 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
     }
 
-    public Boolean ValidaCampos() {
-        //Campos Obrigatórios
+    public Boolean ValidarCampos() {
         Boolean retorno = true;
-        
+
         if (txtNome.getText().equals("")
-                || txtCelular.getText().equals("")
-                || txtTelefone.getText().equals("")
-                || txtCep.getText().equals("")
+                || Utilidades.getValorSemMascara(txtCelular).equals("")
+                || Utilidades.getValorSemMascara(txtTelefone).equals("")
+                || Utilidades.getValorSemMascara(txtCep).equals("")
                 || txtRua.getText().equals("")
                 || txtNumero.getText().equals("")
                 || jComboEstado.getSelectedItem().equals("")
                 || txtBairro.getText().equals("")
                 || txtCidade.getText().equals("")) {
-            
+
             retorno = false;
         }
-        
+
         if (controle.getCliente().getClass() == ClientePessoaFisica.class) {
-            if (txtCpf.getText().equals("")
-                    || txtRg.getText().equals("")
+            if (Utilidades.getValorSemMascara(txtCpf).equals("")
+                    || Utilidades.getValorSemMascara(txtRg).equals("")
                     || jComboSexo.getSelectedItem().equals("")
                     || jcDataNascimento.getDate() == null) {
                 retorno = false;
             }
-            
-        } else {
-            if (txtCnpj.getText().equals("")) {
-                retorno = false;
-            }
+
+        } else if (Utilidades.getValorSemMascara(txtCnpj).equals("")) {
+            retorno = false;
         }
-        
+
         if (!retorno) {
             JOptionPane.showMessageDialog(null, "Todos os campos com o título em negrito, devem estar preenchidos.");
         }
@@ -216,8 +214,13 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
             modeloTabela.removeRow(0);
         }
 
+        listaDependentes = new ArrayList<Dependente>();
+
         for (Dependente dependente : controle.getCliente().getDependentes()) {
-            AdicionarLinha(dependente);
+            if (!dependente.getExcluido()) {
+                listaDependentes.add(dependente);
+                AdicionarLinha(dependente);
+            }
         }
     }
 
@@ -617,9 +620,19 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
         BtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnExcluir.png"))); // NOI18N
         BtnExcluir.setText("Excluir");
+        BtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnExcluirActionPerformed(evt);
+            }
+        });
 
         BtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnEditar.png"))); // NOI18N
         BtnEditar.setText("Editar");
+        BtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditarActionPerformed(evt);
+            }
+        });
 
         jTableDependente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -708,15 +721,25 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoActionPerformed
-        FrmCadastrarDependente frmCadastrarDependente = FrmCadastrarDependente.Mostrar(frame);
+        FrmCadastrarDependente frmCadastrarDependente = FrmCadastrarDependente.Mostrar(frame, new Dependente());
+
+        if (frmCadastrarDependente.getModeloAtualizado()) {
+            Dependente dependente = frmCadastrarDependente.getDependente();
+
+            dependente.setCliente(controle.getCliente());
+
+            AdicionarLinha(dependente);
+            listaDependentes.add(dependente);
+            controle.getCliente().getDependentes().add(dependente);
+        }
     }//GEN-LAST:event_BtnNovoActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
-        if (ValidaCampos()) {
+        if (ValidarCampos()) {
             AtualizarModelo();
 
             Exception erro = controle.Salvar();
@@ -725,7 +748,7 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
                 Utilidades.MostrarMensagemErro(erro);
             } else {
                 modeloAtualizado = true;
-                this.dispose();
+                dispose();
             }
         }
     }//GEN-LAST:event_BtnConfirmarActionPerformed
@@ -760,9 +783,36 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_jRadioPessoaJuridicaActionPerformed
 
     private void BtnConsultarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarCepActionPerformed
-        BuscaCep(txtCep.getText().toString());
+        BuscaCep(txtCep.getText());
         txtNumero.requestFocus();
     }//GEN-LAST:event_BtnConsultarCepActionPerformed
+
+    private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
+        int linhaSelecionada = jTableDependente.getSelectedRow();
+        Dependente dependente = listaDependentes.get(linhaSelecionada);
+        FrmCadastrarDependente frmCadastrarDependente = FrmCadastrarDependente.Mostrar(frame, dependente);
+
+        dependente = frmCadastrarDependente.getDependente();
+
+        if (frmCadastrarDependente.getModeloAtualizado()) {
+            modeloTabela.removeRow(linhaSelecionada);
+            modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(dependente));
+        }
+    }//GEN-LAST:event_BtnEditarActionPerformed
+
+    private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
+        Boolean podeExcluir = Utilidades.MostrarMensagemPergunta("Confirmação", "Tem certeza que deseja excluir o dependente?", false);
+
+        if (podeExcluir) {
+            int linhaSelecionada = jTableDependente.getSelectedRow();
+            Dependente dependente = listaDependentes.get(linhaSelecionada);
+
+            modeloTabela.removeRow(linhaSelecionada);
+            listaDependentes.remove(dependente);
+
+            dependente.setExcluido(true);
+        }
+    }//GEN-LAST:event_BtnExcluirActionPerformed
 
     public void BuscaCep(String cep) {
         try {
