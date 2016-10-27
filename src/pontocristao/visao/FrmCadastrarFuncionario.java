@@ -95,7 +95,7 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
         txtComplemento.setText(controle.getFuncionario().getEndereco().getComplemento());
     }
 
-    private void AtualizarModelo() {
+        private void AtualizarModelo() {
         controle.getFuncionario().setLogin(txtLogin.getText());
         controle.getFuncionario().setDataAdmissao(jcDataAdmissao.getDate());
         controle.getFuncionario().setNome(txtNome.getText());
@@ -185,12 +185,16 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
 
         pInformacoesSistema.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações do Sistema"));
 
+        lLogin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lLogin.setText("Login");
 
+        lSenha.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lSenha.setText("Senha");
 
+        lConfirmacaoSenha.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lConfirmacaoSenha.setText("Confirmação de Senha");
 
+        lDataAdmissao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lDataAdmissao.setText("Data de Admissão");
 
         lDataCadastro.setText("Data de Cadastro");
@@ -248,26 +252,35 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
 
         pInformacoesPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações Pessoais"));
 
+        lTelefone.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lTelefone.setText("Telefone");
 
+        lSexo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lSexo.setText("Sexo");
 
         lCodigo.setText("Código");
 
+        lCpf.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lCpf.setText("CPF");
 
+        lNome.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lNome.setText("Nome");
 
+        lEmail.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lEmail.setText("E-mail");
 
         jComboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Masculino" }));
 
+        lRg.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lRg.setText("RG");
 
+        lDataNascimento.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lDataNascimento.setText("Data de Nascimento");
 
+        lCelular.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lCelular.setText("Celular");
 
+        lCarteiraTrabalho.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lCarteiraTrabalho.setText("Carteira de Trabalho");
 
         javax.swing.GroupLayout pInformacoesPessoaisLayout = new javax.swing.GroupLayout(pInformacoesPessoais);
@@ -373,18 +386,24 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
 
         jComboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
 
+        lEstado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lEstado.setText("Estado");
 
+        lNumero.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lNumero.setText("Número");
 
+        lRua.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lRua.setText("Rua");
 
         lComplemento.setText("Complemento");
 
+        lCep.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lCep.setText("CEP");
 
+        lBairro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lBairro.setText("Bairro");
 
+        lCidade.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lCidade.setText("Cidade");
 
         BtnConsultarCep.setText("Consultar");
@@ -581,10 +600,10 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
                 || txtBairro.getText().equals("")
                 || jComboSexo.getSelectedItem().equals("")
                 || jComboEstado.getSelectedItem().equals("")) {
-            JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos.");
+            JOptionPane.showMessageDialog(null, "Todos os campos em negrito devem estar preenchidos.");
             retorno = false;
         } else if (controle.getFuncionario().getId() == 0 && txtSenha.getPassword().toString().equals("")) {
-            JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos.");
+            JOptionPane.showMessageDialog(null, "Todos os campos em negrito devem estar preenchidos.");
             retorno = false;
         }
 

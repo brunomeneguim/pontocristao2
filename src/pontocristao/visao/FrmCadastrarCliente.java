@@ -245,6 +245,15 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         }
     }
 
+    @Override
+    public void dispose() {
+        if (controle != null) {
+            controle.Dispose();
+        }
+
+        super.dispose();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -3,6 +3,8 @@ package pontocristao.visao;
 import java.awt.*;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
+import pontocristao.controle.ControleFornecedor;
+import pontocristao.modelo.Fornecedor;
 import pontocristao.util.Utilidades;
 
 /**
@@ -11,34 +13,96 @@ import pontocristao.util.Utilidades;
  */
 public class FrmCadastrarFornecedor extends javax.swing.JDialog {
 
-    public FrmCadastrarFornecedor(java.awt.Frame parent, boolean modal) {
+    private static Frame frame;
+    private ControleFornecedor controle;
+    private Boolean modeloAtualizado = false;
+
+    public Boolean getModeloAtualizado() {
+        return modeloAtualizado;
+    }
+
+    public Fornecedor getFornecedor() {
+        return controle.getFornecedor();
+    }
+
+    public FrmCadastrarFornecedor(java.awt.Frame parent, boolean modal, long id) {
         super(parent, modal);
         initComponents();
 
-        //Abrir centralizado
         this.setLocationRelativeTo(null);
-        
-        
-        
 
-        Utilidades utilidades = new Utilidades();
-        Mascara();
+        txtNomeFantasia.requestFocus();
+
+        Utilidades.setMascara("##.###.###/####-##", txtCnpj);
+        Utilidades.setMascara("(##)####-####", txtTelefone);
+        Utilidades.setMascara("(##)####-####", txtCelular);
+
+        InicializarControle(id);
     }
 
-    private static Frame frame;
-
-    public static FrmCadastrarFornecedor Mostrar(java.awt.Frame parent) {
+    public static FrmCadastrarFornecedor Mostrar(java.awt.Frame parent, long id) {
         frame = parent;
-        FrmCadastrarFornecedor frmCadastrarFornecedor = new FrmCadastrarFornecedor(parent, true);
+        FrmCadastrarFornecedor frmCadastrarFornecedor = new FrmCadastrarFornecedor(parent, true, id);
         frmCadastrarFornecedor.setVisible(true);
         return frmCadastrarFornecedor;
     }
 
-    public void Mascara() {
-        //Setando mascáras para campos 
-        Utilidades.setMascara("##.###.###/####-##", txtCnpj);
-        Utilidades.setMascara("(##)####-####", txtTelefone);
-        Utilidades.setMascara("(##)####-####", txtCelular);
+    private void InicializarControle(long id) {
+        this.controle = new ControleFornecedor();
+
+        if (id > 0) {
+            Exception erro = this.controle.RecuperarFornecedor(id);
+
+            if (erro != null) {
+                Utilidades.MostrarMensagemErro(erro);
+            } else {
+                AtualizarCampos();
+            }
+        }
+    }
+
+    private void AtualizarCampos() {
+        txtCelular.setText(controle.getFornecedor().getCelular());
+        txtCnpj.setText(controle.getFornecedor().getCnpj());
+        txtDescricao.setText(controle.getFornecedor().getDescricao());
+        txtInscricaoEstadual.setText(controle.getFornecedor().getInscricaoEstadual());
+        txtNomeFantasia.setText(controle.getFornecedor().getNomeFantasia());
+        txtRazaoSocial.setText(controle.getFornecedor().getRazaoSocial());
+        txtTelefone.setText(controle.getFornecedor().getTelefone());
+    }
+
+    private void AtualizarModelo() {
+        controle.getFornecedor().setCelular(txtCelular.getText());
+        controle.getFornecedor().setCnpj(txtCnpj.getText());
+        controle.getFornecedor().setDescricao(txtDescricao.getText());
+        controle.getFornecedor().setInscricaoEstadual(txtInscricaoEstadual.getText());
+        controle.getFornecedor().setNomeFantasia(txtNomeFantasia.getText());
+        controle.getFornecedor().setRazaoSocial(txtRazaoSocial.getText());
+        controle.getFornecedor().setTelefone(txtTelefone.getText());
+    }
+
+    public Boolean ValidaCampos() {
+        Boolean retorno = true;
+
+        if (txtNomeFantasia.getText().equals("")
+                || Utilidades.getValorSemMascara(txtCnpj).equals("")
+                || Utilidades.getValorSemMascara(txtTelefone).equals("")
+                || txtRazaoSocial.getText().equals("")
+                || txtInscricaoEstadual.getText().equals("")) {
+            retorno = false;
+            JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos.");
+        }
+
+        return retorno;
+    }
+
+    @Override
+    public void dispose() {
+        if (controle != null) {
+            controle.Dispose();
+        }
+
+        super.dispose();
     }
 
     /**
@@ -61,8 +125,6 @@ public class FrmCadastrarFornecedor extends javax.swing.JDialog {
         txtDescricao = new javax.swing.JTextField();
         BtnConfirmar = new javax.swing.JButton();
         BtnCancelar = new javax.swing.JButton();
-        lProduto = new javax.swing.JLabel();
-        jComboProduto = new javax.swing.JComboBox<>();
         txtTelefone = new javax.swing.JFormattedTextField();
         txtCelular = new javax.swing.JFormattedTextField();
         txtCnpj = new javax.swing.JFormattedTextField();
@@ -72,18 +134,23 @@ public class FrmCadastrarFornecedor extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Fornecedores");
 
+        lNomeFantasia.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lNomeFantasia.setText("Nome Fantasia");
 
+        lTelefone.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lTelefone.setText("Telefone");
 
         lCelular.setText("Celular");
 
         ldescricao.setText("Descrição");
 
+        lCnpj.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lCnpj.setText("CNPJ");
 
+        lRazaoSocial.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lRazaoSocial.setText("Razão Social");
 
+        lInscricaoEstadual.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lInscricaoEstadual.setText("Inscrição Estadual");
 
         BtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnConfirmar.png"))); // NOI18N
@@ -101,10 +168,6 @@ public class FrmCadastrarFornecedor extends javax.swing.JDialog {
                 BtnCancelarActionPerformed(evt);
             }
         });
-
-        lProduto.setText("Produtos");
-
-        jComboProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,14 +193,10 @@ public class FrmCadastrarFornecedor extends javax.swing.JDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lCelular)
                                     .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lProduto)
-                        .addGap(532, 532, 532))
+                        .addGap(0, 257, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNomeFantasia)
-                            .addComponent(jComboProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtDescricao, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtRazaoSocial)
                             .addGroup(layout.createSequentialGroup()
@@ -184,12 +243,8 @@ public class FrmCadastrarFornecedor extends javax.swing.JDialog {
                     .addComponent(txtInscricaoEstadual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ldescricao)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lProduto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnCancelar)
@@ -201,27 +256,22 @@ public class FrmCadastrarFornecedor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
-        Object[] botoes = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja Finalizar o Cadastro do Fornecedor? ",
-                "Confirmação",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                botoes, botoes[0]);
-        if (resposta == 0) {
-            this.dispose();
+        if (ValidaCampos()) {
+            AtualizarModelo();
+
+            Exception erro = controle.Salvar();
+
+            if (erro != null) {
+                Utilidades.MostrarMensagemErro(erro);
+            } else {
+                modeloAtualizado = true;
+                this.dispose();
+            }
         }
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
-        Object[] botoes = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja Cancelar o Cadastro do Forncedor? ",
-                "Confirmação",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                botoes, botoes[0]);
-        if (resposta == 0) {
-            this.dispose();
-        }
+        this.dispose();
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
     /**
@@ -254,7 +304,7 @@ public class FrmCadastrarFornecedor extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FrmCadastrarFornecedor dialog = new FrmCadastrarFornecedor(new javax.swing.JFrame(), true);
+                FrmCadastrarFornecedor dialog = new FrmCadastrarFornecedor(new javax.swing.JFrame(), true, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -269,12 +319,10 @@ public class FrmCadastrarFornecedor extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton BtnConfirmar;
-    private javax.swing.JComboBox<String> jComboProduto;
     private javax.swing.JLabel lCelular;
     private javax.swing.JLabel lCnpj;
     private javax.swing.JLabel lInscricaoEstadual;
     private javax.swing.JLabel lNomeFantasia;
-    private javax.swing.JLabel lProduto;
     private javax.swing.JLabel lRazaoSocial;
     private javax.swing.JLabel lTelefone;
     private javax.swing.JLabel ldescricao;

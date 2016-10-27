@@ -241,7 +241,7 @@ public class FrmFuncionario extends javax.swing.JDialog {
             AdicionarLinha(funcionario);
             listaFuncionarios.add(funcionario);
         }
-        
+
         controleFuncionario = new ControleFuncionario();
     }//GEN-LAST:event_BtnNovoActionPerformed
 
@@ -257,12 +257,12 @@ public class FrmFuncionario extends javax.swing.JDialog {
             if (podeExcluir) {
                 int linhaSelecionada = jTabelaFuncionario.getSelectedRow();
                 Funcionario funcionario = listaFuncionarios.get(linhaSelecionada);
-                
+
                 try {
                     controleFuncionario.Excluir(funcionario.getId());
                     modeloTabela.removeRow(linhaSelecionada);
                     listaFuncionarios.remove(funcionario);
-                    
+
                     controleFuncionario = new ControleFuncionario();
                 } catch (Exception e) {
                     Utilidades.MostrarMensagemErro(e);
@@ -278,11 +278,11 @@ public class FrmFuncionario extends javax.swing.JDialog {
             FrmCadastrarFuncionario frmCadastrarFuncionario = FrmCadastrarFuncionario.Mostrar(frame, funcionario.getId());
 
             funcionario = frmCadastrarFuncionario.getFuncionario();
-            
+
             if (frmCadastrarFuncionario.getModeloAtualizado()) {
                 modeloTabela.removeRow(linhaSelecionada);
                 modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(funcionario));
-                
+
                 controleFuncionario = new ControleFuncionario();
             }
         }
@@ -291,10 +291,10 @@ public class FrmFuncionario extends javax.swing.JDialog {
     private void BtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSairActionPerformed
         Object[] botoes = {"Sim", "Não"};
         int resposta = JOptionPane.showOptionDialog(null,
-            "Deseja sair da lista de Clientes? ",
-            "Confirmação",
-            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-            botoes, botoes[0]);
+                "Deseja sair da lista de Clientes? ",
+                "Confirmação",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                botoes, botoes[0]);
         if (resposta == 0) {
             this.dispose();
         }

@@ -2,6 +2,13 @@ package pontocristao.visao;
 
 import java.awt.*;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import pontocristao.controle.ControleFornecedor;
+import pontocristao.modelo.Fornecedor;
+import pontocristao.util.Utilidades;
 
 /**
  *
@@ -9,26 +16,111 @@ import javax.swing.JOptionPane;
  */
 public class FrmFornecedor extends javax.swing.JDialog {
 
-    public FrmFornecedor(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-
-        Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-        this.setBounds(bounds);
-
-        txtPesquisar.requestFocus();
-        BtnEditar.setEnabled(false);
-        BtnExcluir.setEnabled(false);
-
-    }
-
+    private DefaultTableModel modeloTabela;
+    private ControleFornecedor controleFornecedor = new ControleFornecedor();
     private static Frame frame;
+    private java.util.List<Fornecedor> listaFornecedores;
 
     public static FrmFornecedor Mostrar(java.awt.Frame parent) {
         frame = parent;
         FrmFornecedor frmFornecedor = new FrmFornecedor(parent, true);
         frmFornecedor.setVisible(true);
         return frmFornecedor;
+    }
+
+    public FrmFornecedor(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        AjustarTabela();
+
+        Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        this.setBounds(bounds);
+
+        txtPesquisar.requestFocus();
+
+        BtnEditar.setEnabled(false);
+        BtnExcluir.setEnabled(false);
+        
+        ListarFornecedores();
+    }
+
+    private void AjustarTabela() {
+        String[] colunas = new String[]{"Nome fantasia", "Telefone", "Celular", "Descrição", "CNPJ"};
+        modeloTabela = new DefaultTableModel(null, colunas) {
+            @Override
+            public boolean isCellEditable(int row, int col) {
+                return false;
+            }
+        };
+
+        jTableFornecedor.setModel(modeloTabela);
+        jTableFornecedor.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        jTableFornecedor.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent lse) {
+                if (!lse.getValueIsAdjusting()) {
+                    if (jTableFornecedor.getSelectedRow() >= 0) {
+                        BtnEditar.setEnabled(true);
+                        BtnExcluir.setEnabled(true);
+                    } else {
+                        BtnEditar.setEnabled(false);
+                        BtnExcluir.setEnabled(false);
+                    }
+                }
+            }
+        });
+    }
+
+    private void AtualizarTabela(java.util.List<Fornecedor> fornecedores) {
+        while (modeloTabela.getRowCount() > 0) {
+            modeloTabela.removeRow(0);
+        }
+
+        listaFornecedores = fornecedores;
+
+        for (Fornecedor fornecedor : fornecedores) {
+            AdicionarLinha(fornecedor);
+        }
+    }
+
+    private void AdicionarLinha(Fornecedor fornecedor) {
+        modeloTabela.addRow(RetornarNovaLinha(fornecedor));
+    }
+
+    private Object[] RetornarNovaLinha(Fornecedor fornecedor) {
+        return new Object[]{
+            fornecedor.getNomeFantasia(),
+            fornecedor.getTelefone(),
+            fornecedor.getCelular(),
+            fornecedor.getDescricao(),
+            fornecedor.getCnpj()
+        };
+    }
+
+    public void ListarFornecedores() {
+        try {
+            AtualizarTabela(controleFornecedor.RetornarFornecedores());
+        } catch (Exception e) {
+            Utilidades.MostrarMensagemErro(e);
+        }
+    }
+
+    public void ListarFornecedores(String pesquisa) {
+        if (pesquisa != null && pesquisa.length() > 0) {
+            String[] camposPesquisa = new String[]{"nomeFantasia", "telefone", "celular", "descricao", "cnpj"};
+            AtualizarTabela(controleFornecedor.RetornarFornecedores(camposPesquisa, pesquisa));
+        } else {
+            ListarFornecedores();
+        }
+    }
+
+    @Override
+    public void dispose() {
+        if (controleFornecedor != null) {
+            controleFornecedor.Dispose();
+        }
+
+        super.dispose();
     }
 
     /**
@@ -63,12 +155,27 @@ public class FrmFornecedor extends javax.swing.JDialog {
 
         BtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnEditar.png"))); // NOI18N
         BtnEditar.setText("Editar");
+        BtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditarActionPerformed(evt);
+            }
+        });
 
         BtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnExcluir.png"))); // NOI18N
         BtnExcluir.setText("Excluir");
+        BtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnExcluirActionPerformed(evt);
+            }
+        });
 
         BtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnPesquisar.png"))); // NOI18N
         BtnPesquisar.setText("Pesquisar");
+        BtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPesquisarActionPerformed(evt);
+            }
+        });
 
         jTableFornecedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -136,13 +243,21 @@ public class FrmFornecedor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoActionPerformed
-        FrmCadastrarFornecedor frmCadastrarForncedor = FrmCadastrarFornecedor.Mostrar(frame);
+        FrmCadastrarFornecedor frmCadastrarFornecedor = FrmCadastrarFornecedor.Mostrar(frame, 0);
+
+        if (frmCadastrarFornecedor.getModeloAtualizado()) {
+            Fornecedor fornecedor = frmCadastrarFornecedor.getFornecedor();
+            AdicionarLinha(fornecedor);
+            listaFornecedores.add(fornecedor);
+        }
+
+        controleFornecedor = new ControleFornecedor();
     }//GEN-LAST:event_BtnNovoActionPerformed
 
     private void BtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSairActionPerformed
         Object[] botoes = {"Sim", "Não"};
         int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja sair da lista de Clientes? ",
+                "Deseja sair da lista de fornecedores? ",
                 "Confirmação",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                 botoes, botoes[0]);
@@ -150,6 +265,49 @@ public class FrmFornecedor extends javax.swing.JDialog {
             this.dispose();
         }
     }//GEN-LAST:event_BtnSairActionPerformed
+
+    private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
+        if (listaFornecedores != null) {
+            int linhaSelecionada = jTableFornecedor.getSelectedRow();
+            Fornecedor fornecedor = listaFornecedores.get(linhaSelecionada);
+            FrmCadastrarFornecedor frmCadastrarFornecedor = FrmCadastrarFornecedor.Mostrar(frame, fornecedor.getId());
+
+            fornecedor = frmCadastrarFornecedor.getFornecedor();
+
+            if (frmCadastrarFornecedor.getModeloAtualizado()) {
+                modeloTabela.removeRow(linhaSelecionada);
+                modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(fornecedor));
+
+                controleFornecedor = new ControleFornecedor();
+            }
+        }
+    }//GEN-LAST:event_BtnEditarActionPerformed
+
+    private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
+        if (listaFornecedores != null) {
+
+            Boolean podeExcluir = Utilidades.MostrarMensagemPergunta("Confirmação", "Tem certeza que deseja excluir o funcionário?", false);
+
+            if (podeExcluir) {
+                int linhaSelecionada = jTableFornecedor.getSelectedRow();
+                Fornecedor fornecedor = listaFornecedores.get(linhaSelecionada);
+
+                try {
+                    controleFornecedor.Excluir(fornecedor.getId());
+                    modeloTabela.removeRow(linhaSelecionada);
+                    listaFornecedores.remove(fornecedor);
+
+                    controleFornecedor = new ControleFornecedor();
+                } catch (Exception e) {
+                    Utilidades.MostrarMensagemErro(e);
+                }
+            }
+        }
+    }//GEN-LAST:event_BtnExcluirActionPerformed
+
+    private void BtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPesquisarActionPerformed
+        ListarFornecedores(txtPesquisar.getText());
+    }//GEN-LAST:event_BtnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments

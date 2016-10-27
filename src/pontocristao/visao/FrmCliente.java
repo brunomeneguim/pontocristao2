@@ -20,14 +20,14 @@ public class FrmCliente extends javax.swing.JDialog {
     private ControleCliente controleCliente = new ControleCliente(true);
     private static Frame frame;
     private java.util.List<Cliente> listaClientes;
-    
+
     public static FrmCliente Mostrar(java.awt.Frame parent) {
         frame = parent;
         FrmCliente frmCliente = new FrmCliente(parent, true);
         frmCliente.setVisible(true);
         return frmCliente;
     }
-        
+
     public FrmCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -43,7 +43,7 @@ public class FrmCliente extends javax.swing.JDialog {
 
         ListarClientes();
     }
-    
+
     private void AjustarTabela() {
         String[] colunas = new String[]{"Nome", "Telefone", "Celular", "E-mail", "Total de locações"};
         modeloTabela = new DefaultTableModel(null, colunas) {
@@ -70,7 +70,7 @@ public class FrmCliente extends javax.swing.JDialog {
             }
         });
     }
-    
+
     private void AtualizarTabela(java.util.List<Cliente> clientes) {
         while (modeloTabela.getRowCount() > 0) {
             modeloTabela.removeRow(0);
@@ -112,6 +112,15 @@ public class FrmCliente extends javax.swing.JDialog {
         } else {
             ListarClientes();
         }
+    }
+
+    @Override
+    public void dispose() {
+        if (controleCliente != null) {
+            controleCliente.Dispose();
+        }
+
+        super.dispose();
     }
 
     /**
@@ -243,7 +252,7 @@ public class FrmCliente extends javax.swing.JDialog {
             AdicionarLinha(cliente);
             listaClientes.add(cliente);
         }
-        
+
         controleCliente = new ControleCliente(true);
     }//GEN-LAST:event_BtnNovoActionPerformed
 
@@ -254,11 +263,11 @@ public class FrmCliente extends javax.swing.JDialog {
             FrmCadastrarCliente frmCadastrarCliente = FrmCadastrarCliente.Mostrar(frame, cliente.getId());
 
             cliente = frmCadastrarCliente.getCliente();
-            
+
             if (frmCadastrarCliente.getModeloAtualizado()) {
                 modeloTabela.removeRow(linhaSelecionada);
                 modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(cliente));
-                
+
                 controleCliente = new ControleCliente(true);
             }
         }
@@ -268,10 +277,10 @@ public class FrmCliente extends javax.swing.JDialog {
     private void BtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSairActionPerformed
         Object[] botoes = {"Sim", "Não"};
         int resposta = JOptionPane.showOptionDialog(null,
-            "Deseja sair da lista de Clientes? ",
-            "Confirmação",
-            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-            botoes, botoes[0]);
+                "Deseja sair da lista de Clientes? ",
+                "Confirmação",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                botoes, botoes[0]);
         if (resposta == 0) {
             this.dispose();
         }
@@ -285,12 +294,12 @@ public class FrmCliente extends javax.swing.JDialog {
             if (podeExcluir) {
                 int linhaSelecionada = jTableCliente.getSelectedRow();
                 Cliente cliente = listaClientes.get(linhaSelecionada);
-                
+
                 try {
                     controleCliente.Excluir(cliente.getId());
                     modeloTabela.removeRow(linhaSelecionada);
                     listaClientes.remove(cliente);
-                    
+
                     controleCliente = new ControleCliente(true);
                 } catch (Exception e) {
                     Utilidades.MostrarMensagemErro(e);
