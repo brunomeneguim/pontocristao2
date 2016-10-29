@@ -66,9 +66,9 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
         jComboTipoProduto = new javax.swing.JComboBox<>();
         lTipoProduto = new javax.swing.JLabel();
         lFornecedor = new javax.swing.JLabel();
-        txtFornecedor = new javax.swing.JTextField();
         BtnConfirmar = new javax.swing.JButton();
         BtnCancelar = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produtos");
@@ -111,6 +111,8 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,7 +120,12 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFornecedor)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BtnConfirmar)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnCancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -149,12 +156,7 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lTipoProduto)
                                     .addComponent(jComboTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(BtnConfirmar)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnCancelar)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -188,7 +190,7 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lFornecedor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnCancelar)
@@ -268,6 +270,7 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton BtnConfirmar;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboTipoProduto;
     private com.toedter.calendar.JDateChooser jcDataCadastro;
     private javax.swing.JLabel lCodigoBarra;
@@ -280,7 +283,6 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
     private javax.swing.JLabel lValorVenda;
     private javax.swing.JFormattedTextField txtCodigoBarra;
     private javax.swing.JTextField txtCodigoProduto;
-    private javax.swing.JTextField txtFornecedor;
     private javax.swing.JTextField txtNomeProduto;
     private javax.swing.JTextField txtQuantidade;
     private javax.swing.JFormattedTextField txtValorVenda;

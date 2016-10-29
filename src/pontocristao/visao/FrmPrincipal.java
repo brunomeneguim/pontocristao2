@@ -33,6 +33,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         BtnJanelaProduto = new javax.swing.JButton();
         BtnJanelaFuncionario = new javax.swing.JButton();
         BtnJanelaContaPagar = new javax.swing.JButton();
+        btnTipoProduto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Principal");
@@ -79,6 +80,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnTipoProduto.setText("Tipo produto");
+        btnTipoProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTipoProdutoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,30 +94,35 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnJanelaCliente)
-                    .addComponent(BtnJanelaFornecedor)
                     .addComponent(BtnJanelaFilme)
                     .addComponent(BtnJanelaProduto)
-                    .addComponent(BtnJanelaFuncionario)
-                    .addComponent(BtnJanelaContaPagar))
-                .addContainerGap(691, Short.MAX_VALUE))
+                    .addComponent(BtnJanelaContaPagar)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BtnJanelaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnJanelaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnJanelaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(344, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BtnJanelaCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BtnJanelaFornecedor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnJanelaFuncionario)
+                    .addComponent(BtnJanelaFornecedor)
+                    .addComponent(BtnJanelaCliente)
+                    .addComponent(btnTipoProduto))
+                .addGap(35, 35, 35)
                 .addComponent(BtnJanelaFilme)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnJanelaProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BtnJanelaFuncionario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnJanelaContaPagar)
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addContainerGap(315, Short.MAX_VALUE))
         );
 
         BtnJanelaCliente.getAccessibleContext().setAccessibleName("BtnJanelaClientes");
@@ -140,6 +153,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void BtnJanelaContaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJanelaContaPagarActionPerformed
         FrmContaPagar frmContaPagar = FrmContaPagar.Mostrar(this);
     }//GEN-LAST:event_BtnJanelaContaPagarActionPerformed
+
+    private void btnTipoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTipoProdutoActionPerformed
+        FrmTipoProduto frm = FrmTipoProduto.Mostrar(this);
+    }//GEN-LAST:event_btnTipoProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,6 +200,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton BtnJanelaFornecedor;
     private javax.swing.JButton BtnJanelaFuncionario;
     private javax.swing.JButton BtnJanelaProduto;
+    private javax.swing.JButton btnTipoProduto;
     // End of variables declaration//GEN-END:variables
 
 }
