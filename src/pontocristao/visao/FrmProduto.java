@@ -2,6 +2,12 @@ package pontocristao.visao;
 
 import java.awt.*;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.*;
+import javax.swing.table.DefaultTableModel;
+import pontocristao.controle.*;
+import pontocristao.modelo.*;
+import pontocristao.util.Utilidades;
 
 /**
  *
@@ -9,26 +15,102 @@ import javax.swing.JOptionPane;
  */
 public class FrmProduto extends javax.swing.JDialog {
 
+private DefaultTableModel modeloTabela;
+    private ControleProduto controle = new ControleProduto();
+    private static Frame frame;
+    private java.util.List<Produto> lista;
+
+    public static FrmProduto Mostrar(java.awt.Frame parent) {
+        frame = parent;
+        FrmProduto frm = new FrmProduto(parent, true);
+        frm.setVisible(true);
+        return frm;
+    }
+
     public FrmProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        AjustarTabela();
 
         Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
         this.setBounds(bounds);
 
         txtPesquisar.requestFocus();
+
         BtnEditar.setEnabled(false);
         BtnExcluir.setEnabled(false);
 
+        Listar();
     }
 
-    private static Frame frame;
+    private void AjustarTabela() {
+        String[] colunas = new String[]{"Nome", "Valor de venda", "Quantidade", "Fornecedor", "Tipo de produto"};
+        modeloTabela = new DefaultTableModel(null, colunas) {
+            @Override
+            public boolean isCellEditable(int row, int col) {
+                return false;
+            }
+        };
 
-    public static FrmProduto Mostrar(java.awt.Frame parent) {
-        frame = parent;
-        FrmProduto frmProduto = new FrmProduto(parent, true);
-        frmProduto.setVisible(true);
-        return frmProduto;
+        jTableLista.setModel(modeloTabela);
+        jTableLista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        jTableLista.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent lse) {
+                if (!lse.getValueIsAdjusting()) {
+                    if (jTableLista.getSelectedRow() >= 0) {
+                        BtnEditar.setEnabled(true);
+                        BtnExcluir.setEnabled(true);
+                    } else {
+                        BtnEditar.setEnabled(false);
+                        BtnExcluir.setEnabled(false);
+                    }
+                }
+            }
+        });
+    }
+
+    private void AtualizarTabela(java.util.List<Produto> produtos) {
+        while (modeloTabela.getRowCount() > 0) {
+            modeloTabela.removeRow(0);
+        }
+
+        lista = produtos;
+
+        for (Produto produto : produtos) {
+            AdicionarLinha(produto);
+        }
+    }
+
+    private void AdicionarLinha(Produto produto) {
+        modeloTabela.addRow(RetornarNovaLinha(produto));
+    }
+
+    private Object[] RetornarNovaLinha(Produto produto) {
+        return new Object[]{
+            produto.getNome(),
+            produto.getValorVenda(),
+            produto.getQuantidade(),
+            produto.getFornecedor().getNomeFantasia(),
+            produto.getTipoProduto().getDescricao()
+        };
+    }
+
+    public void Listar() {
+        try {
+            AtualizarTabela(controle.RetornarProdutos());
+        } catch (Exception e) {
+            Utilidades.MostrarMensagemErro(e);
+        }
+    }
+
+    public void Listar(String pesquisa) {
+        if (pesquisa != null && pesquisa.length() > 0) {
+            String[] camposPesquisa = new String[]{"nome", "valorvenda", "quantidade", "fornecedor.nomefantasia", "tipoproduto.descricao"};
+            AtualizarTabela(controle.RetornarProdutos(camposPesquisa, pesquisa));
+        } else {
+            Listar();
+        }
     }
 
     /**
@@ -46,7 +128,7 @@ public class FrmProduto extends javax.swing.JDialog {
         txtPesquisar = new javax.swing.JTextField();
         BtnPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableProduto = new javax.swing.JTable();
+        jTableLista = new javax.swing.JTable();
         BtnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -70,7 +152,7 @@ public class FrmProduto extends javax.swing.JDialog {
         BtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnPesquisar.png"))); // NOI18N
         BtnPesquisar.setText("Pesquisar");
 
-        jTableProduto.setModel(new javax.swing.table.DefaultTableModel(
+        jTableLista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -81,7 +163,7 @@ public class FrmProduto extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTableProduto);
+        jScrollPane1.setViewportView(jTableLista);
 
         BtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnSair.png"))); // NOI18N
         BtnSair.setText("Sair");
@@ -201,7 +283,7 @@ public class FrmProduto extends javax.swing.JDialog {
     private javax.swing.JButton BtnPesquisar;
     private javax.swing.JButton BtnSair;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableProduto;
+    private javax.swing.JTable jTableLista;
     private javax.swing.JTextField txtPesquisar;
     // End of variables declaration//GEN-END:variables
 }

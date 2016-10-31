@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class ItemVenda extends ModeloBase {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    private Produto produto;
+    private ProdutoBase produto;
 
     @Column(nullable = false)
     private Integer quantidade;
@@ -21,11 +21,11 @@ public class ItemVenda extends ModeloBase {
     @ManyToOne(optional = false)
     private Venda venda;
 
-    public Produto getProduto() {
+    public ProdutoBase getProduto() {
         return produto;
     }
 
-    public void setProduto(Produto produto) {
+    public void setProduto(ProdutoBase produto) {
         this.produto = produto;
     }
 

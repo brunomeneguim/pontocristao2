@@ -7,7 +7,7 @@ import javax.persistence.*;
  * @author Marcondes
  */
 @Entity
-public class Filme extends Produto {
+public class Filme extends ProdutoBase {
 
     @Column(nullable = false)
     private Boolean lancamento;

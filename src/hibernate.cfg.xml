@@ -9,7 +9,7 @@
         <property name="hibernate.connection.password">root</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
     
         <mapping class="pontocristao.modelo.Caixa"/>
         <mapping class="pontocristao.modelo.Cliente"/>
@@ -36,6 +36,7 @@
         <mapping class="pontocristao.modelo.Pagamento"/>
         <mapping class="pontocristao.modelo.PagamentoLocacao"/>
         <mapping class="pontocristao.modelo.PagamentoVenda"/>
+        <mapping class="pontocristao.modelo.ProdutoBase"/>
         <mapping class="pontocristao.modelo.Produto"/>
         <mapping class="pontocristao.modelo.TabelaPrecoLocacao"/>
         <mapping class="pontocristao.modelo.TipoContaPagar"/>

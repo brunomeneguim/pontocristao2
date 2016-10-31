@@ -30,7 +30,7 @@ public class Fornecedor extends ModeloBase {
     private String inscricaoEstadual;
 
     @OneToMany(mappedBy = "fornecedor")
-    private Set<Produto> produtos = new HashSet<Produto>(0);
+    private Set<ProdutoBase> produtos = new HashSet<ProdutoBase>(0);
 
     public String getNomeFantasia() {
         return nomeFantasia;
@@ -88,11 +88,11 @@ public class Fornecedor extends ModeloBase {
         this.inscricaoEstadual = inscricaoEstadual;
     }
 
-    public Set<Produto> getProdutos() {
+    public Set<ProdutoBase> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(Set<Produto> produtos) {
+    public void setProdutos(Set<ProdutoBase> produtos) {
         this.produtos = produtos;
     }
 

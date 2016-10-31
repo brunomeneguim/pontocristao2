@@ -63,7 +63,6 @@ public class PopularBancoTeste {
 
             Filme filme = RetornarNovoFilme();
             filme.setTipoFilme(tipoFilme);
-            filme.setTipoProduto(tipoProduto);
 
             //Salva um novo filme
             sessao.save(filme);

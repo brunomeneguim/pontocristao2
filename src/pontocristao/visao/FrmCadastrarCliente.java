@@ -77,8 +77,10 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
 
                 if (controle.getCliente().getClass() == ClientePessoaFisica.class) {
                     jRadioPessoaFisica.setSelected(true);
+                    AtualizarTelaPessoaFisica();
                 } else {
                     jRadioPessoaJuridica.setSelected(true);
+                    AtualizarTelaPessoaJuridica();
                 }
                 jRadioPessoaFisica.setEnabled(false);
                 jRadioPessoaJuridica.setEnabled(false);
@@ -242,6 +244,39 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
             AtualizarTabela();
         } catch (Exception e) {
             Utilidades.MostrarMensagemErro(e);
+        }
+    }
+    
+    private void AtualizarTelaPessoaFisica() {
+        txtCpf.setEnabled(true);
+        txtRg.setEnabled(true);
+        jComboSexo.setEnabled(true);
+        jcDataNascimento.setEnabled(true);
+
+        txtCnpj.setEnabled(false);
+
+        txtCnpj.setText("");
+
+        if (controle.getCliente().getId() == 0) {
+            controle.setCliente(new ClientePessoaFisica());
+        }
+    }
+    
+    private void AtualizarTelaPessoaJuridica() {
+        txtCnpj.setEnabled(true);
+
+        txtCpf.setEnabled(false);
+        txtRg.setEnabled(false);
+        jComboSexo.setEnabled(false);
+        jcDataNascimento.setEnabled(false);
+
+        txtRg.setText("");
+        txtCpf.setText("");
+        jComboSexo.setSelectedIndex(-1);
+        jcDataNascimento.setDate(null);
+
+        if (controle.getCliente().getId() == 0) {
+            controle.setCliente(new ClientePessoaJuridica());
         }
     }
 
@@ -763,32 +798,11 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
     private void jRadioPessoaFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioPessoaFisicaActionPerformed
-        txtCpf.setEnabled(true);
-        txtRg.setEnabled(true);
-        jComboSexo.setEnabled(true);
-        jcDataNascimento.setEnabled(true);
-
-        txtCnpj.setEnabled(false);
-
-        txtCnpj.setText("");
-
-        controle.setCliente(new ClientePessoaFisica());
+        AtualizarTelaPessoaFisica();
     }//GEN-LAST:event_jRadioPessoaFisicaActionPerformed
 
     private void jRadioPessoaJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioPessoaJuridicaActionPerformed
-        txtCnpj.setEnabled(true);
-
-        txtCpf.setEnabled(false);
-        txtRg.setEnabled(false);
-        jComboSexo.setEnabled(false);
-        jcDataNascimento.setEnabled(false);
-
-        txtRg.setText("");
-        txtCpf.setText("");
-        jComboSexo.setSelectedIndex(-1);
-        jcDataNascimento.setDate(null);
-
-        controle.setCliente(new ClientePessoaJuridica());
+        AtualizarTelaPessoaJuridica();
     }//GEN-LAST:event_jRadioPessoaJuridicaActionPerformed
 
     private void BtnConsultarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarCepActionPerformed
