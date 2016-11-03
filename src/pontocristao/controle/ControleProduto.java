@@ -30,7 +30,7 @@ public class ControleProduto extends ControleBase {
     }
 
     public List<Produto> RetornarProdutos(String[] camposPesquisa, String textoPesquisa) {
-        String sql = "SELECT * FROM Produto";
+        String sql = "SELECT * FROM Produto JOIN ProdutoBase ON ProdutoBase.id = Produto.id JOIN Fornecedor ON Fornecedor.id = ProdutoBase.fornecedor_id JOIN TipoProduto ON TipoProduto.id = Produto.tipoProduto_id ";
 
         if (camposPesquisa != null && textoPesquisa != null && camposPesquisa.length > 0 && textoPesquisa.length() > 0) {
             sql += " WHERE (";
@@ -40,19 +40,31 @@ public class ControleProduto extends ControleBase {
                 if (i + 1 < camposPesquisa.length) {
                     sql += " OR ";
                 } else {
-                    sql += ") AND excluido = false";
+                    sql += ") AND ProdutoBase.excluido = false";
                 }
             }
         } else {
-            sql += " WHERE excluido = false";
+            sql += " WHERE ProdutoBase.excluido = false";
         }
 
         Query q = this.getSessao().createSQLQuery(sql).addEntity(Produto.class);
         return (List<Produto>) q.list();
     }
+    
+    public  List<Fornecedor> RetornarFornecedores() {
+        String sql = "SELECT * FROM Fornecedor WHERE excluido = false";
+        Query q = this.getSessao().createSQLQuery(sql).addEntity(Fornecedor.class);
+        return (List<Fornecedor>) q.list();
+    }
+    
+    public List<TipoProduto> RetornarTiposProduto() {
+        String sql = "SELECT * FROM TipoProduto WHERE excluido = false";
+        Query q = this.getSessao().createSQLQuery(sql).addEntity(TipoProduto.class);
+        return (List<TipoProduto>) q.list();
+    }
 
     public Exception RecuperarProduto(long id) {
-        String sql = "SELECT * FROM Produto WHERE id = " + id;
+        String sql = "SELECT * FROM Produto JOIN ProdutoBase ON ProdutoBase.Id = Produto.Id WHERE Produto.Id = " + id;
         Exception erro = null;
 
         try {
@@ -101,6 +113,9 @@ public class ControleProduto extends ControleBase {
     }
 
     public Exception Salvar() {
+        if (getProduto().getId() <= 0) {
+            getProduto().setDataCadastro(new Date());
+        }
         return Salvar(getModelo());
     }
 }

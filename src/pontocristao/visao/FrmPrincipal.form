@@ -28,7 +28,6 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="BtnJanelaFilme" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="BtnJanelaProduto" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="BtnJanelaContaPagar" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="BtnJanelaFuncionario" min="-2" pref="100" max="-2" attributes="0"/>
@@ -38,9 +37,11 @@
                       <Component id="BtnJanelaCliente" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnTipoProduto" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="BtnJanelaProduto" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="344" max="32767" attributes="0"/>
+              <EmptySpace pref="226" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -53,12 +54,11 @@
                   <Component id="BtnJanelaFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BtnJanelaCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnTipoProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnJanelaProduto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Component id="BtnJanelaFilme" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="BtnJanelaProduto" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Component id="BtnJanelaContaPagar" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="315" max="32767" attributes="0"/>
           </Group>

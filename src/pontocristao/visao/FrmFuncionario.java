@@ -291,7 +291,7 @@ public class FrmFuncionario extends javax.swing.JDialog {
     private void BtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSairActionPerformed
         Object[] botoes = {"Sim", "Não"};
         int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja sair da lista de Clientes? ",
+                "Deseja sair da lista de funcionários? ",
                 "Confirmação",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                 botoes, botoes[0]);

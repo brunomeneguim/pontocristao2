@@ -106,7 +106,7 @@ private DefaultTableModel modeloTabela;
 
     public void Listar(String pesquisa) {
         if (pesquisa != null && pesquisa.length() > 0) {
-            String[] camposPesquisa = new String[]{"nome", "valorvenda", "quantidade", "fornecedor.nomefantasia", "tipoproduto.descricao"};
+            String[] camposPesquisa = new String[]{"nome", "valorvenda", "quantidade", "Fornecedor.nomeFantasia", "TipoProduto.descricao"};
             AtualizarTabela(controle.RetornarProdutos(camposPesquisa, pesquisa));
         } else {
             Listar();
@@ -145,12 +145,27 @@ private DefaultTableModel modeloTabela;
 
         BtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnEditar.png"))); // NOI18N
         BtnEditar.setText("Editar");
+        BtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditarActionPerformed(evt);
+            }
+        });
 
         BtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnExcluir.png"))); // NOI18N
         BtnExcluir.setText("Excluir");
+        BtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnExcluirActionPerformed(evt);
+            }
+        });
 
         BtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnPesquisar.png"))); // NOI18N
         BtnPesquisar.setText("Pesquisar");
+        BtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPesquisarActionPerformed(evt);
+            }
+        });
 
         jTableLista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -218,13 +233,21 @@ private DefaultTableModel modeloTabela;
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoActionPerformed
-        FrmCadastrarProduto frmCadastrarProduto = FrmCadastrarProduto.Mostrar(frame);
+        FrmCadastrarProduto frm = FrmCadastrarProduto.Mostrar(frame, 0);
+        
+        if (frm.getModeloAtualizado()) {
+            Produto produto = frm.getProduto();
+            AdicionarLinha(produto);
+            lista.add(produto);
+        }
+
+        controle = new ControleProduto();
     }//GEN-LAST:event_BtnNovoActionPerformed
 
     private void BtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSairActionPerformed
         Object[] botoes = {"Sim", "Não"};
         int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja sair da lista de Clientes? ",
+                "Deseja sair da lista de produtos? ",
                 "Confirmação",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                 botoes, botoes[0]);
@@ -232,6 +255,49 @@ private DefaultTableModel modeloTabela;
             this.dispose();
         }
     }//GEN-LAST:event_BtnSairActionPerformed
+
+    private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
+        if (lista != null) {
+            int linhaSelecionada = jTableLista.getSelectedRow();
+            Produto produto = lista.get(linhaSelecionada);
+            FrmCadastrarProduto frm = FrmCadastrarProduto.Mostrar(frame, produto.getId());
+
+            produto = frm.getProduto();
+
+            if (frm.getModeloAtualizado()) {
+                modeloTabela.removeRow(linhaSelecionada);
+                modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(produto));
+
+                controle = new ControleProduto();
+            }
+        }
+    }//GEN-LAST:event_BtnEditarActionPerformed
+
+    private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
+        if (lista != null) {
+
+            Boolean podeExcluir = Utilidades.MostrarMensagemPergunta("Confirmação", "Tem certeza que deseja excluir o produto?", false);
+
+            if (podeExcluir) {
+                int linhaSelecionada = jTableLista.getSelectedRow();
+                Produto produto = lista.get(linhaSelecionada);
+
+                try {
+                    controle.Excluir(produto.getId());
+                    modeloTabela.removeRow(linhaSelecionada);
+                    lista.remove(produto);
+
+                    controle = new ControleProduto();
+                } catch (Exception e) {
+                    Utilidades.MostrarMensagemErro(e);
+                }
+            }
+        }
+    }//GEN-LAST:event_BtnExcluirActionPerformed
+
+    private void BtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPesquisarActionPerformed
+        Listar(txtPesquisar.getText());
+    }//GEN-LAST:event_BtnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
