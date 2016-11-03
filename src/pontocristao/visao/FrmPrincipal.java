@@ -120,9 +120,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(BtnJanelaProduto))
                 .addGap(35, 35, 35)
                 .addComponent(BtnJanelaFilme)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnJanelaContaPagar)
-                .addContainerGap(315, Short.MAX_VALUE))
+                .addContainerGap(344, Short.MAX_VALUE))
         );
 
         BtnJanelaCliente.getAccessibleContext().setAccessibleName("BtnJanelaClientes");
