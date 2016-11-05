@@ -34,6 +34,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         BtnJanelaFuncionario = new javax.swing.JButton();
         BtnJanelaContaPagar = new javax.swing.JButton();
         btnTipoProduto = new javax.swing.JButton();
+        btnTipoFilme = new javax.swing.JButton();
+        btnTabelaPrecoLocacao = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Principal");
@@ -87,14 +89,27 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnTipoFilme.setText("Tipo filme");
+        btnTipoFilme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTipoFilmeActionPerformed(evt);
+            }
+        });
+
+        btnTabelaPrecoLocacao.setText("Tabela de preços de locação");
+        btnTabelaPrecoLocacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTabelaPrecoLocacaoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnJanelaFilme)
                     .addComponent(BtnJanelaContaPagar)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BtnJanelaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -103,10 +118,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(BtnJanelaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnTipoFilme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnTipoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(BtnJanelaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(226, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(BtnJanelaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(BtnJanelaFilme, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnTabelaPrecoLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,12 +139,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(BtnJanelaFornecedor)
                     .addComponent(BtnJanelaCliente)
                     .addComponent(btnTipoProduto)
-                    .addComponent(BtnJanelaProduto))
-                .addGap(35, 35, 35)
-                .addComponent(BtnJanelaFilme)
+                    .addComponent(BtnJanelaProduto)
+                    .addComponent(BtnJanelaFilme))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTipoFilme)
+                    .addComponent(btnTabelaPrecoLocacao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
                 .addComponent(BtnJanelaContaPagar)
-                .addContainerGap(344, Short.MAX_VALUE))
+                .addGap(167, 167, 167))
         );
 
         BtnJanelaCliente.getAccessibleContext().setAccessibleName("BtnJanelaClientes");
@@ -157,6 +182,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnTipoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTipoProdutoActionPerformed
         FrmTipoProduto frm = FrmTipoProduto.Mostrar(this);
     }//GEN-LAST:event_btnTipoProdutoActionPerformed
+
+    private void btnTipoFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTipoFilmeActionPerformed
+        FrmTipoFilme frm = FrmTipoFilme.Mostrar(this);
+    }//GEN-LAST:event_btnTipoFilmeActionPerformed
+
+    private void btnTabelaPrecoLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTabelaPrecoLocacaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTabelaPrecoLocacaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,6 +233,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton BtnJanelaFornecedor;
     private javax.swing.JButton BtnJanelaFuncionario;
     private javax.swing.JButton BtnJanelaProduto;
+    private javax.swing.JButton btnTabelaPrecoLocacao;
+    private javax.swing.JButton btnTipoFilme;
     private javax.swing.JButton btnTipoProduto;
     // End of variables declaration//GEN-END:variables
 

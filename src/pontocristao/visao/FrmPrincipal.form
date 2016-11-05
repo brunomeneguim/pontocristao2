@@ -24,24 +24,33 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="BtnJanelaFilme" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="BtnJanelaContaPagar" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Component id="BtnJanelaContaPagar" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Component id="BtnJanelaFuncionario" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="BtnJanelaFornecedor" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="BtnJanelaCliente" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnTipoProduto" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnTipoFilme" max="32767" attributes="0"/>
+                          <Component id="btnTipoProduto" pref="100" max="32767" attributes="0"/>
+                      </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="BtnJanelaProduto" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="BtnJanelaProduto" min="-2" pref="100" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="BtnJanelaFilme" min="-2" pref="100" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="btnTabelaPrecoLocacao" min="-2" pref="218" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="226" max="32767" attributes="0"/>
+              <EmptySpace pref="101" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -55,12 +64,16 @@
                   <Component id="BtnJanelaCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnTipoProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BtnJanelaProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnJanelaFilme" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-              <Component id="BtnJanelaFilme" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnTipoFilme" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnTabelaPrecoLocacao" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="212" max="32767" attributes="0"/>
               <Component id="BtnJanelaContaPagar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="344" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -123,6 +136,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTipoProdutoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTipoFilme">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tipo filme"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTipoFilmeActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTabelaPrecoLocacao">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tabela de pre&#xe7;os de loca&#xe7;&#xe3;o"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTabelaPrecoLocacaoActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

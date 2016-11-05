@@ -13,21 +13,21 @@ import pontocristao.util.Utilidades;
  *
  * @author Marcondes
  */
-public class FrmFilme extends javax.swing.JDialog {
+public class FrmTipoFilme extends javax.swing.JDialog {
 
-private DefaultTableModel modeloTabela;
-    private ControleFilme controle = new ControleFilme();
+    private DefaultTableModel modeloTabela;
+    private ControleTipoFilme controle = new ControleTipoFilme();
     private static Frame frame;
-    private java.util.List<Filme> lista;
+    private java.util.List<TipoFilme> lista;
 
-    public static FrmFilme Mostrar(java.awt.Frame parent) {
+    public static FrmTipoFilme Mostrar(java.awt.Frame parent) {
         frame = parent;
-        FrmFilme frm = new FrmFilme(parent, true);
+        FrmTipoFilme frm = new FrmTipoFilme(parent, true);
         frm.setVisible(true);
         return frm;
     }
 
-    public FrmFilme(java.awt.Frame parent, boolean modal) {
+    public FrmTipoFilme(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         AjustarTabela();
@@ -44,7 +44,7 @@ private DefaultTableModel modeloTabela;
     }
 
     private void AjustarTabela() {
-        String[] colunas = new String[]{"Nome", "Valor de venda", "Quantidade", "Fornecedor", "Tipo de filme"};
+        String[] colunas = new String[]{"Descrição"};
         modeloTabela = new DefaultTableModel(null, colunas) {
             @Override
             public boolean isCellEditable(int row, int col) {
@@ -70,35 +70,31 @@ private DefaultTableModel modeloTabela;
         });
     }
 
-    private void AtualizarTabela(java.util.List<Filme> filmes) {
+    private void AtualizarTabela(java.util.List<TipoFilme> tiposFilme) {
         while (modeloTabela.getRowCount() > 0) {
             modeloTabela.removeRow(0);
         }
 
-        lista = filmes;
+        lista = tiposFilme;
 
-        for (Filme filme : filmes) {
-            AdicionarLinha(filme);
+        for (TipoFilme tipoFilme : tiposFilme) {
+            AdicionarLinha(tipoFilme);
         }
     }
 
-    private void AdicionarLinha(Filme filme) {
-        modeloTabela.addRow(RetornarNovaLinha(filme));
+    private void AdicionarLinha(TipoFilme tipoFilme) {
+        modeloTabela.addRow(RetornarNovaLinha(tipoFilme));
     }
 
-    private Object[] RetornarNovaLinha(Filme filme) {
+    private Object[] RetornarNovaLinha(TipoFilme tipoFilme) {
         return new Object[]{
-            filme.getNome(),
-            filme.getValorVenda(),
-            filme.getQuantidade(),
-            filme.getFornecedor().getNomeFantasia(),
-            filme.getTipoFilme().getDescricao()
+            tipoFilme.getDescricao()
         };
     }
 
     public void Listar() {
         try {
-            AtualizarTabela(controle.RetornarFilmes());
+            AtualizarTabela(controle.RetornarTiposProduto());
         } catch (Exception e) {
             Utilidades.MostrarMensagemErro(e);
         }
@@ -106,8 +102,8 @@ private DefaultTableModel modeloTabela;
 
     public void Listar(String pesquisa) {
         if (pesquisa != null && pesquisa.length() > 0) {
-            String[] camposPesquisa = new String[]{"nome", "valorvenda", "quantidade", "Fornecedor.nomeFantasia", "TipoFilme.descricao"};
-            AtualizarTabela(controle.RetornarFilmes(camposPesquisa, pesquisa));
+            String[] camposPesquisa = new String[]{"descricao"};
+            AtualizarTabela(controle.RetornarTiposProduto(camposPesquisa, pesquisa));
         } else {
             Listar();
         }
@@ -122,32 +118,31 @@ private DefaultTableModel modeloTabela;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BtnNovo = new javax.swing.JButton();
         BtnEditar = new javax.swing.JButton();
-        BtnExcluir = new javax.swing.JButton();
+        BtnSair = new javax.swing.JButton();
         txtPesquisar = new javax.swing.JTextField();
+        BtnExcluir = new javax.swing.JButton();
         BtnPesquisar = new javax.swing.JButton();
+        BtnNovo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLista = new javax.swing.JTable();
-        BtnSair1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Filme");
-        setResizable(false);
-
-        BtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnNovo.png"))); // NOI18N
-        BtnNovo.setText("Novo");
-        BtnNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnNovoActionPerformed(evt);
-            }
-        });
 
         BtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnEditar.png"))); // NOI18N
         BtnEditar.setText("Editar");
         BtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnEditarActionPerformed(evt);
+            }
+        });
+
+        BtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnSair.png"))); // NOI18N
+        BtnSair.setText("Sair");
+        BtnSair.setPreferredSize(new java.awt.Dimension(139, 65));
+        BtnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSairActionPerformed(evt);
             }
         });
 
@@ -167,6 +162,14 @@ private DefaultTableModel modeloTabela;
             }
         });
 
+        BtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnNovo.png"))); // NOI18N
+        BtnNovo.setText("Novo");
+        BtnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnNovoActionPerformed(evt);
+            }
+        });
+
         jTableLista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -179,15 +182,6 @@ private DefaultTableModel modeloTabela;
             }
         ));
         jScrollPane1.setViewportView(jTableLista);
-
-        BtnSair1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnSair.png"))); // NOI18N
-        BtnSair1.setText("Sair");
-        BtnSair1.setPreferredSize(new java.awt.Dimension(139, 65));
-        BtnSair1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnSair1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -203,13 +197,13 @@ private DefaultTableModel modeloTabela;
                         .addComponent(BtnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnExcluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
                         .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnPesquisar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(BtnSair1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(BtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -223,71 +217,59 @@ private DefaultTableModel modeloTabela;
                     .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BtnSair1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoActionPerformed
-        FrmCadastrarFilme frm = FrmCadastrarFilme.Mostrar(frame, 0);
-        
-        if (frm.getModeloAtualizado()) {
-            Filme filme = frm.getFilme();
-            AdicionarLinha(filme);
-            lista.add(filme);
-        }
-
-        controle = new ControleFilme();
-    }//GEN-LAST:event_BtnNovoActionPerformed
-
-    private void BtnSair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSair1ActionPerformed
-        Object[] botoes = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja sair da lista de filmes? ",
-                "Confirmação",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                botoes, botoes[0]);
-        if (resposta == 0) {
-            this.dispose();
-        }
-    }//GEN-LAST:event_BtnSair1ActionPerformed
-
     private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
         if (lista != null) {
             int linhaSelecionada = jTableLista.getSelectedRow();
-            Filme filme = lista.get(linhaSelecionada);
-            FrmCadastrarFilme frm = FrmCadastrarFilme.Mostrar(frame, filme.getId());
+            TipoFilme tipoFilme = lista.get(linhaSelecionada);
+            FrmCadastrarTipoFilme frm = FrmCadastrarTipoFilme.Mostrar(frame, tipoFilme.getId());
 
-            filme = frm.getFilme();
+            tipoFilme = frm.getTipoFilme();
 
             if (frm.getModeloAtualizado()) {
                 modeloTabela.removeRow(linhaSelecionada);
-                modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(filme));
+                modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(tipoFilme));
 
-                controle = new ControleFilme();
+                controle = new ControleTipoFilme();
             }
         }
     }//GEN-LAST:event_BtnEditarActionPerformed
 
+    private void BtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSairActionPerformed
+        Object[] botoes = {"Sim", "Não"};
+        int resposta = JOptionPane.showOptionDialog(null,
+            "Deseja sair da lista de tipos de filme?",
+            "Confirmação",
+            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+            botoes, botoes[0]);
+        if (resposta == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_BtnSairActionPerformed
+
     private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
         if (lista != null) {
 
-            Boolean podeExcluir = Utilidades.MostrarMensagemPergunta("Confirmação", "Tem certeza que deseja excluir o filme?", false);
+            Boolean podeExcluir = Utilidades.MostrarMensagemPergunta("Confirmação", "Tem certeza que deseja excluir o tipo de filme?", false);
 
             if (podeExcluir) {
                 int linhaSelecionada = jTableLista.getSelectedRow();
-                Filme filme = lista.get(linhaSelecionada);
+                TipoFilme tipoFilme = lista.get(linhaSelecionada);
 
                 try {
-                    controle.Excluir(filme.getId());
+                    controle.Excluir(tipoFilme.getId());
                     modeloTabela.removeRow(linhaSelecionada);
-                    lista.remove(filme);
+                    lista.remove(tipoFilme);
 
-                    controle = new ControleFilme();
+                    controle = new ControleTipoFilme();
                 } catch (Exception e) {
                     Utilidades.MostrarMensagemErro(e);
                 }
@@ -298,6 +280,18 @@ private DefaultTableModel modeloTabela;
     private void BtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPesquisarActionPerformed
         Listar(txtPesquisar.getText());
     }//GEN-LAST:event_BtnPesquisarActionPerformed
+
+    private void BtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoActionPerformed
+        FrmCadastrarTipoFilme frm = FrmCadastrarTipoFilme.Mostrar(frame, 0);
+
+        if (frm.getModeloAtualizado()) {
+            TipoFilme tipoFilme = frm.getTipoFilme();
+            AdicionarLinha(tipoFilme);
+            lista.add(tipoFilme);
+        }
+
+        controle = new ControleTipoFilme();
+    }//GEN-LAST:event_BtnNovoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -316,23 +310,20 @@ private DefaultTableModel modeloTabela;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmFilme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTipoFilme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmFilme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTipoFilme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmFilme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTipoFilme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmFilme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTipoFilme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FrmFilme dialog = new FrmFilme(new javax.swing.JFrame(), true);
+                FrmTipoFilme dialog = new FrmTipoFilme(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -349,7 +340,7 @@ private DefaultTableModel modeloTabela;
     private javax.swing.JButton BtnExcluir;
     private javax.swing.JButton BtnNovo;
     private javax.swing.JButton BtnPesquisar;
-    private javax.swing.JButton BtnSair1;
+    private javax.swing.JButton BtnSair;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableLista;
     private javax.swing.JTextField txtPesquisar;
