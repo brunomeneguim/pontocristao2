@@ -188,7 +188,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTipoFilmeActionPerformed
 
     private void btnTabelaPrecoLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTabelaPrecoLocacaoActionPerformed
-        // TODO add your handling code here:
+        FrmTabelaPrecoLocacao frm = FrmTabelaPrecoLocacao.Mostrar(this);
     }//GEN-LAST:event_btnTabelaPrecoLocacaoActionPerformed
 
     /**

@@ -15,7 +15,7 @@ import pontocristao.util.Utilidades;
  */
 public class FrmProduto extends javax.swing.JDialog {
 
-private DefaultTableModel modeloTabela;
+    private DefaultTableModel modeloTabela;
     private ControleProduto controle = new ControleProduto();
     private static Frame frame;
     private java.util.List<Produto> lista;
@@ -234,7 +234,7 @@ private DefaultTableModel modeloTabela;
 
     private void BtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoActionPerformed
         FrmCadastrarProduto frm = FrmCadastrarProduto.Mostrar(frame, 0);
-        
+
         if (frm.getModeloAtualizado()) {
             Produto produto = frm.getProduto();
             AdicionarLinha(produto);
