@@ -190,7 +190,7 @@ public class FrmCadastrarFilme extends javax.swing.JDialog {
         });
 
         lFornecedor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lFornecedor.setText("Fornecedor");
+        lFornecedor.setText("Fornecedor*");
 
         BtnConfirmar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnConfirmar.png"))); // NOI18N
         BtnConfirmar1.setText("Confirmar");
@@ -201,16 +201,16 @@ public class FrmCadastrarFilme extends javax.swing.JDialog {
         });
 
         lTipoProduto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lTipoProduto.setText("Tipo do filme");
+        lTipoProduto.setText("Tipo do filme*");
 
         lQuantidade.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lQuantidade.setText("Quantidade");
+        lQuantidade.setText("Quantidade*");
 
         lValorVenda.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lValorVenda.setText("Valor de Venda");
+        lValorVenda.setText("Valor de Venda*");
 
         lNomeProduto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lNomeProduto.setText("Nome");
+        lNomeProduto.setText("Nome*");
 
         txtCodigo.setEditable(false);
         txtCodigo.setBackground(new java.awt.Color(255, 255, 255));
@@ -380,7 +380,6 @@ public class FrmCadastrarFilme extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCancelar;
-    private javax.swing.JButton BtnConfirmar;
     private javax.swing.JButton BtnConfirmar1;
     private javax.swing.JCheckBox chkLancamento;
     private javax.swing.JComboBox<String> jComboFornecedor;

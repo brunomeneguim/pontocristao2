@@ -102,7 +102,7 @@ public class FrmCadastrarTipoProduto extends javax.swing.JDialog {
         setTitle("Cadastro de tipo de produto");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("Descrição");
+        jLabel1.setText("Descrição*");
 
         BtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnConfirmar.png"))); // NOI18N
         BtnConfirmar.setText("Confirmar");

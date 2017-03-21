@@ -82,7 +82,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Valor normal"/>
+        <Property name="text" type="java.lang.String" value="Valor normal*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="jspValorNormal">
@@ -97,7 +97,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Valor de lan&#xe7;amento"/>
+        <Property name="text" type="java.lang.String" value="Valor de lan&#xe7;amento*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="jspValorLancamento">
@@ -119,7 +119,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Multa di&#xe1;ria por atraso"/>
+        <Property name="text" type="java.lang.String" value="Multa di&#xe1;ria por atraso*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="BtnConfirmar">

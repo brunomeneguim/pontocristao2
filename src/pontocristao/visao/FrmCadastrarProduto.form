@@ -158,7 +158,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Nome do Produto"/>
+        <Property name="text" type="java.lang.String" value="Nome do Produto*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNomeProduto">
@@ -168,7 +168,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Valor de Venda"/>
+        <Property name="text" type="java.lang.String" value="Valor de Venda*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lQuantidade">
@@ -176,7 +176,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Quantidade"/>
+        <Property name="text" type="java.lang.String" value="Quantidade*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboTipoProduto">
@@ -194,7 +194,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Tipo do Produto"/>
+        <Property name="text" type="java.lang.String" value="Tipo do Produto*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lFornecedor">
@@ -202,7 +202,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Fornecedor"/>
+        <Property name="text" type="java.lang.String" value="Fornecedor*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="BtnConfirmar">

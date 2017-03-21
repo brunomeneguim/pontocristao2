@@ -106,19 +106,19 @@ public class FrmTabelaPrecoLocacao extends javax.swing.JDialog {
         setTitle("Tabela de preços de locação");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("Valor normal");
+        jLabel1.setText("Valor normal*");
 
         jspValorNormal.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setText("Valor de lançamento");
+        jLabel2.setText("Valor de lançamento*");
 
         jspValorLancamento.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
 
         jspValorMultaDiaria.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel3.setText("Multa diária por atraso");
+        jLabel3.setText("Multa diária por atraso*");
 
         BtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnConfirmar.png"))); // NOI18N
         BtnConfirmar.setText("Confirmar");

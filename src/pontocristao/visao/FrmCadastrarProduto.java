@@ -184,19 +184,19 @@ public class FrmCadastrarProduto extends javax.swing.JDialog {
         lDataCadastro.setText("Data de Cadastro");
 
         lNomeProduto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lNomeProduto.setText("Nome do Produto");
+        lNomeProduto.setText("Nome do Produto*");
 
         lValorVenda.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lValorVenda.setText("Valor de Venda");
+        lValorVenda.setText("Valor de Venda*");
 
         lQuantidade.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lQuantidade.setText("Quantidade");
+        lQuantidade.setText("Quantidade*");
 
         lTipoProduto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lTipoProduto.setText("Tipo do Produto");
+        lTipoProduto.setText("Tipo do Produto*");
 
         lFornecedor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lFornecedor.setText("Fornecedor");
+        lFornecedor.setText("Fornecedor*");
 
         BtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnConfirmar.png"))); // NOI18N
         BtnConfirmar.setText("Confirmar");
