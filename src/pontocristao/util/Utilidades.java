@@ -49,6 +49,12 @@ public class Utilidades {
     public static void MostrarMensagemErro(Exception erro) {
         Object[] botoes = {"Ok"};
         JOptionPane.showOptionDialog(null, erro.getMessage(), "Ocorreu um erro inesperado!", JOptionPane.DEFAULT_OPTION,
-                JOptionPane.ERROR, null, botoes, botoes[0]);
+                JOptionPane.ERROR_MESSAGE, null, botoes, botoes[0]);
+    }
+    
+    public static void MostrarMensagem(String titulo, String texto) {
+        Object[] botoes = {"Ok"};
+        JOptionPane.showOptionDialog(null, texto, titulo, JOptionPane.DEFAULT_OPTION,
+                JOptionPane.ERROR_MESSAGE, null, botoes, botoes[0]);
     }
 }

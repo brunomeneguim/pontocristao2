@@ -116,7 +116,7 @@ public class FrmCadastrarFuncionario extends javax.swing.JDialog {
         controle.getFuncionario().getEndereco().setComplemento(txtComplemento.getText());
 
         if (txtSenha.getPassword().length > 0) {
-            controle.getFuncionario().setSenha(txtSenha.getPassword().toString());
+            controle.getFuncionario().setSenha(String.valueOf(txtSenha.getPassword()));
         }
     }
 

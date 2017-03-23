@@ -1,13 +1,25 @@
 package pontocristao.visao;
 
+import java.awt.Frame;
 import javax.swing.JOptionPane;
+import pontocristao.controle.ControleLogin;
+import pontocristao.modelo.Funcionario;
 
 public class FrmLogin extends javax.swing.JDialog {
 
-    /** Creates new form Login */
+    private ControleLogin controle;
+    
     public FrmLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        this.setLocationRelativeTo(null);
+        
+        InicializarControle();
+    }
+    
+    private void InicializarControle() {
+        this.controle = new ControleLogin();
     }
 
     @SuppressWarnings("unchecked")
@@ -99,7 +111,15 @@ public class FrmLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSairActionPerformed
 
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
- 
+        Funcionario f = controle.FazerLogin(txtUsuario.getText(), String.valueOf(pSenha.getPassword()));
+        
+        if(f != null)
+        {
+            FrmPrincipal frame = new FrmPrincipal();
+            frame.setVisible(true);
+            
+            this.dispose();
+        }
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
     /**

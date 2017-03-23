@@ -27,7 +27,11 @@ public abstract class ControleBase {
     
     public ControleBase()
     {
-        sessao = HibernateUtil.getSessionFactory().openSession();
+        try{
+            sessao = HibernateUtil.getSessionFactory().openSession();
+        } catch(Exception e){
+            Exception erro = e;
+        }
     }
     
     public Exception Salvar(ModeloBase modelo) {

@@ -1,6 +1,7 @@
 package pontocristao.visao;
 
 import javax.swing.JOptionPane;
+import pontocristao.controle.ControleSistema;
 import pontocristao.teste.PopularBancoTeste;
 
 /**
@@ -17,6 +18,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         this.setExtendedState(MAXIMIZED_BOTH);
         //PopularBancoTeste.Popular();
+        
+        LblFuncionarioLogado.setText(ControleSistema.FuncionarioLogado.getNome());
     }
 
     /**
@@ -38,7 +41,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnTipoFilme = new javax.swing.JButton();
         btnTabelaPrecoLocacao = new javax.swing.JButton();
         BtnSair = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        LblFuncionarioLogado = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -142,7 +145,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Usuário Logado no Sistema");
+        LblFuncionarioLogado.setText("Usuário Logado no Sistema");
 
         jLabel2.setText("Data e Hora");
 
@@ -297,10 +300,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BtnJanelaContaPagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(126, 126, 126)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1)
+                    .addComponent(LblFuncionarioLogado)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(BtnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
@@ -327,7 +329,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(btnTabelaPrecoLocacao, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
                     .addComponent(BtnJanelaContaPagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(43, 43, 43)
-                .addComponent(jLabel1)
+                .addComponent(LblFuncionarioLogado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
@@ -417,6 +419,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             botoes, botoes[0]);
         if (resposta == 0) {
             this.dispose();
+            System.exit(0);
         }
     }//GEN-LAST:event_BtnSairActionPerformed
 
@@ -463,10 +466,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton BtnJanelaFuncionario;
     private javax.swing.JButton BtnJanelaProduto;
     private javax.swing.JButton BtnSair;
+    private javax.swing.JLabel LblFuncionarioLogado;
     private javax.swing.JButton btnTabelaPrecoLocacao;
     private javax.swing.JButton btnTipoFilme;
     private javax.swing.JButton btnTipoProduto;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
