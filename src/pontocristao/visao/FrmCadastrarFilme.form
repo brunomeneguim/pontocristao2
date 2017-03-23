@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Cadastro de Filmes"/>
@@ -184,7 +184,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Fornecedor"/>
+        <Property name="text" type="java.lang.String" value="Fornecedor*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="BtnConfirmar1">
@@ -203,7 +203,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Tipo do filme"/>
+        <Property name="text" type="java.lang.String" value="Tipo do filme*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboTipoFilme">
@@ -221,7 +221,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Quantidade"/>
+        <Property name="text" type="java.lang.String" value="Quantidade*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lValorVenda">
@@ -229,7 +229,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Valor de Venda"/>
+        <Property name="text" type="java.lang.String" value="Valor de Venda*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNomeProduto">
@@ -239,7 +239,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Nome"/>
+        <Property name="text" type="java.lang.String" value="Nome*"/>
       </Properties>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jcDataCadastro">

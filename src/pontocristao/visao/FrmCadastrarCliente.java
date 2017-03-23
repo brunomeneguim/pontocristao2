@@ -361,18 +361,18 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         lDataCadastro.setText("Data do Cadastro");
 
         lTelefone.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lTelefone.setText("Telefone");
+        lTelefone.setText("Telefone*");
 
         lSexo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lSexo.setText("Sexo");
+        lSexo.setText("Sexo*");
 
         lCodigo.setText("Código");
 
         lCpf.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lCpf.setText("CPF");
+        lCpf.setText("CPF*");
 
         lNome.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lNome.setText("Nome");
+        lNome.setText("Nome*");
 
         lEmail.setText("E-mail");
 
@@ -380,16 +380,16 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         jComboSexo.setSelectedIndex(-1);
 
         lRg.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lRg.setText("RG");
+        lRg.setText("RG*");
 
         lDataNascimento.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lDataNascimento.setText("Data de Nascimento");
+        lDataNascimento.setText("Data de Nascimento*");
 
         lCelular.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lCelular.setText("Celular");
+        lCelular.setText("Celular*");
 
         lCnpj.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lCnpj.setText("CNPJ");
+        lCnpj.setText("CNPJ*");
 
         jButtonGroupTipoCliente.add(jRadioPessoaJuridica);
         jRadioPessoaJuridica.setText("Pessoa Jurídica");
@@ -452,13 +452,9 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
                                         .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(pInformacoesPessoaisLayout.createSequentialGroup()
-                                                .addComponent(lCodigo)
-                                                .addGap(0, 0, Short.MAX_VALUE)))
-                                        .addGap(18, 18, 18)
+                                            .addComponent(lCodigo)
+                                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, Short.MAX_VALUE)
                                         .addGroup(pInformacoesPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lNome)
                                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -536,24 +532,24 @@ public class FrmCadastrarCliente extends javax.swing.JDialog {
         jComboEstado.setSelectedIndex(-1);
 
         lEstado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lEstado.setText("Estado");
+        lEstado.setText("Estado*");
 
         lNumero.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lNumero.setText("Número");
+        lNumero.setText("Número*");
 
         lRua.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lRua.setText("Rua");
+        lRua.setText("Rua*");
 
         lComplemento.setText("Complemento");
 
         lCep.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lCep.setText("CEP");
+        lCep.setText("CEP*");
 
         lBairro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lBairro.setText("Bairro");
+        lBairro.setText("Bairro*");
 
         lCidade.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lCidade.setText("Cidade");
+        lCidade.setText("Cidade*");
 
         BtnConsultarCep.setText("Consultar");
         BtnConsultarCep.addActionListener(new java.awt.event.ActionListener() {

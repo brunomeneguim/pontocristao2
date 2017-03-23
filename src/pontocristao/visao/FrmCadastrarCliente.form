@@ -158,16 +158,10 @@
                                           </Group>
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                      <Component id="txtCodigo" min="-2" pref="81" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="lCodigo" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                  </Group>
+                                                  <Component id="lCodigo" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="txtCodigo" min="-2" pref="92" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="32767" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="lNome" min="-2" max="-2" attributes="0"/>
                                                   <Component id="txtNome" min="-2" pref="528" max="-2" attributes="0"/>
@@ -277,7 +271,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Telefone"/>
+                <Property name="text" type="java.lang.String" value="Telefone*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lSexo">
@@ -285,7 +279,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Sexo"/>
+                <Property name="text" type="java.lang.String" value="Sexo*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lCodigo">
@@ -298,7 +292,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="CPF"/>
+                <Property name="text" type="java.lang.String" value="CPF*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtCodigo">
@@ -308,7 +302,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Nome"/>
+                <Property name="text" type="java.lang.String" value="Nome*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lEmail">
@@ -335,7 +329,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="RG"/>
+                <Property name="text" type="java.lang.String" value="RG*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lDataNascimento">
@@ -343,7 +337,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Data de Nascimento"/>
+                <Property name="text" type="java.lang.String" value="Data de Nascimento*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNome">
@@ -355,7 +349,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Celular"/>
+                <Property name="text" type="java.lang.String" value="Celular*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lCnpj">
@@ -363,7 +357,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="CNPJ"/>
+                <Property name="text" type="java.lang.String" value="CNPJ*"/>
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="jcDataNascimento">
@@ -552,7 +546,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Estado"/>
+                <Property name="text" type="java.lang.String" value="Estado*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lNumero">
@@ -560,7 +554,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="N&#xfa;mero"/>
+                <Property name="text" type="java.lang.String" value="N&#xfa;mero*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lRua">
@@ -568,7 +562,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Rua"/>
+                <Property name="text" type="java.lang.String" value="Rua*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtBairro">
@@ -583,7 +577,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="CEP"/>
+                <Property name="text" type="java.lang.String" value="CEP*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtCidade">
@@ -593,7 +587,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Bairro"/>
+                <Property name="text" type="java.lang.String" value="Bairro*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtRua">
@@ -603,7 +597,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Cidade"/>
+                <Property name="text" type="java.lang.String" value="Cidade*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="BtnConsultarCep">

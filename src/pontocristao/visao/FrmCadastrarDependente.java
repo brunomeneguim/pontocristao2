@@ -100,15 +100,15 @@ public class FrmCadastrarDependente extends javax.swing.JDialog {
         setResizable(false);
 
         lNome.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lNome.setText("Nome");
+        lNome.setText("Nome*");
 
         lTelefone.setText("Telefone");
 
         lRg.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lRg.setText("RG");
+        lRg.setText("RG*");
 
         lCpf.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lCpf.setText("CPF");
+        lCpf.setText("CPF*");
 
         BtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnConfirmar.png"))); // NOI18N
         BtnConfirmar.setText("Confirmar");
@@ -144,15 +144,14 @@ public class FrmCadastrarDependente extends javax.swing.JDialog {
                                     .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lRg)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lNome)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lTelefone)
-                                .addGap(18, 18, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtTelefone)
                                 .addGap(157, 157, 157))
-                            .addComponent(txtNome))
+                            .addComponent(txtNome)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lNome)
+                                    .addComponent(lTelefone))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(9, 9, 9))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)

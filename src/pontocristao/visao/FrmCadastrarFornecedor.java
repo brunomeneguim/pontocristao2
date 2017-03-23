@@ -135,23 +135,23 @@ public class FrmCadastrarFornecedor extends javax.swing.JDialog {
         setTitle("Cadastro de Fornecedores");
 
         lNomeFantasia.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lNomeFantasia.setText("Nome Fantasia");
+        lNomeFantasia.setText("Nome Fantasia*");
 
         lTelefone.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lTelefone.setText("Telefone");
+        lTelefone.setText("Telefone*");
 
         lCelular.setText("Celular");
 
         ldescricao.setText("Descrição");
 
         lCnpj.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lCnpj.setText("CNPJ");
+        lCnpj.setText("CNPJ*");
 
         lRazaoSocial.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lRazaoSocial.setText("Razão Social");
+        lRazaoSocial.setText("Razão Social*");
 
         lInscricaoEstadual.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lInscricaoEstadual.setText("Inscrição Estadual");
+        lInscricaoEstadual.setText("Inscrição Estadual*");
 
         BtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnConfirmar.png"))); // NOI18N
         BtnConfirmar.setText("Confirmar");
