@@ -14,7 +14,7 @@
 			<style mode="Opaque" backcolor="#F0EFEF"/>
 		</conditionalStyle>
 	</style>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT
      cliente.`id` AS cliente_id,
      cliente.`excluido` AS cliente_excluido,
