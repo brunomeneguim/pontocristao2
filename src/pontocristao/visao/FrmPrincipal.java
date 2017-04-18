@@ -1,8 +1,15 @@
 package pontocristao.visao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.HashMap;
+import java.util.Properties;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 import pontocristao.controle.ControleSistema;
 import pontocristao.teste.PopularBancoTeste;
+import pontocristao.util.Utilidades;
 
 /**
  *
@@ -429,7 +436,27 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnSairActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-   
+        String relatorio = ".\\Relatorios\\ListaClientes.jasper";
+        String arquivo = ".\\Relatorios.\\ListaClientes.pdf";
+
+        try {
+            
+            Properties connectionProps = new Properties();
+            connectionProps.put("user", "root");
+            connectionProps.put("password", "root");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pontocristao", connectionProps);
+
+            JasperPrint jp = JasperFillManager.fillReport(relatorio, new HashMap(),conn);
+            
+            JRExporter exporter = new JRPdfExporter();
+            exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, arquivo);
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
+            
+            exporter.exportReport();
+            
+        } catch (Exception ex) {
+            Utilidades.MostrarMensagemErro(ex);
+        }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
