@@ -12,7 +12,7 @@ import pontocristao.util.Utilidades;
  *
  * @author Marcondes
  */
-public class FrmCadastrarFilme extends javax.swing.JDialog {
+public class FrmCadastrarLocacao extends javax.swing.JDialog {
 
     private static Frame frame;
     private ControleFilme controle;
@@ -28,23 +28,23 @@ public class FrmCadastrarFilme extends javax.swing.JDialog {
         return controle.getFilme();
     }
 
-    public FrmCadastrarFilme(java.awt.Frame parent, boolean modal, long id) {
+    public FrmCadastrarLocacao(java.awt.Frame parent, boolean modal, long id) {
         super(parent, modal);
         initComponents();
 
         setLocationRelativeTo(null);
 
         txtCodigo.setEnabled(false);
-        jcDataCadastro.setEnabled(false);
+        jcDataLocacao.setEnabled(false);
         
         txtNomeProduto.requestFocus();
 
         InicializarControle(id);
     }
 
-    public static FrmCadastrarFilme Mostrar(java.awt.Frame parent, long id) {
+    public static FrmCadastrarLocacao Mostrar(java.awt.Frame parent, long id) {
         frame = parent;
-        FrmCadastrarFilme frm = new FrmCadastrarFilme(parent, true, id);
+        FrmCadastrarLocacao frm = new FrmCadastrarLocacao(parent, true, id);
         frm.setVisible(true);
         return frm;
     }
@@ -87,8 +87,8 @@ public class FrmCadastrarFilme extends javax.swing.JDialog {
 
     private void AtualizarCampos() {
         txtCodigo.setText(String.valueOf(controle.getFilme().getId()));
-        //txtCodigoBarra.setText(controle.getFilme().getCodigoBarra());
-        jcDataCadastro.setDate(controle.getFilme().getDataCadastro());
+        txtCodigoBarra.setText(controle.getFilme().getCodigoBarra());
+        jcDataLocacao.setDate(controle.getFilme().getDataCadastro());
         txtNomeProduto.setText(controle.getFilme().getNome());
         jspValor.setValue(controle.getFilme().getValorVenda());
         jspQuantidade.setValue(controle.getFilme().getQuantidade());
@@ -98,7 +98,7 @@ public class FrmCadastrarFilme extends javax.swing.JDialog {
     }
 
     private void AtualizarModelo() {
-        //controle.getFilme().setCodigoBarra(txtCodigoBarra.getText());
+        controle.getFilme().setCodigoBarra(txtCodigoBarra.getText());
         controle.getFilme().setNome(txtNomeProduto.getText());
         controle.getFilme().setValorVenda((Double)jspValor.getValue());
         controle.getFilme().setQuantidade((Integer)jspQuantidade.getValue());
@@ -123,10 +123,7 @@ public class FrmCadastrarFilme extends javax.swing.JDialog {
         Boolean retorno = true;
 
         if (txtNomeProduto.getText().equals("")
-                || jspValor.getValue().toString().equals("")
-                || jspQuantidade.getValue().toString().equals("")
-                || jComboFornecedor.getSelectedIndex() < 0
-                || jComboTipoFilme.getSelectedIndex() < 0) {
+                || jspValor.getValue().toString().equals("")){
             retorno = false;
             JOptionPane.showMessageDialog(null, "Todos os campos em negrito devem estar preenchidos.");
         }
@@ -152,30 +149,22 @@ public class FrmCadastrarFilme extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lCodigoProduto = new javax.swing.JLabel();
-        jspQuantidade = new javax.swing.JSpinner();
+        lCodigo = new javax.swing.JLabel();
         jspValor = new javax.swing.JSpinner();
         BtnCancelar = new javax.swing.JButton();
-        jComboFornecedor = new javax.swing.JComboBox<>();
-        lFornecedor = new javax.swing.JLabel();
         BtnConfirmar1 = new javax.swing.JButton();
-        lTipoProduto = new javax.swing.JLabel();
-        jComboTipoFilme = new javax.swing.JComboBox<>();
-        lQuantidade = new javax.swing.JLabel();
         lValorVenda = new javax.swing.JLabel();
         txtNomeProduto = new javax.swing.JTextField();
         lNomeProduto = new javax.swing.JLabel();
-        jcDataCadastro = new com.toedter.calendar.JDateChooser();
+        jcDataLocacao = new com.toedter.calendar.JDateChooser();
         txtCodigo = new javax.swing.JTextField();
-        lDataCadastro = new javax.swing.JLabel();
-        chkLancamento = new javax.swing.JCheckBox();
+        lDataLocacao = new javax.swing.JLabel();
+        BtnPesquisarCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Filmes");
 
-        lCodigoProduto.setText("Código");
-
-        jspQuantidade.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        lCodigo.setText("Código");
 
         jspValor.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 0.1d));
 
@@ -187,9 +176,6 @@ public class FrmCadastrarFilme extends javax.swing.JDialog {
             }
         });
 
-        lFornecedor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lFornecedor.setText("Fornecedor*");
-
         BtnConfirmar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnConfirmar.png"))); // NOI18N
         BtnConfirmar1.setText("Confirmar");
         BtnConfirmar1.addActionListener(new java.awt.event.ActionListener() {
@@ -198,25 +184,25 @@ public class FrmCadastrarFilme extends javax.swing.JDialog {
             }
         });
 
-        lTipoProduto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lTipoProduto.setText("Tipo do filme*");
-
-        lQuantidade.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lQuantidade.setText("Quantidade*");
-
         lValorVenda.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lValorVenda.setText("Valor de Venda*");
+        lValorVenda.setText("Valor de Locação*");
 
         lNomeProduto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lNomeProduto.setText("Nome*");
+        lNomeProduto.setText("Nome do Cliente*");
 
         txtCodigo.setEditable(false);
         txtCodigo.setBackground(new java.awt.Color(255, 255, 255));
         txtCodigo.setEnabled(false);
 
-        lDataCadastro.setText("Data de Cadastro");
+        lDataLocacao.setText("Data de Locação");
 
-        chkLancamento.setText("Lançamento");
+        BtnPesquisarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnPesquisar.png"))); // NOI18N
+        BtnPesquisarCliente.setText("Pesquisar Cliente");
+        BtnPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPesquisarClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -225,44 +211,30 @@ public class FrmCadastrarFilme extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lCodigoProduto))
-                                    .addGap(186, 186, 186)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lDataCadastro)
-                                        .addComponent(jcDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(lNomeProduto)
-                                .addComponent(txtNomeProduto))
-                            .addComponent(lFornecedor)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(chkLancamento)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lValorVenda)
-                            .addComponent(jspValor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lQuantidade)
-                            .addComponent(jspQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lTipoProduto)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jComboTipoFilme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(BtnConfirmar1)
                         .addGap(18, 18, 18)
-                        .addComponent(BtnCancelar)))
+                        .addComponent(BtnCancelar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lValorVenda)
+                            .addComponent(jspValor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lCodigo))
+                                        .addGap(186, 186, 186)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lDataLocacao)
+                                            .addComponent(jcDataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(lNomeProduto)
+                                    .addComponent(txtNomeProduto))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtnPesquisarCliente)))
+                        .addGap(0, 167, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -270,37 +242,27 @@ public class FrmCadastrarFilme extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lCodigoProduto)
-                    .addComponent(lDataCadastro))
+                    .addComponent(lCodigo)
+                    .addComponent(lDataLocacao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jcDataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lNomeProduto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lValorVenda)
-                    .addComponent(lQuantidade)
-                    .addComponent(lTipoProduto))
+                    .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lValorVenda)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jspValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboTipoFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jspQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jspValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lFornecedor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chkLancamento))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnConfirmar1)
-                    .addComponent(BtnCancelar))
-                .addGap(0, 8, Short.MAX_VALUE))
+                    .addComponent(BtnCancelar)
+                    .addComponent(BtnConfirmar1))
+                .addContainerGap())
         );
 
         pack();
@@ -325,6 +287,10 @@ public class FrmCadastrarFilme extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnConfirmar1ActionPerformed
 
+    private void BtnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPesquisarClienteActionPerformed
+
+    }//GEN-LAST:event_BtnPesquisarClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -342,20 +308,21 @@ public class FrmCadastrarFilme extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCadastrarFilme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCadastrarLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCadastrarFilme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCadastrarLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCadastrarFilme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCadastrarLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCadastrarFilme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCadastrarLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FrmCadastrarFilme dialog = new FrmCadastrarFilme(new javax.swing.JFrame(), true, 0);
+                FrmCadastrarLocacao dialog = new FrmCadastrarLocacao(new javax.swing.JFrame(), true, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -370,18 +337,12 @@ public class FrmCadastrarFilme extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton BtnConfirmar1;
-    private javax.swing.JCheckBox chkLancamento;
-    private javax.swing.JComboBox<String> jComboFornecedor;
-    private javax.swing.JComboBox<String> jComboTipoFilme;
-    private com.toedter.calendar.JDateChooser jcDataCadastro;
-    private javax.swing.JSpinner jspQuantidade;
+    private javax.swing.JButton BtnPesquisarCliente;
+    private com.toedter.calendar.JDateChooser jcDataLocacao;
     private javax.swing.JSpinner jspValor;
-    private javax.swing.JLabel lCodigoProduto;
-    private javax.swing.JLabel lDataCadastro;
-    private javax.swing.JLabel lFornecedor;
+    private javax.swing.JLabel lCodigo;
+    private javax.swing.JLabel lDataLocacao;
     private javax.swing.JLabel lNomeProduto;
-    private javax.swing.JLabel lQuantidade;
-    private javax.swing.JLabel lTipoProduto;
     private javax.swing.JLabel lValorVenda;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNomeProduto;

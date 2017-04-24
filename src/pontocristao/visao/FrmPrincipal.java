@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import pontocristao.controle.ControleSistema;
-import pontocristao.teste.PopularBancoTeste;
 import pontocristao.util.Utilidades;
 
 /**
@@ -38,19 +37,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BtnJanelaCliente = new javax.swing.JButton();
-        BtnJanelaFornecedor = new javax.swing.JButton();
-        BtnJanelaFilme = new javax.swing.JButton();
-        BtnJanelaProduto = new javax.swing.JButton();
-        BtnJanelaFuncionario = new javax.swing.JButton();
-        BtnJanelaContaPagar = new javax.swing.JButton();
-        btnTipoProduto = new javax.swing.JButton();
-        btnTipoFilme = new javax.swing.JButton();
-        btnTabelaPrecoLocacao = new javax.swing.JButton();
         BtnSair = new javax.swing.JButton();
         LblFuncionarioLogado = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jLabel1 = new javax.swing.JLabel();
+        jMenu = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -80,69 +71,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Principal");
 
-        BtnJanelaCliente.setText("Cliente");
-        BtnJanelaCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnJanelaClienteActionPerformed(evt);
-            }
-        });
-
-        BtnJanelaFornecedor.setText("Fornecedor");
-        BtnJanelaFornecedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnJanelaFornecedorActionPerformed(evt);
-            }
-        });
-
-        BtnJanelaFilme.setText("Filme");
-        BtnJanelaFilme.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnJanelaFilmeActionPerformed(evt);
-            }
-        });
-
-        BtnJanelaProduto.setText("Produto");
-        BtnJanelaProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnJanelaProdutoActionPerformed(evt);
-            }
-        });
-
-        BtnJanelaFuncionario.setText("Funcionário");
-        BtnJanelaFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnJanelaFuncionarioActionPerformed(evt);
-            }
-        });
-
-        BtnJanelaContaPagar.setText("Contas a pagar");
-        BtnJanelaContaPagar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnJanelaContaPagarActionPerformed(evt);
-            }
-        });
-
-        btnTipoProduto.setText("Tipo produto");
-        btnTipoProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTipoProdutoActionPerformed(evt);
-            }
-        });
-
-        btnTipoFilme.setText("Tipo filme");
-        btnTipoFilme.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTipoFilmeActionPerformed(evt);
-            }
-        });
-
-        btnTabelaPrecoLocacao.setText("Tabela de preços de locação");
-        btnTabelaPrecoLocacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTabelaPrecoLocacaoActionPerformed(evt);
-            }
-        });
-
         BtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnSair.png"))); // NOI18N
         BtnSair.setText("Sair");
         BtnSair.setPreferredSize(new java.awt.Dimension(139, 65));
@@ -155,6 +83,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         LblFuncionarioLogado.setText("Usuário Logado no Sistema");
 
         jLabel2.setText("Data e Hora");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/ImagemPrincipal.png"))); // NOI18N
 
         jMenu1.setText("Opções");
 
@@ -238,7 +168,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu1.add(jMenu4);
 
-        jMenuBar1.add(jMenu1);
+        jMenu.add(jMenu1);
 
         jMenu2.setText("Relatórios");
 
@@ -265,7 +195,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem15.setText("Contas");
         jMenu2.add(jMenuItem15);
 
-        jMenuBar1.add(jMenu2);
+        jMenu.add(jMenu2);
 
         jMenu5.setText("Ajuda");
 
@@ -275,7 +205,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem17.setText("Contato");
         jMenu5.add(jMenuItem17);
 
-        jMenuBar1.add(jMenu5);
+        jMenu.add(jMenu5);
 
         jMenu6.setText("Sair");
 
@@ -285,110 +215,43 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem19.setText("Logoff");
         jMenu6.add(jMenuItem19);
 
-        jMenuBar1.add(jMenu6);
+        jMenu.add(jMenu6);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnTabelaPrecoLocacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnJanelaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnJanelaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnJanelaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnJanelaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnJanelaContaPagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(126, 126, 126)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(LblFuncionarioLogado)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(BtnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(BtnJanelaFilme, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnTipoFilme, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(343, 343, 343)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(LblFuncionarioLogado)
+                            .addComponent(BtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnTipoFilme, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(BtnJanelaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtnJanelaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtnJanelaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtnJanelaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtnJanelaFilme, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnTipoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnTabelaPrecoLocacao, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                    .addComponent(BtnJanelaContaPagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(43, 43, 43)
+                .addGap(107, 107, 107)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(LblFuncionarioLogado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(BtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addContainerGap())
         );
-
-        BtnJanelaCliente.getAccessibleContext().setAccessibleName("BtnJanelaClientes");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void BtnJanelaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJanelaClienteActionPerformed
-        FrmCliente frmCliente = FrmCliente.Mostrar(this);
-    }//GEN-LAST:event_BtnJanelaClienteActionPerformed
-
-    private void BtnJanelaFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJanelaFornecedorActionPerformed
-        FrmFornecedor frmFornecedor = FrmFornecedor.Mostrar(this);
-    }//GEN-LAST:event_BtnJanelaFornecedorActionPerformed
-
-    private void BtnJanelaFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJanelaFilmeActionPerformed
-        FrmFilme frmFilme = FrmFilme.Mostrar(this);
-    }//GEN-LAST:event_BtnJanelaFilmeActionPerformed
-
-    private void BtnJanelaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJanelaProdutoActionPerformed
-        FrmProduto frmProduto = FrmProduto.Mostrar(this);
-    }//GEN-LAST:event_BtnJanelaProdutoActionPerformed
-
-    private void BtnJanelaFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJanelaFuncionarioActionPerformed
-        FrmFuncionario frmFuncionario = FrmFuncionario.Mostrar(this);
-    }//GEN-LAST:event_BtnJanelaFuncionarioActionPerformed
-
-    private void BtnJanelaContaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJanelaContaPagarActionPerformed
-        FrmContaPagar frmContaPagar = FrmContaPagar.Mostrar(this);
-    }//GEN-LAST:event_BtnJanelaContaPagarActionPerformed
-
-    private void btnTipoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTipoProdutoActionPerformed
-        FrmTipoProduto frm = FrmTipoProduto.Mostrar(this);
-    }//GEN-LAST:event_btnTipoProdutoActionPerformed
-
-    private void btnTipoFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTipoFilmeActionPerformed
-        FrmTipoFilme frm = FrmTipoFilme.Mostrar(this);
-    }//GEN-LAST:event_btnTipoFilmeActionPerformed
-
-    private void btnTabelaPrecoLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTabelaPrecoLocacaoActionPerformed
-        FrmTabelaPrecoLocacao frm = FrmTabelaPrecoLocacao.Mostrar(this);
-    }//GEN-LAST:event_btnTabelaPrecoLocacaoActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
        FrmFuncionario frmFuncionario = FrmFuncionario.Mostrar(this);
@@ -495,25 +358,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnJanelaCliente;
-    private javax.swing.JButton BtnJanelaContaPagar;
-    private javax.swing.JButton BtnJanelaFilme;
-    private javax.swing.JButton BtnJanelaFornecedor;
-    private javax.swing.JButton BtnJanelaFuncionario;
-    private javax.swing.JButton BtnJanelaProduto;
     private javax.swing.JButton BtnSair;
     private javax.swing.JLabel LblFuncionarioLogado;
-    private javax.swing.JButton btnTabelaPrecoLocacao;
-    private javax.swing.JButton btnTipoFilme;
-    private javax.swing.JButton btnTipoProduto;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuBar jMenu;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
