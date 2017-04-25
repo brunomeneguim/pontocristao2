@@ -14,6 +14,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Shift+Ctrl+C"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/pontocristao/icones/CadastrarCliente.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Cliente"/>
               </Properties>
               <Events>
@@ -210,153 +213,41 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="btnTabelaPrecoLocacao" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="BtnJanelaCliente" min="-2" pref="120" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="BtnJanelaFuncionario" min="-2" pref="120" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="BtnJanelaFornecedor" min="-2" pref="120" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnTipoProduto" min="-2" pref="120" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="BtnJanelaProduto" min="-2" pref="120" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="BtnJanelaContaPagar" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <Component id="LblFuncionarioLogado" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="BtnSair" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="BtnJanelaFilme" min="-2" pref="120" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnTipoFilme" min="-2" pref="120" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
+          <Component id="lImagem" alignment="0" pref="606" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lData" min="-2" max="-2" attributes="0"/>
+                          <Component id="LblFuncionarioLogado" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="BtnSair" min="-2" pref="246" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnTipoFilme" alignment="1" max="32767" attributes="0"/>
-                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                      <Component id="BtnJanelaFuncionario" alignment="3" min="-2" pref="255" max="-2" attributes="0"/>
-                      <Component id="BtnJanelaCliente" alignment="3" min="-2" pref="255" max="-2" attributes="0"/>
-                      <Component id="BtnJanelaFornecedor" alignment="3" min="-2" pref="255" max="-2" attributes="0"/>
-                      <Component id="BtnJanelaProduto" min="-2" pref="255" max="-2" attributes="0"/>
-                      <Component id="BtnJanelaFilme" alignment="3" min="-2" pref="255" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="btnTipoProduto" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnTabelaPrecoLocacao" pref="45" max="32767" attributes="0"/>
-                  <Component id="BtnJanelaContaPagar" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Component id="lImagem" min="-2" pref="544" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="LblFuncionarioLogado" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="93" max="32767" attributes="0"/>
+              <Component id="lData" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="BtnSair" min="-2" pref="50" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="BtnJanelaCliente">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Cliente"/>
-      </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="BtnJanelaClientes"/>
-      </AccessibilityProperties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnJanelaClienteActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BtnJanelaFornecedor">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Fornecedor"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnJanelaFornecedorActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BtnJanelaFilme">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Filme"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnJanelaFilmeActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BtnJanelaProduto">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Produto"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnJanelaProdutoActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BtnJanelaFuncionario">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnJanelaFuncionarioActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BtnJanelaContaPagar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Contas a pagar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnJanelaContaPagarActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnTipoProduto">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Tipo produto"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTipoProdutoActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnTipoFilme">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Tipo filme"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTipoFilmeActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnTabelaPrecoLocacao">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Tabela de pre&#xe7;os de loca&#xe7;&#xe3;o"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTabelaPrecoLocacaoActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="BtnSair">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -376,9 +267,16 @@
         <Property name="text" type="java.lang.String" value="Usu&#xe1;rio Logado no Sistema"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="lData">
       <Properties>
         <Property name="text" type="java.lang.String" value="Data e Hora"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lImagem">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/pontocristao/icones/ImagemPrincipal.png"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>
