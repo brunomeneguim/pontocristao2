@@ -1,3 +1,5 @@
+package pontocristao.visao;
+
 
 
 import java.awt.*;
@@ -38,7 +40,7 @@ public class FrmCaixa extends javax.swing.JDialog {
         txtCodigo.setEnabled(false);
         jcData.setEnabled(false);
 
-        txtNomeProduto.requestFocus();
+        //txtNomeProduto.requestFocus();
 
         InicializarControle(id);
     }
@@ -78,24 +80,24 @@ public class FrmCaixa extends javax.swing.JDialog {
     private void AtualizarCampos() {
         txtCodigo.setText(String.valueOf(controle.getFilme().getId()));
         jcData.setDate(controle.getFilme().getDataCadastro());
-        txtNomeProduto.setText(controle.getFilme().getNome());
-        jspValor.setValue(controle.getFilme().getValorVenda());
+        //txtNomeProduto.setText(controle.getFilme().getNome());
+        //jspValor.setValue(controle.getFilme().getValorVenda());
     }
 
     private void AtualizarModelo() {
-        controle.getFilme().setNome(txtNomeProduto.getText());
-        controle.getFilme().setValorVenda((Double) jspValor.getValue());
+        //controle.getFilme().setNome(txtNomeProduto.getText());
+        //controle.getFilme().setValorVenda((Double) jspValor.getValue());
 
     }
 
     public Boolean ValidaCampos() {
         Boolean retorno = true;
 
-        if (txtNomeProduto.getText().equals("")
-                || jspValor.getValue().toString().equals("")) {
-            retorno = false;
-            JOptionPane.showMessageDialog(null, "Todos os campos em negrito devem estar preenchidos.");
-        }
+//        if (txtNomeProduto.getText().equals("")
+//                || jspValor.getValue().toString().equals("")) {
+//            retorno = false;
+//            JOptionPane.showMessageDialog(null, "Todos os campos em negrito devem estar preenchidos.");
+//        }
 
         return retorno;
     }

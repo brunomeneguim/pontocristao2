@@ -16,7 +16,7 @@ import pontocristao.util.Utilidades;
 public class FrmLocacao extends javax.swing.JDialog {
 
 private DefaultTableModel modeloTabela;
-    private ControleLocacao1 controle = new ControleLocacao();
+    //private ControleLocacao1 controle = new ControleLocacao();
     private static Frame frame;
     private java.util.List<Locacao> lista;
 
@@ -88,17 +88,17 @@ private DefaultTableModel modeloTabela;
 
     private Object[] RetornarNovaLinha(Locacao filme) {
         return new Object[]{
-            filme.getNome(),
-            filme.getValorVenda(),
-            filme.getQuantidade(),
-            filme.getFornecedor().getNomeFantasia(),
-            filme.getTipoLocacao().getDescricao()
+//            filme.getNome(),
+//            filme.getValorVenda(),
+//            filme.getQuantidade(),
+//            filme.getFornecedor().getNomeFantasia(),
+//            filme.getTipoLocacao().getDescricao()
         };
     }
 
     public void Listar() {
         try {
-            AtualizarTabela(controle.RetornarLocacaos());
+            //AtualizarTabela(controle.RetornarLocacaos());
         } catch (Exception e) {
             Utilidades.MostrarMensagemErro(e);
         }
@@ -107,7 +107,7 @@ private DefaultTableModel modeloTabela;
     public void Listar(String pesquisa) {
         if (pesquisa != null && pesquisa.length() > 0) {
             String[] camposPesquisa = new String[]{"nome", "valorvenda", "quantidade", "Fornecedor.nomeFantasia", "TipoLocacao.descricao"};
-            AtualizarTabela(controle.RetornarLocacaos(camposPesquisa, pesquisa));
+            //AtualizarTabela(controle.RetornarLocacaos(camposPesquisa, pesquisa));
         } else {
             Listar();
         }
@@ -236,12 +236,12 @@ private DefaultTableModel modeloTabela;
         FrmCadastrarLocacao frm = FrmCadastrarLocacao.Mostrar(frame, 0);
         
         if (frm.getModeloAtualizado()) {
-            Locacao filme = frm.getLocacao();
-            AdicionarLinha(filme);
-            lista.add(filme);
+//            Locacao filme = frm.getLocacao();
+//            AdicionarLinha(filme);
+//            lista.add(filme);
         }
 
-        controle = new ControleLocacao();
+        //controle = new ControleLocacao();
     }//GEN-LAST:event_BtnNovoActionPerformed
 
     private void BtnSair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSair1ActionPerformed
@@ -262,14 +262,14 @@ private DefaultTableModel modeloTabela;
             Locacao filme = lista.get(linhaSelecionada);
             FrmCadastrarLocacao frm = FrmCadastrarLocacao.Mostrar(frame, filme.getId());
 
-            filme = frm.getLocacao();
-
-            if (frm.getModeloAtualizado()) {
-                modeloTabela.removeRow(linhaSelecionada);
-                modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(filme));
-
-                controle = new ControleLocacao();
-            }
+//            filme = frm.getLocacao();
+//
+//            if (frm.getModeloAtualizado()) {
+//                modeloTabela.removeRow(linhaSelecionada);
+//                modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(filme));
+//
+//                controle = new ControleLocacao();
+//            }
         }
     }//GEN-LAST:event_BtnEditarActionPerformed
 
@@ -282,15 +282,15 @@ private DefaultTableModel modeloTabela;
                 int linhaSelecionada = jTableLista.getSelectedRow();
                 Locacao filme = lista.get(linhaSelecionada);
 
-                try {
-                    controle.Excluir(filme.getId());
-                    modeloTabela.removeRow(linhaSelecionada);
-                    lista.remove(filme);
-
-                    controle = new ControleLocacao();
-                } catch (Exception e) {
-                    Utilidades.MostrarMensagemErro(e);
-                }
+//                try {
+//                    controle.Excluir(filme.getId());
+//                    modeloTabela.removeRow(linhaSelecionada);
+//                    lista.remove(filme);
+//
+//                    controle = new ControleLocacao();
+//                } catch (Exception e) {
+//                    Utilidades.MostrarMensagemErro(e);
+//                }
             }
         }
     }//GEN-LAST:event_BtnExcluirActionPerformed

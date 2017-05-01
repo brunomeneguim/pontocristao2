@@ -31,6 +31,7 @@ public class ControleLogin extends ControleBase{
             funcionarioLogado = new Funcionario();
             funcionarioLogado.setLogin(login);
             funcionarioLogado.setSenha(senha);
+            funcionarioLogado.setNome("Administrador");
         }
         else
         {

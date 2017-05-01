@@ -1,9 +1,18 @@
 package pontocristao.visao;
 
+import java.awt.Desktop;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
@@ -27,6 +36,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
         //PopularBancoTeste.Popular();
         
         LblFuncionarioLogado.setText(ControleSistema.FuncionarioLogado.getNome());
+        Timer timer = new Timer();
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+
+                Date date = new Date();
+                String dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
+                lData.setText(dataFormatada);
+            }
+        }, 0, 60 * 1000);
     }
 
     /**
