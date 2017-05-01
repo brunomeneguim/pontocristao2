@@ -324,20 +324,22 @@ public class FrmPrincipal extends javax.swing.JFrame {
         String arquivo = ".\\Relatorios.\\ListaClientes.pdf";
 
         try {
-            
             Properties connectionProps = new Properties();
             connectionProps.put("user", "root");
             connectionProps.put("password", "root");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pontocristao", connectionProps);
 
-            JasperPrint jp = JasperFillManager.fillReport(relatorio, new HashMap(),conn);
-            
+            JasperPrint jp = JasperFillManager.fillReport(relatorio, new HashMap(), conn);
+
             JRExporter exporter = new JRPdfExporter();
             exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, arquivo);
             exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
-            
+
             exporter.exportReport();
-            
+
+            File myFile = new File(arquivo);
+            Desktop.getDesktop().open(myFile);
+
         } catch (Exception ex) {
             Utilidades.MostrarMensagemErro(ex);
         }
