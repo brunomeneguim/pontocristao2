@@ -16,7 +16,7 @@ import pontocristao.util.Utilidades;
 public class FrmLocacao extends javax.swing.JDialog {
 
 private DefaultTableModel modeloTabela;
-    //private ControleLocacao1 controle = new ControleLocacao();
+    private ControleLocacao controle = new ControleLocacao();
     private static Frame frame;
     private java.util.List<Locacao> lista;
 
@@ -44,7 +44,7 @@ private DefaultTableModel modeloTabela;
     }
 
     private void AjustarTabela() {
-        String[] colunas = new String[]{"Nome", "Valor de venda", "Quantidade", "Fornecedor", "Tipo de filme"};
+        String[] colunas = new String[]{"Data", "Cliente", "Valor", "Pago"};
         modeloTabela = new DefaultTableModel(null, colunas) {
             @Override
             public boolean isCellEditable(int row, int col) {
@@ -70,35 +70,34 @@ private DefaultTableModel modeloTabela;
         });
     }
 
-    private void AtualizarTabela(java.util.List<Locacao> filmes) {
+    private void AtualizarTabela(java.util.List<Locacao> locacoes) {
         while (modeloTabela.getRowCount() > 0) {
             modeloTabela.removeRow(0);
         }
 
-        lista = filmes;
+        lista = locacoes;
 
-        for (Locacao filme : filmes) {
-            AdicionarLinha(filme);
+        for (Locacao locacao : locacoes) {
+            AdicionarLinha(locacao);
         }
     }
 
-    private void AdicionarLinha(Locacao filme) {
-        modeloTabela.addRow(RetornarNovaLinha(filme));
+    private void AdicionarLinha(Locacao locacao) {
+        modeloTabela.addRow(RetornarNovaLinha(locacao));
     }
 
-    private Object[] RetornarNovaLinha(Locacao filme) {
+    private Object[] RetornarNovaLinha(Locacao locacao) {
         return new Object[]{
-//            filme.getNome(),
-//            filme.getValorVenda(),
-//            filme.getQuantidade(),
-//            filme.getFornecedor().getNomeFantasia(),
-//            filme.getTipoLocacao().getDescricao()
+            locacao.getData(),
+            locacao.getCliente().getNome(),
+            locacao.getValorTotal(),
+            locacao.getPago()
         };
     }
 
     public void Listar() {
         try {
-            //AtualizarTabela(controle.RetornarLocacaos());
+            AtualizarTabela(controle.RetornarLocacoes());
         } catch (Exception e) {
             Utilidades.MostrarMensagemErro(e);
         }
@@ -106,8 +105,8 @@ private DefaultTableModel modeloTabela;
 
     public void Listar(String pesquisa) {
         if (pesquisa != null && pesquisa.length() > 0) {
-            String[] camposPesquisa = new String[]{"nome", "valorvenda", "quantidade", "Fornecedor.nomeFantasia", "TipoLocacao.descricao"};
-            //AtualizarTabela(controle.RetornarLocacaos(camposPesquisa, pesquisa));
+            String[] camposPesquisa = new String[]{"data", "Cliente.nome", "valor", "pago"};
+            AtualizarTabela(controle.RetornarLocacoes(camposPesquisa, pesquisa));
         } else {
             Listar();
         }
@@ -236,18 +235,18 @@ private DefaultTableModel modeloTabela;
         FrmCadastrarLocacao frm = FrmCadastrarLocacao.Mostrar(frame, 0);
         
         if (frm.getModeloAtualizado()) {
-//            Locacao filme = frm.getLocacao();
-//            AdicionarLinha(filme);
-//            lista.add(filme);
+            Locacao locacao = frm.getLocacao();
+            AdicionarLinha(locacao);
+            lista.add(locacao);
         }
 
-        //controle = new ControleLocacao();
+        controle = new ControleLocacao();
     }//GEN-LAST:event_BtnNovoActionPerformed
 
     private void BtnSair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSair1ActionPerformed
         Object[] botoes = {"Sim", "Não"};
         int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja sair da lista de filmes? ",
+                "Deseja sair da lista de locações? ",
                 "Confirmação",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                 botoes, botoes[0]);
@@ -259,38 +258,38 @@ private DefaultTableModel modeloTabela;
     private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
         if (lista != null) {
             int linhaSelecionada = jTableLista.getSelectedRow();
-            Locacao filme = lista.get(linhaSelecionada);
-            FrmCadastrarLocacao frm = FrmCadastrarLocacao.Mostrar(frame, filme.getId());
+            Locacao locacao = lista.get(linhaSelecionada);
+            FrmCadastrarLocacao frm = FrmCadastrarLocacao.Mostrar(frame, locacao.getId());
 
-//            filme = frm.getLocacao();
-//
-//            if (frm.getModeloAtualizado()) {
-//                modeloTabela.removeRow(linhaSelecionada);
-//                modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(filme));
-//
-//                controle = new ControleLocacao();
-//            }
+            locacao = frm.getLocacao();
+
+            if (frm.getModeloAtualizado()) {
+                modeloTabela.removeRow(linhaSelecionada);
+                modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(locacao));
+
+                controle = new ControleLocacao();
+            }
         }
     }//GEN-LAST:event_BtnEditarActionPerformed
 
     private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
         if (lista != null) {
 
-            Boolean podeExcluir = Utilidades.MostrarMensagemPergunta("Confirmação", "Tem certeza que deseja excluir o filme?", false);
+            Boolean podeExcluir = Utilidades.MostrarMensagemPergunta("Confirmação", "Tem certeza que deseja excluir a locação?", false);
 
             if (podeExcluir) {
                 int linhaSelecionada = jTableLista.getSelectedRow();
-                Locacao filme = lista.get(linhaSelecionada);
+                Locacao locacao = lista.get(linhaSelecionada);
 
-//                try {
-//                    controle.Excluir(filme.getId());
-//                    modeloTabela.removeRow(linhaSelecionada);
-//                    lista.remove(filme);
-//
-//                    controle = new ControleLocacao();
-//                } catch (Exception e) {
-//                    Utilidades.MostrarMensagemErro(e);
-//                }
+                try {
+                    controle.Excluir(locacao.getId());
+                    modeloTabela.removeRow(linhaSelecionada);
+                    lista.remove(locacao);
+
+                    controle = new ControleLocacao();
+                } catch (Exception e) {
+                    Utilidades.MostrarMensagemErro(e);
+                }
             }
         }
     }//GEN-LAST:event_BtnExcluirActionPerformed

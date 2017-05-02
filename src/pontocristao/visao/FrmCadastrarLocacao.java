@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.text.NumberFormatter;
 import pontocristao.controle.*;
 import pontocristao.modelo.*;
+import pontocristao.util.AutoComboBox;
 import pontocristao.util.Utilidades;
 
 /**
@@ -16,29 +17,30 @@ import pontocristao.util.Utilidades;
 public class FrmCadastrarLocacao extends javax.swing.JDialog {
 
     private static Frame frame;
-    private ControleFilme controle;
+    private ControleLocacao controle;
     private Boolean modeloAtualizado = false;
-    private java.util.List<Fornecedor> listaFornecedores;
-    private java.util.List<TipoFilme> listaTiposFilme;
+    private java.util.List<Cliente> listaClientes;
 
     public Boolean getModeloAtualizado() {
         return modeloAtualizado;
     }
 
-    public Filme getFilme() {
-        return controle.getFilme();
+    public Locacao getLocacao() {
+        return controle.getLocacao();
     }
 
     public FrmCadastrarLocacao(java.awt.Frame parent, boolean modal, long id) {
         super(parent, modal);
         initComponents();
+        
+        AutoComboBox.enable(cbxCliente); 
 
         setLocationRelativeTo(null);
 
         txtCodigo.setEnabled(false);
         jcDataLocacao.setEnabled(false);
 
-        txtNomeProduto.requestFocus();
+        //txtNomeProduto.requestFocus();
 
         InicializarControle(id);
     }
@@ -51,13 +53,18 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
     }
 
     private void InicializarControle(long id) {
-        controle = new ControleFilme();
+        controle = new ControleLocacao();
 
-        listaFornecedores = controle.RetornarFornecedores();
-        listaTiposFilme = controle.RetornarTiposFilme();
+        listaClientes = controle.RetornarClientes();
 
+        for (Cliente cliente : listaClientes) {
+            cbxCliente.addItem(RetornarDescricaoCliente(cliente));
+        }
+        
+        cbxCliente.setSelectedIndex(-1);
+        
         if (id > 0) {
-            Exception erro = controle.RecuperarFilme(id);
+            Exception erro = controle.RecuperarLocacao(id);
 
             if (erro != null) {
                 Utilidades.MostrarMensagemErro(erro);
@@ -67,35 +74,31 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
         }
     }
 
-    private String RetornarDescricaoFornecedor(Fornecedor fornecedor) {
-        return fornecedor.getId() + " - " + fornecedor.getNomeFantasia() + " - " + fornecedor.getCnpj();
-    }
-
-    private String RetornarDescricaoTipoFilme(TipoFilme tipoFilme) {
-        return tipoFilme.getId() + " - " + tipoFilme.getDescricao();
+    private String RetornarDescricaoCliente(Cliente cliente) {
+        return cliente.getNome();
     }
 
     private void AtualizarCampos() {
-        txtCodigo.setText(String.valueOf(controle.getFilme().getId()));
-        jcDataLocacao.setDate(controle.getFilme().getDataCadastro());
-        txtNomeProduto.setText(controle.getFilme().getNome());
-        jspValor.setValue(controle.getFilme().getValorVenda());
+//        txtCodigo.setText(String.valueOf(controle.getFilme().getId()));
+//        jcDataLocacao.setDate(controle.getFilme().getDataCadastro());
+//        txtNomeProduto.setText(controle.getFilme().getNome());
+//        jspValor.setValue(controle.getFilme().getValorVenda());
     }
 
     private void AtualizarModelo() {
-        controle.getFilme().setNome(txtNomeProduto.getText());
-        controle.getFilme().setValorVenda((Double) jspValor.getValue());
+//        controle.getFilme().setNome(txtNomeProduto.getText());
+//        controle.getFilme().setValorVenda((Double) jspValor.getValue());
 
     }
 
     public Boolean ValidaCampos() {
         Boolean retorno = true;
 
-        if (txtNomeProduto.getText().equals("")
-                || jspValor.getValue().toString().equals("")) {
-            retorno = false;
-            JOptionPane.showMessageDialog(null, "Todos os campos em negrito devem estar preenchidos.");
-        }
+//        if (txtNomeProduto.getText().equals("")
+//                || jspValor.getValue().toString().equals("")) {
+//            retorno = false;
+//            JOptionPane.showMessageDialog(null, "Todos os campos em negrito devem estar preenchidos.");
+//        }
 
         return retorno;
     }
@@ -123,22 +126,22 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
         BtnCancelar = new javax.swing.JButton();
         BtnConfirmar1 = new javax.swing.JButton();
         lValorVenda = new javax.swing.JLabel();
-        txtNomeProduto = new javax.swing.JTextField();
         lNomeProduto = new javax.swing.JLabel();
         jcDataLocacao = new com.toedter.calendar.JDateChooser();
         txtCodigo = new javax.swing.JTextField();
         lDataLocacao = new javax.swing.JLabel();
-        BtnPesquisarCliente = new javax.swing.JButton();
         lFuncionario = new javax.swing.JLabel();
         txtFuncionario = new javax.swing.JTextField();
-        lPagamento = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         BtnAdicionarFilme = new javax.swing.JButton();
         lDataDevolucao = new javax.swing.JLabel();
         jcDataDevolucao = new com.toedter.calendar.JDateChooser();
+        cbxCliente = new javax.swing.JComboBox<>();
+        jCheckBoxPago = new javax.swing.JCheckBox();
+        cbxFilme = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Locação");
@@ -175,24 +178,7 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
 
         lDataLocacao.setText("Data de Locação");
 
-        BtnPesquisarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnPesquisar.png"))); // NOI18N
-        BtnPesquisarCliente.setText("Pesquisar Cliente");
-        BtnPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnPesquisarClienteActionPerformed(evt);
-            }
-        });
-
         lFuncionario.setText("Funcionário");
-
-        lPagamento.setText("Status do Pagamento");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pago", "Devolução", " " }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Filmes"));
 
@@ -217,13 +203,22 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
         );
 
         BtnAdicionarFilme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnNovo.png"))); // NOI18N
         BtnAdicionarFilme.setText("Adicionar Filme");
+        BtnAdicionarFilme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAdicionarFilmeActionPerformed(evt);
+            }
+        });
 
         lDataDevolucao.setText("Data de Devolução");
+
+        jCheckBoxPago.setText("Pago");
+
+        jLabel1.setText("Filme");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -232,48 +227,51 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BtnConfirmar1)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnCancelar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cbxFilme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(lNomeProduto)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(cbxCliente, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(417, 417, 417)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lValorVenda)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jspValor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jCheckBoxPago))
+                            .addComponent(BtnAdicionarFilme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lCodigoCliente))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BtnAdicionarFilme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnPesquisarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(BtnConfirmar1)
-                                .addGap(18, 18, 18)
-                                .addComponent(BtnCancelar))))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                            .addComponent(lFuncionario)
+                            .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lNomeProduto)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lValorVenda)
-                                    .addComponent(jspValor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lPagamento)))
+                                .addGap(22, 22, 22)
+                                .addComponent(lDataLocacao)
+                                .addGap(86, 86, 86)
+                                .addComponent(lDataDevolucao))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lCodigoCliente))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lFuncionario)
-                                    .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jcDataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jcDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lDataLocacao)
-                                        .addGap(86, 86, 86)
-                                        .addComponent(lDataDevolucao)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jcDataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jcDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -293,27 +291,24 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
                     .addComponent(jcDataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lNomeProduto)
-                .addGap(1, 1, 1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lNomeProduto)
+                    .addComponent(lValorVenda))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jspValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBoxPago))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lValorVenda)
-                            .addComponent(lPagamento))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jspValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(BtnAdicionarFilme, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbxFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnAdicionarFilme, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtnCancelar)
                     .addComponent(BtnConfirmar1))
@@ -342,13 +337,9 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnConfirmar1ActionPerformed
 
-    private void BtnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPesquisarClienteActionPerformed
-
-    }//GEN-LAST:event_BtnPesquisarClienteActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void BtnAdicionarFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdicionarFilmeActionPerformed
+        
+    }//GEN-LAST:event_BtnAdicionarFilmeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,6 +386,7 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
                     }
                 });
                 dialog.setVisible(true);
+                
             }
         });
     }
@@ -403,8 +395,10 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
     private javax.swing.JButton BtnAdicionarFilme;
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton BtnConfirmar1;
-    private javax.swing.JButton BtnPesquisarCliente;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbxCliente;
+    private javax.swing.JComboBox<String> cbxFilme;
+    private javax.swing.JCheckBox jCheckBoxPago;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -416,10 +410,8 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
     private javax.swing.JLabel lDataLocacao;
     private javax.swing.JLabel lFuncionario;
     private javax.swing.JLabel lNomeProduto;
-    private javax.swing.JLabel lPagamento;
     private javax.swing.JLabel lValorVenda;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtFuncionario;
-    private javax.swing.JTextField txtNomeProduto;
     // End of variables declaration//GEN-END:variables
 }
