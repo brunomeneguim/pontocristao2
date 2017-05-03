@@ -18,6 +18,8 @@ import pontocristao.modelo.*;
  */
 public class ControleLocacao extends ControleBase {
     
+    private TabelaPrecoLocacao tabelaPreco;
+    
     public Locacao getLocacao() {
         return (Locacao) this.getModelo();
     }
@@ -58,9 +60,40 @@ public class ControleLocacao extends ControleBase {
         return (List<Locacao>) q.list();
     }
     
-    public  List<Cliente> RetornarClientes() {
+    public List<Cliente> RetornarClientes() {
         ControleCliente controleCliente = new ControleCliente(false);
+        controleCliente.setSessao(getSessao());
         return controleCliente.RetornarClientes();
+    }
+    
+    public List<Filme> RetornarFilmes() {
+        ControleFilme controleFilme = new ControleFilme();
+        controleFilme.setSessao(getSessao());
+        return controleFilme.RetornarFilmes();
+    }
+    
+    public TabelaPrecoLocacao getTabelaPrecoLocacao()
+    {
+        if (tabelaPreco == null)
+        {
+            ControleTabelaPrecoLocacao controle = new ControleTabelaPrecoLocacao();
+            controle.RecuperarTabelaPrecoLocacao();
+            tabelaPreco = controle.getTabelaPrecoLocacao();
+        }
+        
+        return tabelaPreco;
+    }
+    
+    public Double getValorLocacao(Filme filme)
+    {
+        if (filme.getLancamento())
+        {
+            return getTabelaPrecoLocacao().getValorLancamento();
+        }
+        else
+        {
+            return getTabelaPrecoLocacao().getValorNormal();
+        }
     }
 
     public Exception RecuperarLocacao(long id) {

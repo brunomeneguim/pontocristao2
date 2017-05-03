@@ -5,10 +5,11 @@
  */
 package pontocristao.controle;
 
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import pontocristao.modelo.Funcionario;
+import pontocristao.modelo.*;
 import pontocristao.util.Utilidades;
 
 /**
@@ -28,10 +29,46 @@ public class ControleLogin extends ControleBase{
         
         if(login.equals("admin") && senha.equals("admin") && funcionarios.isEmpty())
         {
-            funcionarioLogado = new Funcionario();
-            funcionarioLogado.setLogin(login);
-            funcionarioLogado.setSenha(senha);
-            funcionarioLogado.setNome("Administrador");
+            if(funcionarios.size() == 0)
+            {
+                ControleFuncionario controleFuncionario = new ControleFuncionario();
+                
+                funcionarioLogado = controleFuncionario.getFuncionario();
+                
+                funcionarioLogado.setCarteiraTrabalho("000000000");
+                funcionarioLogado.setCelular("0000000000");
+                funcionarioLogado.setCpf("00000000000");
+                funcionarioLogado.setDataAdmissao(new Date());
+                funcionarioLogado.setDataCadastro(new Date());
+                funcionarioLogado.setDataNascimento(new Date());
+                funcionarioLogado.setEmail("admin@admin.com.br");
+                
+                Endereco end = new Endereco();
+                
+                end.setBairro("admin");
+                end.setCep("00000000");
+                end.setCidade("admin");
+                end.setEstado("admin");
+                end.setNumero("000");
+                end.setRua("admin");
+                
+                funcionarioLogado.setEndereco(end);
+                
+                funcionarioLogado.setLogin("admin");
+                funcionarioLogado.setNome("Administrador");
+                funcionarioLogado.setRg("00000000");
+                funcionarioLogado.setSenha("admin");
+                funcionarioLogado.setSexo(Sexo.Masculino);
+                funcionarioLogado.setTelefoneResidencial("0000000000");
+                
+                Exception erro = controleFuncionario.Salvar();
+                
+                if (erro != null)
+                {
+                    Utilidades.MostrarMensagemErro(erro);
+                }
+            }
+            
         }
         else
         {

@@ -15,7 +15,7 @@ import pontocristao.util.Utilidades;
  */
 public class FrmFilme extends javax.swing.JDialog {
 
-private DefaultTableModel modeloTabela;
+    private DefaultTableModel modeloTabela;
     private ControleFilme controle = new ControleFilme();
     private static Frame frame;
     private java.util.List<Filme> lista;

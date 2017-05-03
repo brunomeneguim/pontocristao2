@@ -15,6 +15,19 @@ public abstract class ControleBase {
     public Session getSessao() {
         return sessao;
     }
+    
+    public void setSessao(Session novaSessao)
+    {
+        if(sessao != null)
+        {
+            if(sessao.isOpen())
+            {
+                sessao.close();
+            }
+        }
+        sessao = novaSessao;
+    }
+    
     private ModeloBase modelo;
 
     public ModeloBase getModelo() {
