@@ -39,11 +39,11 @@ public class Locacao extends ModeloBase {
         this.data = data;
     }
 
-    public Set<ItemLocacao> getItemLocacao() {
+    public Set<ItemLocacao> getItensLocacao() {
         return ItensLocacao;
     }
 
-    public void setItemLocacao(Set<ItemLocacao> ItensLocacao) {
+    public void setItensLocacao(Set<ItemLocacao> ItensLocacao) {
         this.ItensLocacao = ItensLocacao;
     }
 

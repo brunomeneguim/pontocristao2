@@ -13,6 +13,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.NumberFormatter;
+import org.hibernate.Transaction;
 import pontocristao.controle.*;
 import pontocristao.modelo.*;
 import pontocristao.util.AutoComboBox;
@@ -95,7 +96,7 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
         jcDataLocacao.setEnabled(false);
         ckbPago.setEnabled(false);
         jspValor.setEnabled(false);
-        
+
         cbxCliente.setSelectedIndex(-1);
         cbxFilme.setSelectedIndex(-1);
 
@@ -107,12 +108,19 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
             } else {
                 AtualizarCampos();
             }
-        } else 
-        {
+        } else {
             getLocacao().setFuncionario(ControleSistema.getFuncionarioLogado(controle.getSessao()));
             getLocacao().setData(new Date());
+            getLocacao().setPago(false);
         }
 
+        AtualizarCampoDataDevolucaoFilme();
+
+        txtFuncionario.setText(getLocacao().getFuncionario().getNome());
+        jcDataLocacao.setDate(getLocacao().getData());
+    }
+
+    private void AtualizarCampoDataDevolucaoFilme() {
         Calendar calendario = Calendar.getInstance();
         calendario.setTime(getLocacao().getData());
 
@@ -125,8 +133,6 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
         }
 
         jcDataDevolucaoFilme.setDate(calendario.getTime());
-        txtFuncionario.setText(getLocacao().getFuncionario().getNome());
-        jcDataLocacao.setDate(getLocacao().getData());
     }
 
     private String RetornarDescricaoCliente(Cliente cliente) {
@@ -142,7 +148,7 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
             modeloTabela.removeRow(0);
         }
 
-        for (ItemLocacao item : getLocacao().getItemLocacao()) {
+        for (ItemLocacao item : getLocacao().getItensLocacao()) {
             AdicionarLinha(item);
         }
     }
@@ -168,18 +174,31 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
     }
 
     private void AtualizarModelo() {
-
+        getLocacao().setCliente(listaClientes.get(cbxCliente.getSelectedIndex()));
     }
 
     public Boolean ValidaCampos() {
         Boolean retorno = true;
 
-//        if (txtNomeProduto.getText().equals("")
-//                || jspValor.getValue().toString().equals("")) {
-//            retorno = false;
-//            JOptionPane.showMessageDialog(null, "Todos os campos em negrito devem estar preenchidos.");
-//        }
+        if (getLocacao().getItensLocacao().isEmpty()) {
+            Utilidades.MostrarMensagem("Cadastro inválido", "Não foi adicionado nenhum filme na locação.");
+            retorno = false;
+        } else if (cbxCliente.getSelectedIndex() < 0) {
+            Utilidades.MostrarMensagem("Cadastro inválido", "O cliente não foi selecionado.");
+            retorno = false;
+        }
         return retorno;
+    }
+
+    private void AtualizarValorLocacao() {
+        double valor = 0;
+
+        for (ItemLocacao item : getLocacao().getItensLocacao()) {
+            valor += controle.getValorLocacao(item.getFilme());
+        }
+
+        jspValor.setValue(valor);
+        getLocacao().setValorTotal(valor);
     }
 
     @Override
@@ -309,20 +328,16 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
                         .addComponent(BtnCancelar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lNomeProduto)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lNomeProduto)
-                                .addGap(18, 414, Short.MAX_VALUE))
+                                .addComponent(lFuncionario)
+                                .addGap(285, 285, 285)
+                                .addComponent(lDataLocacao))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lFuncionario)
-                                        .addGap(285, 285, 285)
-                                        .addComponent(lDataLocacao))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jcDataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jcDataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lValorVenda)
                             .addGroup(layout.createSequentialGroup()
@@ -367,9 +382,9 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbxFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jcDataDevolucaoFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -395,11 +410,25 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
         if (ValidaCampos()) {
             AtualizarModelo();
 
-            Exception erro = controle.Salvar();
+            Exception erro = null;
+
+            try {
+
+                Transaction transacao = controle.getSessao().getTransaction();
+                transacao.begin();
+
+                //controle.getSessao().saveOrUpdate(modelo);
+
+                transacao.commit();
+
+            } catch (Exception e) {
+                erro = e;
+            }
 
             if (erro != null) {
                 Utilidades.MostrarMensagemErro(erro);
             } else {
+
                 modeloAtualizado = true;
                 this.dispose();
             }
@@ -407,7 +436,25 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnConfirmar1ActionPerformed
 
     private void BtnAdicionarFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdicionarFilmeActionPerformed
+        if (cbxFilme.getSelectedIndex() < 0) {
+            Utilidades.MostrarMensagemErro(new Exception("Você não selecionou nenhum filme para adicionar."));
+        } else if (getLocacao().getData().after(jcDataDevolucaoFilme.getDate())) {
+            Utilidades.MostrarMensagemErro(new Exception("A data de devolução do filme deve ser maior que a data da locação."));
+        } else {
+            ItemLocacao item = new ItemLocacao();
+            item.setDataPrevisaoEntrega(jcDataDevolucaoFilme.getDate());
+            item.setFilme(listaFilmes.get(cbxFilme.getSelectedIndex()));
+            item.setLocacao(getLocacao());
 
+            getLocacao().getItensLocacao().add(item);
+
+            AdicionarLinha(item);
+
+            AtualizarValorLocacao();
+
+            cbxFilme.setSelectedIndex(-1);
+            AtualizarCampoDataDevolucaoFilme();
+        }
     }//GEN-LAST:event_BtnAdicionarFilmeActionPerformed
 
     /**
