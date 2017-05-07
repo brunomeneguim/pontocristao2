@@ -111,7 +111,6 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
         } else {
             getLocacao().setFuncionario(ControleSistema.getFuncionarioLogado(controle.getSessao()));
             getLocacao().setData(new Date());
-            getLocacao().setPago(false);
         }
 
         AtualizarCampoDataDevolucaoFilme();
@@ -167,6 +166,7 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
 
     private void AtualizarCampos() {
         AtualizarTabela();
+        cbxCliente.setSelectedItem(getLocacao().getCliente().getNome());
         txtFuncionario.setText(getLocacao().getFuncionario().getNome());
         jcDataLocacao.setDate(getLocacao().getData());
         jspValor.setValue(getLocacao().getValorTotal());
@@ -417,7 +417,26 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
                 Transaction transacao = controle.getSessao().getTransaction();
                 transacao.begin();
 
-                //controle.getSessao().saveOrUpdate(modelo);
+                double totalPago = 0;
+                
+                for (PagamentoLocacao pagamento : getLocacao().getPagamentos()) {
+                    totalPago += pagamento.getValor();
+                }
+                
+                if (totalPago >= getLocacao().getValorTotal())
+                {
+                    getLocacao().setPago(true);
+                } 
+                else
+                {
+                    getLocacao().setPago(false);
+                }
+                
+                controle.getSessao().saveOrUpdate(getLocacao());
+
+                for (ItemLocacao item : getLocacao().getItensLocacao()) {
+                    controle.getSessao().saveOrUpdate(item);
+                }
 
                 transacao.commit();
 
