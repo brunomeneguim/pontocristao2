@@ -72,6 +72,13 @@ public class ControleLocacao extends ControleBase {
         return controleFilme.RetornarFilmes();
     }
     
+    public List<TipoPagamento> RetornarTiposPagamento() {
+        ControleTipoPagamento controleTipoPagamento = new ControleTipoPagamento();
+        controleTipoPagamento.setSessao(getSessao());
+        controleTipoPagamento.VerificarECadastrarTiposPagamento();
+        return controleTipoPagamento.RetornarTiposPagamento();
+    }
+    
     public TabelaPrecoLocacao getTabelaPrecoLocacao()
     {
         if (tabelaPreco == null)

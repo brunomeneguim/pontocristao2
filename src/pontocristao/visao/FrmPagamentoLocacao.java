@@ -1,8 +1,15 @@
 package pontocristao.visao;
 
 import java.awt.*;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
+import pontocristao.controle.ControleLocacao;
+import pontocristao.controle.ControleSistema;
+import pontocristao.modelo.Filme;
+import pontocristao.modelo.Locacao;
+import pontocristao.modelo.PagamentoLocacao;
+import pontocristao.modelo.TipoPagamento;
 import pontocristao.util.Utilidades;
 
 /**
@@ -11,27 +18,82 @@ import pontocristao.util.Utilidades;
  */
 public class FrmPagamentoLocacao extends javax.swing.JDialog {
 
-    public FrmPagamentoLocacao(java.awt.Frame parent, boolean modal) {
+    private static Frame frame;
+    private ControleLocacao controle;
+    private Boolean modeloAtualizado = false;
+    private java.util.List<TipoPagamento> listaTiposPagamento;
+
+    public Boolean getModeloAtualizado() {
+        return modeloAtualizado;
+    }
+
+    public Locacao getLocacao() {
+        return controle.getLocacao();
+    }
+
+    public FrmPagamentoLocacao(java.awt.Frame parent, boolean modal, long id) {
         super(parent, modal);
         initComponents();
 
         this.setLocationRelativeTo(null);
 
-        Mascara();
+        InicializarControle(id);
     }
 
-    private static Frame frame;
-
-    public static FrmPagamentoLocacao Mostrar(java.awt.Frame parent) {
+    public static FrmPagamentoLocacao Mostrar(java.awt.Frame parent, long idLocacao) {
         frame = parent;
-        FrmPagamentoLocacao frmCadastrarContaPagar = new FrmPagamentoLocacao(parent, true);
+        FrmPagamentoLocacao frmCadastrarContaPagar = new FrmPagamentoLocacao(parent, true, idLocacao);
         frmCadastrarContaPagar.setVisible(true);
         return frmCadastrarContaPagar;
     }
 
-    public void Mascara() {
-        //Setando mascáras para campos 
-        Utilidades.setMascara("R$ #.###,##",txtValorPagamento);
+    private void InicializarControle(long id) {
+        controle = new ControleLocacao();
+
+        listaTiposPagamento = controle.RetornarTiposPagamento();
+
+        for (TipoPagamento tipoPagamento : listaTiposPagamento) {
+            jcbTipoPagamento.addItem(tipoPagamento.getDescricao());
+        }
+
+        jcbTipoPagamento.setSelectedIndex(0);
+
+        if (id > 0) {
+            Exception erro = controle.RecuperarLocacao(id);
+
+            if (erro != null) {
+                Utilidades.MostrarMensagemErro(erro);
+            } else {
+                AtualizarCampos();
+            }
+        } else {
+            Utilidades.MostrarMensagemErro(new Exception("O Id da locação deve ser maior que zero."));
+            this.dispose();
+        }
+    }
+
+    private void AtualizarCampos() {
+        jcDataPagamento.setDate(new Date());
+
+        double valor = getLocacao().getValorTotal();
+
+        for (PagamentoLocacao pagamento : getLocacao().getPagamentos()) {
+            if (!pagamento.getExcluido()) {
+                valor -= pagamento.getValor();
+            }
+        }
+
+        jspValor.setValue(valor);
+
+        txtDescricao.setText(RetornarDescricaoPagamento());
+    }
+
+    private String RetornarDescricaoPagamento() {
+        if (jcbTipoPagamento.getSelectedIndex() >= 0) {
+            return "Pagamento " + listaTiposPagamento.get(jcbTipoPagamento.getSelectedIndex()).getDescricao();
+        } else {
+            return "";
+        }
     }
 
     /**
@@ -48,11 +110,11 @@ public class FrmPagamentoLocacao extends javax.swing.JDialog {
         lValor = new javax.swing.JLabel();
         lDescricao = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
-        txtValorPagamento = new javax.swing.JFormattedTextField();
         BtnCancelar = new javax.swing.JButton();
         BtnConfirmar = new javax.swing.JButton();
         lTipoPagamento = new javax.swing.JLabel();
         jcbTipoPagamento = new javax.swing.JComboBox<>();
+        jspValor = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Contas");
@@ -81,8 +143,6 @@ public class FrmPagamentoLocacao extends javax.swing.JDialog {
 
         lTipoPagamento.setText("Tipo de Pagamento");
 
-        jcbTipoPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dinheiro", "Cartão Débito", "Cartão Crédito", " " }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,30 +150,37 @@ public class FrmPagamentoLocacao extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lTipoPagamento)
+                        .addGap(214, 214, 214))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lTipoPagamento)
-                            .addComponent(jcbTipoPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lDescricao)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(BtnConfirmar)
-                                .addGap(18, 18, 18)
-                                .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtDescricao, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(lDataPagamento)
-                                        .addGap(63, 63, 63)
-                                        .addComponent(lValor))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jcDataPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtValorPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtDescricao, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jcDataPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jspValor))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                    .addComponent(lDataPagamento)
+                                                    .addGap(63, 63, 63))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(lDescricao)
+                                                    .addGap(112, 112, 112)))
+                                            .addComponent(lValor)
+                                            .addGap(124, 124, 124)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(BtnConfirmar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jcbTipoPagamento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,14 +190,13 @@ public class FrmPagamentoLocacao extends javax.swing.JDialog {
                 .addGap(1, 1, 1)
                 .addComponent(jcbTipoPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lDataPagamento)
-                            .addComponent(lValor, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcDataPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtValorPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lDataPagamento)
+                    .addComponent(lValor, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcDataPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jspValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lDescricao)
                 .addGap(1, 1, 1)
@@ -148,7 +214,7 @@ public class FrmPagamentoLocacao extends javax.swing.JDialog {
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
         Object[] botoes = {"Sim", "Não"};
         int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja Cancelar o Cadastro do Dependente? ",
+                "Deseja cancelar? ",
                 "Confirmação",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                 botoes, botoes[0]);
@@ -158,15 +224,7 @@ public class FrmPagamentoLocacao extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
-        Object[] botoes = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja Finalizar o Cadastro do Dependente? ",
-                "Confirmação",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                botoes, botoes[0]);
-        if (resposta == 0) {
-            this.dispose();
-        }
+
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
     /**
@@ -200,7 +258,7 @@ public class FrmPagamentoLocacao extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FrmPagamentoLocacao dialog = new FrmPagamentoLocacao(new javax.swing.JFrame(), true);
+                FrmPagamentoLocacao dialog = new FrmPagamentoLocacao(new javax.swing.JFrame(), true, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -217,11 +275,11 @@ public class FrmPagamentoLocacao extends javax.swing.JDialog {
     private javax.swing.JButton BtnConfirmar;
     private com.toedter.calendar.JDateChooser jcDataPagamento;
     private javax.swing.JComboBox<String> jcbTipoPagamento;
+    private javax.swing.JSpinner jspValor;
     private javax.swing.JLabel lDataPagamento;
     private javax.swing.JLabel lDescricao;
     private javax.swing.JLabel lTipoPagamento;
     private javax.swing.JLabel lValor;
     private javax.swing.JTextField txtDescricao;
-    private javax.swing.JFormattedTextField txtValorPagamento;
     // End of variables declaration//GEN-END:variables
 }

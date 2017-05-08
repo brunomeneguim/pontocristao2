@@ -313,7 +313,20 @@ private DefaultTableModel modeloTabela;
     }//GEN-LAST:event_BtnPesquisarActionPerformed
 
     private void BtnPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPagamentoActionPerformed
-        // TODO add your handling code here:
+        if (lista != null) {
+            int linhaSelecionada = jTableLista.getSelectedRow();
+            Locacao locacao = lista.get(linhaSelecionada);
+            FrmPagamentoLocacao frm = FrmPagamentoLocacao.Mostrar(frame, locacao.getId());
+
+            locacao = frm.getLocacao();
+
+            if (frm.getModeloAtualizado()) {
+                modeloTabela.removeRow(linhaSelecionada);
+                modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(locacao));
+
+                controle = new ControleLocacao();
+            }
+        }
     }//GEN-LAST:event_BtnPagamentoActionPerformed
 
     /**
