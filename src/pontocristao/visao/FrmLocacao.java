@@ -15,7 +15,7 @@ import pontocristao.util.Utilidades;
  */
 public class FrmLocacao extends javax.swing.JDialog {
 
-private DefaultTableModel modeloTabela;
+    private DefaultTableModel modeloTabela;
     private ControleLocacao controle = new ControleLocacao();
     private static Frame frame;
     private java.util.List<Locacao> lista;
@@ -39,6 +39,7 @@ private DefaultTableModel modeloTabela;
 
         BtnEditar.setEnabled(false);
         BtnExcluir.setEnabled(false);
+        BtnPagamento.setEnabled(false);
 
         Listar();
     }
@@ -61,7 +62,15 @@ private DefaultTableModel modeloTabela;
                     if (jTableLista.getSelectedRow() >= 0) {
                         BtnEditar.setEnabled(true);
                         BtnExcluir.setEnabled(true);
-                        BtnPagamento.setEnabled(true);
+                        
+                        int linhaSelecionada = jTableLista.getSelectedRow();
+                        Locacao locacao = lista.get(linhaSelecionada);
+                        
+                        if(!locacao.getPago())
+                        {
+                            BtnPagamento.setEnabled(true);
+                        }
+                        
                     } else {
                         BtnEditar.setEnabled(false);
                         BtnExcluir.setEnabled(false);
@@ -191,7 +200,7 @@ private DefaultTableModel modeloTabela;
             }
         });
 
-        BtnPagamento.setText("Pagamento");
+        BtnPagamento.setText("Pagar");
         BtnPagamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPagamentoActionPerformed(evt);
@@ -227,7 +236,7 @@ private DefaultTableModel modeloTabela;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(BtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(BtnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,9 +244,9 @@ private DefaultTableModel modeloTabela;
                         .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(BtnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(BtnPagamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(BtnSair1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -247,7 +256,7 @@ private DefaultTableModel modeloTabela;
 
     private void BtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoActionPerformed
         FrmCadastrarLocacao frm = FrmCadastrarLocacao.Mostrar(frame, 0);
-        
+
         if (frm.getModeloAtualizado()) {
             Locacao locacao = frm.getLocacao();
             AdicionarLinha(locacao);

@@ -55,7 +55,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="BtnNovo" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                       <Component id="BtnEditar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
@@ -63,11 +63,11 @@
                       <Component id="txtPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="BtnPesquisar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="BtnPagamento" alignment="0" max="32767" attributes="0"/>
+                  <Component id="BtnPagamento" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="494" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="498" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="BtnSair1" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -158,7 +158,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="BtnPagamento">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pagamento"/>
+        <Property name="text" type="java.lang.String" value="Pagar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnPagamentoActionPerformed"/>

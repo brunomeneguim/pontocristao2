@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
+import org.hibernate.Transaction;
 import pontocristao.controle.ControleLocacao;
 import pontocristao.controle.ControleSistema;
 import pontocristao.modelo.Filme;
@@ -22,6 +23,7 @@ public class FrmPagamentoLocacao extends javax.swing.JDialog {
     private ControleLocacao controle;
     private Boolean modeloAtualizado = false;
     private java.util.List<TipoPagamento> listaTiposPagamento;
+    private double valorTotalPagar;
 
     public Boolean getModeloAtualizado() {
         return modeloAtualizado;
@@ -75,6 +77,12 @@ public class FrmPagamentoLocacao extends javax.swing.JDialog {
     private void AtualizarCampos() {
         jcDataPagamento.setDate(new Date());
 
+        AtualizarValor();
+
+        txtDescricao.setText(RetornarDescricaoPagamento());
+    }
+
+    private void AtualizarValor() {
         double valor = getLocacao().getValorTotal();
 
         for (PagamentoLocacao pagamento : getLocacao().getPagamentos()) {
@@ -83,9 +91,8 @@ public class FrmPagamentoLocacao extends javax.swing.JDialog {
             }
         }
 
+        valorTotalPagar = valor;
         jspValor.setValue(valor);
-
-        txtDescricao.setText(RetornarDescricaoPagamento());
     }
 
     private String RetornarDescricaoPagamento() {
@@ -142,6 +149,9 @@ public class FrmPagamentoLocacao extends javax.swing.JDialog {
         });
 
         lTipoPagamento.setText("Tipo de Pagamento");
+
+        jspValor.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
+        jspValor.setOpaque(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -208,6 +218,8 @@ public class FrmPagamentoLocacao extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jspValor.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 0.1d));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -224,7 +236,39 @@ public class FrmPagamentoLocacao extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
+        double valor = (double) jspValor.getValue();
+        if (valor > 0 && valor <= valorTotalPagar) {
+            try {
 
+                PagamentoLocacao pagamento = new PagamentoLocacao();
+                pagamento.setData(new Date());
+                pagamento.setDescricao(txtDescricao.getText());
+                pagamento.setLocacao(getLocacao());
+                pagamento.setTipoPagamento(listaTiposPagamento.get(jcbTipoPagamento.getSelectedIndex()));
+                pagamento.setValor(valor);
+
+                getLocacao().setPago(valor == valorTotalPagar);
+
+                Transaction transacao = controle.getSessao().getTransaction();
+                transacao.begin();
+                 
+                controle.getSessao().saveOrUpdate(pagamento);
+                controle.getSessao().saveOrUpdate(getLocacao());
+                
+                transacao.commit();
+                
+                modeloAtualizado = true;
+                
+                this.dispose();
+                
+            } catch (Exception e) {
+                Utilidades.MostrarMensagemErro(e);
+            }
+
+        } else {
+            Utilidades.MostrarMensagemErro(new Exception("O valor está fora do limite aceito e será recalculado."));
+            AtualizarValor();
+        }
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
     /**
