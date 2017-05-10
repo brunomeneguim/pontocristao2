@@ -23,7 +23,7 @@ import pontocristao.util.Utilidades;
  *
  * @author Marcondes teste
  */
-public class FrmCadastrarLocacao extends javax.swing.JDialog {
+public class FrmCadastrarVenda extends javax.swing.JDialog {
 
     private static Frame frame;
     private ControleLocacao controle;
@@ -40,7 +40,7 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
         return controle.getLocacao();
     }
 
-    public FrmCadastrarLocacao(java.awt.Frame parent, boolean modal, long id) {
+    public FrmCadastrarVenda(java.awt.Frame parent, boolean modal, long id) {
         super(parent, modal);
         initComponents();
 
@@ -58,9 +58,9 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
         InicializarControle(id);
     }
 
-    public static FrmCadastrarLocacao Mostrar(java.awt.Frame parent, long id) {
+    public static FrmCadastrarVenda Mostrar(java.awt.Frame parent, long id) {
         frame = parent;
-        FrmCadastrarLocacao frm = new FrmCadastrarLocacao(parent, true, id);
+        FrmCadastrarVenda frm = new FrmCadastrarVenda(parent, true, id);
         frm.setVisible(true);
         return frm;
     }
@@ -130,8 +130,6 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
             //adiciona só um dia como padrão
             calendario.add(Calendar.DATE, 1);
         }
-
-        jcDataDevolucaoFilme.setDate(calendario.getTime());
     }
 
     private String RetornarDescricaoCliente(Cliente cliente) {
@@ -222,7 +220,7 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
         jspValor = new javax.swing.JSpinner();
         BtnCancelar = new javax.swing.JButton();
         BtnConfirmar1 = new javax.swing.JButton();
-        lValorLocacao = new javax.swing.JLabel();
+        lValorVenda = new javax.swing.JLabel();
         lNomeProduto = new javax.swing.JLabel();
         jcDataLocacao = new com.toedter.calendar.JDateChooser();
         lDataLocacao = new javax.swing.JLabel();
@@ -231,13 +229,11 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblFilmes = new javax.swing.JTable();
-        BtnAdicionarFilme = new javax.swing.JButton();
+        BtnAdicionarProduto = new javax.swing.JButton();
         cbxCliente = new javax.swing.JComboBox<>();
         ckbPago = new javax.swing.JCheckBox();
         cbxFilme = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jcDataDevolucaoFilme = new com.toedter.calendar.JDateChooser();
+        lProduto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Locação");
@@ -260,8 +256,8 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
             }
         });
 
-        lValorLocacao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lValorLocacao.setText("Valor de Locação*");
+        lValorVenda.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lValorVenda.setText("Valor de Venda*");
 
         lNomeProduto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lNomeProduto.setText("Nome do Cliente*");
@@ -298,19 +294,17 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        BtnAdicionarFilme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnNovo.png"))); // NOI18N
-        BtnAdicionarFilme.setText("Adicionar Filme");
-        BtnAdicionarFilme.addActionListener(new java.awt.event.ActionListener() {
+        BtnAdicionarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnNovo.png"))); // NOI18N
+        BtnAdicionarProduto.setText("Adicionar Produto");
+        BtnAdicionarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAdicionarFilmeActionPerformed(evt);
+                BtnAdicionarProdutoActionPerformed(evt);
             }
         });
 
         ckbPago.setText("Pago");
 
-        jLabel1.setText("Filme");
-
-        jLabel2.setText("Data de devolução do filme");
+        lProduto.setText("Produto");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -319,46 +313,43 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbxCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(BtnConfirmar1)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnCancelar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BtnAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(510, 510, 510))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lNomeProduto)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lFuncionario)
-                                .addGap(285, 285, 285)
-                                .addComponent(lDataLocacao))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jcDataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lValorLocacao)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jspValor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(BtnConfirmar1)
                                 .addGap(18, 18, 18)
-                                .addComponent(ckbPago))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(BtnCancelar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lNomeProduto)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lFuncionario)
+                                        .addGap(285, 285, 285)
+                                        .addComponent(lDataLocacao))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jcDataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lValorVenda)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jspValor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(ckbPago))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cbxFilme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18))
+                                .addGap(176, 176, 176))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(417, 417, 417)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcDataDevolucaoFilme, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnAdicionarFilme, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(453, 453, 453)))
-                .addContainerGap())
+                                .addComponent(lProduto)
+                                .addGap(575, 575, 575)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,7 +358,7 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lDataLocacao)
                     .addComponent(lFuncionario)
-                    .addComponent(lValorLocacao))
+                    .addComponent(lValorVenda))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -380,16 +371,11 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jcDataDevolucaoFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lProduto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BtnAdicionarFilme, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
@@ -418,20 +404,17 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
                 transacao.begin();
 
                 double totalPago = 0;
-                
+
                 for (PagamentoLocacao pagamento : getLocacao().getPagamentos()) {
                     totalPago += pagamento.getValor();
                 }
-                
-                if (totalPago >= getLocacao().getValorTotal())
-                {
+
+                if (totalPago >= getLocacao().getValorTotal()) {
                     getLocacao().setPago(true);
-                } 
-                else
-                {
+                } else {
                     getLocacao().setPago(false);
                 }
-                
+
                 controle.getSessao().saveOrUpdate(getLocacao());
 
                 for (ItemLocacao item : getLocacao().getItensLocacao()) {
@@ -454,14 +437,11 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnConfirmar1ActionPerformed
 
-    private void BtnAdicionarFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdicionarFilmeActionPerformed
+    private void BtnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdicionarProdutoActionPerformed
         if (cbxFilme.getSelectedIndex() < 0) {
             Utilidades.MostrarMensagemErro(new Exception("Você não selecionou nenhum filme para adicionar."));
-        } else if (getLocacao().getData().after(jcDataDevolucaoFilme.getDate())) {
-            Utilidades.MostrarMensagemErro(new Exception("A data de devolução do filme deve ser maior que a data da locação."));
         } else {
             ItemLocacao item = new ItemLocacao();
-            item.setDataPrevisaoEntrega(jcDataDevolucaoFilme.getDate());
             item.setFilme(listaFilmes.get(cbxFilme.getSelectedIndex()));
             item.setLocacao(getLocacao());
 
@@ -474,7 +454,7 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
             cbxFilme.setSelectedIndex(-1);
             AtualizarCampoDataDevolucaoFilme();
         }
-    }//GEN-LAST:event_BtnAdicionarFilmeActionPerformed
+    }//GEN-LAST:event_BtnAdicionarProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -493,14 +473,22 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCadastrarLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCadastrarVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCadastrarLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCadastrarVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCadastrarLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCadastrarVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCadastrarLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCadastrarVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -513,7 +501,7 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FrmCadastrarLocacao dialog = new FrmCadastrarLocacao(new javax.swing.JFrame(), true, 0);
+                FrmCadastrarVenda dialog = new FrmCadastrarVenda(new javax.swing.JFrame(), true, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -527,23 +515,21 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnAdicionarFilme;
+    private javax.swing.JButton BtnAdicionarProduto;
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton BtnConfirmar1;
     private javax.swing.JComboBox<String> cbxCliente;
     private javax.swing.JComboBox<String> cbxFilme;
     private javax.swing.JCheckBox ckbPago;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.toedter.calendar.JDateChooser jcDataDevolucaoFilme;
     private com.toedter.calendar.JDateChooser jcDataLocacao;
     private javax.swing.JSpinner jspValor;
     private javax.swing.JLabel lDataLocacao;
     private javax.swing.JLabel lFuncionario;
     private javax.swing.JLabel lNomeProduto;
-    private javax.swing.JLabel lValorLocacao;
+    private javax.swing.JLabel lProduto;
+    private javax.swing.JLabel lValorVenda;
     private javax.swing.JTable tblFilmes;
     private javax.swing.JTextField txtFuncionario;
     // End of variables declaration//GEN-END:variables
