@@ -5,10 +5,12 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import org.hibernate.Transaction;
+import pontocristao.controle.ControleCaixa;
 import pontocristao.controle.ControleLocacao;
 import pontocristao.controle.ControleSistema;
 import pontocristao.modelo.Filme;
 import pontocristao.modelo.Locacao;
+import pontocristao.modelo.MovimentacaoCaixaLocacao;
 import pontocristao.modelo.PagamentoLocacao;
 import pontocristao.modelo.TipoPagamento;
 import pontocristao.util.Utilidades;
@@ -254,6 +256,16 @@ public class FrmPagamentoLocacao extends javax.swing.JDialog {
                  
                 controle.getSessao().saveOrUpdate(pagamento);
                 controle.getSessao().saveOrUpdate(getLocacao());
+                
+                ControleCaixa controleCaixa = new ControleCaixa(controle.getSessao());
+                
+                MovimentacaoCaixaLocacao movimentacao = new MovimentacaoCaixaLocacao();
+                movimentacao.setData(new Date());
+                movimentacao.setFuncionario(ControleSistema.getFuncionarioLogado(controle.getSessao()));
+                movimentacao.setLocacao(getLocacao());
+                movimentacao.setValor(valor);
+                
+                controleCaixa.AdicionarMovimentacao(movimentacao);
                 
                 transacao.commit();
                 

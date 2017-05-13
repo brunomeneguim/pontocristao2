@@ -280,7 +280,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem24.setText("Locação");
         jMenu2.add(jMenuItem24);
 
-        jMenuItem23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/RelatorioVendas.png"))); // NOI18N
+        jMenuItem23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/RelatorioVenda.png"))); // NOI18N
         jMenuItem23.setText("Venda");
         jMenu2.add(jMenuItem23);
 
