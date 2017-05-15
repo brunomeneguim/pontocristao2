@@ -1,10 +1,12 @@
 package pontocristao.visao;
 
-
-
 import java.awt.*;
 import java.text.NumberFormat;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.NumberFormatter;
 import pontocristao.controle.*;
 import pontocristao.modelo.*;
@@ -12,103 +14,126 @@ import pontocristao.util.Utilidades;
 
 /**
  *
- * @author Marcondes
- * teste
+ * @author Marcondes teste
  */
 public class FrmCaixa extends javax.swing.JDialog {
 
+    private DefaultTableModel modeloTabela;
+    private ControleCaixa controle = new ControleCaixa();
     private static Frame frame;
-    private ControleFilme controle;
-    private Boolean modeloAtualizado = false;
-    private java.util.List<Fornecedor> listaFornecedores;
-    private java.util.List<TipoFilme> listaTiposFilme;
+    private java.util.List<MovimentacaoCaixa> lista;
 
-    public Boolean getModeloAtualizado() {
-        return modeloAtualizado;
-    }
-
-    public Filme getFilme() {
-        return controle.getFilme();
-    }
-
-    public FrmCaixa(java.awt.Frame parent, boolean modal, long id) {
-        super(parent, modal);
-        initComponents();
-
-        setLocationRelativeTo(null);
-
-        txtCodigo.setEnabled(false);
-        jcData.setEnabled(false);
-
-        //txtNomeProduto.requestFocus();
-
-        InicializarControle(id);
-    }
-
-    public static FrmCadastrarLocacao Mostrar(java.awt.Frame parent, long id) {
+    public static FrmCaixa Mostrar(java.awt.Frame parent) {
         frame = parent;
-        FrmCadastrarLocacao frm = new FrmCadastrarLocacao(parent, true, id);
+        FrmCaixa frm = new FrmCaixa(parent, true);
         frm.setVisible(true);
         return frm;
     }
 
-    private void InicializarControle(long id) {
-        controle = new ControleFilme();
+    public FrmCaixa(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        AjustarTabela();
 
-        listaFornecedores = controle.RetornarFornecedores();
-        listaTiposFilme = controle.RetornarTiposFilme();
+        Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        this.setBounds(bounds);
 
-        if (id > 0) {
-            Exception erro = controle.RecuperarFilme(id);
+        jspSaldo.setEnabled(false);
+        
+        Listar();
+        AtualizarSaldo();
+    }
 
-            if (erro != null) {
-                Utilidades.MostrarMensagemErro(erro);
-            } else {
-                AtualizarCampos();
+    private void AjustarTabela() {
+        String[] colunas = new String[]{"Operação", "Data", "Valor", "Tipo de movimentação", "Descrição"};
+        modeloTabela = new DefaultTableModel(null, colunas) {
+            @Override
+            public boolean isCellEditable(int row, int col) {
+                return false;
             }
+        };
+
+        jTableLista.setModel(modeloTabela);
+        jTableLista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
+
+    private void AtualizarTabela(java.util.List<MovimentacaoCaixa> movimentacoes) {
+        while (modeloTabela.getRowCount() > 0) {
+            modeloTabela.removeRow(0);
+        }
+
+        lista = movimentacoes;
+
+        for (MovimentacaoCaixa movimentacao : movimentacoes) {
+            AdicionarLinha(movimentacao);
         }
     }
 
-    private String RetornarDescricaoFornecedor(Fornecedor fornecedor) {
-        return fornecedor.getId() + " - " + fornecedor.getNomeFantasia() + " - " + fornecedor.getCnpj();
+    private void AdicionarLinha(MovimentacaoCaixa movimentacao) {
+        modeloTabela.addRow(RetornarNovaLinha(movimentacao));
     }
 
-    private String RetornarDescricaoTipoFilme(TipoFilme tipoFilme) {
-        return tipoFilme.getId() + " - " + tipoFilme.getDescricao();
-    }
-
-    private void AtualizarCampos() {
-        txtCodigo.setText(String.valueOf(controle.getFilme().getId()));
-        jcData.setDate(controle.getFilme().getDataCadastro());
-        //txtNomeProduto.setText(controle.getFilme().getNome());
-        //jspValor.setValue(controle.getFilme().getValorVenda());
-    }
-
-    private void AtualizarModelo() {
-        //controle.getFilme().setNome(txtNomeProduto.getText());
-        //controle.getFilme().setValorVenda((Double) jspValor.getValue());
-
-    }
-
-    public Boolean ValidaCampos() {
-        Boolean retorno = true;
-
-//        if (txtNomeProduto.getText().equals("")
-//                || jspValor.getValue().toString().equals("")) {
-//            retorno = false;
-//            JOptionPane.showMessageDialog(null, "Todos os campos em negrito devem estar preenchidos.");
-//        }
-
-        return retorno;
-    }
-
-    @Override
-    public void dispose() {
-        if (controle != null) {
-            controle.Dispose();
+    private Object[] RetornarNovaLinha(MovimentacaoCaixa movimentacao) {
+        String operacao = "";
+        String tipo = "";
+        String descricao = "";
+        
+        if(movimentacao instanceof MovimentacaoCaixaContaPagar)
+        {
+            operacao = "Débito";
+            tipo = "Pagamento de conta";
+            descricao = "Identificador da conta: " + ((MovimentacaoCaixaContaPagar) movimentacao).getContaPagar().getId();
+        }
+        else if(movimentacao instanceof MovimentacaoCaixaDeposito)
+        {
+            operacao = "Crédito";
+            tipo = "Depósito";
+            descricao = ((MovimentacaoCaixaDeposito) movimentacao).getDescricao();
+        }
+        else if(movimentacao instanceof MovimentacaoCaixaLocacao)
+        {
+            operacao = "Crédito";
+            tipo = "Pagamento de locação";
+            descricao = "Identificador da locação: " + ((MovimentacaoCaixaLocacao) movimentacao).getLocacao().getId();
+        }
+        else if(movimentacao instanceof MovimentacaoCaixaRetirada)
+        {
+            operacao = "Débito";
+            tipo = "Retirada";
+            descricao = ((MovimentacaoCaixaRetirada) movimentacao).getDescricao();
+        }
+        else if(movimentacao instanceof MovimentacaoCaixaVenda)
+        {
+            operacao = "Crédito";
+            tipo = "Pagamento de venda";
+            descricao = "Identificador da venda: " + ((MovimentacaoCaixaVenda) movimentacao).getVenda().getId();
+        }
+        else
+        {
+            Utilidades.MostrarMensagemErro(new Exception("Tipo desconhecido."));
         }
 
-        super.dispose();
+        return new Object[]{
+            operacao,
+            movimentacao.getData(),
+            movimentacao.getValor(),
+            tipo,
+            descricao
+        };
+    }
+
+    public void Listar() {
+        try {
+            AtualizarTabela(controle.RetornarMovimentacoesCaixa());
+        } catch (Exception e) {
+            Utilidades.MostrarMensagemErro(e);
+        }
+    }
+    
+    public void AtualizarSaldo()
+    {
+        double saldo = controle.RetornarCaixa().getSaldo();
+        jspSaldo.setValue(saldo);
     }
 
     /**
@@ -120,58 +145,34 @@ public class FrmCaixa extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lCodigoCliente = new javax.swing.JLabel();
-        BtnCancelar = new javax.swing.JButton();
-        BtnConfirmar1 = new javax.swing.JButton();
-        jcData = new com.toedter.calendar.JDateChooser();
-        txtCodigo = new javax.swing.JTextField();
-        lData = new javax.swing.JLabel();
-        lFuncionario = new javax.swing.JLabel();
-        txtFuncionario = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
+        BtnRetirar = new javax.swing.JButton();
+        BtnDepositar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        lSaldo = new javax.swing.JLabel();
-        txtSaldo = new javax.swing.JTextField();
-        lDeposito = new javax.swing.JLabel();
-        txtDeposito = new javax.swing.JTextField();
-        BtnDeposito = new javax.swing.JButton();
-        lRetirada = new javax.swing.JLabel();
-        txtRetirada = new javax.swing.JTextField();
-        BtnRetirada = new javax.swing.JButton();
+        jTableLista = new javax.swing.JTable();
+        BtnSair = new javax.swing.JButton();
+        jspSaldo = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Locação");
 
-        lCodigoCliente.setText("Código do Funcionário");
-
-        BtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnCancelar.png"))); // NOI18N
-        BtnCancelar.setText("Cancelar");
-        BtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        BtnRetirar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnNovo.png"))); // NOI18N
+        BtnRetirar.setText("Retirar");
+        BtnRetirar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnCancelarActionPerformed(evt);
+                BtnRetirarActionPerformed(evt);
             }
         });
 
-        BtnConfirmar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnConfirmar.png"))); // NOI18N
-        BtnConfirmar1.setText("Confirmar");
-        BtnConfirmar1.addActionListener(new java.awt.event.ActionListener() {
+        BtnDepositar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnEditar.png"))); // NOI18N
+        BtnDepositar.setText("Depositar");
+        BtnDepositar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnConfirmar1ActionPerformed(evt);
+                BtnDepositarActionPerformed(evt);
             }
         });
 
-        txtCodigo.setEditable(false);
-        txtCodigo.setBackground(new java.awt.Color(255, 255, 255));
-        txtCodigo.setEnabled(false);
-
-        lData.setText("Data");
-
-        lFuncionario.setText("Funcionário");
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Caixa"));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableLista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -182,77 +183,40 @@ public class FrmCaixa extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableLista);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(148, Short.MAX_VALUE))
-        );
+        BtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnSair.png"))); // NOI18N
+        BtnSair.setText("Sair");
+        BtnSair.setPreferredSize(new java.awt.Dimension(139, 65));
+        BtnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSairActionPerformed(evt);
+            }
+        });
 
-        lSaldo.setText("Saldo");
+        jspSaldo.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 0.0d));
 
-        txtSaldo.setEditable(false);
-
-        lDeposito.setText("Descrição do Depósito");
-
-        BtnDeposito.setText("Depósito");
-
-        lRetirada.setText("Descrição da Retirada");
-
-        BtnRetirada.setText("Retirada");
+        jLabel1.setText("Saldo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lSaldo)
-                            .addComponent(BtnConfirmar1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtnCancelar, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(BtnRetirar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnDepositar)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(BtnDeposito, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                    .addComponent(txtDeposito, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtRetirada)
-                                    .addComponent(BtnRetirada, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lCodigoCliente)
-                                    .addComponent(lDeposito))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lRetirada)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lFuncionario)
-                                            .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jcData, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lData))))))
-                        .addGap(0, 164, Short.MAX_VALUE)))
+                            .addComponent(jLabel1)
+                            .addComponent(jspSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -260,61 +224,42 @@ public class FrmCaixa extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lCodigoCliente)
-                    .addComponent(lData)
-                    .addComponent(lFuncionario))
+                    .addComponent(BtnRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jcData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lDeposito)
-                    .addComponent(lRetirada))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtRetirada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnDeposito)
-                    .addComponent(BtnRetirada))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lSaldo)
-                    .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnCancelar)
-                    .addComponent(BtnConfirmar1))
+                    .addComponent(BtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jspSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_BtnCancelarActionPerformed
+    private void BtnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRetirarActionPerformed
 
-    private void BtnConfirmar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmar1ActionPerformed
-        if (ValidaCampos()) {
-            AtualizarModelo();
+    }//GEN-LAST:event_BtnRetirarActionPerformed
 
-            Exception erro = controle.Salvar();
+    private void BtnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDepositarActionPerformed
 
-            if (erro != null) {
-                Utilidades.MostrarMensagemErro(erro);
-            } else {
-                modeloAtualizado = true;
-                this.dispose();
-            }
+    }//GEN-LAST:event_BtnDepositarActionPerformed
+
+    private void BtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSairActionPerformed
+        Object[] botoes = {"Sim", "Não"};
+        int resposta = JOptionPane.showOptionDialog(null,
+                "Deseja sair do caixa? ",
+                "Confirmação",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                botoes, botoes[0]);
+        if (resposta == 0) {
+            this.dispose();
         }
-    }//GEN-LAST:event_BtnConfirmar1ActionPerformed
+    }//GEN-LAST:event_BtnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -366,24 +311,12 @@ public class FrmCaixa extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnCancelar;
-    private javax.swing.JButton BtnConfirmar1;
-    private javax.swing.JButton BtnDeposito;
-    private javax.swing.JButton BtnRetirada;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton BtnDepositar;
+    private javax.swing.JButton BtnRetirar;
+    private javax.swing.JButton BtnSair;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private com.toedter.calendar.JDateChooser jcData;
-    private javax.swing.JLabel lCodigoCliente;
-    private javax.swing.JLabel lData;
-    private javax.swing.JLabel lDeposito;
-    private javax.swing.JLabel lFuncionario;
-    private javax.swing.JLabel lRetirada;
-    private javax.swing.JLabel lSaldo;
-    private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtDeposito;
-    private javax.swing.JTextField txtFuncionario;
-    private javax.swing.JTextField txtRetirada;
-    private javax.swing.JTextField txtSaldo;
+    private javax.swing.JTable jTableLista;
+    private javax.swing.JSpinner jspSaldo;
     // End of variables declaration//GEN-END:variables
 }

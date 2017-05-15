@@ -230,6 +230,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/Caixa.png"))); // NOI18N
         jMenuItem22.setText("Caixa");
+        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem22ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem22);
 
         jMenuBar1.add(jMenu1);
@@ -434,6 +439,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
+        FrmCaixa frmCaixa = FrmCaixa.Mostrar(this);
+    }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     /**
      * @param args the command line arguments
