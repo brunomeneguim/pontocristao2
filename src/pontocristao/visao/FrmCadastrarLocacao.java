@@ -434,9 +434,18 @@ public class FrmCadastrarLocacao extends javax.swing.JDialog {
                 
                 controle.getSessao().saveOrUpdate(getLocacao());
 
+                Cliente cliente = controle.getLocacao().getCliente();
+                
                 for (ItemLocacao item : getLocacao().getItensLocacao()) {
+                    if(item.getId() == 0)
+                    {
+                        cliente.setTotalLocacoes(cliente.getTotalLocacoes() + 1);
+                    }
+                    
                     controle.getSessao().saveOrUpdate(item);
                 }
+                
+                controle.getSessao().saveOrUpdate(cliente);
 
                 transacao.commit();
 

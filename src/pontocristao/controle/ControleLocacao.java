@@ -17,9 +17,9 @@ import pontocristao.modelo.*;
  * @author Marco
  */
 public class ControleLocacao extends ControleBase {
-    
+
     private TabelaPrecoLocacao tabelaPreco;
-    
+
     public Locacao getLocacao() {
         return (Locacao) this.getModelo();
     }
@@ -59,46 +59,40 @@ public class ControleLocacao extends ControleBase {
         Query q = this.getSessao().createSQLQuery(sql).addEntity(Locacao.class);
         return (List<Locacao>) q.list();
     }
-    
+
     public List<Cliente> RetornarClientes() {
         ControleCliente controleCliente = new ControleCliente(false);
         controleCliente.setSessao(getSessao());
         return controleCliente.RetornarClientes();
     }
-    
+
     public List<Filme> RetornarFilmes() {
         ControleFilme controleFilme = new ControleFilme();
         controleFilme.setSessao(getSessao());
         return controleFilme.RetornarFilmes();
     }
-    
+
     public List<TipoPagamento> RetornarTiposPagamento() {
         ControleTipoPagamento controleTipoPagamento = new ControleTipoPagamento();
         controleTipoPagamento.setSessao(getSessao());
         controleTipoPagamento.VerificarECadastrarTiposPagamento();
         return controleTipoPagamento.RetornarTiposPagamento();
     }
-    
-    public TabelaPrecoLocacao getTabelaPrecoLocacao()
-    {
-        if (tabelaPreco == null)
-        {
+
+    public TabelaPrecoLocacao getTabelaPrecoLocacao() {
+        if (tabelaPreco == null) {
             ControleTabelaPrecoLocacao controle = new ControleTabelaPrecoLocacao();
             controle.RecuperarTabelaPrecoLocacao();
             tabelaPreco = controle.getTabelaPrecoLocacao();
         }
-        
+
         return tabelaPreco;
     }
-    
-    public Double getValorLocacao(Filme filme)
-    {
-        if (filme.getLancamento())
-        {
+
+    public Double getValorLocacao(Filme filme) {
+        if (filme.getLancamento()) {
             return getTabelaPrecoLocacao().getValorLancamento();
-        }
-        else
-        {
+        } else {
             return getTabelaPrecoLocacao().getValorNormal();
         }
     }
@@ -136,10 +130,20 @@ public class ControleLocacao extends ControleBase {
                 Locacao locacao = (Locacao) resultados.get(0);
                 locacao.setExcluido(true);
 
+                Cliente cliente = locacao.getCliente();
+                int totalLocacoes = cliente.getTotalLocacoes() - locacao.getItensLocacao().size();
+
+                if (totalLocacoes < 0) {
+                    totalLocacoes = 0;
+                }
+
+                cliente.setTotalLocacoes(totalLocacoes);
+
                 Transaction transacao = s.getTransaction();
 
                 transacao.begin();
-                s.save(locacao);
+                s.saveOrUpdate(cliente);
+                s.saveOrUpdate(locacao);
                 transacao.commit();
 
             } else {
