@@ -1,7 +1,9 @@
 package pontocristao.visao;
 
 import java.awt.*;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import org.hibernate.Transaction;
 import pontocristao.controle.*;
 import pontocristao.modelo.*;
 import pontocristao.util.Utilidades;
@@ -13,61 +15,56 @@ import pontocristao.util.Utilidades;
 public class FrmCaixaRetirada extends javax.swing.JDialog {
 
     private static Frame frame;
-    private ControleTipoFilme controle;
+    private ControleCaixa controle;
     private Boolean modeloAtualizado = false;
+    private MovimentacaoCaixaRetirada movimentacao;
+
+    public MovimentacaoCaixaRetirada getMovimentacao() {
+        return movimentacao;
+    }
 
     public Boolean getModeloAtualizado() {
         return modeloAtualizado;
     }
 
-    public TipoFilme getTipoFilme() {
-        return controle.getTipoFilme();
-    }
-
-    public FrmCaixaRetirada(java.awt.Frame parent, boolean modal, long id) {
+    public FrmCaixaRetirada(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
         this.setLocationRelativeTo(null);
 
-        txtDescricao.requestFocus();
+        jcData.setDate(new Date());
+        jcData.setEnabled(false);
 
-        InicializarControle(id);
+        jspValor.requestFocus();
+
+        InicializarControle();
     }
 
-    public static FrmCaixaRetirada Mostrar(java.awt.Frame parent, long id) {
+    public static FrmCaixaRetirada Mostrar(java.awt.Frame parent) {
         frame = parent;
-        FrmCaixaRetirada frm = new FrmCaixaRetirada(parent, true, id);
+        FrmCaixaRetirada frm = new FrmCaixaRetirada(parent, true);
         frm.setVisible(true);
         return frm;
     }
 
-    private void InicializarControle(long id) {
-        this.controle = new ControleTipoFilme();
-
-        if (id > 0) {
-            Exception erro = this.controle.RecuperarTipoFilme(id);
-
-            if (erro != null) {
-                Utilidades.MostrarMensagemErro(erro);
-            } else {
-                AtualizarCampos();
-            }
-        }
-    }
-
-    private void AtualizarCampos() {
-        txtDescricao.setText(controle.getTipoFilme().getDescricao());
+    private void InicializarControle() {
+        controle = new ControleCaixa();
+        movimentacao = new MovimentacaoCaixaRetirada();
+        movimentacao.setFuncionario(ControleSistema.getFuncionarioLogado(controle.getSessao()));
     }
 
     private void AtualizarModelo() {
-        controle.getTipoFilme().setDescricao(txtDescricao.getText());
+        movimentacao.setData(jcData.getDate());
+        movimentacao.setDescricao(txtDescricao.getText());
+        movimentacao.setValor((Double) jspValor.getValue());
     }
 
     public Boolean ValidaCampos() {
         Boolean retorno = true;
 
-        if (txtDescricao.getText().equals("")) {
+        if (txtDescricao.getText().equals("")
+                || jspValor.getValue().toString().equals("")) {
             retorno = false;
             JOptionPane.showMessageDialog(null, "Todos os campos em negrito devem estar preenchidos.");
         }
@@ -98,9 +95,9 @@ public class FrmCaixaRetirada extends javax.swing.JDialog {
         BtnConfirmar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lValor = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         lDataRetirada = new javax.swing.JLabel();
-        jcDataRetirada = new com.toedter.calendar.JDateChooser();
+        jcData = new com.toedter.calendar.JDateChooser();
+        jspValor = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -129,6 +126,8 @@ public class FrmCaixaRetirada extends javax.swing.JDialog {
         lDataRetirada.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lDataRetirada.setText("Data da Retirada*");
 
+        jspValor.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 0.1d));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,15 +142,15 @@ public class FrmCaixaRetirada extends javax.swing.JDialog {
                         .addComponent(BtnCancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lValor))
+                            .addComponent(lValor)
+                            .addComponent(jspValor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lDataRetirada)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jcDataRetirada, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jcData, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE))))
                     .addComponent(txtDescricao)
                     .addGroup(layout.createSequentialGroup()
@@ -167,9 +166,9 @@ public class FrmCaixaRetirada extends javax.swing.JDialog {
                     .addComponent(lValor)
                     .addComponent(lDataRetirada))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcDataRetirada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jcData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jspValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -192,7 +191,19 @@ public class FrmCaixaRetirada extends javax.swing.JDialog {
         if (ValidaCampos()) {
             AtualizarModelo();
 
-            Exception erro = controle.Salvar();
+            Exception erro = null;
+
+            try {
+                Transaction transacao = controle.getSessao().getTransaction();
+                transacao.begin();
+
+                controle.AdicionarMovimentacao(movimentacao);
+
+                transacao.commit();
+
+            } catch (Exception e) {
+                erro = e;
+            }
 
             if (erro != null) {
                 Utilidades.MostrarMensagemErro(erro);
@@ -234,7 +245,7 @@ public class FrmCaixaRetirada extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FrmCaixaRetirada dialog = new FrmCaixaRetirada(new javax.swing.JFrame(), true, 0);
+                FrmCaixaRetirada dialog = new FrmCaixaRetirada(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -250,8 +261,8 @@ public class FrmCaixaRetirada extends javax.swing.JDialog {
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton BtnConfirmar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
-    private com.toedter.calendar.JDateChooser jcDataRetirada;
+    private com.toedter.calendar.JDateChooser jcData;
+    private javax.swing.JSpinner jspValor;
     private javax.swing.JLabel lDataRetirada;
     private javax.swing.JLabel lValor;
     private javax.swing.JTextField txtDescricao;

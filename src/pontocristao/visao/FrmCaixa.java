@@ -242,11 +242,23 @@ public class FrmCaixa extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRetirarActionPerformed
-
+        FrmCaixaRetirada frmCaixaRetirada = FrmCaixaRetirada.Mostrar(frame);
+        
+        if (frmCaixaRetirada.getModeloAtualizado()) {
+            MovimentacaoCaixa movimentacao = frmCaixaRetirada.getMovimentacao();
+            modeloTabela.addRow( RetornarNovaLinha(movimentacao));
+            jspSaldo.setValue(movimentacao.getCaixa().getSaldo());
+        }
     }//GEN-LAST:event_BtnRetirarActionPerformed
 
     private void BtnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDepositarActionPerformed
-
+        FrmCaixaDeposito frmCaixaDeposito = FrmCaixaDeposito.Mostrar(frame);
+        
+        if (frmCaixaDeposito.getModeloAtualizado()) {
+            MovimentacaoCaixa movimentacao = frmCaixaDeposito.getMovimentacao();
+            modeloTabela.addRow( RetornarNovaLinha(movimentacao));
+            jspSaldo.setValue(movimentacao.getCaixa().getSaldo());
+        }
     }//GEN-LAST:event_BtnDepositarActionPerformed
 
     private void BtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSairActionPerformed
