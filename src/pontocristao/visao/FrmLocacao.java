@@ -200,6 +200,7 @@ public class FrmLocacao extends javax.swing.JDialog {
             }
         });
 
+        BtnPagamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnPagar.png"))); // NOI18N
         BtnPagamento.setText("Pagar");
         BtnPagamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

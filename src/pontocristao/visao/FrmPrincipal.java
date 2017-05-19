@@ -99,7 +99,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Principal");
 
-        BtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnSair.png"))); // NOI18N
+        BtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/Sair.png"))); // NOI18N
         BtnSair.setText("Sair");
         BtnSair.setPreferredSize(new java.awt.Dimension(139, 65));
         BtnSair.addActionListener(new java.awt.event.ActionListener() {

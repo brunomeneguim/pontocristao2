@@ -32,6 +32,10 @@
                       <Component id="BtnRetirar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="BtnDepositar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="BtnEditar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="BtnExcluir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -54,6 +58,10 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="BtnRetirar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="BtnDepositar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Component id="BtnEditar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="BtnExcluir" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="534" max="32767" attributes="0"/>
@@ -140,6 +148,28 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Saldo"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="BtnEditar">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/pontocristao/icones/BtnEditar.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Editar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnEditarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BtnExcluir">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/pontocristao/icones/BtnExcluir.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Excluir"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnExcluirActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
