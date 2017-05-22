@@ -152,8 +152,6 @@ public class FrmCaixa extends javax.swing.JDialog {
         BtnSair = new javax.swing.JButton();
         jspSaldo = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
-        BtnEditar = new javax.swing.JButton();
-        BtnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Locação");
@@ -200,22 +198,6 @@ public class FrmCaixa extends javax.swing.JDialog {
 
         jLabel1.setText("Saldo");
 
-        BtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnEditar.png"))); // NOI18N
-        BtnEditar.setText("Editar");
-        BtnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEditarActionPerformed(evt);
-            }
-        });
-
-        BtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/BtnExcluir.png"))); // NOI18N
-        BtnExcluir.setText("Excluir");
-        BtnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnExcluirActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -228,10 +210,6 @@ public class FrmCaixa extends javax.swing.JDialog {
                         .addComponent(BtnRetirar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnDepositar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnExcluir)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,10 +225,7 @@ public class FrmCaixa extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(BtnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(BtnDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -297,45 +272,6 @@ public class FrmCaixa extends javax.swing.JDialog {
             this.dispose();
         }
     }//GEN-LAST:event_BtnSairActionPerformed
-
-    private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
-        if (lista != null) {
-            int linhaSelecionada = jTableLista.getSelectedRow();
-            Locacao locacao = lista.get(linhaSelecionada);
-            FrmCadastrarLocacao frm = FrmCadastrarLocacao.Mostrar(frame, locacao.getId());
-
-            locacao = frm.getLocacao();
-
-            if (frm.getModeloAtualizado()) {
-                modeloTabela.removeRow(linhaSelecionada);
-                modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(locacao));
-
-                controle = new ControleLocacao();
-            }
-        }
-    }//GEN-LAST:event_BtnEditarActionPerformed
-
-    private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
-        if (lista != null) {
-
-            Boolean podeExcluir = Utilidades.MostrarMensagemPergunta("Confirmação", "Tem certeza que deseja excluir a locação?", false);
-
-            if (podeExcluir) {
-                int linhaSelecionada = jTableLista.getSelectedRow();
-                Locacao locacao = lista.get(linhaSelecionada);
-
-                try {
-                    controle.Excluir(locacao.getId());
-                    modeloTabela.removeRow(linhaSelecionada);
-                    lista.remove(locacao);
-
-                    controle = new ControleLocacao();
-                } catch (Exception e) {
-                    Utilidades.MostrarMensagemErro(e);
-                }
-            }
-        }
-    }//GEN-LAST:event_BtnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -388,8 +324,6 @@ public class FrmCaixa extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnDepositar;
-    private javax.swing.JButton BtnEditar;
-    private javax.swing.JButton BtnExcluir;
     private javax.swing.JButton BtnRetirar;
     private javax.swing.JButton BtnSair;
     private javax.swing.JLabel jLabel1;
