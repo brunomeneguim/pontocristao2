@@ -16,9 +16,9 @@ import pontocristao.util.Utilidades;
 public class FrmVenda extends javax.swing.JDialog {
 
     private DefaultTableModel modeloTabela;
-    private ControleLocacao controle = new ControleLocacao();
+    private ControleVenda controle = new ControleVenda();
     private static Frame frame;
-    private java.util.List<Locacao> lista;
+    private java.util.List<Venda> lista;
 
     public static FrmVenda Mostrar(java.awt.Frame parent) {
         frame = parent;
@@ -37,6 +37,7 @@ public class FrmVenda extends javax.swing.JDialog {
 
         txtPesquisar.requestFocus();
 
+        BtnPagamento.setEnabled(false);
         BtnEditar.setEnabled(false);
         BtnExcluir.setEnabled(false);
 
@@ -63,41 +64,51 @@ public class FrmVenda extends javax.swing.JDialog {
                         BtnExcluir.setEnabled(true);
                         
                         int linhaSelecionada = jTableLista.getSelectedRow();
-                        Locacao locacao = lista.get(linhaSelecionada);
+                        Venda venda = lista.get(linhaSelecionada);
+                        
+                        if(!venda.getPago())
+                        {
+                            BtnPagamento.setEnabled(true);
+                        }
+                    }
+                    else {
+                        BtnEditar.setEnabled(false);
+                        BtnExcluir.setEnabled(false);
+                        BtnPagamento.setEnabled(false);
                     }
                 }
             }
         });
     }
 
-    private void AtualizarTabela(java.util.List<Locacao> locacoes) {
+    private void AtualizarTabela(java.util.List<Venda> vendas) {
         while (modeloTabela.getRowCount() > 0) {
             modeloTabela.removeRow(0);
         }
 
-        lista = locacoes;
+        lista = vendas;
 
-        for (Locacao locacao : locacoes) {
-            AdicionarLinha(locacao);
+        for (Venda venda : vendas) {
+            AdicionarLinha(venda);
         }
     }
 
-    private void AdicionarLinha(Locacao locacao) {
-        modeloTabela.addRow(RetornarNovaLinha(locacao));
+    private void AdicionarLinha(Venda venda) {
+        modeloTabela.addRow(RetornarNovaLinha(venda));
     }
 
-    private Object[] RetornarNovaLinha(Locacao locacao) {
+    private Object[] RetornarNovaLinha(Venda venda) {
         return new Object[]{
-            locacao.getData(),
-            locacao.getCliente().getNome(),
-            locacao.getValorTotal(),
-            locacao.getPago()
+            venda.getData(),
+            venda.getCliente().getNome(),
+            venda.getValorTotal(),
+            venda.getPago()
         };
     }
 
     public void Listar() {
         try {
-            AtualizarTabela(controle.RetornarLocacoes());
+            AtualizarTabela(controle.RetornarVendas());
         } catch (Exception e) {
             Utilidades.MostrarMensagemErro(e);
         }
@@ -106,7 +117,7 @@ public class FrmVenda extends javax.swing.JDialog {
     public void Listar(String pesquisa) {
         if (pesquisa != null && pesquisa.length() > 0) {
             String[] camposPesquisa = new String[]{"data", "Cliente.nome", "valor", "pago"};
-            AtualizarTabela(controle.RetornarLocacoes(camposPesquisa, pesquisa));
+            AtualizarTabela(controle.RetornarVendas(camposPesquisa, pesquisa));
         } else {
             Listar();
         }
@@ -129,6 +140,7 @@ public class FrmVenda extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLista = new javax.swing.JTable();
         BtnSair1 = new javax.swing.JButton();
+        BtnPagamento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Locação");
@@ -188,6 +200,8 @@ public class FrmVenda extends javax.swing.JDialog {
             }
         });
 
+        BtnPagamento.setText("Pagar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -202,7 +216,9 @@ public class FrmVenda extends javax.swing.JDialog {
                         .addComponent(BtnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnExcluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 303, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
                         .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnPesquisar))
@@ -215,12 +231,14 @@ public class FrmVenda extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnPagamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -232,21 +250,21 @@ public class FrmVenda extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoActionPerformed
-        FrmCadastrarLocacao frm = FrmCadastrarLocacao.Mostrar(frame, 0);
+        FrmCadastrarVenda frm = FrmCadastrarVenda.Mostrar(frame, 0);
 
         if (frm.getModeloAtualizado()) {
-            Locacao locacao = frm.getLocacao();
-            AdicionarLinha(locacao);
-            lista.add(locacao);
+            Venda venda = frm.getVenda();
+            AdicionarLinha(venda);
+            lista.add(venda);
         }
 
-        controle = new ControleLocacao();
+        controle = new ControleVenda();
     }//GEN-LAST:event_BtnNovoActionPerformed
 
     private void BtnSair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSair1ActionPerformed
         Object[] botoes = {"Sim", "Não"};
         int resposta = JOptionPane.showOptionDialog(null,
-                "Deseja sair da lista de locações? ",
+                "Deseja sair da lista de vendas? ",
                 "Confirmação",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                 botoes, botoes[0]);
@@ -258,16 +276,16 @@ public class FrmVenda extends javax.swing.JDialog {
     private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
         if (lista != null) {
             int linhaSelecionada = jTableLista.getSelectedRow();
-            Locacao locacao = lista.get(linhaSelecionada);
-            FrmCadastrarLocacao frm = FrmCadastrarLocacao.Mostrar(frame, locacao.getId());
+            Venda venda = lista.get(linhaSelecionada);
+            FrmCadastrarVenda frm = FrmCadastrarVenda.Mostrar(frame, venda.getId());
 
-            locacao = frm.getLocacao();
+            venda = frm.getVenda();
 
             if (frm.getModeloAtualizado()) {
                 modeloTabela.removeRow(linhaSelecionada);
-                modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(locacao));
+                modeloTabela.insertRow(linhaSelecionada, RetornarNovaLinha(venda));
 
-                controle = new ControleLocacao();
+                controle = new ControleVenda();
             }
         }
     }//GEN-LAST:event_BtnEditarActionPerformed
@@ -275,18 +293,18 @@ public class FrmVenda extends javax.swing.JDialog {
     private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
         if (lista != null) {
 
-            Boolean podeExcluir = Utilidades.MostrarMensagemPergunta("Confirmação", "Tem certeza que deseja excluir a locação?", false);
+            Boolean podeExcluir = Utilidades.MostrarMensagemPergunta("Confirmação", "Tem certeza que deseja excluir a venda?", false);
 
             if (podeExcluir) {
                 int linhaSelecionada = jTableLista.getSelectedRow();
-                Locacao locacao = lista.get(linhaSelecionada);
+                Venda venda = lista.get(linhaSelecionada);
 
                 try {
-                    controle.Excluir(locacao.getId());
+                    controle.Excluir(venda.getId());
                     modeloTabela.removeRow(linhaSelecionada);
-                    lista.remove(locacao);
+                    lista.remove(venda);
 
-                    controle = new ControleLocacao();
+                    controle = new ControleVenda();
                 } catch (Exception e) {
                     Utilidades.MostrarMensagemErro(e);
                 }
@@ -359,6 +377,7 @@ public class FrmVenda extends javax.swing.JDialog {
     private javax.swing.JButton BtnEditar;
     private javax.swing.JButton BtnExcluir;
     private javax.swing.JButton BtnNovo;
+    private javax.swing.JButton BtnPagamento;
     private javax.swing.JButton BtnPesquisar;
     private javax.swing.JButton BtnSair1;
     private javax.swing.JScrollPane jScrollPane1;
