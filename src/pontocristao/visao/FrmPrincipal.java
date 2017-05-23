@@ -300,10 +300,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/Sobre.png"))); // NOI18N
         jMenuItem16.setText("Sobre");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem16);
 
         jMenuItem17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pontocristao/icones/Contato.png"))); // NOI18N
         jMenuItem17.setText("Contato");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem17);
 
         jMenuBar1.add(jMenu5);
@@ -399,8 +409,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnSairActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        String relatorio = ".\\Relatorios\\ListaClientes.jasper";
-        String arquivo = ".\\Relatorios.\\ListaClientes.pdf";
+        String relatorio = ".\\Relatorios\\RelatorioCliente.jasper";
+        String arquivo = ".\\Relatorios.\\RelatorioCliente.pdf";
 
         try {
             Properties connectionProps = new Properties();
@@ -443,6 +453,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
         FrmCaixa frmCaixa = FrmCaixa.Mostrar(this);
     }//GEN-LAST:event_jMenuItem22ActionPerformed
+
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+        FrmContato frmContato = FrmContato.Mostrar(this);
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+         FrmSobre frmSobre = FrmSobre.Mostrar(this);
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     /**
      * @param args the command line arguments
