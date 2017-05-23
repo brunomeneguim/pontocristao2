@@ -6,9 +6,7 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.Timer;
@@ -17,7 +15,6 @@ import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import pontocristao.controle.ControleSistema;
-import pontocristao.teste.PopularBancoTeste;
 import pontocristao.util.Utilidades;
 
 /**
