@@ -26,18 +26,18 @@ import pontocristao.util.Utilidades;
 public class FrmCadastrarVenda extends javax.swing.JDialog {
 
     private static Frame frame;
-    private ControleLocacao controle;
+    private ControleVenda controle;
     private Boolean modeloAtualizado = false;
     private java.util.List<Cliente> listaClientes;
-    private java.util.List<Filme> listaFilmes;
+    private java.util.List<Produto> listaProdutos;
     private DefaultTableModel modeloTabela;
 
     public Boolean getModeloAtualizado() {
         return modeloAtualizado;
     }
 
-    public Locacao getLocacao() {
-        return controle.getLocacao();
+    public Venda getVenda() {
+        return controle.getVenda();
     }
 
     public FrmCadastrarVenda(java.awt.Frame parent, boolean modal, long id) {
@@ -45,7 +45,7 @@ public class FrmCadastrarVenda extends javax.swing.JDialog {
         initComponents();
 
         AutoComboBox.enable(cbxCliente);
-        AutoComboBox.enable(cbxFilme);
+        AutoComboBox.enable(cbxProduto);
 
         AjustarTabela();
 
@@ -66,7 +66,7 @@ public class FrmCadastrarVenda extends javax.swing.JDialog {
     }
 
     private void AjustarTabela() {
-        String[] colunas = new String[]{"Nome", "Tipo de filme", "Valor da locação"};
+        String[] colunas = new String[]{"Nome", "Valor unitário", "Quantidade", "Valor total"};
         modeloTabela = new DefaultTableModel(null, colunas) {
             @Override
             public boolean isCellEditable(int row, int col) {
@@ -79,17 +79,17 @@ public class FrmCadastrarVenda extends javax.swing.JDialog {
     }
 
     private void InicializarControle(long id) {
-        controle = new ControleLocacao();
+        controle = new ControleVenda();
 
         listaClientes = controle.RetornarClientes();
-        listaFilmes = controle.RetornarFilmes();
+        listaProdutos = controle.RetornarProdutos();
 
         for (Cliente cliente : listaClientes) {
             cbxCliente.addItem(RetornarDescricaoCliente(cliente));
         }
 
-        for (Filme filme : listaFilmes) {
-            cbxFilme.addItem(RetornarDescricaoFilme(filme));
+        for (Produto produto : listaProdutos) {
+            cbxProduto.addItem(RetornarDescricaoProduto(produto));
         }
 
         txtFuncionario.setEnabled(false);
@@ -98,10 +98,10 @@ public class FrmCadastrarVenda extends javax.swing.JDialog {
         jspValor.setEnabled(false);
 
         cbxCliente.setSelectedIndex(-1);
-        cbxFilme.setSelectedIndex(-1);
+        cbxProduto.setSelectedIndex(-1);
 
         if (id > 0) {
-            Exception erro = controle.RecuperarLocacao(id);
+            Exception erro = controle.RecuperarVenda(id);
 
             if (erro != null) {
                 Utilidades.MostrarMensagemErro(erro);
@@ -109,35 +109,20 @@ public class FrmCadastrarVenda extends javax.swing.JDialog {
                 AtualizarCampos();
             }
         } else {
-            getLocacao().setFuncionario(ControleSistema.getFuncionarioLogado(controle.getSessao()));
-            getLocacao().setData(new Date());
+            getVenda().setFuncionario(ControleSistema.getFuncionarioLogado(controle.getSessao()));
+            getVenda().setData(new Date());
         }
 
-        AtualizarCampoDataDevolucaoFilme();
-
-        txtFuncionario.setText(getLocacao().getFuncionario().getNome());
-        jcDataLocacao.setDate(getLocacao().getData());
-    }
-
-    private void AtualizarCampoDataDevolucaoFilme() {
-        Calendar calendario = Calendar.getInstance();
-        calendario.setTime(getLocacao().getData());
-
-        if (calendario.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
-            //Adiciona 2 dias por causa do Domingo
-            calendario.add(Calendar.DATE, 2);
-        } else {
-            //adiciona só um dia como padrão
-            calendario.add(Calendar.DATE, 1);
-        }
+        txtFuncionario.setText(getVenda().getFuncionario().getNome());
+        jcDataLocacao.setDate(getVenda().getData());
     }
 
     private String RetornarDescricaoCliente(Cliente cliente) {
         return cliente.getNome();
     }
 
-    private String RetornarDescricaoFilme(Filme filme) {
-        return filme.getNome();
+    private String RetornarDescricaoProduto(Produto produto) {
+        return produto.getNome();
     }
 
     private void AtualizarTabela() {
@@ -145,41 +130,42 @@ public class FrmCadastrarVenda extends javax.swing.JDialog {
             modeloTabela.removeRow(0);
         }
 
-        for (ItemLocacao item : getLocacao().getItensLocacao()) {
+        for (ItemVenda item : getVenda().getItensVenda()) {
             AdicionarLinha(item);
         }
     }
 
-    private void AdicionarLinha(ItemLocacao item) {
+    private void AdicionarLinha(ItemVenda item) {
         modeloTabela.addRow(RetornarNovaLinha(item));
     }
 
-    private Object[] RetornarNovaLinha(ItemLocacao item) {
+    private Object[] RetornarNovaLinha(ItemVenda item) {
         return new Object[]{
-            item.getFilme().getNome(),
-            item.getFilme().getTipoFilme().getDescricao(),
-            controle.getValorLocacao(item.getFilme())
+            item.getProduto().getNome(),
+            item.getValorUnitario(),
+            item.getQuantidade(),
+            item.getQuantidade() * item.getValorUnitario()
         };
     }
 
     private void AtualizarCampos() {
         AtualizarTabela();
-        cbxCliente.setSelectedItem(getLocacao().getCliente().getNome());
-        txtFuncionario.setText(getLocacao().getFuncionario().getNome());
-        jcDataLocacao.setDate(getLocacao().getData());
-        jspValor.setValue(getLocacao().getValorTotal());
-        ckbPago.setSelected(getLocacao().getPago());
+        cbxCliente.setSelectedItem(getVenda().getCliente().getNome());
+        txtFuncionario.setText(getVenda().getFuncionario().getNome());
+        jcDataLocacao.setDate(getVenda().getData());
+        jspValor.setValue(getVenda().getValorTotal());
+        ckbPago.setSelected(getVenda().getPago());
     }
 
     private void AtualizarModelo() {
-        getLocacao().setCliente(listaClientes.get(cbxCliente.getSelectedIndex()));
+        getVenda().setCliente(listaClientes.get(cbxCliente.getSelectedIndex()));
     }
 
     public Boolean ValidaCampos() {
         Boolean retorno = true;
 
-        if (getLocacao().getItensLocacao().isEmpty()) {
-            Utilidades.MostrarMensagem("Cadastro inválido", "Não foi adicionado nenhum filme na locação.");
+        if (getVenda().getItensVenda().isEmpty()) {
+            Utilidades.MostrarMensagem("Cadastro inválido", "Não foi adicionado nenhum produto na venda.");
             retorno = false;
         } else if (cbxCliente.getSelectedIndex() < 0) {
             Utilidades.MostrarMensagem("Cadastro inválido", "O cliente não foi selecionado.");
@@ -191,12 +177,12 @@ public class FrmCadastrarVenda extends javax.swing.JDialog {
     private void AtualizarValorLocacao() {
         double valor = 0;
 
-        for (ItemLocacao item : getLocacao().getItensLocacao()) {
-            valor += controle.getValorLocacao(item.getFilme());
+        for (ItemVenda item : getVenda().getItensVenda()) {
+            valor += item.getQuantidade() * item.getValorUnitario();
         }
 
         jspValor.setValue(valor);
-        getLocacao().setValorTotal(valor);
+        getVenda().setValorTotal(valor);
     }
 
     @Override
@@ -232,8 +218,10 @@ public class FrmCadastrarVenda extends javax.swing.JDialog {
         BtnAdicionarProduto = new javax.swing.JButton();
         cbxCliente = new javax.swing.JComboBox<>();
         ckbPago = new javax.swing.JCheckBox();
-        cbxFilme = new javax.swing.JComboBox<>();
+        cbxProduto = new javax.swing.JComboBox<>();
         lProduto = new javax.swing.JLabel();
+        jspQuantidade = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Locação");
@@ -306,6 +294,10 @@ public class FrmCadastrarVenda extends javax.swing.JDialog {
 
         lProduto.setText("Produto");
 
+        jspQuantidade.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+
+        jLabel1.setText("Quantidade");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -343,12 +335,17 @@ public class FrmCadastrarVenda extends javax.swing.JDialog {
                                         .addComponent(jspValor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(ckbPago))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbxFilme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(176, 176, 176))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lProduto)
-                                .addGap(575, 575, 575)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cbxProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lProduto)
+                                        .addGap(513, 513, 513)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jspQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -371,9 +368,13 @@ public class FrmCadastrarVenda extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
-                .addComponent(lProduto)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lProduto)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbxFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jspQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -405,19 +406,19 @@ public class FrmCadastrarVenda extends javax.swing.JDialog {
 
                 double totalPago = 0;
 
-                for (PagamentoLocacao pagamento : getLocacao().getPagamentos()) {
+                for (PagamentoVenda pagamento : getVenda().getPagamentos()) {
                     totalPago += pagamento.getValor();
                 }
 
-                if (totalPago >= getLocacao().getValorTotal()) {
-                    getLocacao().setPago(true);
+                if (totalPago >= getVenda().getValorTotal()) {
+                    getVenda().setPago(true);
                 } else {
-                    getLocacao().setPago(false);
+                    getVenda().setPago(false);
                 }
 
-                controle.getSessao().saveOrUpdate(getLocacao());
+                controle.getSessao().saveOrUpdate(getVenda());
 
-                for (ItemLocacao item : getLocacao().getItensLocacao()) {
+                for (ItemVenda item : getVenda().getItensVenda()) {
                     controle.getSessao().saveOrUpdate(item);
                 }
 
@@ -438,21 +439,25 @@ public class FrmCadastrarVenda extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnConfirmar1ActionPerformed
 
     private void BtnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdicionarProdutoActionPerformed
-        if (cbxFilme.getSelectedIndex() < 0) {
+        if (cbxProduto.getSelectedIndex() < 0) {
             Utilidades.MostrarMensagemErro(new Exception("Você não selecionou nenhum filme para adicionar."));
         } else {
-            ItemLocacao item = new ItemLocacao();
-            item.setFilme(listaFilmes.get(cbxFilme.getSelectedIndex()));
-            item.setLocacao(getLocacao());
+            Produto produto = listaProdutos.get(cbxProduto.getSelectedIndex());
+            
+            ItemVenda item = new ItemVenda();
+            item.setProduto(produto);
+            item.setVenda(getVenda());
+            item.setQuantidade((Integer)jspQuantidade.getValue());
+            item.setValorUnitario(produto.getValorVenda());
 
-            getLocacao().getItensLocacao().add(item);
+            getVenda().getItensVenda().add(item);
 
             AdicionarLinha(item);
 
             AtualizarValorLocacao();
 
-            cbxFilme.setSelectedIndex(-1);
-            AtualizarCampoDataDevolucaoFilme();
+            cbxProduto.setSelectedIndex(-1);
+            jspQuantidade.setValue(1);
         }
     }//GEN-LAST:event_BtnAdicionarProdutoActionPerformed
 
@@ -519,11 +524,13 @@ public class FrmCadastrarVenda extends javax.swing.JDialog {
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton BtnConfirmar1;
     private javax.swing.JComboBox<String> cbxCliente;
-    private javax.swing.JComboBox<String> cbxFilme;
+    private javax.swing.JComboBox<String> cbxProduto;
     private javax.swing.JCheckBox ckbPago;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JDateChooser jcDataLocacao;
+    private javax.swing.JSpinner jspQuantidade;
     private javax.swing.JSpinner jspValor;
     private javax.swing.JLabel lDataLocacao;
     private javax.swing.JLabel lFuncionario;

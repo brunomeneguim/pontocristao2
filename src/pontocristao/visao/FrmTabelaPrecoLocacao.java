@@ -17,11 +17,6 @@ public class FrmTabelaPrecoLocacao extends javax.swing.JDialog {
 
     private static Frame frame;
     private ControleTabelaPrecoLocacao controle;
-    private Boolean modeloAtualizado = false;
-    
-    public Boolean getModeloAtualizado() {
-        return modeloAtualizado;
-    }
 
     public TabelaPrecoLocacao getTabelaPrecoLocacao() {
         return controle.getTabelaPrecoLocacao();
@@ -108,14 +103,14 @@ public class FrmTabelaPrecoLocacao extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Valor normal*");
 
-        jspValorNormal.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
+        jspValorNormal.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 0.1d));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Valor de lançamento*");
 
-        jspValorLancamento.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
+        jspValorLancamento.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 0.1d));
 
-        jspValorMultaDiaria.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
+        jspValorMultaDiaria.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 0.1d));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Multa diária por atraso*");
@@ -193,7 +188,6 @@ public class FrmTabelaPrecoLocacao extends javax.swing.JDialog {
             if (erro != null) {
                 Utilidades.MostrarMensagemErro(erro);
             } else {
-                modeloAtualizado = true;
                 this.dispose();
             }
         }

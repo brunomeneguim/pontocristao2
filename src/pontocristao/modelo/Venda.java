@@ -39,11 +39,11 @@ public class Venda extends ModeloBase {
         this.data = data;
     }
 
-    public Set<ItemVenda> getItemVenda() {
+    public Set<ItemVenda> getItensVenda() {
         return ItensVenda;
     }
 
-    public void setItemVenda(Set<ItemVenda> ItensVenda) {
+    public void setItensVenda(Set<ItemVenda> ItensVenda) {
         this.ItensVenda = ItensVenda;
     }
 
