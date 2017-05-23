@@ -2,9 +2,6 @@ package pontocristao.visao;
 
 import java.awt.*;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.*;
-import javax.swing.table.DefaultTableModel;
 import pontocristao.controle.*;
 import pontocristao.modelo.*;
 import pontocristao.util.Utilidades;
@@ -21,42 +18,42 @@ public class FrmTabelaPrecoLocacao extends javax.swing.JDialog {
     public TabelaPrecoLocacao getTabelaPrecoLocacao() {
         return controle.getTabelaPrecoLocacao();
     }
-    
+
     public static FrmTabelaPrecoLocacao Mostrar(java.awt.Frame parent) {
         frame = parent;
         FrmTabelaPrecoLocacao frm = new FrmTabelaPrecoLocacao(parent, true);
         frm.setVisible(true);
         return frm;
     }
-    
+
     public FrmTabelaPrecoLocacao(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         setLocationRelativeTo(null);
-        
+
         jspValorNormal.requestFocus();
 
         InicializarControle();
     }
-    
+
     private void InicializarControle() {
         controle = new ControleTabelaPrecoLocacao();
         AtualizarCampos();
     }
-    
+
     private void AtualizarCampos() {
         jspValorLancamento.setValue(controle.getTabelaPrecoLocacao().getValorLancamento());
         jspValorMultaDiaria.setValue(controle.getTabelaPrecoLocacao().getValorMultaDiaria());
         jspValorNormal.setValue(controle.getTabelaPrecoLocacao().getValorNormal());
     }
-    
+
     private void AtualizarModelo() {
-        controle.getTabelaPrecoLocacao().setValorLancamento((Double)jspValorLancamento.getValue());
-        controle.getTabelaPrecoLocacao().setValorMultaDiaria((Double)jspValorMultaDiaria.getValue());
-        controle.getTabelaPrecoLocacao().setValorNormal((Double)jspValorNormal.getValue());
+        controle.getTabelaPrecoLocacao().setValorLancamento((Double) jspValorLancamento.getValue());
+        controle.getTabelaPrecoLocacao().setValorMultaDiaria((Double) jspValorMultaDiaria.getValue());
+        controle.getTabelaPrecoLocacao().setValorNormal((Double) jspValorNormal.getValue());
     }
-    
+
     public Boolean ValidaCampos() {
         Boolean retorno = true;
 
@@ -78,7 +75,7 @@ public class FrmTabelaPrecoLocacao extends javax.swing.JDialog {
 
         super.dispose();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

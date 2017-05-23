@@ -32,7 +32,6 @@ public class FrmContato extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         lContato = new javax.swing.JLabel();
         lTelefoneDesenvolvedor = new javax.swing.JLabel();
         lCelularDesenvolvedor = new javax.swing.JLabel();
@@ -41,18 +40,8 @@ public class FrmContato extends javax.swing.JDialog {
         lEmailFaculdade = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         lContato.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         lContato.setText("Contato");
@@ -174,7 +163,6 @@ public class FrmContato extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lCelularDesenvolvedor;
     private javax.swing.JLabel lContato;
     private javax.swing.JLabel lEmailDesenvolvedor;
